@@ -2,3 +2,11 @@
   margin: 0px;
   padding: 0px;
 }
+.nav-pri {
+  background-color: #e6e7e6;
+  font-size: 17px;
+}
+.nav-sec {
+  background-color: #0e6856;
+  padding: 0px;
+}
