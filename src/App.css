@@ -23,3 +23,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1rem;
+  padding: 1rem 0;
+}

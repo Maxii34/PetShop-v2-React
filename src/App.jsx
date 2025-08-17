@@ -3,8 +3,10 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navprimero from './Components/Navbar';
 import Navsegundo from './Components/SegundoNavbar';
 import Footer from './Components/Footer';
-import './App.css'
 import CarouselComponente from './Components/Carousel';
+import ContainerGrid from './Components/ContainerGrid';
+import './App.css'
+
 
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
       <Navsegundo />
       <main>
       <CarouselComponente />
-
+      <ContainerGrid/>
       </main>
       <Footer />
     </>
