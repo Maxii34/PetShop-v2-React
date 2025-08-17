@@ -2,6 +2,8 @@
   margin: 0px;
   padding: 0px;
 }
+
+
 .nav-pri {
   background-color: #e6e7e6;
   font-size: 17px;
@@ -9,4 +11,15 @@
 .nav-sec {
   background-color: #0e6856;
   padding: 0px;
+}
+
+.icono-redes {
+  background-color: #212529;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
