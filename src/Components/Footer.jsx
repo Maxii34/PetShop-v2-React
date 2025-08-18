@@ -1,11 +1,13 @@
+import { Container } from "react-bootstrap";
+
 
 
 
 const Footer = () => {
     return (
-    <footer className="pt-3 border-top footer-color">
+    <footer className="pt-3 border-top footer-color color-footer">
         
-      <div className="container">
+      <Container>
         <div className="row">
 
           <div className="col-12 col-md-4 col-lg-4 mb-4 text-center text-md-start">
@@ -119,7 +121,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
 
       
       <div className="pie-footer py-4 shadow nav-sec">

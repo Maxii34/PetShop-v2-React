@@ -3,7 +3,7 @@ import CardsProductos from "./Cards";
 
 const ContainerGrid = () => {
   return (
-    <Container>
+    <Container fluid>
       <div className="grid-container">
         <CardsProductos
           nombreProducto="pam integral"

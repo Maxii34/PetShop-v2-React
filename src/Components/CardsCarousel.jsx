@@ -1,6 +1,6 @@
 import '../Components/EstilosCards.css'
 
-const CardsProductos = (props) => {
+const CardsCarousel = (props) => {
   return (
     <div className="card card-wrapper">
       <div className="card product-card h-100">
@@ -11,12 +11,14 @@ const CardsProductos = (props) => {
           loading="lazy"
         />
         <div className="card-body d-flex text-center flex-column bod-top">
-          <p className="card-title fw-bold">
-            {props.nombreProducto}
+          <p className="card-title fw-bold">{props.nombreProductoCC}</p>
+          <p className="price-main mt-2 mb-0">{props.precioCC}</p>
+          <p className="price-cash mt-1 mb-1">
+            {props.precioEfectivoCC} con Efectivo
           </p>
-          <p className="price-main mt-2 mb-0">{props.precio}</p>
-          <p className="price-cash mt-1 mb-1">{props.precioEfectivo} con Efectivo</p>
-          <p className="installments mb-3">{props.cuotas} cuotas sin interés de {props.precioCuotas}</p>
+          <p className="installments mb-3">
+            {props.cuotasCC} cuotas sin interés de {props.precioCuotasCC}
+          </p>
           <div className="mt-auto d-flex justify-content-center">
             <a href="#" className="btn btn-custom mx-1 flex-shrink-0">
               COMPRAR
@@ -34,4 +36,4 @@ const CardsProductos = (props) => {
   );
 };
 
-export default CardsProductos;
+export default CardsCarousel;

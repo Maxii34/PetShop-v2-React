@@ -5,6 +5,7 @@ import Navsegundo from './Components/SegundoNavbar';
 import Footer from './Components/Footer';
 import CarouselComponente from './Components/Carousel';
 import ContainerGrid from './Components/ContainerGrid';
+import CarouselProductos from './Components/CarouselProductos';
 import './App.css'
 
 
@@ -14,10 +15,14 @@ function App() {
     <>
       <Navprimero />
       <Navsegundo />
+
       <main>
       <CarouselComponente />
+        <h1 className='text-center my-4'>TUS NUEVOS FAVORITOS 🛍️</h1>
       <ContainerGrid/>
+      <CarouselProductos />
       </main>
+
       <Footer />
     </>
   )
