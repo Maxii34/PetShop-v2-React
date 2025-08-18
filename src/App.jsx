@@ -6,6 +6,7 @@ import Footer from './Components/Footer';
 import CarouselComponente from './Components/Carousel';
 import ContainerGrid from './Components/ContainerGrid';
 import CarouselProductos from './Components/CarouselProductos';
+import MuralInstagran from './Components/MuralInstagran';
 import './App.css'
 
 
@@ -21,6 +22,7 @@ function App() {
         <h1 className='text-center my-4'>TUS NUEVOS FAVORITOS 🛍️</h1>
       <ContainerGrid/>
       <CarouselProductos />
+      <MuralInstagran />
       </main>
 
       <Footer />

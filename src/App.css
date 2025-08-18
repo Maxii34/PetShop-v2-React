@@ -3,6 +3,9 @@
   padding: 0px;
 }
 
+main{
+    background-color: #f8f9fa;
+}
 
 .nav-pri {
   background-color: #e6e7e6;
@@ -28,9 +31,41 @@
   justify-content: center;
 }
 
+/*Grid para cards de productos*/
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 1rem;
   padding: 1rem 0;
+}
+
+/*Mual de Redes Instagran*/
+.instagram-section {
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 50px 0;
+}
+
+.mural {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h4 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.bi- {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.p-mural {
+  font-size: 18px;
+  color: #6c757d;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
