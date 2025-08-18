@@ -8,7 +8,7 @@ const CarouselComponente = () => {
           className="d-block w-100"
           src="https://images.pexels.com/photos/4214919/pexels-photo-4214919.jpeg"
           alt="First slide"
-          style={{ height: "300px", objectFit: "cover" }}
+          style={{ height: "350px", objectFit: "cover" }}
         />
         <Carousel.Caption>
           <h3>First slide label</h3>
@@ -20,7 +20,7 @@ const CarouselComponente = () => {
           className="d-block w-100"
           src="https://images.pexels.com/photos/13953689/pexels-photo-13953689.jpeg"
           alt="Second slide"
-          style={{ height: "300px", objectFit: "cover" }}
+          style={{ height: "350px", objectFit: "cover" }}
         />
         <Carousel.Caption>
           <h3>Second slide label</h3>
@@ -32,7 +32,7 @@ const CarouselComponente = () => {
           className="d-block w-100"
           src="https://images.pexels.com/photos/25283877/pexels-photo-25283877.jpeg"
           alt="Third slide"
-          style={{ height: "300px", objectFit: "cover" }}
+          style={{ height: "350px", objectFit: "cover" }}
         />
         <Carousel.Caption>
           <h3>Third slide label</h3>

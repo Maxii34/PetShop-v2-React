@@ -20,7 +20,7 @@ const Navprimero = () => {
               <Form.Control
                 type="search"
                 placeholder="¿Que estas buscando.?"
-                className="me-2"
+                className="me-2 w-100"
                 aria-label="Search"
               />
               <Button variant="outline-success" className="me-4" >Search</Button>

@@ -1,10 +1,10 @@
-*{
+* {
   margin: 0px;
   padding: 0px;
 }
 
-main{
-    background-color: #f8f9fa;
+main {
+  background-color: #f8f9fa;
 }
 
 .nav-pri {
@@ -16,7 +16,7 @@ main{
   padding: 0px;
 }
 
-.color-footer{
+.color-footer {
   background-color: #e6e7e6;
 }
 
@@ -69,3 +69,4 @@ h4 {
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
