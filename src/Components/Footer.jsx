@@ -125,7 +125,7 @@ const Footer = () => {
       <div className="pie-footer py-4 shadow nav-sec">
         <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center small">
           <p className="mb-0 text-light">
-            &copy; Copyright Apolo PetShop - 2025. Todos los derechos
+            &copy; Copyright Apolo PetShop - 2025 Todos los derechos
             reservados.
           </p>
         </div>

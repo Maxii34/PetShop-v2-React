@@ -20,7 +20,7 @@ function App() {
       <main>
       <CarouselComponente />
         <h1 className='text-center my-4'>TUS NUEVOS FAVORITOS 🛍️</h1>
-      <ContainerGrid/>
+      <ContainerGrid  />
       <CarouselProductos />
       <MuralInstagran />
       </main>
