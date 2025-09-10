@@ -23,11 +23,14 @@ const Navprimero = () => {
                 className="me-2 w-100"
                 aria-label="Search"
               />
-              <Button variant="outline-success" className="me-4" >Search</Button>
+              <Button variant="outline-success" className="me-4">
+                Search
+              </Button>
             </Form>
             <Nav.Link href="#action1">Inicio</Nav.Link>
-            <Nav.Link href="#action2">Contacto</Nav.Link>
-            <Nav.Link href="#action3">Login</Nav.Link>
+            <Nav.Link href="#action2">Administrador</Nav.Link>
+            <Nav.Link href="#action3">Iniciar sesión</Nav.Link>
+            <Nav.Link href="#action3">Cerrar sesión</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

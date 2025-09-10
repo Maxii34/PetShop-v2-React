@@ -1,43 +1,58 @@
 import { Container } from "react-bootstrap";
 
-
 const Footer = () => {
-    return (
+  return (
     <footer className="pt-2 border-top footer-color color-footer">
-        
       <Container>
         <div className="row">
-
           <div className="col-12 col-md-4 col-lg-4 mb-4 text-center text-md-start">
             <h5 className="fw-bold mb-3">Categorías</h5>
             <ul className="list-unstyled">
               <li>
-                <a href="#" className="text-dark text-decoration-none d-block mb-2">
+                <a
+                  href="#"
+                  className="text-dark text-decoration-none d-block mb-2"
+                >
                   Contacto
                 </a>
               </li>
               <li>
-                <a href="#" className="text-dark text-decoration-none d-block mb-2">
+                <a
+                  href="#"
+                  className="text-dark text-decoration-none d-block mb-2"
+                >
                   Quienes Somos
                 </a>
               </li>
               <li>
-                <a href="#" className="text-dark text-decoration-none d-block mb-2">
+                <a
+                  href="#"
+                  className="text-dark text-decoration-none d-block mb-2"
+                >
                   Trabajá con nosotros
                 </a>
               </li>
               <li>
-                <a href="#" className="text-dark text-decoration-none d-block mb-2">
+                <a
+                  href="#"
+                  className="text-dark text-decoration-none d-block mb-2"
+                >
                   Cómo Comprar
                 </a>
               </li>
               <li>
-                <a href="#" className="text-dark text-decoration-none d-block mb-2">
+                <a
+                  href="#"
+                  className="text-dark text-decoration-none d-block mb-2"
+                >
                   Política de Devolución
                 </a>
               </li>
               <li>
-                <a href="#" className="text-dark text-decoration-none d-block mb-2">
+                <a
+                  href="#"
+                  className="text-dark text-decoration-none d-block mb-2"
+                >
                   Preguntas Frecuentes
                 </a>
               </li>
@@ -59,13 +74,12 @@ const Footer = () => {
                 <i className="bi bi-envelope me-2"></i>PetShopApolo@gmail.com
               </li>
               <li>
-                <i className="bi bi-geo-alt me-2"></i> Sucursales en: San Miguel de
-                Tucumán - Yerba Buena - Tafí Viejo - Banda del Río Salí
+                <i className="bi bi-geo-alt me-2"></i> Sucursales en: San Miguel
+                de Tucumán - Yerba Buena - Tafí Viejo - Banda del Río Salí
               </li>
             </ul>
           </div>
 
-        
           <div className="col-12 col-md-4 col-lg-4 text-center text-md-start">
             <h5 className="fw-bold mb-3">Sigamos conectados</h5>
             <div className="d-flex gap-3 justify-content-center justify-content-md-start">
@@ -84,7 +98,6 @@ const Footer = () => {
             </div>
           </div>
 
-          
           <div className="container py-4 text-center text-md-start">
             <div className="row">
               <div className="col-12">
@@ -121,17 +134,15 @@ const Footer = () => {
         </div>
       </Container>
 
-      
       <div className="pie-footer py-4 shadow nav-sec">
         <div className="container d-flex flex-column flex-md-row justify-content-center align-items-center small">
           <p className="mb-0 text-light">
-            &copy; Copyright Apolo PetShop - 2025 Todos los derechos
-            reservados.
+            &copy; Copyright Apolo PetShop - 2025 Todos los derechos reservados.
           </p>
         </div>
       </div>
     </footer>
-    );
+  );
 };
 
 export default Footer;
