@@ -3,6 +3,7 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { NavLink } from "react-router";
 
 const Navprimero = () => {
   return (
@@ -27,10 +28,18 @@ const Navprimero = () => {
                 Search
               </Button>
             </Form>
-            <Nav.Link href="#action1">Inicio</Nav.Link>
-            <Nav.Link href="#action2">Administrador</Nav.Link>
-            <Nav.Link href="#action3">Iniciar sesión</Nav.Link>
-            <Nav.Link href="#action3">Cerrar sesión</Nav.Link>
+            <NavLink to="/" className="nav-link">
+              Inicio
+            </NavLink>
+            <NavLink to="/admin" className="nav-link">
+              Administrador
+            </NavLink>
+            <NavLink to="/login" className="nav-link">
+              Iniciar sesión
+            </NavLink>
+            <NavLink to="/logout" className="nav-link">
+              Cerrar sesión
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>
