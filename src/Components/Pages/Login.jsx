@@ -1,7 +1,9 @@
 import { Card, Button, Row, Col, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
-const Login = ({setusuarioLogueado}) => {
+const Login = ({ setusuarioLogueado }) => {
   const {
     register,
     handleSubmit,
@@ -9,11 +11,33 @@ const Login = ({setusuarioLogueado}) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const navegacion = useNavigate();
 
-  reset
-  }
+  const onSubmit = (data) => {
+    console.log(data);
+
+    if (
+      data.email === import.meta.env.VITE_API_EMAIL &&
+      data.password === import.meta.env.VITE_API_PASSWORD
+    ) {
+      //Se agrega la logica y actualiza el estado.
+      setusuarioLogueado(true);
+      //alerts y redireciona
+      Swal.fire({
+        title: "Bienvenido Administrador",
+        text: "Iniciaste sesion correctamente.",
+        icon: "success",
+      });
+      navegacion("/admin");
+    } else {
+      Swal.fire({
+        title: "Ocurrio un error",
+        text: "Credenciales incorrectas",
+        icon: "error",
+      });
+    }
+    reset;
+  };
 
   return (
     <Card className="shadow-css my-4">
@@ -39,7 +63,9 @@ const Login = ({setusuarioLogueado}) => {
                     },
                   })}
                 />
-                <Form.Text className="text-danger">{errors.email?.message}</Form.Text>
+                <Form.Text className="text-danger">
+                  {errors.email?.message}
+                </Form.Text>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -57,7 +83,9 @@ const Login = ({setusuarioLogueado}) => {
                     },
                   })}
                 />
-                <Form.Text className="text-danger">{errors.password?.message}</Form.Text>
+                <Form.Text className="text-danger">
+                  {errors.password?.message}
+                </Form.Text>
               </Form.Group>
 
               <Button variant="warning" type="submit">
