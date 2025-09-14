@@ -15,9 +15,10 @@ import { useEffect, useState } from "react";
 
 
 function App() {
+  //lee sessionStorage
   const sesionUsuario = JSON.parse(sessionStorage.getItem("usuariokey")) || false
   //Esado de login de usuario
-  const [usuarioLogueado, setusuarioLogueado] = useState([])
+  const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario)
   //Guarda el estado de usuario en sessionStore
   useEffect(() => {
     sessionStorage.getItem("usuariokey",JSON.stringify(usuarioLogueado))
