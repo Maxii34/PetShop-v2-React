@@ -1,9 +1,19 @@
+import CarouselComponente from "../Carousel";
+import CarouselProductos from "../CarouselProductos";
+import ContainerGrid from "../ContainerGrid";
+import MuralInstagran from "../MuralInstagran";
+
 
 const Inicio = () => {
     return (
-        <div>
-            <h1>inicio</h1>
-        </div>
+        <section>
+            <CarouselComponente />
+            <div>
+                <ContainerGrid />
+                <CarouselProductos />
+            </div>
+            <MuralInstagran />
+        </section>
     );
 };
 

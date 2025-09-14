@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { BrowserRouter, Routes, Route } from "react-router";
-import "./App.css";
 import Inicio from "./Components/Pages/Inicio";
 import Menu from "./Components/Shared/Menu";
 import Footer from "./Components/Shared/Footer";
@@ -17,7 +16,7 @@ function App() {
     <BrowserRouter>
       <Menu />
       <Navsegundo />
-      <main className="container">
+      <main className="">
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/detalle" element={<DetalleProductos />} />
