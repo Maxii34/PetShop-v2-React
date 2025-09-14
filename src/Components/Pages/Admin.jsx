@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import { Table } from "react-bootstrap";
+import ItemProductos from "../Productos/ItemProductos";
+
 
 const Administrador = () => {
   return (
@@ -27,7 +29,9 @@ const Administrador = () => {
             <th>Opciones</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+        <ItemProductos />
+        </tbody>
       </Table>
     </section>
   );
