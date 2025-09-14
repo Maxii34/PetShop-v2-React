@@ -17,7 +17,7 @@ const ItemProductos = () => {
       <td>Categoría</td>
       <td>
         <div className="d-flex justify-content-center gap-2">
-          <a className="me-lg-2 btn btn-warning" href="/admin/editar">
+          <a className="me-lg-2 btn btn-warning" href="/editar">
             <i className="bi bi-pencil-square"></i>
           </a>
           <a className="btn btn-danger btn-sm shadow" href="">

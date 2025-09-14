@@ -10,37 +10,39 @@ import DetalleProductos from "./Components/Pages/DetalleProductos";
 import Admin from "./Components/Pages/Admin";
 import FormularioProductos from "./Components/Productos/FormularioProductos";
 import Error404 from "./Components/Pages/Error404";
-import { Container } from "react-bootstrap";
 import { useEffect, useState } from "react";
-
 
 function App() {
   //lee sessionStorage
-  const sesionUsuario = JSON.parse(sessionStorage.getItem("usuariokey")) || false
+  const sesionUsuario =
+    JSON.parse(sessionStorage.getItem("usuariokey")) || false;
   //Esado de login de usuario
-  const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario)
+  const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
   //Guarda el estado de usuario en sessionStore
   useEffect(() => {
-    sessionStorage.getItem("usuariokey",JSON.stringify(usuarioLogueado))
-  },[])
+    sessionStorage.getItem("usuariokey", JSON.stringify(usuarioLogueado));
+  }, [usuarioLogueado]);
 
   return (
     <BrowserRouter>
       <Menu />
       <Navsegundo />
-      <Container>
-        <main>
-          <Routes>
-            <Route path="/" element={<Inicio />} />
-            <Route path="/detalle" element={<DetalleProductos />} />
-            <Route path="/login" element={<Login setusuarioLogueado={setusuarioLogueado}/>} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/crear" element={<FormularioProductos />} />
-            <Route path="/editar" element={<FormularioProductos />} />
-            <Route path="*" element={<Error404 />} />
-          </Routes>
-        </main>
-      </Container>
+
+      <main className=" container">
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/detalle" element={<DetalleProductos />} />
+          <Route
+            path="/login"
+            element={<Login setusuarioLogueado={setusuarioLogueado} />}
+          />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/crear" element={<FormularioProductos />} />
+          <Route path="/editar" element={<FormularioProductos />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </main>
+
       <Footer />
     </BrowserRouter>
   );

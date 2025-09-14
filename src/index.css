@@ -2,20 +2,11 @@
 min-height: 100vh;
 display: flex;
 flex-direction: column;
+background-color: #f8f9fa;
 }
 
 main{
-    flex-grow: 1;
-}
-
-
-* {
-  margin: 0px;
-  padding: 0px;
-}
-
-main {
-  background-color: #f8f9fa;
+  flex-grow: 1;
 }
 
 .nav-pri {
