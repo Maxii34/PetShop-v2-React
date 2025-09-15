@@ -11,6 +11,7 @@ import Admin from "./Components/Pages/Admin";
 import FormularioProductos from "./Components/Productos/FormularioProductos";
 import Error404 from "./Components/Pages/Error404";
 import { useEffect, useState } from "react";
+import ProtectorAdmin from "./Components/Routes/ProtectoAdmin";
 
 function App() {
   //lee sessionStorage
@@ -38,32 +39,38 @@ function App() {
   };
 
   const borrarProducto = (idProducto) => {
-    const productoFiltrado = productos.filter((itemProducto)=> itemProducto.id !== idProducto)
-    setProductos(productoFiltrado)
-    return true
-  }
+    const productoFiltrado = productos.filter(
+      (itemProducto) => itemProducto.id !== idProducto
+    );
+    setProductos(productoFiltrado);
+    return true;
+  };
 
   const buscarProductos = (idProducto) => {
-    const productoBuscado = productos.find((itemProducto)=> itemProducto.id !== idProducto)
-    return productoBuscado
-  }
+    const productoBuscado = productos.find(
+      (itemProducto) => itemProducto.id !== idProducto
+    );
+    return productoBuscado;
+  };
 
   const modificarProducto = (idProducto, datosProducto) => {
     const productoActualizado = productos.map((itemProducto) => {
       if (itemProducto.id === idProducto) {
         return {
           ...itemProducto,
-          ...datosProducto
-        }
+          ...datosProducto,
+        };
       }
-      return itemProducto
-    })
-  }
-
+      return itemProducto;
+    });
+  };
 
   return (
     <BrowserRouter>
-      <Menu usuarioLogueado={usuarioLogueado} setusuarioLogueado={setusuarioLogueado}/>
+      <Menu
+        usuarioLogueado={usuarioLogueado}
+        setusuarioLogueado={setusuarioLogueado}
+      />
       <Navsegundo />
 
       <main className=" container">
@@ -74,22 +81,37 @@ function App() {
             path="login"
             element={<Login setusuarioLogueado={setusuarioLogueado} />}
           />
-          <Route path="admin" element={<Admin productos={productos} borrarProducto={borrarProducto} />} />
           <Route
-            path="crear"
+            path="admin"
             element={
-              <FormularioProductos
-                titulo="Formulario: Agregar producto"
-                crearProducto={crearProducto}
-              />
+              <ProtectorAdmin
+                usuarioLogueado={usuarioLogueado}
+              ></ProtectorAdmin>
             }
-          />
-          <Route
-            path="editar/:id"
-            element={
-              <FormularioProductos titulo="Formulario: Editar producto" />
-            }
-          />
+          >
+            <Route
+              index
+              element={
+                <Admin productos={productos} borrarProducto={borrarProducto} />
+              }
+            />
+            <Route
+              path="crear"
+              element={
+                <FormularioProductos
+                  titulo="Formulario: Agregar producto"
+                  crearProducto={crearProducto}
+                />
+              }
+            />
+            <Route
+              path="editar/:id"
+              element={
+                <FormularioProductos titulo="Formulario: Editar producto" />
+              }
+            />
+          </Route>
+
           <Route path="*" element={<Error404 />} />
         </Routes>
       </main>
