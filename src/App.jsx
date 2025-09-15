@@ -43,22 +43,40 @@ function App() {
     return true
   }
 
+  const buscarProductos = (idProducto) => {
+    const productoBuscado = productos.find((itemProducto)=> itemProducto.id !== idProducto)
+    return productoBuscado
+  }
+
+  const modificarProducto = (idProducto, datosProducto) => {
+    const productoActualizado = productos.map((itemProducto) => {
+      if (itemProducto.id === idProducto) {
+        return {
+          ...itemProducto,
+          ...datosProducto
+        }
+      }
+      return itemProducto
+    })
+  }
+
+
   return (
     <BrowserRouter>
-      <Menu />
+      <Menu usuarioLogueado={usuarioLogueado} setusuarioLogueado={setusuarioLogueado}/>
       <Navsegundo />
 
       <main className=" container">
         <Routes>
           <Route path="/" element={<Inicio />} />
-          <Route path="/detalle" element={<DetalleProductos />} />
+          <Route path="detalle" element={<DetalleProductos />} />
           <Route
-            path="/login"
+            path="login"
             element={<Login setusuarioLogueado={setusuarioLogueado} />}
           />
-          <Route path="/admin" element={<Admin productos={productos} borrarProducto={borrarProducto} />} />
+          <Route path="admin" element={<Admin productos={productos} borrarProducto={borrarProducto} />} />
           <Route
-            path="/crear"
+            path="crear"
             element={
               <FormularioProductos
                 titulo="Formulario: Agregar producto"
@@ -67,7 +85,7 @@ function App() {
             }
           />
           <Route
-            path="/editar"
+            path="editar/:id"
             element={
               <FormularioProductos titulo="Formulario: Editar producto" />
             }

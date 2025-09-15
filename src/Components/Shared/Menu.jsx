@@ -3,9 +3,16 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
-const Navprimero = () => {
+const Navprimero = ({ usuarioLogueado, setusuarioLogueado }) => {
+  const navegacion = useNavigate();
+
+  const cerrarSession = () => {
+    setusuarioLogueado(false);
+    navegacion("/");
+  };
+
   return (
     <Navbar expand="lg" className="nav-pri">
       <Container>
@@ -31,15 +38,24 @@ const Navprimero = () => {
             <NavLink to="/" className="nav-link">
               Inicio
             </NavLink>
-            <NavLink to="/admin" className="nav-link">
-              Administrador
-            </NavLink>
-            <NavLink to="/login" className="nav-link">
-              Iniciar sesión
-            </NavLink>
-            <NavLink to="/logout" className="nav-link">
-              Cerrar sesión
-            </NavLink>
+            {usuarioLogueado ? (
+              <>
+                <NavLink to="/admin" className="nav-link">
+                  Administrador
+                </NavLink>
+                <Button
+                  className={"nav-link"}
+                  variant=""
+                  onClick={cerrarSession}
+                >
+                  Cerrar sesión
+                </Button>
+              </>
+            ) : (
+              <NavLink to="/login" className="nav-link">
+                Iniciar sesión
+              </NavLink>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
