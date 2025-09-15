@@ -24,8 +24,11 @@ const Administrador = ({ productos }) => {
             <th>#</th>
             <th>Producto</th>
             <th>Precio</th>
+            <th>Marca</th>
             <th>URL de imagen</th>
             <th>Categoria</th>
+            <th>Peso (kg)</th>
+            <th>Stock disp.</th>
             <th>Opciones</th>
           </tr>
         </thead>

@@ -1,21 +1,24 @@
-import React from "react";
 import { Link } from "react-router";
 
-const ItemProductos = () => {
+const ItemProductos = ({itemProducto, fila}) => {
   return (
     <tr className="text-center align-middle shadow">
-      <td>1</td>
-      <td>Nombre del Producto</td>
-      <td>$99.99</td>
+      <td>{fila}</td>
+      <td>{itemProducto.nombreProducto}</td>
+      <td>{itemProducto.precioOriginal}</td>
+      <td>{itemProducto.marca}</td>
       <td>
         <img
-          src="https://via.placeholder.com/100"
+          src={itemProducto.imagen}
           className="img-fluid rounded table-img"
           alt="Nombre del Producto"
+          style={{ width: "80px", height: "80px", objectFit: "cover" }}
           loading="lazy"
         />
       </td>
-      <td>Categoría</td>
+      <td>{itemProducto.categoria}</td>
+      <td>{itemProducto.peso}</td>
+      <td>{itemProducto.stock}</td>
       <td>
         <div className="d-flex justify-content-center gap-1">
           <Link className="me-lg-2 btn btn-warning" to="/editar">

@@ -22,6 +22,7 @@ const FormularioProductos = ({ titulo, crearProducto }) => {
           text: `El producto ${data.nombreProducto} se creo correctamente`,
           icon: "success",
         });
+        reset;
       }
     } else {
       //logica para editar
