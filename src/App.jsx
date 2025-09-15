@@ -16,15 +16,21 @@ function App() {
   //lee sessionStorage
   const sesionUsuario =
     JSON.parse(sessionStorage.getItem("usuariokey")) || false;
+
+    const productosLS = JSON.parse(localStorage.getItem("productoskey")) || []
   //Esado de login de usuario
   const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
+  //Estado que guarda productos
+  const [productos, setProductos] = useState(productosLS)
+  
   //Guarda el estado de usuario en sessionStore
   useEffect(() => {
     sessionStorage.getItem("usuariokey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
- //Estado que guarda productos
-  const [productos, setProductos] = useState([])
-
+  //observa los cambios de productos y actualiza localestorage
+  useEffect(()=> {
+    localStorage.setItem("productoskey",JSON.stringify(productos))
+  },[productos])
 
   return (
     <BrowserRouter>
@@ -39,7 +45,7 @@ function App() {
             path="/login"
             element={<Login setusuarioLogueado={setusuarioLogueado} />}
           />
-          <Route path="/admin" element={<Admin productos={productos} setProductos={setProductos}/>} />
+          <Route path="/admin" element={<Admin productos={productos} />} />
           <Route path="/crear" element={<FormularioProductos />} />
           <Route path="/editar" element={<FormularioProductos />} />
           <Route path="*" element={<Error404 />} />

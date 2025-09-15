@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 import ItemProductos from "../Productos/ItemProductos";
 
 
-const Administrador = ({productos, setProductos}) => {
+const Administrador = ({ productos }) => {
   return (
     <section className="container my-4">
       <div className="d-flex justify-content-between align-content-center">
@@ -30,7 +30,13 @@ const Administrador = ({productos, setProductos}) => {
           </tr>
         </thead>
         <tbody>
-        <ItemProductos />
+          {productos.map((itemProducto, indice) => (
+            <ItemProductos 
+            itemProducto={itemProducto}
+            key={itemProducto.id}
+            fila={indice + 1}
+            />
+          ))}
         </tbody>
       </Table>
     </section>
