@@ -22,6 +22,9 @@ function App() {
   useEffect(() => {
     sessionStorage.getItem("usuariokey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
+ //Estado que guarda productos
+  const [productos, setProductos] = useState([])
+
 
   return (
     <BrowserRouter>
@@ -36,7 +39,7 @@ function App() {
             path="/login"
             element={<Login setusuarioLogueado={setusuarioLogueado} />}
           />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<Admin productos={productos} setProductos={setProductos}/>} />
           <Route path="/crear" element={<FormularioProductos />} />
           <Route path="/editar" element={<FormularioProductos />} />
           <Route path="*" element={<Error404 />} />

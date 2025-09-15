@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 import ItemProductos from "../Productos/ItemProductos";
 
 
-const Administrador = () => {
+const Administrador = ({productos, setProductos}) => {
   return (
     <section className="container">
       <div className="d-flex justify-content-between align-content-center">
