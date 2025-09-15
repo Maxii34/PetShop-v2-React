@@ -5,7 +5,7 @@ import ItemProductos from "../Productos/ItemProductos";
 
 const Administrador = ({productos, setProductos}) => {
   return (
-    <section className="container">
+    <section className="container my-4">
       <div className="d-flex justify-content-between align-content-center">
         <h1>Productos disponibles</h1>
         <div>

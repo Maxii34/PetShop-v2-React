@@ -11,11 +11,11 @@ const FormularioProductos = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data)
+    console.log(data);
   };
 
   return (
-    <section className="my-3">
+    <section className="my-5">
       <h2 className="text-center mb-4">Agregar Nuevo Producto</h2>
       <div>
         <Form
@@ -24,7 +24,7 @@ const FormularioProductos = () => {
         >
           {/* URL Imagen */}
           <Row>
-            <Col md={12}>
+            <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>URL de la Imagen *</Form.Label>
                 <Form.Control
@@ -43,11 +43,9 @@ const FormularioProductos = () => {
                 )}
               </Form.Group>
             </Col>
-          </Row>
 
-          {/* Título */}
-          <Row>
-            <Col md={12}>
+            {/* Título */}
+            <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Título del Producto *</Form.Label>
                 <Form.Control

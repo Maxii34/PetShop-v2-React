@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router";
 
 const ItemProductos = () => {
   return (
-    <tr className="text-center align-middle">
+    <tr className="text-center align-middle shadow">
       <td>1</td>
       <td>Nombre del Producto</td>
       <td>$99.99</td>
@@ -16,13 +17,13 @@ const ItemProductos = () => {
       </td>
       <td>Categoría</td>
       <td>
-        <div className="d-flex justify-content-center gap-2">
-          <a className="me-lg-2 btn btn-warning" href="/editar">
+        <div className="d-flex justify-content-center gap-1">
+          <Link className="me-lg-2 btn btn-warning" to="/editar">
             <i className="bi bi-pencil-square"></i>
-          </a>
-          <a className="btn btn-danger btn-sm shadow" href="">
+          </Link>
+          <button className="me-lg-2 btn btn-danger shadow" >
             <i className="bi bi-trash"></i>
-          </a>
+          </button>
         </div>
       </td>
     </tr>
