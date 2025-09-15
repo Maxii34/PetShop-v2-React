@@ -1,7 +1,9 @@
 import { Form, Button, Row, Col, FormText } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { v4 as uuidv4 } from "uuid";
 
-const FormularioProductos = () => {
+const FormularioProductos = ({ titulo, crearProducto }) => {
   const {
     register,
     handleSubmit,
@@ -11,12 +13,24 @@ const FormularioProductos = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (titulo === "Formulario: Agregar producto") {
+      data.id = uuidv4();
+      console.log(data);
+      if (crearProducto(data)) {
+        Swal.fire({
+          title: "Producto creado",
+          text: `El producto ${data.nombreProducto} se creo correctamente`,
+          icon: "success",
+        });
+      }
+    } else {
+      //logica para editar
+    }
   };
 
   return (
     <section className="my-5">
-      <h2 className="text-center mb-4">Agregar Nuevo Producto</h2>
+      <h2 className="text-center mb-4">{titulo}</h2>
       <div>
         <Form
           className="p-4 border rounded shadow"
@@ -47,15 +61,15 @@ const FormularioProductos = () => {
             {/* Título */}
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Título del Producto *</Form.Label>
+                <Form.Label>Nombre del Producto *</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Ej. Agility Perro Adulto x 20Kg"
-                  {...register("titulo", {
-                    required: "El título es obligatorio",
+                  {...register("nombreProducto", {
+                    required: "El nombre del producto es obligatorio",
                     minLength: {
                       value: 5,
-                      message: "El título debe tener al menos 5 caracteres",
+                      message: "El nombre debe tener al menos 5 caracteres",
                     },
                   })}
                 />
