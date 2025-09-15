@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 import ItemProductos from "../Productos/ItemProductos";
 
 
-const Administrador = ({ productos }) => {
+const Administrador = ({ productos, borrarProducto }) => {
   return (
     <section className="container my-4">
       <div className="d-flex justify-content-between align-content-center">
@@ -12,9 +12,6 @@ const Administrador = ({ productos }) => {
           <Link to="/crear" className="btn btn-primary shadow m-1">
             <i className="bi bi-file-earmark-plus"></i>
           </Link>
-          <button type="button" className="btn btn-info shadow m-1">
-            <i className="bi bi-database"></i>
-          </button>
         </div>
       </div>
       <hr />
@@ -36,6 +33,7 @@ const Administrador = ({ productos }) => {
           {productos.map((itemProducto, indice) => (
             <ItemProductos 
             itemProducto={itemProducto}
+            borrarProducto={borrarProducto}
             key={itemProducto.id}
             fila={indice + 1}
             />

@@ -37,6 +37,12 @@ function App() {
     return true;
   };
 
+  const borrarProducto = (idProducto) => {
+    const productoFiltrado = productos.filter((itemProducto)=> itemProducto.id !== idProducto)
+    setProductos(productoFiltrado)
+    return true
+  }
+
   return (
     <BrowserRouter>
       <Menu />
@@ -50,7 +56,7 @@ function App() {
             path="/login"
             element={<Login setusuarioLogueado={setusuarioLogueado} />}
           />
-          <Route path="/admin" element={<Admin productos={productos} />} />
+          <Route path="/admin" element={<Admin productos={productos} borrarProducto={borrarProducto} />} />
           <Route
             path="/crear"
             element={

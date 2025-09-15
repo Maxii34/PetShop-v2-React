@@ -1,5 +1,6 @@
 import { Form, Button, Row, Col, FormText } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 
@@ -284,9 +285,14 @@ const FormularioProductos = ({ titulo, crearProducto }) => {
 
           <Row>
             <Col className="text-center">
-              <Button variant="primary" type="submit" className="mt-4">
-                Agregar Producto
-              </Button>
+              <div className="d-flex justify-content-center gap-2 mt-4">
+                <Button variant="primary" type="submit">
+                  Agregar Producto
+                </Button>
+                <Link to="/admin" className="btn btn-success shadow">
+                  <i className="bi bi-arrow-bar-left"></i> Volver
+                </Link>
+              </div>
             </Col>
           </Row>
         </Form>

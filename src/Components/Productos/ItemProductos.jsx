@@ -1,6 +1,30 @@
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
-const ItemProductos = ({itemProducto, fila}) => {
+const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
+  const eliminarProducto = () => {
+    Swal.fire({
+      title: "¿Estas seguro de eliminar?",
+      text: "No se puede revertir este paso posteriormente",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#198754",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Borrar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (borrarProducto(itemProducto.id)) {
+          Swal.fire({
+            title: "Producto eliminado",
+            text: `El producto eliminado correctamente`,
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <tr className="text-center align-middle shadow">
       <td>{fila}</td>
@@ -24,7 +48,7 @@ const ItemProductos = ({itemProducto, fila}) => {
           <Link className="me-lg-2 btn btn-warning" to="/editar">
             <i className="bi bi-pencil-square"></i>
           </Link>
-          <button className="me-lg-2 btn btn-danger shadow" >
+          <button className="me-lg-2 btn btn-danger shadow" onClick={eliminarProducto}>
             <i className="bi bi-trash"></i>
           </button>
         </div>
