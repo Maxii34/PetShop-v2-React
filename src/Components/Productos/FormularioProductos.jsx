@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Form, Button, Row, Col, FormText } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 
@@ -20,7 +20,9 @@ const FormularioProductos = ({
   } = useForm();
   const { id } = useParams();
 
-useEffect(() => {
+  const navegacion = useNavigate();
+
+  useEffect(() => {
     if (id) {
       const productoBuscado = buscarProducto(id);
       if (productoBuscado) {
@@ -53,6 +55,20 @@ useEffect(() => {
       }
     } else {
       //logica para editar
+      if (modificarProducto(id,data)) {
+        Swal.fire({
+          title: "Producto editado",
+          text: `El producto ${data.nombreProducto} se actualizo correctamente`,
+          icon: "success",
+        });
+        navegacion("/admin");
+      } else {
+        Swal.fire({
+          title: "Ocurrio un Error",
+          text: `No se pudo actualizar el producto ${data.nombreProducto}`,
+          icon: "error",
+        });
+      }
     }
   };
 
@@ -133,9 +149,9 @@ useEffect(() => {
                   {...register("animal", { required: "Seleccione un animal" })}
                 >
                   <option value="">Seleccione...</option>
-                  <option>Perro</option>
-                  <option>Gato</option>
-                  <option>Otro</option>
+                  <option value="Perro">Perro</option>
+                  <option value="Gato">Gato</option>
+                  <option value="Otro">Otro</option>
                 </Form.Select>
                 {errors.animal && (
                   <span className="text-danger">{errors.animal.message}</span>
@@ -150,8 +166,8 @@ useEffect(() => {
                   {...register("etapa", { required: "Seleccione una etapa" })}
                 >
                   <option value="">Seleccione...</option>
-                  <option>Cachorro</option>
-                  <option>Adulto</option>
+                  <option value="Cachorro">Cachorro</option>
+                  <option value="Adulto">Adulto</option>
                 </Form.Select>
                 {errors.etapa && (
                   <span className="text-danger">{errors.etapa.message}</span>
@@ -267,12 +283,12 @@ useEffect(() => {
                   })}
                 >
                   <option value="">Seleccione...</option>
-                  <option>Alimentos</option>
-                  <option>Juguetes</option>
-                  <option>Accesorios</option>
-                  <option>Higiene</option>
-                  <option>Camas y Transporte</option>
-                  <option>Suplementos</option>
+                  <option value="Alimentos">Alimentos</option>
+                  <option value="Juguetes">Juguetes</option>
+                  <option value="Accesorios">Accesorios</option>
+                  <option value="Higiene">Higiene</option>
+                  <option value="Camas y Transporte">Camas y Transporte</option>
+                  <option value="Suplementos">Suplementos</option>
                 </Form.Select>
                 {errors.categoria && (
                   <span className="text-danger">
@@ -312,10 +328,16 @@ useEffect(() => {
           <Row>
             <Col className="text-center">
               <div className="d-flex justify-content-center gap-2 mt-4">
-                <Button variant="primary" type="submit">
-                  Agregar Producto
-                </Button>
-                <Link to="/admin" className="btn btn-success shadow">
+                {titulo === "Formulario: Agregar producto" ? (
+                  <Button variant="success" type="submit">
+                    Agregar Producto
+                  </Button>
+                ) : (
+                  <Button variant="success" type="submit">
+                    Guardar cambios
+                  </Button>
+                )}
+                <Link to="/admin" className="btn btn-danger shadow">
                   <i className="bi bi-arrow-bar-left"></i> Volver
                 </Link>
               </div>

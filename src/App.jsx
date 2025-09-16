@@ -63,6 +63,8 @@ function App() {
       }
       return itemProducto;
     });
+    setProductos(productoActualizado)
+    return true
   };
 
   return (
