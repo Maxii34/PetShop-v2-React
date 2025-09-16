@@ -3,13 +3,10 @@ import { Button, Table } from "react-bootstrap";
 import ItemProductos from "../Productos/ItemProductos";
 import productosObj from "../../data/ProductosObjeto";
 
-
-const Administrador = ({ productos, setProductos, borrarProducto }) => {
-
-  const productosPrueba =()=>{
-    setProductos(productosObj)
-  }
-
+const Administrador = ({ productos, setProductos, borrarProducto, borrarTodosLosProductos }) => {
+  const productosPrueba = () => {
+    setProductos(productosObj);
+  };
 
   return (
     <section className="container my-4">
@@ -20,8 +17,15 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
             <i className="bi bi-file-earmark-plus"></i>
           </Link>
           <Button
+            variant="danger"
+            className="me-lg-2 shadow m-1"
+            onClick={borrarTodosLosProductos}
+          >
+            <i className="bi bi-trash"></i>
+          </Button>
+          <Button
             variant="info"
-            className="text-light"
+            className="text-light shadow"
             onClick={productosPrueba}
           >
             <i className="bi bi-database-fill-up"></i>
@@ -45,11 +49,11 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
         </thead>
         <tbody>
           {productos.map((itemProducto, indice) => (
-            <ItemProductos 
-            itemProducto={itemProducto}
-            borrarProducto={borrarProducto}
-            key={itemProducto.id}
-            fila={indice + 1}
+            <ItemProductos
+              itemProducto={itemProducto}
+              borrarProducto={borrarProducto}
+              key={itemProducto.id}
+              fila={indice + 1}
             />
           ))}
         </tbody>

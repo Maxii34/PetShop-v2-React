@@ -46,6 +46,28 @@ function App() {
     return true;
   };
 
+  const borrarTodosLosProductos = () => {
+    Swal.fire({
+      title: "¿Estás seguro de borrar todo.?",
+      text: "¡No podrás deshacer esta acción!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, ¡borrar todo!",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setProductos([]);
+        Swal.fire(
+          "¡Borrado!",
+          "Todos los productos han sido eliminados.",
+          "success"
+        );
+      }
+    });
+  };
+
   const buscarProductos = (idProducto) => {
     const productoBuscado = productos.find(
       (itemProducto) => itemProducto.id === idProducto
@@ -80,7 +102,11 @@ function App() {
         handleShow={handleShow}
       />
       <Navsegundo />
-      <Login setusuarioLogueado={setusuarioLogueado}  handleClose={handleClose} show={show}/>
+      <Login
+        setusuarioLogueado={setusuarioLogueado}
+        handleClose={handleClose}
+        show={show}
+      />
       <main className=" container">
         <Routes>
           <Route path="/" element={<Inicio productos={productos} />} />
@@ -96,7 +122,12 @@ function App() {
             <Route
               index
               element={
-                <Admin productos={productos} setProductos={setProductos} borrarProducto={borrarProducto} />
+                <Admin
+                  productos={productos}
+                  setProductos={setProductos}
+                  borrarProducto={borrarProducto}
+                  borrarTodosLosProductos={borrarTodosLosProductos}
+                />
               }
             />
             <Route
@@ -119,7 +150,6 @@ function App() {
               }
             />
           </Route>
-
           <Route path="*" element={<Error404 />} />
         </Routes>
       </main>

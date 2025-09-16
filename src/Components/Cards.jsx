@@ -15,8 +15,8 @@ const precioCuotas = producto.precioEfectivo / producto.cuotas;
         />
         <div className="card-body d-flex text-center flex-column bod-top">
           <p className="card-title fw-bold">{producto.nombreProducto}</p>
-          <p className="price-main mt-2 mb-0">{producto.precioOriginal}</p>
-          <p className="price-cash mt-1 mb-1">{producto.precioEfectivo} con Efectivo</p>
+          <p className="price-main mt-2 mb-0"> ${producto.precioOriginal}</p>
+          <p className="price-cash mt-1 mb-1"> ${producto.precioEfectivo} con Efectivo</p>
           <p className="installments mb-3">{producto.cuotas} cuotas sin interés de $ {precioCuotas.toFixed(2)}</p>
           <div className="mt-auto d-flex justify-content-center">
             <a href="#" className="btn btn-custom mx-1 flex-shrink-0">COMPRAR</a>
