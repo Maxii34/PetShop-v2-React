@@ -4,12 +4,12 @@ import ContainerGrid from "../ContainerGrid";
 import MuralInstagran from "../MuralInstagran";
 
 
-const Inicio = () => {
+const Inicio = ({productos}) => {
     return (
         <section>
             <CarouselComponente />
             <div>
-                <ContainerGrid />
+                <ContainerGrid  productos={productos}/>
                 <CarouselProductos />
             </div>
             <MuralInstagran />
