@@ -297,6 +297,29 @@ const FormularioProductos = ({
                 )}
               </Form.Group>
             </Col>
+            <Col md={4}>
+              <Form.Group>
+                <Form.Label>Alt (Nombre de la imagen)*</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ej. Royal Canin 25kg"
+                  {...register("alt", {
+                    required: "El alt es obligatorio",
+                    minLength: {
+                      value: 4,
+                      message: "Debe tener minimo 4 caracteres",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Debe tener un maximo de 20 caracteres",
+                    },
+                  })}
+                />
+                {errors.alt && (
+                  <span className="text-danger">{errors.alt.message}</span>
+                )}
+              </Form.Group>
+            </Col>
           </Row>
 
           {/* Descripción */}
@@ -312,7 +335,11 @@ const FormularioProductos = ({
                     required: "La descripción es obligatoria",
                     minLength: {
                       value: 10,
-                      message: "Debe tener al menos 10 caracteres",
+                      message: "Debe tener como minimo 10 caracteres",
+                    },
+                    maxLength: {
+                      value: 100,
+                      message: "Debe tener como maximo 100 caracteres",
                     },
                   })}
                 />
