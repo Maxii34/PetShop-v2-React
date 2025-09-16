@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router";
 
-const Navprimero = ({ usuarioLogueado, setusuarioLogueado }) => {
+const Navprimero = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
   const navegacion = useNavigate();
 
   const cerrarSession = () => {
@@ -52,9 +52,9 @@ const Navprimero = ({ usuarioLogueado, setusuarioLogueado }) => {
                 </Button>
               </>
             ) : (
-              <NavLink to="/login" className="nav-link">
+              <Button className="nav-link" variant="" onClick={handleShow}>
                 Iniciar sesión
-              </NavLink>
+              </Button>
             )}
           </Nav>
         </Navbar.Collapse>

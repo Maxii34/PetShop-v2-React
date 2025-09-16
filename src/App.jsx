@@ -63,26 +63,28 @@ function App() {
       }
       return itemProducto;
     });
-    setProductos(productoActualizado)
-    return true
+    setProductos(productoActualizado);
+    return true;
   };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <BrowserRouter>
       <Menu
         usuarioLogueado={usuarioLogueado}
         setusuarioLogueado={setusuarioLogueado}
+        handleShow={handleShow}
       />
       <Navsegundo />
-
+      <Login setusuarioLogueado={setusuarioLogueado}  handleClose={handleClose} show={show}/>
       <main className=" container">
         <Routes>
           <Route path="/" element={<Inicio productos={productos} />} />
-          <Route path="detalle" element={<DetalleProductos />} />
-          <Route
-            path="login"
-            element={<Login setusuarioLogueado={setusuarioLogueado} />}
-          />
+          <Route path="detalle" element={<DetalleProductos />} />>
           <Route
             path="admin"
             element={
@@ -111,7 +113,7 @@ function App() {
               element={
                 <FormularioProductos
                   titulo="Formulario: Editar producto"
-                   buscarProducto={buscarProductos}
+                  buscarProducto={buscarProductos}
                   modificarProducto={modificarProducto}
                 />
               }
