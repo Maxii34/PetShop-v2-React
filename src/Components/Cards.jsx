@@ -9,7 +9,7 @@ const precioCuotas = producto.precioEfectivo / producto.cuotas;
       <div className="card product-card h-100">
         <img
           className="card-img-top"
-          src={producto.imagen}   
+          src={producto.imagen || null}   
           alt={producto.alt} 
           loading="lazy"
         />

@@ -2,10 +2,52 @@ import { Link } from "react-router";
 import { Button, Table } from "react-bootstrap";
 import ItemProductos from "../Productos/ItemProductos";
 import productosObj from "../../data/ProductosObjeto";
+import Swal from "sweetalert2";
 
-const Administrador = ({ productos, setProductos, borrarProducto, borrarTodosLosProductos }) => {
+const Administrador = ({
+  productos,
+  setProductos,
+  borrarProducto,
+  borrarTodosLosProductos,
+}) => {
+
   const productosPrueba = () => {
+  if (Array.isArray(productosObj) && productosObj.length > 0) {
     setProductos(productosObj);
+    Swal.fire({
+      title: "¡Éxito!",
+      text: "Los productos de prueba se cargaron correctamente.",
+      icon: "success"
+    });
+  } else {
+    Swal.fire({
+      title: "Error",
+      text: "No se encontraron productos para cargar.",
+      icon: "error"
+    });
+  }
+};
+
+  const borrarTodo = () => {
+    Swal.fire({
+      title: "¿Estás seguro de borrar todo.?",
+      text: "¡No podrás deshacer esta acción!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, ¡borrar todo!",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setProductos([]);
+        Swal.fire(
+          "¡Borrado!",
+          "Todos los productos han sido eliminados.",
+          "success"
+        );
+      }
+    });
   };
 
   return (
@@ -19,7 +61,7 @@ const Administrador = ({ productos, setProductos, borrarProducto, borrarTodosLos
           <Button
             variant="danger"
             className="me-lg-2 shadow m-1"
-            onClick={borrarTodosLosProductos}
+            onClick={borrarTodo}
           >
             <i className="bi bi-trash"></i>
           </Button>

@@ -47,25 +47,7 @@ function App() {
   };
 
   const borrarTodosLosProductos = () => {
-    Swal.fire({
-      title: "¿Estás seguro de borrar todo.?",
-      text: "¡No podrás deshacer esta acción!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Sí, ¡borrar todo!",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setProductos([]);
-        Swal.fire(
-          "¡Borrado!",
-          "Todos los productos han sido eliminados.",
-          "success"
-        );
-      }
-    });
+    
   };
 
   const buscarProductos = (idProducto) => {
@@ -110,7 +92,7 @@ function App() {
       <main className=" container">
         <Routes>
           <Route path="/" element={<Inicio productos={productos} />} />
-          <Route path="detalle" element={<DetalleProductos />} />>
+          <Route path="detalle" element={<DetalleProductos />} />
           <Route
             path="admin"
             element={

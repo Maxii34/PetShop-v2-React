@@ -8,13 +8,14 @@ const productosObj = [
     marca: "Royal Canin",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 32999,
-    precioEfectivo: 28999,
+    precioOriginal: 32500,
+    precioEfectivo: 28700,
     cuotas: 3,
     peso: "3kg",
     stock: 45,
-    categoria: "alimento-seco",
-    descripcion: "Formulado para perros pequeños adultos. Promueve digestión saludable y piel sensible."
+    categoria: "Alimentos",
+    descripcion: "Formulado para perros pequeños adultos. Promueve digestión saludable y piel sensible.",
+    alt: "Alimento Royal Canin Mini Adult con pollo para perros pequeños adultos, bolsa de 3kg"
   },
   {
     id: "2",
@@ -24,13 +25,14 @@ const productosObj = [
     marca: "Purina Pro Plan",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 68599,
-    precioEfectivo: 62599,
+    precioOriginal: 68300,
+    precioEfectivo: 62100,
     cuotas: 6,
     peso: "7.5kg",
     stock: 30,
-    categoria: "alimento-seco",
-    descripcion: "Nutrición avanzada con pollo real. Fortalece el sistema inmunológico y mejora el pelaje."
+    categoria: "Alimentos",
+    descripcion: "Nutrición avanzada con pollo real. Fortalece el sistema inmunológico y mejora el pelaje.",
+    alt: "Alimento Purina Pro Plan Adulto con pollo para perros, bolsa de 7.5kg"
   },
   {
     id: "3",
@@ -40,13 +42,14 @@ const productosObj = [
     marca: "Hills Science Diet",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 155099,
-    precioEfectivo: 145099,
+    precioOriginal: 98500,
+    precioEfectivo: 89200,
     cuotas: 6,
     peso: "12kg",
     stock: 18,
-    categoria: "alimento-seco",
-    descripcion: "Ideal para perros con estómago sensible. Ingredientes suaves y fácil digestión."
+    categoria: "Alimentos",
+    descripcion: "Ideal para perros con estómago sensible. Ingredientes suaves y fácil digestión.",
+    alt: "Alimento Hills Science Diet para perros con estómago sensible, bolsa de 12kg"
   },
   {
     id: "4",
@@ -56,13 +59,14 @@ const productosObj = [
     marca: "Eukanuba",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 118099,
-    precioEfectivo: 110099,
+    precioOriginal: 96000,
+    precioEfectivo: 88000,
     cuotas: 6,
     peso: "12kg",
     stock: 22,
-    categoria: "alimento-seco",
-    descripcion: "Nutrición específica para razas grandes. Apoyo a articulaciones y masa muscular."
+    categoria: "Alimentos",
+    descripcion: "Nutrición específica para razas grandes. Apoyo a articulaciones y masa muscular.",
+    alt: "Alimento Eukanuba para perros adultos de raza grande, bolsa de 12kg"
   },
   {
     id: "5",
@@ -72,13 +76,14 @@ const productosObj = [
     marca: "Acana",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 112099,
-    precioEfectivo: 105099,
+    precioOriginal: 94000,
+    precioEfectivo: 87500,
     cuotas: 3,
     peso: "6kg",
     stock: 25,
-    categoria: "premium",
-    descripcion: "Hecho con pescados frescos del Atlántico. Sin granos, alto en proteína animal."
+    categoria: "Alimentos",
+    descripcion: "Hecho con pescados frescos del Atlántico. Sin granos, alto en proteína animal.",
+    alt: "Alimento Acana Wild Atlantic con pescado fresco para perros, bolsa de 6kg"
   },
   {
     id: "6",
@@ -88,13 +93,14 @@ const productosObj = [
     marca: "Dog Chow",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 65099,
-    precioEfectivo: 60099,
+    precioOriginal: 64500,
+    precioEfectivo: 59200,
     cuotas: 6,
     peso: "15kg",
     stock: 60,
-    categoria: "económico",
-    descripcion: "Nutrición balanceada a precio accesible. Ideal para perros adultos de todas las razas."
+    categoria: "Alimentos",
+    descripcion: "Nutrición balanceada a precio accesible. Ideal para perros adultos de todas las razas.",
+    alt: "Alimento Dog Chow básico para perros adultos, bolsa de 15kg"
   },
   {
     id: "7",
@@ -104,13 +110,14 @@ const productosObj = [
     marca: "Pedigree",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 80099,
-    precioEfectivo: 75099,
+    precioOriginal: 79000,
+    precioEfectivo: 72500,
     cuotas: 6,
     peso: "15kg",
     stock: 40,
-    categoria: "económico",
-    descripcion: "Sabor irresistible con pollo y arroz. Enriquecido con vitaminas y minerales esenciales."
+    categoria: "Alimentos",
+    descripcion: "Sabor irresistible con pollo y arroz. Enriquecido con vitaminas y minerales esenciales.",
+    alt: "Alimento Pedigree con pollo y arroz para perros adultos, bolsa de 15kg"
   },
   {
     id: "8",
@@ -120,13 +127,14 @@ const productosObj = [
     marca: "Nutri Source",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 120099,
-    precioEfectivo: 115099,
+    precioOriginal: 95000,
+    precioEfectivo: 89000,
     cuotas: 3,
     peso: "12kg",
     stock: 15,
-    categoria: "sin-granos",
-    descripcion: "Sin granos, con pollo como primer ingrediente. Ideal para perros con sensibilidad alimentaria."
+    categoria: "Alimentos",
+    descripcion: "Sin granos, con pollo como primer ingrediente. Ideal para perros con sensibilidad alimentaria.",
+    alt: "Alimento Nutri Source sin granos con pollo para perros, bolsa de 12kg"
   },
   {
     id: "9",
@@ -136,13 +144,14 @@ const productosObj = [
     marca: "Criadores",
     animal: "perro",
     etapa: "cachorro",
-    precioOriginal: 52099,
-    precioEfectivo: 48099,
+    precioOriginal: 51500,
+    precioEfectivo: 47200,
     cuotas: 3,
     peso: "8kg",
     stock: 35,
-    categoria: "cachorro",
-    descripcion: "Fórmula equilibrada para el crecimiento saludable de cachorros. Calidad española."
+    categoria: "Alimentos",
+    descripcion: "Fórmula equilibrada para el crecimiento saludable de cachorros. Calidad española.",
+    alt: "Alimento Criadores Premium para cachorros de perro, bolsa de 8kg"
   },
   {
     id: "10",
@@ -152,13 +161,14 @@ const productosObj = [
     marca: "Orijen",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 132099,
-    precioEfectivo: 125099,
+    precioOriginal: 97000,
+    precioEfectivo: 90000,
     cuotas: 3,
     peso: "6kg",
     stock: 12,
-    categoria: "premium",
-    descripcion: "Con 6 tipos de pescado fresco. Alimento biológicamente apropiado, sin conservantes."
+    categoria: "Alimentos",
+    descripcion: "Con 6 tipos de pescado fresco. Alimento biológicamente apropiado, sin conservantes.",
+    alt: "Alimento Orijen Six Fish con 6 pescados frescos para perros, bolsa de 6kg"
   },
   {
     id: "11",
@@ -168,13 +178,14 @@ const productosObj = [
     marca: "Royal Canin",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 34099,
-    precioEfectivo: 30099,
+    precioOriginal: 33500,
+    precioEfectivo: 29800,
     cuotas: 3,
     peso: "3kg",
     stock: 28,
-    categoria: "alimento-seco",
-    descripcion: "Para perros pequeños que viven adentro. Control de olor y pelo."
+    categoria: "Alimentos",
+    descripcion: "Para perros pequeños que viven adentro. Control de olor y pelo.",
+    alt: "Alimento Royal Canin Mini Indoor para perros pequeños de interior, bolsa de 3kg"
   },
   {
     id: "12",
@@ -184,13 +195,14 @@ const productosObj = [
     marca: "Purina Pro Plan",
     animal: "perro",
     etapa: "senior",
-    precioOriginal: 70099,
-    precioEfectivo: 64099,
+    precioOriginal: 69500,
+    precioEfectivo: 63000,
     cuotas: 6,
     peso: "7.5kg",
     stock: 20,
-    categoria: "senior",
-    descripcion: "Fórmula para perros mayores de 7 años. Con antioxidantes y proteínas de fácil digestión."
+    categoria: "Alimentos",
+    descripcion: "Fórmula para perros mayores de 7 años. Con antioxidantes y proteínas de fácil digestión.",
+    alt: "Alimento Purina Pro Plan Senior 7+ para perros mayores, bolsa de 7.5kg"
   },
   {
     id: "13",
@@ -200,13 +212,14 @@ const productosObj = [
     marca: "Hills Science Diet",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 150099,
-    precioEfectivo: 140099,
+    precioOriginal: 97500,
+    precioEfectivo: 90500,
     cuotas: 6,
     peso: "12kg",
     stock: 16,
-    categoria: "alimento-seco",
-    descripcion: "Sabor a cordero con arroz. Ideal para perros con sensibilidad a proteínas de pollo."
+    categoria: "Alimentos",
+    descripcion: "Sabor a cordero con arroz. Ideal para perros con sensibilidad a proteínas de pollo.",
+    alt: "Alimento Hills Science Diet con cordero y arroz para perros, bolsa de 12kg"
   },
   {
     id: "14",
@@ -216,13 +229,14 @@ const productosObj = [
     marca: "Eukanuba",
     animal: "perro",
     etapa: "cachorro",
-    precioOriginal: 125099,
-    precioEfectivo: 118099,
+    precioOriginal: 96500,
+    precioEfectivo: 89500,
     cuotas: 6,
     peso: "12kg",
     stock: 14,
-    categoria: "cachorro",
-    descripcion: "Desarrollo óseo y muscular controlado para cachorros de raza grande."
+    categoria: "Alimentos",
+    descripcion: "Desarrollo óseo y muscular controlado para cachorros de raza grande.",
+    alt: "Alimento Eukanuba Puppy para cachorros de raza grande, bolsa de 12kg"
   },
   {
     id: "15",
@@ -232,14 +246,14 @@ const productosObj = [
     marca: "Acana",
     animal: "perro",
     etapa: "adulto",
-    precioOriginal: 118099,
-    precioEfectivo: 110099,
+    precioOriginal: 95500,
+    precioEfectivo: 88500,
     cuotas: 3,
     peso: "6kg",
     stock: 20,
-    categoria: "sin-granos",
-    descripcion: "Con salmón del Pacífico. Sin granos, sin papas, sin conservantes artificiales."
-
+    categoria: "Alimentos",
+    descripcion: "Con salmón del Pacífico. Sin granos, sin papas, sin conservantes artificiales.",
+    alt: "Alimento Acana sin granos con salmón del Pacífico para perros, bolsa de 6kg"
   },
 
   // 🐱 15 PRODUCTOS PARA GATOS
@@ -251,13 +265,14 @@ const productosObj = [
     marca: "Royal Canin",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 59999,
-    precioEfectivo: 54999,
+    precioOriginal: 59500,
+    precioEfectivo: 54200,
     cuotas: 3,
     peso: "4kg",
     stock: 35,
-    categoria: "indoor",
-    descripcion: "Para gatos que viven en interiores. Control de bolas de pelo y peso."
+    categoria: "Alimentos",
+    descripcion: "Para gatos que viven en interiores. Control de bolas de pelo y peso.",
+    alt: "Alimento Royal Canin Indoor 27 para gatos de interior, bolsa de 4kg"
   },
   {
     id: "17",
@@ -267,13 +282,14 @@ const productosObj = [
     marca: "Purina Pro Plan",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 49999,
-    precioEfectivo: 44999,
+    precioOriginal: 49500,
+    precioEfectivo: 44200,
     cuotas: 3,
     peso: "3kg",
     stock: 30,
-    categoria: "piel-sensible",
-    descripcion: "Para gatos con piel sensible y digestión delicada. Con avena y pollo."
+    categoria: "Alimentos",
+    descripcion: "Para gatos con piel sensible y digestión delicada. Con avena y pollo.",
+    alt: "Alimento Purina Pro Plan para gatos con piel sensible, bolsa de 3kg"
   },
   {
     id: "18",
@@ -283,13 +299,14 @@ const productosObj = [
     marca: "Whiskas",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 31999,
-    precioEfectivo: 27999,
+    precioOriginal: 31500,
+    precioEfectivo: 27200,
     cuotas: 3,
     peso: "3kg",
     stock: 50,
-    categoria: "económico",
-    descripcion: "Sabor a atún que los gatos adoran. Enriquecido con vitaminas y minerales."
+    categoria: "Alimentos",
+    descripcion: "Sabor a atún que los gatos adoran. Enriquecido con vitaminas y minerales.",
+    alt: "Alimento Whiskas con atún para gatos adultos, bolsa de 3kg"
   },
   {
     id: "19",
@@ -299,13 +316,14 @@ const productosObj = [
     marca: "Hills Science Diet",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 54999,
-    precioEfectivo: 49999,
+    precioOriginal: 54500,
+    precioEfectivo: 49200,
     cuotas: 3,
     peso: "2kg",
     stock: 25,
-    categoria: "alimento-seco",
-    descripcion: "Nutrición clínica para mantener un sistema inmunológico fuerte."
+    categoria: "Alimentos",
+    descripcion: "Nutrición clínica para mantener un sistema inmunológico fuerte.",
+    alt: "Alimento Hills Science Diet con pollo para gatos adultos, bolsa de 2kg"
   },
   {
     id: "20",
@@ -315,13 +333,14 @@ const productosObj = [
     marca: "Acana",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 117999,
-    precioEfectivo: 109999,
+    precioOriginal: 97500,
+    precioEfectivo: 90500,
     cuotas: 3,
     peso: "5.4kg",
     stock: 15,
-    categoria: "premium",
-    descripcion: "Con 5 tipos de pescado fresco. Sin granos, alto en proteína animal."
+    categoria: "Alimentos",
+    descripcion: "Con 5 tipos de pescado fresco. Sin granos, alto en proteína animal.",
+    alt: "Alimento Acana Bountiful Catch con pescado fresco para gatos, bolsa de 5.4kg"
   },
   {
     id: "21",
@@ -331,13 +350,14 @@ const productosObj = [
     marca: "Criadores",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 34999,
-    precioEfectivo: 31999,
+    precioOriginal: 34500,
+    precioEfectivo: 31200,
     cuotas: 3,
     peso: "3kg",
     stock: 40,
-    categoria: "económico",
-    descripcion: "Nutrición equilibrada para gatos adultos. Calidad española a buen precio."
+    categoria: "Alimentos",
+    descripcion: "Nutrición equilibrada para gatos adultos. Calidad española a buen precio.",
+    alt: "Alimento Criadores para gatos adultos, bolsa de 3kg"
   },
   {
     id: "22",
@@ -347,13 +367,14 @@ const productosObj = [
     marca: "Cat Chow",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 31999,
-    precioEfectivo: 27999,
+    precioOriginal: 31500,
+    precioEfectivo: 27200,
     cuotas: 3,
     peso: "3kg",
     stock: 45,
-    categoria: "indoor",
-    descripcion: "Ayuda a controlar el peso y reducir el olor de las heces."
+    categoria: "Alimentos",
+    descripcion: "Ayuda a controlar el peso y reducir el olor de las heces.",
+    alt: "Alimento Cat Chow Indoor para control de peso en gatos, bolsa de 3kg"
   },
   {
     id: "23",
@@ -363,13 +384,14 @@ const productosObj = [
     marca: "Orijen",
     animal: "gato",
     etapa: "gatito",
-    precioOriginal: 139999,
-    precioEfectivo: 129999,
+    precioOriginal: 98000,
+    precioEfectivo: 91000,
     cuotas: 3,
     peso: "5.4kg",
     stock: 10,
-    categoria: "gatito",
-    descripcion: "Ideal para gatitos y gatos en crecimiento. Con carnes frescas y huevos enteros."
+    categoria: "Alimentos",
+    descripcion: "Ideal para gatitos y gatos en crecimiento. Con carnes frescas y huevos enteros.",
+    alt: "Alimento Orijen Cat & Kitten para gatitos y gatos en crecimiento, bolsa de 5.4kg"
   },
   {
     id: "24",
@@ -379,13 +401,14 @@ const productosObj = [
     marca: "Equilibrio",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 64999,
-    precioEfectivo: 59999,
+    precioOriginal: 64500,
+    precioEfectivo: 59200,
     cuotas: 3,
     peso: "3kg",
     stock: 25,
-    categoria: "sin-granos",
-    descripcion: "Sin granos, con salmón real. Para piel saludable y pelaje brillante."
+    categoria: "Alimentos",
+    descripcion: "Sin granos, con salmón real. Para piel saludable y pelaje brillante.",
+    alt: "Alimento Equilibrio sin granos con salmón para gatos, bolsa de 3kg"
   },
   {
     id: "25",
@@ -395,13 +418,14 @@ const productosObj = [
     marca: "Mio",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 19999,
-    precioEfectivo: 17999,
+    precioOriginal: 19500,
+    precioEfectivo: 17200,
     cuotas: 3,
     peso: "2kg",
     stock: 60,
-    categoria: "económico",
-    descripcion: "Precio accesible sin sacrificar nutrición básica. Ideal para gatos adultos."
+    categoria: "Alimentos",
+    descripcion: "Precio accesible sin sacrificar nutrición básica. Ideal para gatos adultos.",
+    alt: "Alimento Mio económico con pollo para gatos adultos, bolsa de 2kg"
   },
   {
     id: "26",
@@ -411,13 +435,14 @@ const productosObj = [
     marca: "Royal Canin",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 57999,
-    precioEfectivo: 51999,
+    precioOriginal: 57500,
+    precioEfectivo: 51200,
     cuotas: 3,
     peso: "2kg",
     stock: 30,
-    categoria: "piel-pelaje",
-    descripcion: "Mejora la salud del pelaje y reduce la caída del pelo."
+    categoria: "Alimentos",
+    descripcion: "Mejora la salud del pelaje y reduce la caída del pelo.",
+    alt: "Alimento Royal Canin Hair & Skin para cuidado del pelaje en gatos, bolsa de 2kg"
   },
   {
     id: "27",
@@ -427,13 +452,14 @@ const productosObj = [
     marca: "Purina Pro Plan",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 51999,
-    precioEfectivo: 46999,
+    precioOriginal: 51500,
+    precioEfectivo: 46200,
     cuotas: 3,
     peso: "3kg",
     stock: 22,
-    categoria: "salud-urinaria",
-    descripcion: "Formulado para apoyar la salud del tracto urinario en gatos."
+    categoria: "Alimentos",
+    descripcion: "Formulado para apoyar la salud del tracto urinario en gatos.",
+    alt: "Alimento Purina Pro Plan para salud urinaria en gatos, bolsa de 3kg"
   },
   {
     id: "28",
@@ -443,13 +469,14 @@ const productosObj = [
     marca: "Hills Science Diet",
     animal: "gato",
     etapa: "gatito",
-    precioOriginal: 44999,
-    precioEfectivo: 39999,
+    precioOriginal: 44500,
+    precioEfectivo: 39200,
     cuotas: 3,
     peso: "1.5kg",
     stock: 28,
-    categoria: "gatito",
-    descripcion: "Nutrición para el crecimiento saludable de gatitos hasta 1 año."
+    categoria: "Alimentos",
+    descripcion: "Nutrición para el crecimiento saludable de gatitos hasta 1 año.",
+    alt: "Alimento Hills Science Diet Kitten para gatitos, bolsa de 1.5kg"
   },
   {
     id: "29",
@@ -459,13 +486,14 @@ const productosObj = [
     marca: "Whiskas",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 33999,
-    precioEfectivo: 29999,
+    precioOriginal: 33500,
+    precioEfectivo: 29200,
     cuotas: 3,
     peso: "3kg",
     stock: 40,
-    categoria: "indoor",
-    descripcion: "Control de bolas de pelo y digestión saludable para gatos de interior."
+    categoria: "Alimentos",
+    descripcion: "Control de bolas de pelo y digestión saludable para gatos de interior.",
+    alt: "Alimento Whiskas Indoor con control de bolas de pelo para gatos, bolsa de 3kg"
   },
   {
     id: "30",
@@ -475,13 +503,14 @@ const productosObj = [
     marca: "Acana",
     animal: "gato",
     etapa: "adulto",
-    precioOriginal: 121999,
-    precioEfectivo: 114999,
+    precioOriginal: 98500,
+    precioEfectivo: 91500,
     cuotas: 3,
     peso: "5.4kg",
     stock: 18,
-    categoria: "sin-granos",
-    descripcion: "Con pescado y pato frescos. Sin granos, sin conservantes, sin colorantes."
+    categoria: "Alimentos",
+    descripcion: "Con pescado y pato frescos. Sin granos, sin conservantes, sin colorantes.",
+    alt: "Alimento Acana sin granos con pescado y pato para gatos, bolsa de 5.4kg"
   }
 ];
 
