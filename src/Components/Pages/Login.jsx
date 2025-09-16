@@ -14,8 +14,6 @@ const Login = ({ setusuarioLogueado }) => {
   const navegacion = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
-
     if (
       data.email === import.meta.env.VITE_API_EMAIL &&
       data.password === import.meta.env.VITE_API_PASSWORD

@@ -48,7 +48,7 @@ function App() {
 
   const buscarProductos = (idProducto) => {
     const productoBuscado = productos.find(
-      (itemProducto) => itemProducto.id !== idProducto
+      (itemProducto) => itemProducto.id === idProducto
     );
     return productoBuscado;
   };
@@ -107,7 +107,11 @@ function App() {
             <Route
               path="editar/:id"
               element={
-                <FormularioProductos titulo="Formulario: Editar producto" />
+                <FormularioProductos
+                  titulo="Formulario: Editar producto"
+                   buscarProducto={buscarProductos}
+                  modificarProducto={modificarProducto}
+                />
               }
             />
           </Route>

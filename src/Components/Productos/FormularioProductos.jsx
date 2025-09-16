@@ -1,10 +1,16 @@
+import { useEffect } from "react";
 import { Form, Button, Row, Col, FormText } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 
-const FormularioProductos = ({ titulo, crearProducto }) => {
+const FormularioProductos = ({
+  titulo,
+  crearProducto,
+  buscarProducto,
+  modificarProducto,
+}) => {
   const {
     register,
     handleSubmit,
@@ -12,11 +18,31 @@ const FormularioProductos = ({ titulo, crearProducto }) => {
     setValue,
     formState: { errors },
   } = useForm();
+  const { id } = useParams();
+
+useEffect(() => {
+    if (id) {
+      const productoBuscado = buscarProducto(id);
+      if (productoBuscado) {
+        setValue("nombreProducto", productoBuscado.nombreProducto);
+        setValue("imagen", productoBuscado.imagen);
+        setValue("marca", productoBuscado.marca);
+        setValue("animal", productoBuscado.animal);
+        setValue("etapa", productoBuscado.etapa);
+        setValue("precioOriginal", productoBuscado.precioOriginal);
+        setValue("precioEfectivo", productoBuscado.precioEfectivo);
+        setValue("cuotas", productoBuscado.cuotas);
+        setValue("peso", productoBuscado.peso);
+        setValue("stock", productoBuscado.stock);
+        setValue("categoria", productoBuscado.categoria);
+        setValue("descripcion", productoBuscado.descripcion);
+      }
+    }
+  }, [titulo, id, setValue, buscarProducto]);
 
   const onSubmit = (data) => {
     if (titulo === "Formulario: Agregar producto") {
       data.id = uuidv4();
-      console.log(data);
       if (crearProducto(data)) {
         Swal.fire({
           title: "Producto creado",
