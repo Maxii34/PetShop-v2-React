@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <g fill="#7ED957">
+    <!-- Dedos -->
+    <circle cx="20" cy="18" r="6"/>
+    <circle cx="32" cy="14" r="6"/>
+    <circle cx="44" cy="18" r="6"/>
+    <circle cx="52" cy="26" r="5"/>
+    <!-- Almohadón -->
+    <path d="M16 34
+             C16 26, 24 22, 32 22
+             C40 22, 48 26, 48 34
+             C48 42, 40 52, 32 52
+             C24 52, 16 42, 16 34 Z"/>
+  </g>
+</svg>
