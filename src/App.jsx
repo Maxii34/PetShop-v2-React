@@ -96,7 +96,7 @@ function App() {
             <Route
               index
               element={
-                <Admin productos={productos} borrarProducto={borrarProducto} />
+                <Admin productos={productos} setProductos={setProductos} borrarProducto={borrarProducto} />
               }
             />
             <Route

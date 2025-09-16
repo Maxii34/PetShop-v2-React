@@ -1,9 +1,16 @@
 import { Link } from "react-router";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import ItemProductos from "../Productos/ItemProductos";
+import productosObj from "../../data/ProductosObjeto";
 
 
-const Administrador = ({ productos, borrarProducto }) => {
+const Administrador = ({ productos, setProductos, borrarProducto }) => {
+
+  const productosPrueba =()=>{
+    setProductos(productosObj)
+  }
+
+
   return (
     <section className="container my-4">
       <div className="d-flex justify-content-between align-content-center">
@@ -12,6 +19,13 @@ const Administrador = ({ productos, borrarProducto }) => {
           <Link to="crear" className="btn btn-primary shadow m-1">
             <i className="bi bi-file-earmark-plus"></i>
           </Link>
+          <Button
+            variant="info"
+            className="text-light"
+            onClick={productosPrueba}
+          >
+            <i className="bi bi-database-fill-up"></i>
+          </Button>
         </div>
       </div>
       <hr />

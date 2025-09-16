@@ -1,4 +1,4 @@
-const productos = [
+const productosObj = [
   // 🐶 15 PRODUCTOS PARA PERROS
   {
     id: "1",
@@ -485,4 +485,4 @@ const productos = [
   }
 ];
 
-export default productos;
+export default productosObj;
