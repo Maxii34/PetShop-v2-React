@@ -37,6 +37,7 @@ const FormularioProductos = ({
         setValue("peso", productoBuscado.peso);
         setValue("stock", productoBuscado.stock);
         setValue("categoria", productoBuscado.categoria);
+        setValue("alt", productoBuscado.alt);
         setValue("descripcion", productoBuscado.descripcion);
       }
     }
@@ -55,7 +56,7 @@ const FormularioProductos = ({
       }
     } else {
       //logica para editar
-      if (modificarProducto(id,data)) {
+      if (modificarProducto(id, data)) {
         Swal.fire({
           title: "Producto editado",
           text: `El producto ${data.nombreProducto} se actualizo correctamente`,
@@ -182,11 +183,15 @@ const FormularioProductos = ({
               <Form.Group>
                 <Form.Label>Precio Original ($) *</Form.Label>
                 <Form.Control
-                  type="number"
+                  type="text"
                   placeholder="62000"
                   {...register("precioOriginal", {
                     required: "El precio original es obligatorio",
-                    min: { value: 1, message: "Debe ser mayor a 0" },
+                    pattern: {
+                      value: /^(?:[1-9]\d{0,5}|500000)(?:[.,]\d{1,2})?$/,
+                      message:
+                        "Debe ser un número entre 1 y 500.000 (máx. 2 decimales). No uses separadores de miles.",
+                    },
                   })}
                 />
                 {errors.precioOriginal && (
@@ -201,11 +206,15 @@ const FormularioProductos = ({
               <Form.Group>
                 <Form.Label>Precio en Efectivo ($) *</Form.Label>
                 <Form.Control
-                  type="number"
+                  type="text"
                   placeholder="55800"
                   {...register("precioEfectivo", {
                     required: "El precio en efectivo es obligatorio",
-                    min: { value: 1, message: "Debe ser mayor a 0" },
+                    pattern: {
+                      value: /^(?:[1-9]\d{0,5}|500000)(?:[.,]\d{1,2})?$/,
+                      message:
+                        "Debe ser un número entre 1 y 500.000 (máx. 2 decimales). No uses separadores de miles.",
+                    },
                   })}
                 />
                 {errors.precioEfectivo && (
@@ -297,6 +306,29 @@ const FormularioProductos = ({
                 )}
               </Form.Group>
             </Col>
+            <Col md={4}>
+              <Form.Group>
+                <Form.Label>Alt (Nombre de la imagen)*</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Ej. Royal Canin 25kg"
+                  {...register("alt", {
+                    required: "El alt es obligatorio",
+                    minLength: {
+                      value: 4,
+                      message: "Debe tener minimo 4 caracteres",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "Debe tener un maximo de 20 caracteres",
+                    },
+                  })}
+                />
+                {errors.alt && (
+                  <span className="text-danger">{errors.alt.message}</span>
+                )}
+              </Form.Group>
+            </Col>
           </Row>
 
           {/* Descripción */}
@@ -312,7 +344,11 @@ const FormularioProductos = ({
                     required: "La descripción es obligatoria",
                     minLength: {
                       value: 10,
-                      message: "Debe tener al menos 10 caracteres",
+                      message: "Debe tener como minimo 10 caracteres",
+                    },
+                    maxLength: {
+                      value: 100,
+                      message: "Debe tener como maximo 100 caracteres",
                     },
                   })}
                 />

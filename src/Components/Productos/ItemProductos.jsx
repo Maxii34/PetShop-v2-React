@@ -33,9 +33,9 @@ const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
       <td>{itemProducto.marca}</td>
       <td>
         <img
-          src={itemProducto.imagen}
+          src={itemProducto.imagen || null}
           className="img-fluid rounded table-img"
-          alt="Nombre del Producto"
+          alt={itemProducto.alt}
           style={{ width: "80px", height: "80px", objectFit: "cover" }}
           loading="lazy"
         />

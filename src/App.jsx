@@ -46,6 +46,10 @@ function App() {
     return true;
   };
 
+  const borrarTodosLosProductos = () => {
+    
+  };
+
   const buscarProductos = (idProducto) => {
     const productoBuscado = productos.find(
       (itemProducto) => itemProducto.id === idProducto
@@ -63,26 +67,32 @@ function App() {
       }
       return itemProducto;
     });
-    setProductos(productoActualizado)
-    return true
+    setProductos(productoActualizado);
+    return true;
   };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <BrowserRouter>
       <Menu
         usuarioLogueado={usuarioLogueado}
         setusuarioLogueado={setusuarioLogueado}
+        handleShow={handleShow}
       />
       <Navsegundo />
-
+      <Login
+        setusuarioLogueado={setusuarioLogueado}
+        handleClose={handleClose}
+        show={show}
+      />
       <main className=" container">
         <Routes>
           <Route path="/" element={<Inicio productos={productos} />} />
           <Route path="detalle" element={<DetalleProductos />} />
-          <Route
-            path="login"
-            element={<Login setusuarioLogueado={setusuarioLogueado} />}
-          />
           <Route
             path="admin"
             element={
@@ -94,7 +104,12 @@ function App() {
             <Route
               index
               element={
-                <Admin productos={productos} borrarProducto={borrarProducto} />
+                <Admin
+                  productos={productos}
+                  setProductos={setProductos}
+                  borrarProducto={borrarProducto}
+                  borrarTodosLosProductos={borrarTodosLosProductos}
+                />
               }
             />
             <Route
@@ -111,13 +126,12 @@ function App() {
               element={
                 <FormularioProductos
                   titulo="Formulario: Editar producto"
-                   buscarProducto={buscarProductos}
+                  buscarProducto={buscarProductos}
                   modificarProducto={modificarProducto}
                 />
               }
             />
           </Route>
-
           <Route path="*" element={<Error404 />} />
         </Routes>
       </main>
