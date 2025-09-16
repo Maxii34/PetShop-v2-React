@@ -77,7 +77,7 @@ function App() {
 
       <main className=" container">
         <Routes>
-          <Route path="/" element={<Inicio />} />
+          <Route path="/" element={<Inicio productos={productos} />} />
           <Route path="detalle" element={<DetalleProductos />} />
           <Route
             path="login"
