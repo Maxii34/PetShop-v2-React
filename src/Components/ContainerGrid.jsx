@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import CardsProductos from "./Cards";
-import { useNavigate } from "react-router";
 
 const ContainerGrid = ({ productos }) => {
   const [visible, setVisible] = useState(10); // cantidad inicial de cards visibles
-  const navegacion = useNavigate();
 
   const mostrarMas = () => {
     setVisible((prev) => prev + 5); // suma 5 más cada vez que se presionas

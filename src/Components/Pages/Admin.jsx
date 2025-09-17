@@ -3,6 +3,7 @@ import { Button, Table } from "react-bootstrap";
 import ItemProductos from "../Productos/ItemProductos";
 import productosObj from "../../data/ProductosObjeto";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const Administrador = ({
   productos,
@@ -10,23 +11,22 @@ const Administrador = ({
   borrarProducto,
   borrarTodosLosProductos,
 }) => {
-
   const productosPrueba = () => {
-  if (Array.isArray(productosObj) && productosObj.length > 0) {
-    setProductos(productosObj);
-    Swal.fire({
-      title: "¡Éxito!",
-      text: "Los productos de prueba se cargaron correctamente.",
-      icon: "success"
-    });
-  } else {
-    Swal.fire({
-      title: "Error",
-      text: "No se encontraron productos para cargar.",
-      icon: "error"
-    });
-  }
-};
+    if (Array.isArray(productosObj) && productosObj.length > 0) {
+      setProductos(productosObj);
+      Swal.fire({
+        title: "¡Éxito!",
+        text: "Los productos de prueba se cargaron correctamente.",
+        icon: "success",
+      });
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "No se encontraron productos para cargar.",
+        icon: "error",
+      });
+    }
+  };
 
   const borrarTodo = () => {
     Swal.fire({
@@ -50,8 +50,31 @@ const Administrador = ({
     });
   };
 
+  const [visible, setVisible] = useState(10);
+
+  const mostrarMas = () => {
+    setVisible((prev) => prev + 5); // suma 5 más cada vez
+  };
+
+  const mostrarMenos = () => {
+    setVisible((prev) => (prev > 10 ? prev - 5 : 10));
+    top();
+  };
+
+  const restablecer = () => {
+    setVisible(10); // vuelve al estado inicial en lugar de restar
+    top();
+  };
+
+  const top = () => {
+    const seccion = document.getElementById("topLine");
+    if (seccion) {
+      seccion.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="container my-4">
+    <section  className="container my-4">
       <div className="d-flex justify-content-between align-content-center">
         <h1>Productos disponibles</h1>
         <div>
@@ -90,7 +113,7 @@ const Administrador = ({
           </tr>
         </thead>
         <tbody>
-          {productos.map((itemProducto, indice) => (
+          {productos.slice(0, visible).map((itemProducto, indice) => (
             <ItemProductos
               itemProducto={itemProducto}
               borrarProducto={borrarProducto}
@@ -100,6 +123,46 @@ const Administrador = ({
           ))}
         </tbody>
       </Table>
+      <div className="text-center mt-3">
+        {visible < productos.length ? (
+          <div
+            id="mostarmenos"
+            className=" d-flex justify-content-center align-content-center"
+          >
+            <Button
+              variant="primary"
+              className="shadow mx-1"
+              onClick={mostrarMas}
+            >
+              Ver más
+            </Button>
+            <Button
+              variant="danger"
+              className="shadow mx-1"
+              onClick={mostrarMenos}
+            >
+              Ver menos
+            </Button>
+          </div>
+        ) : (
+          <div className=" d-flex justify-content-center align-content-center">
+            <Button
+              variant="primary"
+              className="shadow mx-1"
+              onClick={mostrarMenos}
+            >
+              Ver menos
+            </Button>
+            <Button
+              variant="danger"
+              className="shadow mx-1"
+              onClick={restablecer}
+            >
+              Restablecer
+            </Button>
+          </div>
+        )}
+      </div>
     </section>
   );
 };
