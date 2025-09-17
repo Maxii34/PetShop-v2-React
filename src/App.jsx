@@ -89,7 +89,7 @@ function App() {
         handleClose={handleClose}
         show={show}
       />
-      <main className=" container">
+      <main className="container-fluid">
         <Routes>
           <Route path="/" element={<Inicio productos={productos} />} />
           <Route path="detalle" element={<DetalleProductos />} />
