@@ -53,12 +53,17 @@ const Administrador = ({
   const [visible, setVisible] = useState(10);
 
   const mostrarMas = () => {
-    setVisible((prev) => prev + 5); // suma 5 más cada vez que se presionas
+    setVisible((prev) => prev + 5); // suma 5 más cada vez
   };
 
   const mostrarMenos = () => {
+    setVisible((prev) => (prev > 10 ? prev - 5 : 10));
+    top();
+  };
+
+  const restablecer = () => {
     setVisible(10); // vuelve al estado inicial en lugar de restar
-    top()
+    top();
   };
 
   const top = () => {
@@ -69,7 +74,7 @@ const Administrador = ({
   };
 
   return (
-    <section id="topLine" className="container my-4">
+    <section  className="container my-4">
       <div className="d-flex justify-content-between align-content-center">
         <h1>Productos disponibles</h1>
         <div>
@@ -120,13 +125,42 @@ const Administrador = ({
       </Table>
       <div className="text-center mt-3">
         {visible < productos.length ? (
-          <Button variant="primary" className="shadow" onClick={mostrarMas}>
-            Ver más
-          </Button>
+          <div
+            id="mostarmenos"
+            className=" d-flex justify-content-center align-content-center"
+          >
+            <Button
+              variant="primary"
+              className="shadow mx-1"
+              onClick={mostrarMas}
+            >
+              Ver más
+            </Button>
+            <Button
+              variant="danger"
+              className="shadow mx-1"
+              onClick={mostrarMenos}
+            >
+              Ver menos
+            </Button>
+          </div>
         ) : (
-          <Button variant="secondary" className="shadow" onClick={mostrarMenos}>
-            Ver menos
-          </Button>
+          <div className=" d-flex justify-content-center align-content-center">
+            <Button
+              variant="primary"
+              className="shadow mx-1"
+              onClick={mostrarMenos}
+            >
+              Ver menos
+            </Button>
+            <Button
+              variant="danger"
+              className="shadow mx-1"
+              onClick={restablecer}
+            >
+              Restablecer
+            </Button>
+          </div>
         )}
       </div>
     </section>
