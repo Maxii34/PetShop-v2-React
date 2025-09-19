@@ -5,12 +5,7 @@ import productosObj from "../../data/ProductosObjeto";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
-const Administrador = ({
-  productos,
-  setProductos,
-  borrarProducto,
-  borrarTodosLosProductos,
-}) => {
+const Administrador = ({ productos, setProductos, borrarProducto }) => {
   const productosPrueba = () => {
     if (Array.isArray(productosObj) && productosObj.length > 0) {
       setProductos(productosObj);
@@ -74,22 +69,20 @@ const Administrador = ({
   };
 
   return (
-    <section className="container my-4">
-      <div className="d-flex justify-content-between align-content-center">
-        <div className="mb-4">
+    <section id="topLine" className="container my-4">
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-md-items-center">
+        <div className="mb-3 mb-md-0">
           <h1 className="mb-0">Panel de productos disponibles</h1>
-          <small className="text-muted">Gestión de productos disponibles <strong>"vista pública en cards."</strong></small>
+          <small className="text-muted">
+            Gestión de productos disponibles
+            <strong>"vista pública en carrousel."</strong>
+          </small>
         </div>
-
-        <div>
-          <Link to="crear" className="btn btn-primary shadow m-1">
+        <div className="d-flex gap-2 flex-wrap mt-2 mt-md-0">
+          <Link to="crear" className="btn btn-primary shadow">
             <i className="bi bi-file-earmark-plus"></i>
           </Link>
-          <Button
-            variant="danger"
-            className="me-lg-2 shadow m-1"
-            onClick={borrarTodo}
-          >
+          <Button variant="danger" className="shadow" onClick={borrarTodo}>
             <i className="bi bi-trash"></i>
           </Button>
           <Button

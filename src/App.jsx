@@ -28,7 +28,7 @@ function App() {
   //Estado que guarda productos
   const [productos, setProductos] = useState(productosLS);
 
-  const [productosOferta, setProductosOferta] = useState({});
+  const [productosOferta, setProductosOferta] = useState(productosLSCR);
 
 
 
@@ -43,7 +43,7 @@ function App() {
 
   useEffect(()=>{
     localStorage.setItem("productosCRKey", JSON.stringify(productosOferta))
-  })
+  },[productosOferta])
 
 
   const crearProducto = (productoNuevo) => {
@@ -59,7 +59,13 @@ function App() {
     return true;
   };
 
-  const borrarTodosLosProductos = () => {};
+  const borrarProductoCR = (idProductoF) => {
+    const productoFilCarrousel = productosOferta.filter(
+      (itemProductoF) => itemProductoF.id !== idProductoF
+    )
+    setProductosOferta(productoFilCarrousel)
+    return true
+  }
 
   const buscarProductos = (idProducto) => {
     const productoBuscado = productos.find(
@@ -117,7 +123,6 @@ function App() {
                   productos={productos}
                   setProductos={setProductos}
                   borrarProducto={borrarProducto}
-                  borrarTodosLosProductos={borrarTodosLosProductos}
                 />
               }
             />
@@ -153,7 +158,7 @@ function App() {
                 <AdminCarousel
                   productosOferta={productosOferta}
                   setProductosOferta={setProductosOferta}
-                  borrarProducto={borrarProducto}
+                  borrarProductoCR={borrarProductoCR}
                 />
               }
             />

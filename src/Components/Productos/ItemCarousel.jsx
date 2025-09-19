@@ -1,30 +1,60 @@
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
-const ItemCarousel = () => {
+const ItemCarousel = ({ itemProductosC, fila, borrarProductoCR }) => {
+  const eliminarProducto = () => {
+    Swal.fire({
+      title: "¿Estas seguro de eliminar?",
+      text: "No se puede revertir este paso posteriormente",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#198754",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Borrar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (borrarProductoCR(itemProductosC.id)) {
+          Swal.fire({
+            title: "Producto eliminado",
+            text: `El producto eliminado correctamente`,
+            icon: "success",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <tr className="text-center align-middle shadow">
-      <td>1</td>
-      <td>Nombre del producto</td>
-      <td>32500</td>
-      <td>Marca Ejemplo</td>
+      <td>{fila}</td>
+      <td>{itemProductosC.nombreProducto}</td>
+      <td>{itemProductosC.precioOriginal}</td>
+      <td>{itemProductosC.marca}</td>
       <td>
         <img
-          src="https://via.placeholder.com/80"
+          src={itemProductosC.imagen || null}
           className="img-fluid rounded table-img"
-          alt="Producto ejemplo"
+          alt={itemProductosC.alt}
           style={{ width: "80px", height: "80px", objectFit: "cover" }}
           loading="lazy"
         />
       </td>
-      <td>Alimentos</td>
-      <td>3kg</td>
-      <td>45</td>
+      <td>{itemProductosC.categoria}</td>
+      <td>{itemProductosC.peso}</td>
+      <td>{itemProductosC.stock}</td>
       <td>
         <div className="d-flex justify-content-center gap-1">
-          <Link className="me-lg-2 btn btn-warning shadow" to="editar">
+          <Link
+            className="me-lg-2 btn btn-warning shadow"
+            to={`editar/${itemProductosC.id}`}
+          >
             <i className="bi bi-pencil-square"></i>
           </Link>
-          <button className="me-lg-2 btn btn-danger shadow">
+          <button
+            className="me-lg-2 btn btn-danger shadow"
+            onClick={eliminarProducto}
+          >
             <i className="bi bi-trash"></i>
           </button>
         </div>

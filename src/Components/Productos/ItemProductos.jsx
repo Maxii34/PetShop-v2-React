@@ -45,7 +45,7 @@ const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
       <td>{itemProducto.stock}</td>
       <td>
         <div className="d-flex justify-content-center gap-1">
-          <Link className="me-lg-2 btn btn-warning" to={`editar/${itemProducto.id}`}>
+          <Link className="me-lg-2 btn btn-warning shadow" to={`editar/${itemProducto.id}`}>
             <i className="bi bi-pencil-square"></i>
           </Link>
           <button className="me-lg-2 btn btn-danger shadow" onClick={eliminarProducto}>
