@@ -157,7 +157,7 @@ function App() {
               }
             />
             <Route
-              path="editar/:id"
+              path="editar"
               element={
                 <FormularioCarrousel titulo="Formulario: Editar en carousel" />
               }

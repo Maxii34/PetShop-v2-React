@@ -74,9 +74,13 @@ const Administrador = ({
   };
 
   return (
-    <section  className="container my-4">
+    <section className="container my-4">
       <div className="d-flex justify-content-between align-content-center">
-        <h1>Productos disponibles</h1>
+        <div className="mb-4">
+          <h1 className="mb-0">Panel de productos disponibles</h1>
+          <small className="text-muted">Gestión de productos disponibles <strong>"vista pública en cards."</strong></small>
+        </div>
+
         <div>
           <Link to="crear" className="btn btn-primary shadow m-1">
             <i className="bi bi-file-earmark-plus"></i>

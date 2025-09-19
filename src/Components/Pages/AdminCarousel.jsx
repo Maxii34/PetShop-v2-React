@@ -1,12 +1,19 @@
 import { Link } from "react-router";
 import { Button, Table } from "react-bootstrap";
+import ItemCarousel from "../Productos/ItemCarousel";
+
 
 const AdminCarousel = () => {
   return (
     <section className="container my-4">
       {/* Encabezado */}
       <div className="d-flex justify-content-between align-items-center">
-        <h1>Productos disponibles</h1>
+        <div className="mb-4">
+          <h1 className="mb-0">Panel de productos disponibles</h1>
+          <small className="text-muted">
+            Gestión de productos disponibles <strong>"vista pública en carrousel."</strong>
+          </small>
+        </div>
         <div>
           <Link to="crear" className="btn btn-primary shadow m-1">
             <i className="bi bi-file-earmark-plus"></i>
@@ -38,7 +45,7 @@ const AdminCarousel = () => {
           </tr>
         </thead>
         <tbody>
-          
+          <ItemCarousel />
         </tbody>
       </Table>
 
