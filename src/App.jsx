@@ -8,10 +8,12 @@ import Navsegundo from "./Components/Shared/SegundoNavbar";
 import Login from "./Components/Pages/Login";
 import DetalleProductos from "./Components/Pages/DetalleProductos";
 import Admin from "./Components/Pages/Admin";
+import AdminCarousel from "./Components/Pages/AdminCarousel";
 import FormularioProductos from "./Components/Productos/FormularioProductos";
 import Error404 from "./Components/Pages/Error404";
 import { useEffect, useState } from "react";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin";
+import FormularioCarrousel from "./Components/Productos/FormularioCarrousel";
 
 function App() {
   //lee sessionStorage
@@ -24,9 +26,10 @@ function App() {
   //Estado que guarda productos
   const [productos, setProductos] = useState(productosLS);
 
+  const [productosOferta, setProductosOferta] = useState({});
   //Guarda el estado de usuario en sessionStore
   useEffect(() => {
-    sessionStorage.getItem("usuariokey", JSON.stringify(usuarioLogueado));
+    sessionStorage.setItem("usuariokey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
   //observa los cambios de productos y actualiza localestorage
   useEffect(() => {
@@ -46,9 +49,7 @@ function App() {
     return true;
   };
 
-  const borrarTodosLosProductos = () => {
-    
-  };
+  const borrarTodosLosProductos = () => {};
 
   const buscarProductos = (idProducto) => {
     const productoBuscado = productos.find(
@@ -93,13 +94,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Inicio productos={productos} />} />
           <Route path="detalle" element={<DetalleProductos />} />
+
+          {/* Ruta protegida: /admin */}
           <Route
             path="admin"
-            element={
-              <ProtectorAdmin
-                usuarioLogueado={usuarioLogueado}
-              ></ProtectorAdmin>
-            }
+            element={<ProtectorAdmin usuarioLogueado={usuarioLogueado} />}
           >
             <Route
               index
@@ -132,6 +131,39 @@ function App() {
               }
             />
           </Route>
+
+          {/* Ruta protegida: /admincarousel */}
+          <Route
+            path="admincarousel"
+            element={<ProtectorAdmin usuarioLogueado={usuarioLogueado} />}
+          >
+            <Route
+              index
+              element={
+                <AdminCarousel
+                  productosOferta={productosOferta}
+                  setProductosOferta={setProductosOferta}
+                  borrarProducto={borrarProducto}
+                />
+              }
+            />
+            <Route
+              path="crear"
+              element={
+                <FormularioCarrousel
+                  titulo="Formulario: Agregar a carousel"
+                  // Aquí podrías pasar otra función si manejas carousel aparte
+                />
+              }
+            />
+            <Route
+              path="editar/:id"
+              element={
+                <FormularioCarrousel titulo="Formulario: Editar en carousel" />
+              }
+            />
+          </Route>
+
           <Route path="*" element={<Error404 />} />
         </Routes>
       </main>
