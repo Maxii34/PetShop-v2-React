@@ -21,12 +21,17 @@ function App() {
     JSON.parse(sessionStorage.getItem("usuariokey")) || false;
 
   const productosLS = JSON.parse(localStorage.getItem("productoskey")) || [];
+  
+  const productosLSCR = JSON.parse(localStorage.getItem("productosCRKey")) || [];
   //Esado de login de usuario
   const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
   //Estado que guarda productos
   const [productos, setProductos] = useState(productosLS);
 
   const [productosOferta, setProductosOferta] = useState({});
+
+
+
   //Guarda el estado de usuario en sessionStore
   useEffect(() => {
     sessionStorage.setItem("usuariokey", JSON.stringify(usuarioLogueado));
@@ -35,6 +40,11 @@ function App() {
   useEffect(() => {
     localStorage.setItem("productoskey", JSON.stringify(productos));
   }, [productos]);
+
+  useEffect(()=>{
+    localStorage.setItem("productosCRKey", JSON.stringify(productosOferta))
+  })
+
 
   const crearProducto = (productoNuevo) => {
     setProductos([...productos, productoNuevo]);
