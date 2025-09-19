@@ -1,21 +1,82 @@
+import { useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Link } from "react-router";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate, useParams } from "react-router";
+import Swal from "sweetalert2";
+import { v4 as uuidv4 } from "uuid";
 
-const FormularioCarrousel = () => {
+const FormularioCarrousel = ({
+  titulo,
+  crearProductoCR,
+  buscarProductosCR,
+  modificarProductoCR,
+}) => {
   const {
     register,
     handleSubmit,
+    reset,
+    setValue,
     formState: { errors },
   } = useForm();
+  const { id } = useParams();
+
+  const navegacion = useNavigate();
+
+  useEffect(() => {
+  if (id) {
+    const productoEncontrado = buscarProductosCR(id);
+    if (productoEncontrado) {
+      setValue("nombreProducto", productoEncontrado.nombreProducto);
+      setValue("imagen", productoEncontrado.imagen);
+      setValue("marca", productoEncontrado.marca);
+      setValue("animal", productoEncontrado.animal);
+      setValue("etapa", productoEncontrado.etapa);
+      setValue("precioOriginal", productoEncontrado.precioOriginal);
+      setValue("precioEfectivo", productoEncontrado.precioEfectivo);
+      setValue("cuotas", productoEncontrado.cuotas);
+      setValue("peso", productoEncontrado.peso);
+      setValue("stock", productoEncontrado.stock);
+      setValue("categoria", productoEncontrado.categoria);
+      setValue("alt", productoEncontrado.alt);
+      setValue("descripcion", productoEncontrado.descripcion);
+    }
+  }
+}, [titulo, id, setValue, buscarProductosCR]);
+
 
   const onSubmit = (data) => {
-    console.log("Datos del formulario:", data);
+    if (titulo === "Formulario: Agregar productos en carousel") {
+      data.id = uuidv4();
+      if (crearProductoCR(data)) {
+        Swal.fire({
+          title: "Producto creado",
+          text: `El producto ${data.nombreProducto} se creo correctamente`,
+          icon: "success",
+        });
+        reset;
+      }
+    } else {
+      // editar
+      if (modificarProductoCR(id, data)) {
+        Swal.fire({
+          title: "Producto editado",
+          text: `El producto ${data.nombreProducto} se actualizo correctamente`,
+          icon: "success",
+        });
+        navegacion("/admin");
+      } else {
+        Swal.fire({
+          title: "Ocurrio un Error",
+          text: `No se pudo actualizar el producto ${data.nombreProducto}`,
+          icon: "error",
+        });
+      }
+    }
   };
 
   return (
     <section className="my-5">
-      <h2 className="text-center mb-4">Formulario: Agregar producto</h2>
+      <h2 className="text-center mb-4">{titulo}</h2>
       <div>
         <Form
           className="p-4 border rounded shadow"
@@ -264,8 +325,8 @@ const FormularioCarrousel = () => {
                   placeholder="Ej. Alimento balanceado..."
                   {...register("descripcion", {
                     required: "La descripción es obligatoria",
-                    minLength: { value: 10, message: "Mínimo 10 caracteres" },
-                    maxLength: { value: 100, message: "Máximo 100 caracteres" },
+                    minLength: { value: 3, message: "Mínimo 3 caracteres" },
+                    maxLength: { value: 300, message: "Máximo 300 caracteres" },
                   })}
                 />
                 {errors.descripcion && (

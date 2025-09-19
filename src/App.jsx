@@ -21,16 +21,15 @@ function App() {
     JSON.parse(sessionStorage.getItem("usuariokey")) || false;
 
   const productosLS = JSON.parse(localStorage.getItem("productoskey")) || [];
-  
-  const productosLSCR = JSON.parse(localStorage.getItem("productosCRKey")) || [];
+
+  const productosLSCR =
+    JSON.parse(localStorage.getItem("productosCRKey")) || [];
   //Esado de login de usuario
   const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
   //Estado que guarda productos
   const [productos, setProductos] = useState(productosLS);
 
   const [productosOferta, setProductosOferta] = useState(productosLSCR);
-
-
 
   //Guarda el estado de usuario en sessionStore
   useEffect(() => {
@@ -41,16 +40,21 @@ function App() {
     localStorage.setItem("productoskey", JSON.stringify(productos));
   }, [productos]);
 
-  useEffect(()=>{
-    localStorage.setItem("productosCRKey", JSON.stringify(productosOferta))
-  },[productosOferta])
-
+  useEffect(() => {
+    localStorage.setItem("productosCRKey", JSON.stringify(productosOferta));
+  }, [productosOferta]);
 
   const crearProducto = (productoNuevo) => {
     setProductos([...productos, productoNuevo]);
     return true;
   };
 
+  const crearProductoCR = (productoNuevoF) => {
+    setProductosOferta([...productosOferta, productoNuevoF]);
+    return true;
+  };
+
+  // Eliminar producto normal
   const borrarProducto = (idProducto) => {
     const productoFiltrado = productos.filter(
       (itemProducto) => itemProducto.id !== idProducto
@@ -59,14 +63,16 @@ function App() {
     return true;
   };
 
+  // Eliminar producto en Carrousel
   const borrarProductoCR = (idProductoF) => {
     const productoFilCarrousel = productosOferta.filter(
       (itemProductoF) => itemProductoF.id !== idProductoF
-    )
-    setProductosOferta(productoFilCarrousel)
-    return true
-  }
+    );
+    setProductosOferta(productoFilCarrousel);
+    return true;
+  };
 
+  // Buscar producto normal
   const buscarProductos = (idProducto) => {
     const productoBuscado = productos.find(
       (itemProducto) => itemProducto.id === idProducto
@@ -74,6 +80,15 @@ function App() {
     return productoBuscado;
   };
 
+  // Buscar producto en Carrousel
+  const buscarProductosCR = (idProductoF) => {
+    const productoBuscadoCR = productosOferta.find(
+      (itemProductoF) => itemProductoF.id === idProductoF
+    );
+    return productoBuscadoCR;
+  };
+
+  // Modificar producto normal
   const modificarProducto = (idProducto, datosProducto) => {
     const productoActualizado = productos.map((itemProducto) => {
       if (itemProducto.id === idProducto) {
@@ -85,6 +100,21 @@ function App() {
       return itemProducto;
     });
     setProductos(productoActualizado);
+    return true;
+  };
+
+  // Modificar producto en Carrousel
+  const modificarProductoCR = (idProductoF, datosProductoF) => {
+    const productoActualizadoCR = productosOferta.map((itemProductoF) => {
+      if (itemProductoF.id === idProductoF) {
+        return {
+          ...itemProductoF,
+          ...datosProductoF,
+        };
+      }
+      return itemProductoF;
+    });
+    setProductosOferta(productoActualizadoCR);
     return true;
   };
 
@@ -166,15 +196,19 @@ function App() {
               path="crear"
               element={
                 <FormularioCarrousel
-                  titulo="Formulario: Agregar a carousel"
-                  // Aquí podrías pasar otra función si manejas carousel aparte
+                  titulo="Formulario: Agregar productos en carousel"
+                  crearProductoCR={crearProductoCR}
                 />
               }
             />
             <Route
-              path="editar"
+              path="editar/:id"
               element={
-                <FormularioCarrousel titulo="Formulario: Editar en carousel" />
+                <FormularioCarrousel
+                  titulo="Formulario: Editar productos de carousel"
+                  buscarProductosCR={buscarProductosCR}
+                  modificarProductoCR={modificarProductoCR}
+                />
               }
             />
           </Route>
