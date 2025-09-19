@@ -75,7 +75,7 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
           <h1 className="mb-0">Panel de productos disponibles</h1>
           <small className="text-muted">
             Gestión de productos disponibles
-            <strong>"vista pública en carrousel."</strong>
+            <strong>"vista pública en Cards/inicio."</strong>
           </small>
         </div>
         <div className="d-flex gap-2 flex-wrap mt-2 mt-md-0">
