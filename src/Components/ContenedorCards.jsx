@@ -1,4 +1,4 @@
-import CardsCarousel from "../components/Productos/CardsCarousel";
+import CardsCarousel from "../Components/Productos/CardsCarousel";
 
 const ContenedorCards = ({ productosOferta }) => {
   return (
