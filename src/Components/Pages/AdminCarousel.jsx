@@ -1,14 +1,18 @@
 import { Link } from "react-router";
 import { Button, Table } from "react-bootstrap";
-import ItemProductos from "../Productos/ItemProductos";
-import productosObj from "../../data/ProductosObjeto";
+import ItemCarousel from "../Productos/ItemCarousel";
+import ProductoObjetoCR from "../../data/ProductosObjetoCR";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
-const Administrador = ({ productos, setProductos, borrarProducto }) => {
+const AdminCarousel = ({
+  productosOferta,
+  setProductosOferta,
+  borrarProductoCR,
+}) => {
   const productosPrueba = () => {
-    if (Array.isArray(productosObj) && productosObj.length > 0) {
-      setProductos(productosObj);
+    if (Array.isArray(ProductoObjetoCR) && ProductoObjetoCR.length > 0) {
+      setProductosOferta(ProductoObjetoCR);
       Swal.fire({
         title: "¡Éxito!",
         text: "Los productos de prueba se cargaron correctamente.",
@@ -35,7 +39,7 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        setProductos([]);
+        setProductosOferta([]);
         Swal.fire(
           "¡Borrado!",
           "Todos los productos han sido eliminados.",
@@ -70,12 +74,13 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
 
   return (
     <section id="topLine" className="container my-4">
+      {/* Encabezado */}
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-md-items-center">
         <div className="mb-3 mb-md-0">
           <h1 className="mb-0">Panel de productos disponibles</h1>
           <small className="text-muted">
             Gestión de productos disponibles
-            <strong>"vista pública en Cards/inicio."</strong>
+            <strong>"vista pública en carrousel/inicio."</strong>
           </small>
         </div>
         <div className="d-flex gap-2 flex-wrap mt-2 mt-md-0">
@@ -94,7 +99,10 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
           </Button>
         </div>
       </div>
+
       <hr />
+
+      {/* Tabla - solo una fila de ejemplo visual */}
       <Table responsive striped bordered hover>
         <thead>
           <tr className="text-center align-middle">
@@ -103,25 +111,27 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
             <th>Precio</th>
             <th>Marca</th>
             <th>URL de imagen</th>
-            <th>Categoria</th>
+            <th>Categoría</th>
             <th>Peso (kg)</th>
             <th>Stock disp.</th>
             <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
-          {productos.slice(0, visible).map((itemProducto, indice) => (
-            <ItemProductos
-              itemProducto={itemProducto}
-              borrarProducto={borrarProducto}
-              key={itemProducto.id}
+          {productosOferta.slice(0, visible).map((itemProductosC, indice) => (
+            <ItemCarousel
+              itemProductosC={itemProductosC}
+              borrarProductoCR={borrarProductoCR}
+              key={itemProductosC.id}
               fila={indice + 1}
             />
           ))}
         </tbody>
       </Table>
+
+      {/* Botones de paginación visual */}
       <div className="text-center mt-3">
-        {visible < productos.length ? (
+        {visible < productosOferta.length ? (
           <div
             id="mostarmenos"
             className=" d-flex justify-content-center align-content-center"
@@ -164,4 +174,4 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
   );
 };
 
-export default Administrador;
+export default AdminCarousel;

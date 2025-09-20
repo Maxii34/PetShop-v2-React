@@ -41,7 +41,10 @@ const Navprimero = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
             {usuarioLogueado ? (
               <>
                 <NavLink to="/admin" className="nav-link">
-                  Administrador
+                  Productos
+                </NavLink>
+                <NavLink to="/admincarousel" className="nav-link">
+                  Ofertas
                 </NavLink>
                 <Button
                   className={"nav-link"}

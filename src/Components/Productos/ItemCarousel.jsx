@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
+const ItemCarousel = ({ itemProductosC, fila, borrarProductoCR }) => {
   const eliminarProducto = () => {
     Swal.fire({
       title: "¿Estas seguro de eliminar?",
@@ -14,7 +14,7 @@ const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        if (borrarProducto(itemProducto.id)) {
+        if (borrarProductoCR(itemProductosC.id)) {
           Swal.fire({
             title: "Producto eliminado",
             text: `El producto eliminado correctamente`,
@@ -28,27 +28,33 @@ const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
   return (
     <tr className="text-center align-middle shadow">
       <td>{fila}</td>
-      <td>{itemProducto.nombreProducto}</td>
-      <td>{itemProducto.precioOriginal}</td>
-      <td>{itemProducto.marca}</td>
+      <td>{itemProductosC.nombreProducto}</td>
+      <td>{itemProductosC.precioOriginal}</td>
+      <td>{itemProductosC.marca}</td>
       <td>
         <img
-          src={itemProducto.imagen || null}
+          src={itemProductosC.imagen || null}
           className="img-fluid rounded table-img"
-          alt={itemProducto.alt}
+          alt={itemProductosC.alt}
           style={{ width: "80px", height: "80px", objectFit: "cover" }}
           loading="lazy"
         />
       </td>
-      <td>{itemProducto.categoria}</td>
-      <td>{itemProducto.peso}</td>
-      <td>{itemProducto.stock}</td>
+      <td>{itemProductosC.categoria}</td>
+      <td>{itemProductosC.peso}</td>
+      <td>{itemProductosC.stock}</td>
       <td>
         <div className="d-flex justify-content-center gap-1">
-          <Link className="me-lg-2 btn btn-warning shadow" to={`editar/${itemProducto.id}`}>
+          <Link
+            className="me-lg-2 btn btn-warning shadow"
+            to={`editar/${itemProductosC.id}`}
+          >
             <i className="bi bi-pencil-square"></i>
           </Link>
-          <button className="me-lg-2 btn btn-danger shadow" onClick={eliminarProducto}>
+          <button
+            className="me-lg-2 btn btn-danger shadow"
+            onClick={eliminarProducto}
+          >
             <i className="bi bi-trash"></i>
           </button>
         </div>
@@ -57,4 +63,4 @@ const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
   );
 };
 
-export default ItemProductos;
+export default ItemCarousel;

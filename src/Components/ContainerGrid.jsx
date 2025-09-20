@@ -14,7 +14,7 @@ const ContainerGrid = ({ productos }) => {
     irIniciocard(); // suve al inicio de las cards
   };
 
-   const irIniciocard = () => {
+  const irIniciocard = () => {
     const seccion = document.getElementById("InicioCards");
     if (seccion) {
       seccion.scrollIntoView({ behavior: "smooth" });
@@ -24,9 +24,11 @@ const ContainerGrid = ({ productos }) => {
   return (
     <Container fluid>
       <div id="InicioCards" className="my-2">
-      <h1 className="text-center">TUS NUEVOS FAVORITOS 🛍️</h1>
+        <h1 className="text-center fw-bold display-5 fs-2">
+          Lo mejor para tus compañeros peludos 🐾✨
+        </h1>
       </div>
-      <div  className="grid-container">
+      <div className="grid-container">
         {productos.slice(0, visible).map((itemProducto, indice) => (
           <CardsProductos key={indice} producto={itemProducto} />
         ))}

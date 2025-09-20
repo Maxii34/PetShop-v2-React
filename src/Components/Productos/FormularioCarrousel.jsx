@@ -5,11 +5,11 @@ import { Link, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 
-const FormularioProductos = ({
+const FormularioCarrousel = ({
   titulo,
-  crearProducto,
-  buscarProducto,
-  modificarProducto,
+  crearProductoCR,
+  buscarProductosCR,
+  modificarProductoCR,
 }) => {
   const {
     register,
@@ -23,30 +23,31 @@ const FormularioProductos = ({
   const navegacion = useNavigate();
 
   useEffect(() => {
-    if (id) {
-      const productoBuscado = buscarProducto(id);
-      if (productoBuscado) {
-        setValue("nombreProducto", productoBuscado.nombreProducto);
-        setValue("imagen", productoBuscado.imagen);
-        setValue("marca", productoBuscado.marca);
-        setValue("animal", productoBuscado.animal);
-        setValue("etapa", productoBuscado.etapa);
-        setValue("precioOriginal", productoBuscado.precioOriginal);
-        setValue("precioEfectivo", productoBuscado.precioEfectivo);
-        setValue("cuotas", productoBuscado.cuotas);
-        setValue("peso", productoBuscado.peso);
-        setValue("stock", productoBuscado.stock);
-        setValue("categoria", productoBuscado.categoria);
-        setValue("alt", productoBuscado.alt);
-        setValue("descripcion", productoBuscado.descripcion);
-      }
+  if (id) {
+    const productoEncontrado = buscarProductosCR(id);
+    if (productoEncontrado) {
+      setValue("nombreProducto", productoEncontrado.nombreProducto);
+      setValue("imagen", productoEncontrado.imagen);
+      setValue("marca", productoEncontrado.marca);
+      setValue("animal", productoEncontrado.animal);
+      setValue("etapa", productoEncontrado.etapa);
+      setValue("precioOriginal", productoEncontrado.precioOriginal);
+      setValue("precioEfectivo", productoEncontrado.precioEfectivo);
+      setValue("cuotas", productoEncontrado.cuotas);
+      setValue("peso", productoEncontrado.peso);
+      setValue("stock", productoEncontrado.stock);
+      setValue("categoria", productoEncontrado.categoria);
+      setValue("alt", productoEncontrado.alt);
+      setValue("descripcion", productoEncontrado.descripcion);
     }
-  }, [titulo, id, setValue, buscarProducto]);
+  }
+}, [titulo, id, setValue, buscarProductosCR]);
+
 
   const onSubmit = (data) => {
-    if (titulo === "Formulario: Agregar producto") {
+    if (titulo === "Formulario: Agregar productos en carousel") {
       data.id = uuidv4();
-      if (crearProducto(data)) {
+      if (crearProductoCR(data)) {
         Swal.fire({
           title: "Producto creado",
           text: `El producto ${data.nombreProducto} se creo correctamente`,
@@ -55,8 +56,8 @@ const FormularioProductos = ({
         reset;
       }
     } else {
-      //logica para editar
-      if (modificarProducto(id, data)) {
+      // editar
+      if (modificarProductoCR(id, data)) {
         Swal.fire({
           title: "Producto editado",
           text: `El producto ${data.nombreProducto} se actualizo correctamente`,
@@ -103,7 +104,7 @@ const FormularioProductos = ({
               </Form.Group>
             </Col>
 
-            {/* Título */}
+            {/* Nombre del producto */}
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Nombre del Producto *</Form.Label>
@@ -118,8 +119,10 @@ const FormularioProductos = ({
                     },
                   })}
                 />
-                {errors.titulo && (
-                  <span className="text-danger">{errors.titulo.message}</span>
+                {errors.nombreProducto && (
+                  <span className="text-danger">
+                    {errors.nombreProducto.message}
+                  </span>
                 )}
               </Form.Group>
             </Col>
@@ -188,9 +191,8 @@ const FormularioProductos = ({
                   {...register("precioOriginal", {
                     required: "El precio original es obligatorio",
                     pattern: {
-                      value: /^(?:[1-9]\d{0,5}|500000)(?:[.,]\d{1,2})?$/,
-                      message:
-                        "Debe ser un número entre 1 y 500.000 (máx. 2 decimales). No uses separadores de miles.",
+                      value: /^[0-9]+$/,
+                      message: "Debe ser un número válido",
                     },
                   })}
                 />
@@ -211,9 +213,8 @@ const FormularioProductos = ({
                   {...register("precioEfectivo", {
                     required: "El precio en efectivo es obligatorio",
                     pattern: {
-                      value: /^(?:[1-9]\d{0,5}|500000)(?:[.,]\d{1,2})?$/,
-                      message:
-                        "Debe ser un número entre 1 y 500.000 (máx. 2 decimales). No uses separadores de miles.",
+                      value: /^[0-9]+$/,
+                      message: "Debe ser un número válido",
                     },
                   })}
                 />
@@ -231,13 +232,8 @@ const FormularioProductos = ({
                 <Form.Control
                   type="number"
                   placeholder="3"
-                  {...register("cuotas", {
-                    min: { value: 0, message: "Debe ser positivo" },
-                  })}
+                  {...register("cuotas")}
                 />
-                {errors.cuotas && (
-                  <span className="text-danger">{errors.cuotas.message}</span>
-                )}
               </Form.Group>
             </Col>
           </Row>
@@ -251,10 +247,7 @@ const FormularioProductos = ({
                   type="number"
                   step="0.1"
                   placeholder="20.0"
-                  {...register("peso", {
-                    required: "El peso es obligatorio",
-                    min: { value: 0.1, message: "Debe ser mayor a 0" },
-                  })}
+                  {...register("peso", { required: "El peso es obligatorio" })}
                 />
                 {errors.peso && (
                   <span className="text-danger">{errors.peso.message}</span>
@@ -270,7 +263,6 @@ const FormularioProductos = ({
                   placeholder="50"
                   {...register("stock", {
                     required: "El stock es obligatorio",
-                    min: { value: 0, message: "No puede ser negativo" },
                   })}
                 />
                 {errors.stock && (
@@ -280,13 +272,12 @@ const FormularioProductos = ({
             </Col>
           </Row>
 
-          {/* Categoría */}
+          {/* Categoría y Alt */}
           <Row className="mb-3">
             <Col md={6}>
               <Form.Group>
                 <Form.Label>Categoría *</Form.Label>
                 <Form.Select
-                  defaultValue=""
                   {...register("categoria", {
                     required: "Seleccione una categoría",
                   })}
@@ -295,9 +286,6 @@ const FormularioProductos = ({
                   <option value="Alimentos">Alimentos</option>
                   <option value="Juguetes">Juguetes</option>
                   <option value="Accesorios">Accesorios</option>
-                  <option value="Higiene">Higiene</option>
-                  <option value="Camas y Transporte">Camas y Transporte</option>
-                  <option value="Suplementos">Suplementos</option>
                 </Form.Select>
                 {errors.categoria && (
                   <span className="text-danger">
@@ -306,7 +294,8 @@ const FormularioProductos = ({
                 )}
               </Form.Group>
             </Col>
-            <Col md={4}>
+
+            <Col md={6}>
               <Form.Group>
                 <Form.Label>Alt (Nombre de la imagen)*</Form.Label>
                 <Form.Control
@@ -314,14 +303,8 @@ const FormularioProductos = ({
                   placeholder="Ej. Royal Canin 25kg"
                   {...register("alt", {
                     required: "El alt es obligatorio",
-                    minLength: {
-                      value: 4,
-                      message: "Debe tener minimo 4 caracteres",
-                    },
-                    maxLength: {
-                      value: 20,
-                      message: "Debe tener un maximo de 20 caracteres",
-                    },
+                    minLength: { value: 4, message: "Mínimo 4 caracteres" },
+                    maxLength: { value: 20, message: "Máximo 20 caracteres" },
                   })}
                 />
                 {errors.alt && (
@@ -342,14 +325,8 @@ const FormularioProductos = ({
                   placeholder="Ej. Alimento balanceado..."
                   {...register("descripcion", {
                     required: "La descripción es obligatoria",
-                    minLength: {
-                      value: 10,
-                      message: "Debe tener como minimo 10 caracteres",
-                    },
-                    maxLength: {
-                      value: 100,
-                      message: "Debe tener como maximo 100 caracteres",
-                    },
+                    minLength: { value: 3, message: "Mínimo 3 caracteres" },
+                    maxLength: { value: 300, message: "Máximo 300 caracteres" },
                   })}
                 />
                 {errors.descripcion && (
@@ -361,19 +338,14 @@ const FormularioProductos = ({
             </Col>
           </Row>
 
+          {/* Botones */}
           <Row>
             <Col className="text-center">
               <div className="d-flex justify-content-center gap-2 mt-4">
-                {titulo === "Formulario: Agregar producto" ? (
-                  <Button variant="success" type="submit">
-                    Agregar Producto
-                  </Button>
-                ) : (
-                  <Button variant="success" type="submit">
-                    Guardar cambios
-                  </Button>
-                )}
-                <Link to="/admin" className="btn btn-danger shadow">
+                <Button variant="success" type="submit">
+                  Agregar Producto
+                </Button>
+                <Link to="/adminCarousel" className="btn btn-danger shadow">
                   <i className="bi bi-arrow-bar-left"></i> Volver
                 </Link>
               </div>
@@ -385,4 +357,4 @@ const FormularioProductos = ({
   );
 };
 
-export default FormularioProductos;
+export default FormularioCarrousel;

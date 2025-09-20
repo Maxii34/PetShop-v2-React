@@ -79,3 +79,18 @@ h4 {
   border-radius: 6px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+.divContenedor-cards {
+  display: flex;
+  overflow: auto;
+  gap: 16px;
+  padding: 20px;
+  scroll-snap-type: mandatory;
+  scroll-padding: calc(50% - 120px);
+}
+
+.div-1 {
+  min-width: 240px;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+}
