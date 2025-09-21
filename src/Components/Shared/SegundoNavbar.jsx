@@ -2,8 +2,22 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import productosObj from "../../data/ProductosObjeto";
+import ProductoObjetoCR from "../../data/ProductosObjetoCR";
 
-const Navsegundo = () => {
+const Navsegundo = ({ setProductos, setProductosOferta }) => {
+
+const productosPrueba = () => {
+  if (Array.isArray(ProductoObjetoCR) && ProductoObjetoCR.length > 0) {
+    setProductosOferta(ProductoObjetoCR);
+  }
+  if (Array.isArray(productosObj) && productosObj.length > 0) {
+    setProductos(productosObj);
+  }
+};
+
+
+
   return (
     <Navbar className="nav-sec">
       <Container>
@@ -69,8 +83,8 @@ const Navsegundo = () => {
             <NavDropdown.Item>Accesorios Variados</NavDropdown.Item>
           </NavDropdown>
 
-          <Nav.Link href="#action1" className="text-light">
-            Promociones
+          <Nav.Link onClick={productosPrueba} className="text-light">
+            <i className="bi bi-database-fill-up"></i> Productos
           </Nav.Link>
           <Nav.Link href="#action1" className="text-light d-none d-lg-block">
             Nuevos Productos
