@@ -130,7 +130,7 @@ function App() {
         setusuarioLogueado={setusuarioLogueado}
         handleShow={handleShow}
       />
-      <Navsegundo />
+      <Navsegundo setProductos={setProductos} setProductosOferta={setProductosOferta} />
       <Login
         setusuarioLogueado={setusuarioLogueado}
         handleClose={handleClose}
