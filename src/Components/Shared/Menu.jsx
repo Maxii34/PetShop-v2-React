@@ -32,7 +32,7 @@ const Navprimero = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
                 aria-label="Search"
               />
               <Button variant="outline-success" className="me-4">
-                Search
+                <i class="bi bi-search"></i>
               </Button>
             </Form>
             <NavLink to="/" className="nav-link">

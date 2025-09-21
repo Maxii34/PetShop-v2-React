@@ -10,7 +10,7 @@
 Permite **crear, mostrar, editar y borrar productos (CRUD completo)** a través de formularios simples e intuitivos, y es **responsiva** para adaptarse a distintos dispositivos.  
 
 
-👉 [Ver proyecto online](https://petshop-apolo.netlify.app/) Proximamente
+👉 [Ver proyecto online](https://petshopv2react.netlify.app/) Actualizado!
 
 ---
 
@@ -74,5 +74,5 @@ npm install
 npm run dev
 
 # 5️⃣ Abrir en el navegador
-http://localhost:5173
+http://localhost:4556
 ```
