@@ -2,7 +2,7 @@ import Carousel from "react-bootstrap/Carousel";
 
 const CarouselComponente = () => {
   return (
-    <Carousel slide={false}>
+    <Carousel slide={false} className="shadow">
       <Carousel.Item>
         <img
           className="d-block w-100"
