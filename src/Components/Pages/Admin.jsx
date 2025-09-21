@@ -92,6 +92,9 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
           >
             <i className="bi bi-database-fill-up"></i>
           </Button>
+          <Link to="/admincarousel" className="btn btn-info shadow d-block d-md-none">
+            Ir a ofertas <i class="bi bi-arrow-bar-right"></i>
+          </Link>
         </div>
       </div>
       <hr />

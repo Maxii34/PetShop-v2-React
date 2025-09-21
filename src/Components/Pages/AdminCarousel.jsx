@@ -77,7 +77,7 @@ const AdminCarousel = ({
       {/* Encabezado */}
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-md-items-center">
         <div className="mb-3 mb-md-0">
-          <h1 className="mb-0">Panel de productos disponibles</h1>
+          <h1 className="mb-0">Panel de ofertas disponibles</h1>
           <small className="text-muted">
             Gestión de productos disponibles
             <strong>"vista pública en carrousel/inicio."</strong>
@@ -97,6 +97,9 @@ const AdminCarousel = ({
           >
             <i className="bi bi-database-fill-up"></i>
           </Button>
+          <Link to="/admin" className="btn btn-info shadow d-block d-md-none">
+            <i class="bi bi-arrow-bar-left"></i> Ir a productos
+          </Link>
         </div>
       </div>
 
