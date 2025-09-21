@@ -138,7 +138,7 @@ function App() {
       />
       <main className="container-fluid">
         <Routes>
-          <Route path="/" element={<Inicio productos={productos} productosOferta={productosOferta}/>} />
+          <Route path="/" element={<Inicio productos={productos} productosOferta={productosOferta}  />} />
           <Route path="detalle" element={<DetalleProductos />} />
 
           {/* Ruta protegida: /admin */}
