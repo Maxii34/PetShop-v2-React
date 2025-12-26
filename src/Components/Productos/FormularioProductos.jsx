@@ -57,10 +57,16 @@ const FormularioProductos = ({
   return (
     <Container>
       <section className="my-5">
-        <h2 className="text-center mb-4">{titulo}</h2>
+        <div className="text-center mb-3">
+          <h2>{titulo || "Alta de producto"}</h2>
+          <span className="text-muted d-block mb-2">
+            Ingresá la información necesaria para registrar un producto
+          </span>
+          <hr className="w-25 mx-auto" />
+        </div>
 
         <Form
-          className="p-4 border rounded shadow"
+          className="p-4 border rounded-2 shadow-lg"
           onSubmit={handleSubmit(onSubmit)}
         >
           {/* Imagen + Nombre */}
