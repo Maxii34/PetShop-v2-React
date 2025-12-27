@@ -1,4 +1,4 @@
-import CardsCarousel from "../Components/Productos/CardsCarousel";
+import { CardsCarousel } from "../index.jsx";
 
 export const ContenedorCards = ({ productosOferta }) => {
   return (

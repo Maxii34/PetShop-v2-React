@@ -1,5 +1,5 @@
 import Carousel from "react-bootstrap/Carousel";
-import ContaiGridCarousel from "./ContaiGridCarousel";
+import { ContaiGridCarousel } from '../index.jsx';
 import { Container } from "react-bootstrap";
 
 export const CarouselProductos = ({productosOferta}) => {

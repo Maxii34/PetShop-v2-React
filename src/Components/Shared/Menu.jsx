@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router";
 
-export const Navprimero = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
+export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
   const navegacion = useNavigate();
 
   const cerrarSession = () => {

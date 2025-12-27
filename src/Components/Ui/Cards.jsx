@@ -1,5 +1,5 @@
-import { Link } from "react-router";
-import "../Components/EstilosCards.css";
+import { Link } from "react-router-dom";
+import "./EstilosCards.css";
 
 // Antes de props. usar sintaxis desestructuración
 export const CardsProductos = ({ producto }) => {

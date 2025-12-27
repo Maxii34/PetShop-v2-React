@@ -5,7 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import productosObj from "../../data/ProductosObjeto";
 import ProductoObjetoCR from "../../data/ProductosObjetoCR";
 
-export const Navsegundo = ({ setProductos, setProductosOferta }) => {
+export const SegundoNavbar = ({ setProductos, setProductosOferta }) => {
 
 const productosPrueba = () => {
   if (Array.isArray(ProductoObjetoCR) && ProductoObjetoCR.length > 0) {

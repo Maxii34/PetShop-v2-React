@@ -1,7 +1,4 @@
-import CarouselComponente from "../Ui/Carousel";
-import ContainerGrid from "../Ui/ContainerGrid";
-import ContenedorCards from "../ContenedorCards";
-import MuralInstagran from "../Ui/MuralInstagran";
+import { CarouselComponente, ContainerGrid, ContenedorCards, MuralInstagran } from "../index.jsx";
 
 
 export function Inicio({productos, productosOferta }) {

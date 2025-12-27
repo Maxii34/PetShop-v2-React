@@ -1,4 +1,4 @@
-import '../EstilosCards.css';
+import '../Ui/EstilosCards.css';
 
 // Antes de props. usar sintaxis desestructuración 
 export const CardsCarousel = ({ itemProducto }) => {
