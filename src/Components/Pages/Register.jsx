@@ -3,82 +3,202 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
-export const Register = () => {
+export const Register = ({ handleClose2, show2 }) => {
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm();
 
+  const password = watch("password");
+
   const onsubmit = (data) => {
     console.log(data);
+    Swal.fire({
+      title: "¡Registro exitoso!",
+      text: "Tu cuenta ha sido creada correctamente",
+      icon: "success",
+      confirmButtonText: "Aceptar",
+    });
     reset();
+    handleClose2();
   };
+
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show2} onHide={handleClose2} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Registrate</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row xs={12}>
             <Col>
               <Card.Body>
-                <h4 className="text-center fs-2 display-1">
-                  <b>Iniciar sesión</b>
+                <h4 className="text-center fs-2 display-1 mb-4">
+                  <b>Registrate</b>
                 </h4>
-                <Form onSubmit={handleSubmit(onSubmit)}>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Ej: usuario@mail.com"
-                      {...register("email", {
-                        required: "El email es un dato obligatorio",
-                        pattern: {
-                          value:
-                            /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
-                          message:
-                            "El email debe ser un correo valido por ej: usuario@mail.com",
-                        },
-                      })}
-                    />
-                    <Form.Text className="text-danger">
-                      {errors.email?.message}
-                    </Form.Text>
-                  </Form.Group>
+                <Form onSubmit={handleSubmit(onsubmit)}>
+                  <Row className="g-3">
+                    <Col md={6}>
+                      <Form.Group controlId="formBasicNombre">
+                        <Form.Label>Nombre</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Ingresa tu nombre"
+                          {...register("nombre", {
+                            required: "El nombre es obligatorio",
+                            minLength: {
+                              value: 2,
+                              message: "Mínimo 2 caracteres",
+                            },
+                            maxLength: {
+                              value: 50,
+                              message: "Máximo 50 caracteres",
+                            },
+                          })}
+                        />
+                        <Form.Text className="text-danger">
+                          {errors.nombre?.message}
+                        </Form.Text>
+                      </Form.Group>
+                    </Col>
 
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Contraseña:</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Ingresa una contraseña"
-                      {...register("password", {
-                        required: "La contraseña es un dato obligatorio",
-                        pattern: {
-                          value:
-                            /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
-                          message:
-                            "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter especial.",
-                        },
-                      })}
-                    />
-                    <Form.Text className="text-danger">
-                      {errors.password?.message}
-                    </Form.Text>
-                  </Form.Group>
+                    <Col md={6}>
+                      <Form.Group controlId="formBasicApellido">
+                        <Form.Label>Apellido</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Ingresa tu apellido"
+                          {...register("apellido", {
+                            required: "El apellido es obligatorio",
+                            minLength: {
+                              value: 2,
+                              message: "Mínimo 2 caracteres",
+                            },
+                            maxLength: {
+                              value: 50,
+                              message: "Máximo 50 caracteres",
+                            },
+                          })}
+                        />
+                        <Form.Text className="text-danger">
+                          {errors.apellido?.message}
+                        </Form.Text>
+                      </Form.Group>
+                    </Col>
 
-                  <Button variant="success" type="submit" onClick={handleClose}>
-                    Iniciar sesión
-                  </Button>
+                    <Col xs={12}>
+                      <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Correo electrónico</Form.Label>
+                        <Form.Control
+                          type="email"
+                          placeholder="correo@ejemplo.com"
+                          {...register("email", {
+                            required: "El email es obligatorio",
+                            pattern: {
+                              value:
+                                /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                              message: "Ingresa un correo válido",
+                            },
+                          })}
+                        />
+                        <Form.Text className="text-danger">
+                          {errors.email?.message}
+                        </Form.Text>
+                      </Form.Group>
+                    </Col>
+
+                    <Col md={6}>
+                      <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Contraseña</Form.Label>
+                        <Form.Control
+                          type="password"
+                          placeholder="Mínimo 8 caracteres"
+                          {...register("password", {
+                            required: "La contraseña es obligatoria",
+                            pattern: {
+                              value:
+                                /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
+                              message:
+                                "8-16 caracteres, incluye mayúscula, minúscula, número y símbolo",
+                            },
+                          })}
+                        />
+                        <Form.Text className="text-danger">
+                          {errors.password?.message}
+                        </Form.Text>
+                      </Form.Group>
+                    </Col>
+
+                    <Col md={6}>
+                      <Form.Group controlId="formBasicConfirmPassword">
+                        <Form.Label>Confirmar contraseña</Form.Label>
+                        <Form.Control
+                          type="password"
+                          placeholder="Repite la contraseña"
+                          {...register("confirmPassword", {
+                            required: "Confirma tu contraseña",
+                            validate: (value) =>
+                              value === password ||
+                              "Las contraseñas no coinciden",
+                          })}
+                        />
+                        <Form.Text className="text-danger">
+                          {errors.confirmPassword?.message}
+                        </Form.Text>
+                      </Form.Group>
+                    </Col>
+
+                    <Col xs={12}>
+                      <Form.Group controlId="formBasicTerminos">
+                        <Form.Check
+                          type="checkbox"
+                          label="Acepto los términos y condiciones"
+                          {...register("terminos", {
+                            required: "Debes aceptar los términos",
+                          })}
+                        />
+                        <Form.Text className="text-danger d-block">
+                          {errors.terminos?.message}
+                        </Form.Text>
+                      </Form.Group>
+                    </Col>
+
+                    <Col xs={12}>
+                      <div className="d-grid">
+                        <Button variant="success" type="submit" size="lg">
+                          Crear cuenta
+                        </Button>
+                      </div>
+                    </Col>
+
+                    <Col xs={12}>
+                      <div className="text-center mt-3">
+                        <p className="mb-0">
+                          ¿Ya tienes cuenta?{" "}
+                          <Button
+                            variant="link"
+                            className="p-0 text-decoration-none"
+                            onClick={() => {
+                              handleClose2();
+                              // Aquí deberías llamar a la función que abre el modal de login
+                              // Por ejemplo: handleShowLogin();
+                            }}
+                          >
+                            Inicia sesión aquí
+                          </Button>
+                        </p>
+                      </div>
+                    </Col>
+                  </Row>
                 </Form>
               </Card.Body>
             </Col>
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose2}>
             Cerrar
           </Button>
         </Modal.Footer>

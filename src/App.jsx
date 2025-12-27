@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { BrowserRouter, Routes, Route } from "react-router";;
 import { useEffect, useState } from "react";
-import { Inicio, Menu, Footer, SegundoNavbar, Login, DetalleProductos, Admin, FormularioProductos, Error404 } from "./Components/index.jsx";
+import { Inicio, Menu, Footer, SegundoNavbar, Login, DetalleProductos, Admin, FormularioProductos, Error404, Register } from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
 
 
@@ -69,9 +69,14 @@ function App() {
  
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [show2, setShow2] = useState(false);
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+
+
 
   return (
     <BrowserRouter>
@@ -79,12 +84,17 @@ function App() {
         usuarioLogueado={usuarioLogueado}
         setusuarioLogueado={setusuarioLogueado}
         handleShow={handleShow}
+        handleShow2={handleShow2}
       />
       <SegundoNavbar setProductos={setProductos} />
       <Login
         setusuarioLogueado={setusuarioLogueado}
         handleClose={handleClose}
         show={show}
+      />
+      <Register
+        handleClose2={handleClose2}
+        show2={show2}
       />
       <main className="container-fluid">
         <Routes>

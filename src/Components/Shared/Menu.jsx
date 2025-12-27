@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router";
 
-export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
+export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleShow2 }) => {
   const navegacion = useNavigate();
 
   const cerrarSession = () => {
@@ -59,6 +59,9 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
                 Iniciar sesión
               </Button>
             )}
+            <Button className="nav-link" variant="" onClick={handleShow2}>
+              Registrarse
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
