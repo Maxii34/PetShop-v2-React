@@ -3,6 +3,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { BrowserRouter, Routes, Route } from "react-router";;
 import { useEffect, useState } from "react";
 import { Inicio, Menu, Footer, SegundoNavbar, Login, DetalleProductos, Admin, FormularioProductos, Error404 } from "./Components/index.jsx";
+import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
+
 
 function App() {
   //lee sessionStorage

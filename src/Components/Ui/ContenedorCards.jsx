@@ -1,22 +1,16 @@
 import { CardsCarousel } from "../index.jsx";
 
-export const ContenedorCards = ({ productosOferta }) => {
+export const ContenedorCards = () => {
   return (
     <>
       <div className="my-5">
-        <h4 className="text-center fs-2 ">
-          ¡Ofertas Exclusivas para Vos! 🛍️
-        </h4>
+        <h4 className="text-center fs-2 ">¡Ofertas Exclusivas para Vos! 🛍️</h4>
         <div className="divContenedor-cards">
-          {productosOferta.map((itemProducto, index) => (
-            <div className="div-1" key={index}>
-              <CardsCarousel itemProducto={itemProducto} />
-            </div>
-          ))}
+          <div className="div-1">
+            <CardsCarousel/>
+          </div>
         </div>
       </div>
     </>
   );
 };
-
-

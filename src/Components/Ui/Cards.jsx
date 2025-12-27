@@ -2,35 +2,32 @@ import { Link } from "react-router-dom";
 import "./EstilosCards.css";
 
 // Antes de props. usar sintaxis desestructuración
-export const CardsProductos = ({ producto }) => {
-  const precioCuotas = producto.precioEfectivo / producto.cuotas;
-
-
-
+export const CardsProductos = () => {
+  
   return (
     <div className="card card-wrapper">
       <div className="card product-card h-100">
         <img
           className="card-img-top"
-          src={producto.imagen || null}
-          alt={producto.alt}
+          src="https://images.pexels.com/photos"
+          alt="Card image cap"
           loading="lazy"
         />
         <div className="card-body d-flex text-center flex-column bod-top">
-          <p className="card-title fw-bold">{producto.nombreProducto}</p>
-          <p className="price-main mt-2 mb-0"> ${producto.precioOriginal}</p>
+          <p className="card-title fw-bold"> </p>
+          <p className="price-main mt-2 mb-0"> </p>
           <p className="price-cash mt-1 mb-1">
             {" "}
-            ${producto.precioEfectivo} con Efectivo
+            $ con Efectivo
           </p>
           <p className="installments mb-3">
-            {producto.cuotas} cuotas sin interés de $ {precioCuotas.toFixed(2)}
+             cuotas sin interés de $
           </p>
           <div className="mt-auto d-flex justify-content-center">
             <Link className="btn btn-custom mx-1 flex-shrink-0">COMPRAR</Link>
             <Link
               to="/detalle"
-              state={{ producto: producto }}
+              state={{ producto: "producto"}}
               className="btn btn-eye mx-1 text-decoration-none text-dark flex-shrink-0"
             >
               <i className="bi bi-eye me-1"></i> VER

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Container, Button } from "react-bootstrap";
-import CardsProductos from "./Cards";
+import { CardsProductos } from "./Cards";
+
+
 
 export const ContainerGrid = ({ productos }) => {
   const [visible, setVisible] = useState(10); // cantidad inicial de cards visibles
