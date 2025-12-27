@@ -1,6 +1,6 @@
 import CardsCarousel from "../Components/Productos/CardsCarousel";
 
-const ContenedorCards = ({ productosOferta }) => {
+export const ContenedorCards = ({ productosOferta }) => {
   return (
     <>
       <div className="my-5">
@@ -19,4 +19,4 @@ const ContenedorCards = ({ productosOferta }) => {
   );
 };
 
-export default ContenedorCards;
+

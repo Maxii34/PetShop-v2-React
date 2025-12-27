@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import "../Components/EstilosCards.css";
 
 // Antes de props. usar sintaxis desestructuración
-const CardsProductos = ({ producto }) => {
+export const CardsProductos = ({ producto }) => {
   const precioCuotas = producto.precioEfectivo / producto.cuotas;
 
 
@@ -42,4 +42,4 @@ const CardsProductos = ({ producto }) => {
   );
 };
 
-export default CardsProductos;
+

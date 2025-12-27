@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router";
 
-const Navprimero = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
+export const Navprimero = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
   const navegacion = useNavigate();
 
   const cerrarSession = () => {
@@ -66,4 +66,4 @@ const Navprimero = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
   );
 };
 
-export default Navprimero;
+

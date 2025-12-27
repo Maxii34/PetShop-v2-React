@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import CardsProductos from "./Cards";
 
-const ContainerGrid = ({ productos }) => {
+export const ContainerGrid = ({ productos }) => {
   const [visible, setVisible] = useState(10); // cantidad inicial de cards visibles
 
   const mostrarMas = () => {
@@ -50,4 +50,4 @@ const ContainerGrid = ({ productos }) => {
   );
 };
 
-export default ContainerGrid;
+

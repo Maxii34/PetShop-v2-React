@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
 
-const FormularioProductos = ({
+export const FormularioProductos = ({
   titulo,
   crearProducto,
   buscarProducto,
@@ -319,4 +319,4 @@ const FormularioProductos = ({
   );
 };
 
-export default FormularioProductos;
+

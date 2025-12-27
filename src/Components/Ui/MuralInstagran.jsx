@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 
-const MuralInstagran = () => {
+export const MuralInstagran = () => {
   return (
     <section className="instagram-section my-5">
       <div className="mural text-center">
@@ -20,4 +20,4 @@ const MuralInstagran = () => {
   );
 };
 
-export default MuralInstagran;
+

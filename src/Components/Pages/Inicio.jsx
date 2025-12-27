@@ -1,10 +1,10 @@
-import CarouselComponente from "../Carousel";
-import ContainerGrid from "../ContainerGrid";
+import CarouselComponente from "../Ui/Carousel";
+import ContainerGrid from "../Ui/ContainerGrid";
 import ContenedorCards from "../ContenedorCards";
-import MuralInstagran from "../MuralInstagran";
+import MuralInstagran from "../Ui/MuralInstagran";
 
 
-const Inicio = ({productos, productosOferta }) => {
+export function Inicio({productos, productosOferta }) {
     return (
         <section>
             <CarouselComponente />
@@ -16,5 +16,3 @@ const Inicio = ({productos, productosOferta }) => {
         </section>
     );
 };
-
-export default Inicio;

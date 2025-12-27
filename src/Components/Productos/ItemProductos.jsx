@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
+export const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
   const eliminarProducto = () => {
     Swal.fire({
       title: "¿Estas seguro de eliminar?",
@@ -57,4 +57,4 @@ const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
   );
 };
 
-export default ItemProductos;
+

@@ -1,11 +1,9 @@
 import React from 'react';
 
-const CardProductos = () => {
+export const CardProductos = () => {
     return (
         <div>
             
         </div>
     );
 };
-
-export default CardProductos;

@@ -1,7 +1,7 @@
 import CardsCarousel from "./CardsCarousel";
 
 //Componente de la sesión  1 del carousel
-const ContaiGridCarousel = ({productosOferta}) => {
+export const ContaiGridCarousel = ({productosOferta}) => {
   return (
     <div className="grid-container">
       <CardsCarousel productosOferta={productosOferta}/>
@@ -9,4 +9,4 @@ const ContaiGridCarousel = ({productosOferta}) => {
   );
 };
 
-export default ContaiGridCarousel
+

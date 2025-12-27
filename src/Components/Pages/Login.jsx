@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
-const Login = ({ setusuarioLogueado, handleClose, show }) => {
+export const Login = ({ setusuarioLogueado, handleClose, show }) => {
   const {
     register,
     handleSubmit,
@@ -107,4 +107,4 @@ const Login = ({ setusuarioLogueado, handleClose, show }) => {
   );
 };
 
-export default Login;
+

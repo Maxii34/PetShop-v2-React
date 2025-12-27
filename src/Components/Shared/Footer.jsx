@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className="pt-2 border-top footer-color color-footer">
       <Container>
@@ -145,4 +145,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+

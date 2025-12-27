@@ -1,6 +1,6 @@
 import Carousel from "react-bootstrap/Carousel";
 
-const CarouselComponente = () => {
+export const CarouselComponente = () => {
   return (
     <Carousel slide={false} className="shadow">
       <Carousel.Item>
@@ -34,4 +34,4 @@ const CarouselComponente = () => {
   );
 };
 
-export default CarouselComponente;
+

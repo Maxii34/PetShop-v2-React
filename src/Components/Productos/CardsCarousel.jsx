@@ -1,7 +1,7 @@
 import '../EstilosCards.css';
 
 // Antes de props. usar sintaxis desestructuración 
-const CardsCarousel = ({ itemProducto }) => {
+export const CardsCarousel = ({ itemProducto }) => {
   const precioCuotas = itemProducto.precioEfectivo / itemProducto.cuotas;
 
   return (
@@ -30,4 +30,4 @@ const CardsCarousel = ({ itemProducto }) => {
   );
 };
 
-export default CardsCarousel;
+
