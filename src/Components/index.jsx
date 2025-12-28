@@ -21,3 +21,4 @@ export * from './Ui/ContainerGrid';
 export * from './Ui/ContenedorCards';
 export * from './Ui/MuralInstagran';
 export * from './Productos/CardProductos'
+export * from './Ui/Canvas'

@@ -25,17 +25,8 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleSh
             navbarScroll
           >
             <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="¿Que estas buscando.?"
-                className="me-2 w-100"
-                aria-label="Search"
-              />
-              <Button variant="outline-success" className="me-4">
-                <i class="bi bi-search"></i>
-              </Button>
             </Form>
-            <NavLink to="/" className="nav-link">
+            <NavLink to="/" className="nav-link ">
               Inicio
             </NavLink>
             {usuarioLogueado ? (

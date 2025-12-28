@@ -1,10 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { BrowserRouter, Routes, Route } from "react-router";;
+import { BrowserRouter, Routes, Route } from "react-router";
 import { useEffect, useState } from "react";
-import { Inicio, Menu, Footer, SegundoNavbar, Login, DetalleProductos, Admin, FormularioProductos, Error404, Register } from "./Components/index.jsx";
+import {
+  Inicio,
+  Menu,
+  Footer,
+  SegundoNavbar,
+  Login,
+  DetalleProductos,
+  Admin,
+  FormularioProductos,
+  Error404,
+  Register,
+  Canvas
+} from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
-
 
 function App() {
   //lee sessionStorage
@@ -16,7 +27,6 @@ function App() {
   const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
   //Estado que guarda productos
   const [productos, setProductos] = useState(productosLS);
-
 
   //Guarda el estado de usuario en sessionStore
   useEffect(() => {
@@ -31,7 +41,6 @@ function App() {
     setProductos([...productos, productoNuevo]);
     return true;
   };
-
 
   // Eliminar producto normal
   const borrarProducto = (idProducto) => {
@@ -50,7 +59,6 @@ function App() {
     return productoBuscado;
   };
 
-
   // Modificar producto normal
   const modificarProducto = (idProducto, datosProducto) => {
     const productoActualizado = productos.map((itemProducto) => {
@@ -66,8 +74,6 @@ function App() {
     return true;
   };
 
- 
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -76,7 +82,10 @@ function App() {
   const handleClose2 = () => setShow2(false);
   const handleShow2 = () => setShow2(true);
 
+  const [show3, setShow3] = useState(false);
 
+  const handleClose3 = () => setShow3(false);
+  const handleShow3 = () => setShow3(true);
 
   return (
     <BrowserRouter>
@@ -86,19 +95,17 @@ function App() {
         handleShow={handleShow}
         handleShow2={handleShow2}
       />
-      <SegundoNavbar setProductos={setProductos} />
+      <SegundoNavbar setProductos={setProductos} handleShow3={handleShow3} />
       <Login
         setusuarioLogueado={setusuarioLogueado}
         handleClose={handleClose}
         show={show}
       />
-      <Register
-        handleClose2={handleClose2}
-        show2={show2}
-      />
+      <Canvas handleClose3={handleClose3} show3={show3}/>
+      <Register handleClose2={handleClose2} show2={show2} />
       <main className="container-fluid">
         <Routes>
-          <Route path="/" element={<Inicio productos={productos}   />} />
+          <Route path="/" element={<Inicio productos={productos} />} />
           <Route path="detalle" element={<DetalleProductos />} />
 
           {/* Ruta protegida: /admin */}
