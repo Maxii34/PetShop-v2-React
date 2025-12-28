@@ -95,3 +95,19 @@ h4 {
   scroll-snap-align: center;
 }
 
+.acordeon-verde .accordion-button:not(.collapsed) {
+  background-color: rgba(104, 104, 104, 0.267) !important;
+  color: rgb(11, 32, 20) !important;
+  box-shadow: none !important;
+  font-size: 22px;
+}
+
+.acordeon-verde .accordion-button:focus {
+  border-color: unset !important;
+  box-shadow: none !important;
+}
+
+.acordeon-verde .accordion-button {
+  color: #333 !important;
+  font-weight: 600;
+}

@@ -16,7 +16,7 @@ export const Canvas = ({ handleClose3, show3, placement = "start" }) => {
         </Offcanvas.Header>
         <Offcanvas.Body className="p-0">
           
-          <Accordion flush defaultActiveKey="0">
+          <Accordion flush defaultActiveKey="0" className="acordeon-verde">
             {/* SECCIÓN PERROS */}
             <Accordion.Item eventKey="0">
               <Accordion.Header>Perros</Accordion.Header>
