@@ -1,6 +1,5 @@
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router";
@@ -20,13 +19,11 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleSh
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
-            className="ms-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
+            className="ms-auto text-center align-items-center gap-2"
+            style={{ maxHeight: "300px" }}
             navbarScroll
           >
-            <Form className="d-flex">
-            </Form>
-            <NavLink to="/" className="nav-link ">
+            <NavLink to="/" className="nav-link">
               Inicio
             </NavLink>
             {usuarioLogueado ? (
@@ -38,19 +35,25 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleSh
                   Ofertas
                 </NavLink>
                 <Button
-                  className={"nav-link"}
-                  variant=""
+                  className="nav-link"
+                  variant="link"
                   onClick={cerrarSession}
+                  style={{ textDecoration: "none" }}
                 >
                   Cerrar sesión
                 </Button>
               </>
             ) : (
-              <Button className="nav-link" variant="" onClick={handleShow}>
+              <Button 
+                className="nav-link" 
+                variant="link" 
+                onClick={handleShow}
+                style={{ textDecoration: "none" }}
+              >
                 Iniciar sesión
               </Button>
             )}
-            <Button className="nav-link" variant="" onClick={handleShow2}>
+            <Button className="nav-link" variant="link" onClick={handleShow2} style={{ textDecoration: "none" }}>
               Registrarse
             </Button>
           </Nav>
@@ -59,5 +62,3 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleSh
     </Navbar>
   );
 };
-
-
