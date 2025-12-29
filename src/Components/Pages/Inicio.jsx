@@ -5,7 +5,7 @@ export function Inicio({productos, productosOferta }) {
     return (
         <section>
             <CarouselComponente />
-            <div>
+            <div className=" container-fluid mt-5">
                 <ContainerGrid  productos={productos} />
                 <ContenedorCards productosOferta={productosOferta}/>
             </div>

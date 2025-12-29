@@ -111,7 +111,7 @@ function App() {
       <Canvas handleClose3={handleClose3} show3={show3} />
       <CarritoModal handleCloseCarrito={handleCloseCarrito} showCarrito={showCarrito} />
       <Register handleClose2={handleClose2} show2={show2} />
-      <main className="container-fluid">
+      <main className="">
         <Routes>
           <Route path="/" element={<Inicio productos={productos} />} />
           <Route path="detalle" element={<DetalleProductos />} />
