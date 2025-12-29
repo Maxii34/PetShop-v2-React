@@ -1,98 +1,69 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import NavDropdown from "react-bootstrap/NavDropdown"; 
 import productosObj from "../../data/ProductosObjeto";
 import ProductoObjetoCR from "../../data/ProductosObjetoCR";
 
-const Navsegundo = ({ setProductos, setProductosOferta }) => {
+export const SegundoNavbar = ({ setProductos, setProductosOferta, handleShow3 }) => {
 
-const productosPrueba = () => {
-  if (Array.isArray(ProductoObjetoCR) && ProductoObjetoCR.length > 0) {
-    setProductosOferta(ProductoObjetoCR);
-  }
-  if (Array.isArray(productosObj) && productosObj.length > 0) {
-    setProductos(productosObj);
-  }
-};
-
-
+  const productosPrueba = () => {
+    if (Array.isArray(ProductoObjetoCR) && ProductoObjetoCR.length > 0) {
+      setProductosOferta(ProductoObjetoCR);
+    }
+    if (Array.isArray(productosObj) && productosObj.length > 0) {
+      setProductos(productosObj);
+    }
+  };
 
   return (
     <Navbar className="nav-sec">
       <Container>
         <Nav className="w-100 d-flex justify-content-center align-items-center">
-          <NavDropdown
-            title={<span className="text-light">Perros</span>}
-            id="navbarScrollingDropdown"
-          >
-            <NavDropdown.Header className="text-dark text-muted fs-5">
-              Alimentos Balanceados
-            </NavDropdown.Header>
-            <NavDropdown.Item>Pedigree</NavDropdown.Item>
-            <NavDropdown.Item>Dog Chow</NavDropdown.Item>
-            <NavDropdown.Item>Eukanuba</NavDropdown.Item>
-            <NavDropdown.Item>Pro Plan</NavDropdown.Item>
-            <NavDropdown.Item>Royal Canin</NavDropdown.Item>
-            <NavDropdown.Item>Nutrique</NavDropdown.Item>
-            <NavDropdown.Item>Vital Can</NavDropdown.Item>
-
-            <NavDropdown.Divider />
-
-            <NavDropdown.Header className="text-dark text-muted fs-5">
-              Accesorios
-            </NavDropdown.Header>
-            <NavDropdown.Item>Collares y Correas</NavDropdown.Item>
-            <NavDropdown.Item>Camas y Mantas</NavDropdown.Item>
-            <NavDropdown.Item>Juguetes</NavDropdown.Item>
-            <NavDropdown.Item>Transportadoras</NavDropdown.Item>
-          </NavDropdown>
-
-          <NavDropdown
-            title={<span className="text-light">Gatos</span>}
-            id="navbarScrollingDropdown"
-          >
-            <NavDropdown.Header className="text-dark text-muted fs-5">
-              Alimentos Balanceados
-            </NavDropdown.Header>
-            <NavDropdown.Item>Agility</NavDropdown.Item>
-            <NavDropdown.Item>Excellent</NavDropdown.Item>
-            <NavDropdown.Item>Eukanuba</NavDropdown.Item>
-            <NavDropdown.Item>Nutrique</NavDropdown.Item>
-            <NavDropdown.Item>Pro Pan</NavDropdown.Item>
-            <NavDropdown.Item>Perfomans</NavDropdown.Item>
-            <NavDropdown.Item>Vital Can</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Header className="text-dark text-muted fs-5">
-              Accesorios
-            </NavDropdown.Header>
-            <NavDropdown.Item>Comederos</NavDropdown.Item>
-            <NavDropdown.Item>Transportes</NavDropdown.Item>
-            <NavDropdown.Item>Arena satitarias</NavDropdown.Item>
-            <NavDropdown.Item>Juquetes y Rascadores</NavDropdown.Item>
-          </NavDropdown>
-
-          <NavDropdown
-            title={<span className="text-light">Otros</span>}
-            id="navbarScrollingDropdown"
-          >
-            <NavDropdown.Item>Aves</NavDropdown.Item>
-            <NavDropdown.Item>Peces</NavDropdown.Item>
-            <NavDropdown.Item>Roedores</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item>Accesorios Variados</NavDropdown.Item>
-          </NavDropdown>
-
-          <Nav.Link onClick={productosPrueba} className="text-light">
-            <i className="bi bi-database-fill-up"></i> Productos
+          
+          {/* --- GRUPO 1: SIEMPRE VISIBLES --- */}
+          <Nav.Link onClick={handleShow3} className="text-light px-2">
+            Perros & Gatos
           </Nav.Link>
-          <Nav.Link href="#action1" className="text-light d-none d-lg-block">
+
+          <Nav.Link className="text-light px-2">
+            Ofertas
+          </Nav.Link>
+
+           <Nav.Link className="text-light px-2">
+            Veterinaria
+          </Nav.Link>
+
+          {/* --- GRUPO 2: SOLO VISIBLES EN PC (d-none d-lg-block) --- */}
+          {/* Estas opciones desaparecen en pantallas chicas */}
+          <Nav.Link href="#nuevos" className="text-light px-2 d-none d-lg-block">
             Nuevos Productos
           </Nav.Link>
+          
+          <Nav.Link href="#destacados" className="text-light px-2 d-none d-lg-block">
+             Destacados
+          </Nav.Link>
+          
+          <Nav.Link href="#contacto" className="text-light px-2 d-none d-lg-block">
+             Contacto
+          </Nav.Link>
+
+          {/* --- GRUPO 3: SOLO VISIBLE EN MÓVIL (d-lg-none) --- */}
+          {/* Este dropdown contiene las mismas opciones del Grupo 2, pero solo aparece en celular */}
+          <NavDropdown
+            className="d-lg-none" 
+            title={<span className="text-light">Más</span>}
+            id="basic-nav-dropdown"
+            menuVariant="dark"
+          >
+            <NavDropdown.Item href="#nuevos">Nuevos Productos</NavDropdown.Item>
+            <NavDropdown.Item href="#destacados">Destacados</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#contacto">Contacto</NavDropdown.Item>
+          </NavDropdown>
+
         </Nav>
       </Container>
     </Navbar>
   );
 };
-
-export default Navsegundo;

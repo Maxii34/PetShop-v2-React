@@ -94,3 +94,71 @@ h4 {
   flex: 0 0 auto;
   scroll-snap-align: center;
 }
+
+.acordeon-verde .accordion-button:not(.collapsed) {
+  background-color: rgba(104, 104, 104, 0.267) !important;
+  color: rgb(11, 32, 20) !important;
+  box-shadow: none !important;
+  font-size: 22px;
+}
+
+.acordeon-verde .accordion-button:focus {
+  border-color: unset !important;
+  box-shadow: none !important;
+}
+
+.acordeon-verde .accordion-button {
+  color: #333 !important;
+  font-weight: 600;
+}
+
+/* Clase unificada para Links y Botones */
+.btn-customs {
+  /* Estructura */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none !important; 
+  border: unset;                    
+  
+  /* Tu diseño visual */
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #e6e7e6;
+  color: #0e6856;
+  font-weight: 900;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 250ms;
+}
+
+/* El efecto de fondo deslizante */
+.btn-customs::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 5px;
+  background-color: #0e6856;
+  z-index: -1;
+  transition: all 250ms;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+}
+
+/* Hover: cambia color de texto */
+.btn-customs:hover {
+  color: #e8e8e8;
+}
+
+/* Hover: expande el fondo negro */
+.btn-customs:hover::before {
+  width: 100%;
+}
+
+/*Segundo nav clases*/

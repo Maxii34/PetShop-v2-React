@@ -1,14 +1,11 @@
-import CarouselComponente from "../Carousel";
-import ContainerGrid from "../ContainerGrid";
-import ContenedorCards from "../ContenedorCards";
-import MuralInstagran from "../MuralInstagran";
+import { CarouselComponente, ContainerGrid, ContenedorCards, MuralInstagran } from "../index.jsx";
 
 
-const Inicio = ({productos, productosOferta }) => {
+export function Inicio({productos, productosOferta }) {
     return (
         <section>
             <CarouselComponente />
-            <div>
+            <div className=" container-fluid mt-5">
                 <ContainerGrid  productos={productos} />
                 <ContenedorCards productosOferta={productosOferta}/>
             </div>
@@ -16,5 +13,3 @@ const Inicio = ({productos, productosOferta }) => {
         </section>
     );
 };
-
-export default Inicio;

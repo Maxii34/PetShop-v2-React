@@ -1,11 +1,11 @@
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router";
+import { BsCart3 } from "react-icons/bs";
 
-const Navprimero = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
+
+export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleShow2, handleShowCarrito }) => {
   const navegacion = useNavigate();
 
   const cerrarSession = () => {
@@ -14,56 +14,71 @@ const Navprimero = ({ usuarioLogueado, setusuarioLogueado, handleShow }) => {
   };
 
   return (
-    <Navbar expand="lg" className="nav-pri">
+    <Navbar expand="lg" className="nav-pri py-3">
       <Container>
         <Navbar.Brand href="#">Apolo PetShop</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
+          
+          {/* gap-3 separa los botones entre sí */}
           <Nav
-            className="ms-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
+            className="ms-auto text-center align-items-center gap-3 mt-3 mt-lg-0"
             navbarScroll
           >
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="¿Que estas buscando.?"
-                className="me-2 w-100"
-                aria-label="Search"
-              />
-              <Button variant="outline-success" className="me-4">
-                <i class="bi bi-search"></i>
-              </Button>
-            </Form>
-            <NavLink to="/" className="nav-link">
+            {/* ENLACE: Usa NavLink + btn-custom */}
+            <NavLink to="/" className="btn-customs">
               Inicio
             </NavLink>
+
             {usuarioLogueado ? (
               <>
-                <NavLink to="/admin" className="nav-link">
+                <NavLink to="/admin" className="btn-customs">
                   Productos
                 </NavLink>
-                <NavLink to="/admincarousel" className="nav-link">
+                
+                <NavLink to="/admincarousel" className="btn-customs">
                   Ofertas
                 </NavLink>
-                <Button
-                  className={"nav-link"}
-                  variant=""
+                
+                {/* ACCIÓN: Usa button + btn-customs */}
+                <button
+                  className="btn-customs"
                   onClick={cerrarSession}
+                  type="button"
                 >
                   Cerrar sesión
-                </Button>
+                </button>
               </>
             ) : (
-              <Button className="nav-link" variant="" onClick={handleShow}>
+              // Si NO está logueado
+              <button 
+                className="btn-customs" 
+                onClick={handleShow}
+                type="button"
+              >
                 Iniciar sesión
-              </Button>
+              </button>
             )}
+            
+            {/* BOTÓN REGISTRO */}
+            <button 
+              className="btn-customs" 
+              onClick={handleShow2}
+              type="button"
+            >
+              Registrarse
+            </button>
+            <button 
+              className="btn-customs" 
+              onClick={handleShowCarrito}
+              type="button"
+            >
+              <BsCart3 className="fs-5" /> 
+            </button>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 };
-
-export default Navprimero;

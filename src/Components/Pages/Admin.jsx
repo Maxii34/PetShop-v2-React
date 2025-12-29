@@ -1,11 +1,11 @@
 import { Link } from "react-router";
 import { Button, Table } from "react-bootstrap";
-import ItemProductos from "../Productos/ItemProductos";
+import { ItemProductos } from "../index.jsx";
 import productosObj from "../../data/ProductosObjeto";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
-const Administrador = ({ productos, setProductos, borrarProducto }) => {
+export function Admin({ productos, setProductos, borrarProducto }) {
   const productosPrueba = () => {
     if (Array.isArray(productosObj) && productosObj.length > 0) {
       setProductos(productosObj);
@@ -167,4 +167,4 @@ const Administrador = ({ productos, setProductos, borrarProducto }) => {
   );
 };
 
-export default Administrador;
+

@@ -1,23 +1,23 @@
-import '../EstilosCards.css';
+import '../Ui/EstilosCards.css';
 
 // Antes de props. usar sintaxis desestructuración 
-const CardsCarousel = ({ itemProducto }) => {
-  const precioCuotas = itemProducto.precioEfectivo / itemProducto.cuotas;
+export const CardsCarousel = () => {
+ 
 
   return (
     <div className="card card-wrapper">
       <div className="card product-card h-100">
         <img
           className="card-img-top"
-          src={itemProducto.imagen || null}   
-          alt={itemProducto.alt} 
+          src="https://images.pexels.com/photos"   
+          alt="Card image cap"
           loading="lazy"
         />
         <div className="card-body d-flex text-center flex-column bod-top">
-          <p className="card-title fw-bold">{itemProducto.nombreproducto}</p>
-          <p className="price-main mt-2 mb-0"> ${itemProducto.precioOriginal}</p>
-          <p className="price-cash mt-1 mb-1"> ${itemProducto.precioEfectivo} con Efectivo</p>
-          <p className="installments mb-3">{itemProducto.cuotas} cuotas sin interés de $ {precioCuotas.toFixed(2)}</p>
+          <p className="card-title fw-bold"> </p>
+          <p className="price-main mt-2 mb-0"> $</p>
+          <p className="price-cash mt-1 mb-1"> $ con Efectivo</p>
+          <p className="installments mb-3"> cuotas sin interés de $ </p>
           <div className="mt-auto d-flex justify-content-center">
             <a href="#" className="btn btn-custom mx-1 flex-shrink-0">COMPRAR</a>
             <a href="" className="btn btn-eye mx-1 text-decoration-none text-dark flex-shrink-0">
@@ -30,4 +30,4 @@ const CardsCarousel = ({ itemProducto }) => {
   );
 };
 
-export default CardsCarousel;
+

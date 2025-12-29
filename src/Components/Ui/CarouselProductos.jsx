@@ -1,15 +1,15 @@
 import Carousel from "react-bootstrap/Carousel";
-import ContaiGridCarousel from "./ContaiGridCarousel";
+import { ContaiGridCarousel } from '../index.jsx';
 import { Container } from "react-bootstrap";
 
-const CarouselProductos = ({productosOferta}) => {
+export const CarouselProductos = () => {
   return (
     <Container fluid>
       <h4 className="text-center fs-2 my-4">PROMOCIONES IMPERDIBLES🎉</h4>
       <Carousel slide={false}>
         
         <Carousel.Item>
-          <ContaiGridCarousel productosOferta={productosOferta}/>
+          <ContaiGridCarousel/>
         </Carousel.Item>
 
       </Carousel> 
@@ -17,4 +17,4 @@ const CarouselProductos = ({productosOferta}) => {
   );
 };
 
-export default CarouselProductos;
+

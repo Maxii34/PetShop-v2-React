@@ -10,7 +10,7 @@ import {
 import { useLocation } from "react-router";
 import { Image } from "react-bootstrap";
 
-const DetalleProductos = () => {
+export const DetalleProductos = () => {
   const location = useLocation();
   const { producto } = location.state || {};
   console.log(producto);
@@ -164,4 +164,4 @@ const DetalleProductos = () => {
   );
 };
 
-export default DetalleProductos;
+

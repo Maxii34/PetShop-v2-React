@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; // 1. Agregamos useEffect
 import { Container, Button } from "react-bootstrap";
-import CardsProductos from "./Cards";
+import { CardsProductos } from "./Cards";
+import AOS from "aos"; // 
+import "aos/dist/aos.css"; 
 
-const ContainerGrid = ({ productos }) => {
-  const [visible, setVisible] = useState(10); // cantidad inicial de cards visibles
+export const ContainerGrid = ({ productos }) => {
+  const [visible, setVisible] = useState(10);
+
+  // Inicializamos AOS al cargar el componente
+  useEffect(() => {
+    AOS.init({
+      duration: 500, 
+    });
+  }, []);
 
   const mostrarMas = () => {
-    setVisible((prev) => prev + 5); // suma 5 más cada vez que se presionas
+    setVisible((prev) => prev + 5);
   };
 
   const mostrarMenos = () => {
-    setVisible(10); // vuelve al estado inicial en lugar de restar
-    irIniciocard(); // suve al inicio de las cards
+    setVisible(10);
+    irIniciocard();
   };
 
   const irIniciocard = () => {
@@ -28,13 +37,20 @@ const ContainerGrid = ({ productos }) => {
           Lo mejor para tus compañeros peludos 🐾✨
         </h1>
       </div>
+      
       <div className="grid-container">
         {productos.slice(0, visible).map((itemProducto, indice) => (
-          <CardsProductos key={indice} producto={itemProducto} />
+          /* Envolvemos la card en un div con la animación */
+          <div 
+            key={indice} 
+            data-aos="fade-up" 
+            data-aos-delay={indice * 100} // Efecto escalera
+          >
+             <CardsProductos producto={itemProducto} />
+          </div>
         ))}
       </div>
 
-      {/* Se muestra el btn "ver mas" solo si hay mas productos en prodcutos que en visible y si estan todos visible "Ver menos".*/}
       <div className="text-center mt-3">
         {visible < productos.length ? (
           <Button variant="primary" className="shadow" onClick={mostrarMas}>
@@ -49,5 +65,3 @@ const ContainerGrid = ({ productos }) => {
     </Container>
   );
 };
-
-export default ContainerGrid;
