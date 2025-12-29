@@ -2,8 +2,10 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router";
+import { BsCart3 } from "react-icons/bs";
 
-export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleShow2 }) => {
+
+export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleShow2, handleShowCarrito }) => {
   const navegacion = useNavigate();
 
   const cerrarSession = () => {
@@ -65,6 +67,13 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleSh
               type="button"
             >
               Registrarse
+            </button>
+            <button 
+              className="btn-custom" 
+              onClick={handleShowCarrito}
+              type="button"
+            >
+              <BsCart3 className="fs-5" /> 
             </button>
             
           </Nav>

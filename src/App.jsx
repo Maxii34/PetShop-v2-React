@@ -13,7 +13,8 @@ import {
   FormularioProductos,
   Error404,
   Register,
-  Canvas
+  Canvas,
+  CarritoModal,
 } from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
 
@@ -87,6 +88,10 @@ function App() {
   const handleClose3 = () => setShow3(false);
   const handleShow3 = () => setShow3(true);
 
+  const [showCarrito, setShowCarrito] = useState(false);
+  const handleCloseCarrito = () => setShowCarrito(false);
+  const handleShowCarrito = () => setShowCarrito(true);
+
   return (
     <BrowserRouter>
       <Menu
@@ -94,6 +99,7 @@ function App() {
         setusuarioLogueado={setusuarioLogueado}
         handleShow={handleShow}
         handleShow2={handleShow2}
+        handleShowCarrito={handleShowCarrito}
       />
       <SegundoNavbar setProductos={setProductos} handleShow3={handleShow3} />
       <Login
@@ -101,7 +107,8 @@ function App() {
         handleClose={handleClose}
         show={show}
       />
-      <Canvas handleClose3={handleClose3} show3={show3}/>
+      <Canvas handleClose3={handleClose3} show3={show3} />
+      <CarritoModal handleCloseCarrito={handleCloseCarrito} showCarrito={showCarrito} />
       <Register handleClose2={handleClose2} show2={show2} />
       <main className="container-fluid">
         <Routes>
