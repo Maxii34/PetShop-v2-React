@@ -6,7 +6,7 @@ export const CarouselComponente = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://images.pexels.com/photos/4214919/pexels-photo-4214919.jpeg"
+          src=""
           alt="First slide"
           loading="lazy"
           style={{ height: "350px", objectFit: "cover" }}
@@ -15,7 +15,7 @@ export const CarouselComponente = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://images.pexels.com/photos/13953689/pexels-photo-13953689.jpeg"
+          src=""
           alt="Second slide"
           loading="lazy"
           style={{ height: "350px", objectFit: "cover" }}
@@ -24,7 +24,7 @@ export const CarouselComponente = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="https://images.pexels.com/photos/25283877/pexels-photo-25283877.jpeg"
+          src=""
           alt="Third slide"
           loading="lazy"
           style={{ height: "350px", objectFit: "cover" }}

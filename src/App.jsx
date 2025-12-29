@@ -15,6 +15,7 @@ import {
   Register,
   Canvas,
   CarritoModal,
+  CarritoPagos,
 } from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
 
@@ -114,6 +115,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Inicio productos={productos} />} />
           <Route path="detalle" element={<DetalleProductos />} />
+          <Route path="carrito" element={<CarritoPagos />} />
 
           {/* Ruta protegida: /admin */}
           <Route

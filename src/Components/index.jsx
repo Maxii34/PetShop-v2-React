@@ -23,3 +23,4 @@ export * from './Ui/MuralInstagran';
 export * from './Productos/CardProductos'
 export * from './Ui/Canvas'
 export * from './Ui/CarritoModal'
+export * from './Pages/CarritoPagos'

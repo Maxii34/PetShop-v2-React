@@ -26,23 +26,23 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleSh
             navbarScroll
           >
             {/* ENLACE: Usa NavLink + btn-custom */}
-            <NavLink to="/" className="btn-custom">
+            <NavLink to="/" className="btn-customs">
               Inicio
             </NavLink>
 
             {usuarioLogueado ? (
               <>
-                <NavLink to="/admin" className="btn-custom">
+                <NavLink to="/admin" className="btn-customs">
                   Productos
                 </NavLink>
                 
-                <NavLink to="/admincarousel" className="btn-custom">
+                <NavLink to="/admincarousel" className="btn-customs">
                   Ofertas
                 </NavLink>
                 
-                {/* ACCIÓN: Usa button + btn-custom */}
+                {/* ACCIÓN: Usa button + btn-customs */}
                 <button
-                  className="btn-custom"
+                  className="btn-customs"
                   onClick={cerrarSession}
                   type="button"
                 >
@@ -52,7 +52,7 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleSh
             ) : (
               // Si NO está logueado
               <button 
-                className="btn-custom" 
+                className="btn-customs" 
                 onClick={handleShow}
                 type="button"
               >
@@ -62,14 +62,14 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleSh
             
             {/* BOTÓN REGISTRO */}
             <button 
-              className="btn-custom" 
+              className="btn-customs" 
               onClick={handleShow2}
               type="button"
             >
               Registrarse
             </button>
             <button 
-              className="btn-custom" 
+              className="btn-customs" 
               onClick={handleShowCarrito}
               type="button"
             >
