@@ -147,3 +147,110 @@
 .btn-buy:hover {
   background-color: #157347;
 }
+
+/*Carrito*/
+
+.imagen-Carrito {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
+}
+
+.text-nombre {
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.text-precio {
+font-size: 15px;
+font-weight: 400;
+padding: 5px;
+}
+
+.text-cantidad {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.text-precio-total {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.btn-eliminar {
+  width: 40px;
+  height: 40px;
+  padding: 0; 
+  background-color: #ef4444; 
+  color: white;          
+  border: none;    
+  border-radius: 5px;     
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+
+.btn-eliminar:hover {
+  background-color: #dc2626; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
+  transform: translateY(-1px); 
+}
+
+.btn-eliminar:active {
+  transform: translateY(0); 
+  box-shadow: none; 
+}
+
+.btn-seguir {
+  background-color: #6c757d;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(108, 117, 125, 0.4);
+}
+
+.btn-seguir:hover {
+  background-color: #5c636a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(108, 117, 125, 0.5);
+  color: white;
+}
+
+.btn-seguir:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(108, 117, 125, 0.4);
+}
+
+.btn-finalizar {
+  background-color: #198754;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(25, 135, 84, 0.4);
+}
+
+.btn-finalizar:hover {
+  background-color: #157347;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(25, 135, 84, 0.5);
+  color: white;
+}
+
+.btn-finalizar:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(25, 135, 84, 0.4);
+}
