@@ -378,3 +378,54 @@
   color: white !important;
   opacity: 0.9;
 }
+
+/* Badge de oferta animado (opcional, llama la atencion) */
+.badge-oferta {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Efecto hover suave para los botones de esta card */
+.btn-hover-scale {
+    transition: transform 0.2s ease;
+}
+.btn-hover-scale:hover {
+    transform: scale(1.05); /* Crece un poquito al pasar el mouse */
+}
+
+/* Reutilizamos tu sombra preferida para la card completa */
+.card-wrapper:hover {
+    /* Tu sombra negra potente */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6) !important; 
+    transform: translateY(-5px);
+}
+
+/* --- Estilos para los Links del Menú (Efecto Marcador) --- */
+.opcion-lateral {
+  display: block;
+  padding: 10px 15px;
+  color: #6c757d; /* Gris suave */
+  text-decoration: none;
+  font-weight: 500;
+  border-left: 4px solid transparent; /* Borde invisible inicial */
+  transition: all 0.2s ease-in-out;
+}
+
+.opcion-lateral:hover {
+  background-color: #fffbf0;
+  color: #d9a406;
+  border-left: 4px solid #ffc107;
+  padding-left: 25px;
+}
+
+.accordion-flush .accordion-item .accordion-button {
+    background-color: transparent;
+    color: #333;
+    font-weight: bold;
+    box-shadow: none; 
+}
+
+.accordion-flush .accordion-item .accordion-button:not(.collapsed) {
+    color: #ffc107; 
+    background-color: rgba(255, 193, 7, 0.1); 
+}

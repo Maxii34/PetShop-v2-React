@@ -17,7 +17,6 @@ export const CardsCarousel = () => {
           <p className="card-title fw-bold"> </p>
           <p className="price-main mt-2 mb-0"> $</p>
           <p className="price-cash mt-1 mb-1"> $ con Efectivo</p>
-          <p className="installments mb-3"> cuotas sin interés de $ </p>
           <div className="mt-auto d-flex justify-content-center">
             <a href="#" className="btn btn-custom mx-1 flex-shrink-0">COMPRAR</a>
             <a href="" className="btn btn-eye mx-1 text-decoration-none text-dark flex-shrink-0">
