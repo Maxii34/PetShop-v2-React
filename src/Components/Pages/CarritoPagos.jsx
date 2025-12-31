@@ -1,5 +1,5 @@
-import { Container } from "react-bootstrap";
-import { CarritoProductos } from "../Ui/CarritoProductos";
+import { Col, Container, Row } from "react-bootstrap";
+import { CarritoProductos, SectorPagos } from "../index.jsx";
 
 export const CarritoPagos = () => {
   return (
@@ -13,12 +13,20 @@ export const CarritoPagos = () => {
           </span>
         </div>
 
-        <div className="d-flex flex-column">
-          <CarritoProductos />
-          <CarritoProductos />
-          <CarritoProductos />
-          <CarritoProductos />
+        <div className="d-flex flex-column my-4 border-1 border-bottom">
+          <Row>
+            <Col md={12} lg={8} className="my-4">
+              <CarritoProductos />
+              <CarritoProductos />
+              <CarritoProductos />
+            </Col>
+            <Col md={12} lg={4} className="my-4">
+              <SectorPagos />
+            </Col>
+          </Row>
         </div>
+
+        <div className="d-flex flex-column my-4"></div>
       </Container>
     </>
   );

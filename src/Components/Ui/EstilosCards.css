@@ -267,6 +267,7 @@
 /* Contenedor principal */
 .card-producto {
   background-color: #fff;
+  width: 100%;
   padding: 10px;
   border-bottom: 1px solid #f0f0f0; 
   border: 1px solid #ddd;
@@ -338,7 +339,7 @@
 
 /* 3. Precio y Basura */
 .precio-final {
-  font-weight: 700;
+  font-weight: 7 00;
   font-size: 1.1rem;
   color: #212529;
 }
@@ -354,4 +355,17 @@
 
 .btn-eliminar-item:hover {
   color: #dc3545; 
+}
+
+.card-pagos {
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  margin: 2px;
+  transition: box-shadow 0.5s ease-in-out, transform 0.3s ease-in-out;
 }

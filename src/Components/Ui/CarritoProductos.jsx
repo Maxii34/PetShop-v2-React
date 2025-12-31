@@ -1,12 +1,11 @@
 import { BsTrash, BsPlus, BsDash } from "react-icons/bs";
-import "./EstilosCards.css";
 import { Row, Col } from "react-bootstrap";
+import "./EstilosCards.css";
+
 
 export const CarritoProductos = () => {
   return (
     <>
-      <Row>
-        <Col md={12} lg={6}>
           <div className="card-producto d-flex align-items-center justify-content-between">
             {/* SECCIÓN 1: Imagen y Texto */}
             <div className="d-flex align-items-center gap-2">
@@ -46,8 +45,6 @@ export const CarritoProductos = () => {
               </button>
             </div>
           </div>
-        </Col>
-      </Row>
     </>
   );
 };
