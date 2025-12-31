@@ -272,14 +272,13 @@
   border-bottom: 1px solid #f0f0f0; 
   border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   margin: 2px;
   transition: box-shadow 0.5s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .card-producto:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transform: translateY(-3px);
 }
 
@@ -368,4 +367,18 @@
   overflow: hidden;
   margin: 2px;
   transition: box-shadow 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn-finalizar {
+  border-radius: 30px;
+  color: white !important;
+  font-weight: bold;
+  padding: 10px;
+  /* Opcional: Para que siga siendo blanco al pasar el mouse */
+  transition: all 0.3s ease;
+}
+
+.btn-finalizar:hover {
+  color: white !important;
+  opacity: 0.9;
 }

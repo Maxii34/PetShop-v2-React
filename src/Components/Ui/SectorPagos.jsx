@@ -67,17 +67,7 @@ export const SectorPagos = () => {
       </div>
 
       {/* --- BOTON FINALIZAR --- */}
-      <Button
-        variant="warning"
-        size="lg"
-        className="w-100 mb-3"
-        style={{
-          borderRadius: "30px",
-          color: "white",
-          fontWeight: "bold",
-          padding: "15px",
-        }}
-      >
+      <Button variant="warning" size="lg" className="w-100 mb-3 btn-finalizar">
         FINALIZAR COMPRA →
       </Button>
 

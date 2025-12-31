@@ -13,7 +13,7 @@ export const CarritoPagos = () => {
           </span>
         </div>
 
-        <div className="d-flex flex-column my-4 border-1 border-bottom">
+        <div className="d-flex flex-column my-1 border-1 border-bottom">
           <Row>
             <Col md={12} lg={8} className="my-4">
               <CarritoProductos />
@@ -26,7 +26,9 @@ export const CarritoPagos = () => {
           </Row>
         </div>
 
-        <div className="d-flex flex-column my-4"></div>
+        <div className=" d-flex justify-content-center align-content-center my-4">
+          <h4>Otros productos que te podrian interesar</h4>
+        </div>
       </Container>
     </>
   );

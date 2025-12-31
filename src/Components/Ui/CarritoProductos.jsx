@@ -1,5 +1,4 @@
 import { BsTrash, BsPlus, BsDash } from "react-icons/bs";
-import { Row, Col } from "react-bootstrap";
 import "./EstilosCards.css";
 
 
@@ -17,7 +16,6 @@ export const CarritoProductos = () => {
                 />
               </div>
 
-              {/* Título y Variante */}
               <div>
                 <h6 className="mb-1 fw-bold text-dark">
                   Alimento Premium Gato
@@ -26,7 +24,6 @@ export const CarritoProductos = () => {
               </div>
             </div>
 
-            {/* SECCIÓN 2: Selector de Cantidad (La "Pastilla") */}
             <div className="selector-cantidad">
               <button className="btn-qty">
                 <BsDash />
@@ -37,7 +34,6 @@ export const CarritoProductos = () => {
               </button>
             </div>
 
-            {/* SECCIÓN 3: Precio y Eliminar */}
             <div className="d-flex align-items-center gap-2 mx-1">
               <span className="precio-final">$150.990</span>
               <button className="btn-eliminar-item">
