@@ -10,24 +10,20 @@
 /* Estilo base de la tarjeta de producto */
 .product-card {
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 15px;
   overflow: hidden;
-  transition: box-shadow 0.7s ease-in-out, transform 0.7s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
   height: 100%;
   user-select: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .product-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transform: translateY(-5px);
 }
 
-/* Hover del borde cuando la card está en hover */
-.product-card:hover .bod-top {
-  border-top: 4px solid rgba(32, 88, 32, 0.8);
-  box-shadow: 0 -2px 8px rgba(32, 88, 32, 0.5);
-}
+
 
 /* Imagen superior de la tarjeta */
 .card-img-top {
@@ -35,17 +31,17 @@
   height: 200px;
 }
 
-/* Precio principal */
-.price-main {
-  font-size: 20px;
+.card-title {
+  font-size: 22px;
   font-weight: bold;
   color: #212529;
 }
 
-.price-main:hover {
-  color: #102338;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+/* Precio principal */
+.price-main {
+  font-size: 20px;
+  font-weight: 600;
+  color: #212529;
 }
 
 /* Precio con efectivo */
