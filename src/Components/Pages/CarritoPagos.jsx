@@ -13,7 +13,10 @@ export const CarritoPagos = () => {
           </span>
         </div>
 
-        <div>
+        <div className="d-flex flex-column">
+          <CarritoProductos />
+          <CarritoProductos />
+          <CarritoProductos />
           <CarritoProductos />
         </div>
       </Container>

@@ -155,7 +155,7 @@
   height: 55px;
   object-fit: cover;
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 .text-nombre {
@@ -164,9 +164,9 @@
 }
 
 .text-precio {
-font-size: 15px;
-font-weight: 400;
-padding: 5px;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 5px;
 }
 
 .text-cantidad {
@@ -184,29 +184,28 @@ padding: 5px;
 .btn-eliminar {
   width: 40px;
   height: 40px;
-  padding: 0; 
-  background-color: #ef4444; 
-  color: white;          
-  border: none;    
-  border-radius: 5px;     
+  padding: 0;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-
 .btn-eliminar:hover {
-  background-color: #dc2626; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
-  transform: translateY(-1px); 
+  background-color: #dc2626;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  transform: translateY(-1px);
 }
 
 .btn-eliminar:active {
-  transform: translateY(0); 
-  box-shadow: none; 
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn-seguir {
@@ -268,15 +267,30 @@ padding: 5px;
 /* Contenedor principal */
 .card-producto {
   background-color: #fff;
-  padding: 20px 0;
-  border-bottom: 1px solid #f0f0f0; /* Línea divisoria suave */
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  margin: 2px;
+  transition: box-shadow 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.card-producto:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  transform: translateY(-3px);
 }
 
 /* 1. Imagen Circular */
 .img-circular {
   width: 65px;
   height: 65px;
-  border-radius: 50%; /* Círculo perfecto */
+  min-width: 65px;
+  min-height: 65px;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   overflow: hidden;
   background-color: #f8f9fa;
   border: 1px solid #eee;
@@ -298,8 +312,8 @@ padding: 5px;
   justify-content: space-between;
   width: 100px;
   padding: 4px 5px;
-  border: 1px solid #e5e5e5; /* Borde gris suave */
-  border-radius: 50px;      /* Bordes muy redondos */
+  border: 1px solid #e5e5e5; 
+  border-radius: 50px; 
   background-color: #fff;
 }
 
@@ -324,7 +338,7 @@ padding: 5px;
 
 /* 3. Precio y Basura */
 .precio-final {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.1rem;
   color: #212529;
 }
@@ -332,12 +346,12 @@ padding: 5px;
 .btn-eliminar-item {
   background: none;
   border: none;
-  color: #c5a47e; /* Color "Dorado/Marrón" de la imagen */
+  color: #424140; 
   cursor: pointer;
   padding: 5px;
   transition: color 0.2s;
 }
 
 .btn-eliminar-item:hover {
-  color: #dc3545; /* Rojo al pasar el mouse */
+  color: #dc3545; 
 }
