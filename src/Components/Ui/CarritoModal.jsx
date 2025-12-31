@@ -78,7 +78,7 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
                   </div>
 
                   <Button variant="danger" size="sm" className="btn-eliminar">
-                    <BsTrash />
+                    <BsTrash className="fs-5 text-white" />
                   </Button>
                 </ListGroup.Item>
               ))}
@@ -100,7 +100,8 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
             <Button
               as={Link}
               to="/carrito"
-              variant="primary"
+              variant="success"
+              onClick={handleCloseCarrito}
               className="btn-finalizar w-100 w-sm-auto"
             >
               Finalizar Compra
