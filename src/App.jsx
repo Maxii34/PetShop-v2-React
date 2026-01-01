@@ -118,7 +118,6 @@ function App() {
           <Route path="detalle" element={<DetalleProductos />} />
           <Route path="carrito" element={<CarritoPagos />} />
           <Route path="checkout" element={<CheckoutPagos />} />
-
           {/* Ruta protegida: /admin */}
           <Route
             path="admin"

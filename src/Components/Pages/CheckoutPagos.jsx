@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import { SiMercadopago } from "react-icons/si";
 import { DatosTarjetas } from "../Ui/DatosTarjetas";
+import { Link } from "react-router";
 
 export const CheckoutPagos = () => {
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -18,7 +19,7 @@ export const CheckoutPagos = () => {
       <div className="mb-4">
         <h2 className="fw-bold mb-3">Finalizar Compra</h2>
         <div className="d-flex text-muted small">
-          <span className="text-success fw-bold">1. Carrito</span>
+          <Link to={"/carrito"} className="text-success fw-bold">1. Carrito</Link>
           <span className="mx-2"> &gt; </span>
           <span className="text-dark fw-bold">2. Datos y Pago</span>
           <span className="mx-2"> &gt; </span>

@@ -68,7 +68,7 @@ export const SectorPagos = () => {
       </div>
 
       {/* --- BOTON FINALIZAR --- */}
-      <Link to="/checkout" variant="warning" size="lg" className="w-100 mb-3 btn-finalizar">
+      <Link to="/checkout" variant="warning" size="lg" className="w-100 mb-3 btn-finalizar btn">
         FINALIZAR COMPRA →
       </Link>
 
