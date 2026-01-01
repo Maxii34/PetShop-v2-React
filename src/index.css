@@ -1,11 +1,11 @@
-#root{
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-background-color: #f8f9fa;
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
 }
 
-main{
+main {
   flex-grow: 1;
 }
 
@@ -23,7 +23,7 @@ main{
 }
 
 .icono-redes {
-  background-color: #212529; 
+  background-color: #212529;
   color: #ffffff;
   border-radius: 50%;
   width: 45px;
@@ -119,9 +119,9 @@ h4 {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  text-decoration: none !important; 
-  border: unset;                    
-  
+  text-decoration: none !important;
+  border: unset;
+
   /* Tu diseño visual */
   padding: 10px 20px;
   border-radius: 5px;
@@ -147,8 +147,8 @@ h4 {
   background-color: #0e6856;
   z-index: -1;
   transition: all 250ms;
-  -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-  box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
 }
 
 /* Hover: cambia color de texto */
@@ -237,64 +237,74 @@ h4 {
 /* ConfirmacionPago.css */
 
 .confirmacion-container {
-    background-color: #f9f9f9;
-    min-height: 100vh;
-    display: flex;
-    align-items: center; /* Centrado vertical */
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  display: flex;
+  align-items: center; /* Centrado vertical */
 }
 
 .card-success {
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
-    overflow: hidden;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  overflow: hidden;
 }
 
 /* Animación para el icono de éxito */
 .success-icon {
-    font-size: 5rem;
-    color: #198754; /* Verde Bootstrap */
-    animation: scale-up 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  font-size: 5rem;
+  color: #198754; /* Verde Bootstrap */
+  animation: scale-up 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
 @keyframes scale-up {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .order-number-box {
-    background-color: #f8f9fa;
-    border: 2px dashed #dee2e6;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 20px 0;
+  background-color: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px 0;
 }
 
 /* Botón "Volver al inicio" */
 .btn-home {
-    background-color: #ffc107;
-    color: #212529;
-    font-weight: bold;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 50px;
-    transition: all 0.3s ease;
+  background-color: #ffc107;
+  color: #212529;
+  font-weight: bold;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
 }
 
 .btn-home:hover {
-    background-color: #e0a800;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+  background-color: #e0a800;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
 }
 
 .btn-outline-secondary {
-    border-radius: 50px;
-    padding: 12px 30px;
+  border-radius: 50px;
+  padding: 12px 15px;
+  background-color: #f8f9fa;
+  color: #212529;
+  border: 1px solid #dee;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #dee2e6;
+  transform: translateY(-2px);
+  color: #212529;
 }
