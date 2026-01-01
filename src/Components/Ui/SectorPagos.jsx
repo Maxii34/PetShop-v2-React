@@ -1,5 +1,6 @@
 import { Form, Button } from "react-bootstrap";
 import "./EstilosCards.css"; // Asegúrate de tener tus estilos base aquí
+import { Link } from "react-router";
 
 export const SectorPagos = () => {
   return (
@@ -67,9 +68,9 @@ export const SectorPagos = () => {
       </div>
 
       {/* --- BOTON FINALIZAR --- */}
-      <Button variant="warning" size="lg" className="w-100 mb-3 btn-finalizar">
+      <Link to="/checkout" variant="warning" size="lg" className="w-100 mb-3 btn-finalizar">
         FINALIZAR COMPRA →
-      </Button>
+      </Link>
 
       {/* Iconos de pago simples */}
       <div className="text-center text-muted small">

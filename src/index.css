@@ -161,4 +161,75 @@ h4 {
   width: 100%;
 }
 
-/*Segundo nav clases*/
+/* CheckoutPagos.css */
+
+/* Contenedor principal */
+.checkout-container {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Estilo base de las tarjetas (Cards) */
+.card-checkout {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: #ffffff;
+}
+
+/* Inputs personalizados */
+.input-custom {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.2s ease;
+}
+
+.input-custom:focus {
+  background-color: #ffffff;
+  border-color: #ffc107; /* Color amarillo al hacer clic */
+  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.15);
+  outline: none;
+}
+
+/* Opciones de método de pago */
+.payment-option {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+}
+
+.payment-option:hover {
+  border-color: #ffc107;
+  background-color: #fffdf5;
+}
+
+/* Clase para cuando una opción de pago está seleccionada */
+.payment-option.active {
+  border-color: #ffc107 !important; /* Fuerza el borde amarillo */
+  background-color: #fff3cd !important; /* Fondo amarillo muy suave */
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+
+/* Botón principal amarillo */
+.btn-checkout-primary {
+  background-color: #ffc107;
+  color: #212529;
+  font-weight: bold;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.2s;
+}
+
+.btn-checkout-primary:hover {
+  background-color: #e0a800; /* Un poco más oscuro al pasar el mouse */
+  color: #000;
+}
