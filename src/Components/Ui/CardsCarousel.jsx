@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { MdVisibility } from "react-icons/md";
-import { BiCreditCard } from "react-icons/bi";
+import { BiCreditCard } from "react-icons/bi"; 
 import "./EstilosCards.css";
 
-export const CardsProductos = () => {
+export const CardsCarousel = () => {
   return (
     <div className="card card-wrapper product-card border-0 shadow-sm h-100">
       <div

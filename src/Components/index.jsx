@@ -4,8 +4,7 @@ export * from './Pages/Error404';
 export * from './Pages/Inicio';
 export * from './Pages/Login';
 export * from './Pages/Register';
-export * from './Productos/CardProductos';
-export * from './Productos/CardsCarousel';
+export * from './Ui/CardsCarousel';
 export * from './Productos/FormularioProductos';
 export * from './Productos/ItemCarousel';
 export * from './Productos/ItemProductos';
@@ -20,7 +19,6 @@ export * from './Ui/ContaiGridCarousel';
 export * from './Ui/ContainerGrid';
 export * from './Ui/ContenedorCards';
 export * from './Ui/MuralInstagran';
-export * from './Productos/CardProductos'
 export * from './Ui/Canvas'
 export * from './Ui/CarritoModal'
 export * from './Pages/CarritoPagos'
