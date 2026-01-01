@@ -159,9 +159,9 @@ export const CheckoutPagos = () => {
               </div>
             </div>
 
-            <button className="btn-checkout-primary shadow-sm">
+            <Link to={"/confirmacion"} className="btn-checkout-primary shadow-sm">
               <FaLock size={14} /> PAGAR AHORA
-            </button>
+            </Link>
 
             <div className="mt-3 text-center">
               <small className="text-muted d-flex justify-content-center align-items-center gap-2">

@@ -17,6 +17,7 @@ import {
   CarritoModal,
   CarritoPagos,
   CheckoutPagos,
+  ConfirmacionPago
 } from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
 
@@ -118,6 +119,7 @@ function App() {
           <Route path="detalle" element={<DetalleProductos />} />
           <Route path="carrito" element={<CarritoPagos />} />
           <Route path="checkout" element={<CheckoutPagos />} />
+          <Route path="confirmacion" element={<ConfirmacionPago />} />
           {/* Ruta protegida: /admin */}
           <Route
             path="admin"
