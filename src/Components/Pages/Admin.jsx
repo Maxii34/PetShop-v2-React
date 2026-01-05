@@ -4,6 +4,11 @@ import { ItemProductos } from "../index.jsx";
 import productosObj from "../../data/ProductosObjeto";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import {
+  BsFileEarmarkPlus,
+  BsTrash,
+  BsDatabaseFillAdd,
+} from "react-icons/bs";
 
 export function Admin({ productos, setProductos, borrarProducto }) {
   const productosPrueba = () => {
@@ -72,29 +77,41 @@ export function Admin({ productos, setProductos, borrarProducto }) {
     <section id="topLine" className="container my-4">
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-md-items-center">
         <div className="mb-3 mb-md-0">
-          <h1 className="mb-0">Panel de productos disponibles</h1>
+          <h1 className="mb-0 display-5">Listado de productos agregados.</h1>
           <small className="text-muted">
-            Gestión de productos disponibles
-            <strong>"vista pública en Cards/inicio."</strong>
+            Agrega nuevos productos desde el Botom
+            <strong className="">"Agregar Productos"</strong>
           </small>
         </div>
         <div className="d-flex gap-2 flex-wrap mt-2 mt-md-0">
-          <Link to="crear" className="btn btn-primary shadow">
-            <i className="bi bi-file-earmark-plus"></i>
+          {/* Botón Agregar Productos */}
+          <Link
+            to="crear"
+            className="btn btn-agregar shadow d-flex align-items-center"
+          >
+            <BsFileEarmarkPlus size={20} className="me-2" />
+            Agregar Productos
           </Link>
-          <Button variant="danger" className="shadow" onClick={borrarTodo}>
-            <i className="bi bi-trash"></i>
+
+          {/* Botón Borrar Todo */}
+          <Button
+            variant="danger"
+            className="shadow d-flex align-items-center"
+            onClick={borrarTodo}
+            title="Borrar todo"
+          >
+            <BsTrash size={20} />
           </Button>
+
+          {/* Botón Cargar Datos Prueba */}
           <Button
             variant="info"
-            className="text-light shadow"
+            className="text-light shadow d-flex align-items-center"
             onClick={productosPrueba}
+            title="Cargar datos de prueba"
           >
-            <i className="bi bi-database-fill-up"></i>
+            <BsDatabaseFillAdd size={20} />
           </Button>
-          <Link to="/admincarousel" className="btn btn-info shadow d-block d-md-none">
-            Ir a ofertas <i class="bi bi-arrow-bar-right"></i>
-          </Link>
         </div>
       </div>
       <hr />
@@ -165,6 +182,4 @@ export function Admin({ productos, setProductos, borrarProducto }) {
       </div>
     </section>
   );
-};
-
-
+}

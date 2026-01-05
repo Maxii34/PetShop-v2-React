@@ -4,12 +4,12 @@ import { BsTrash, BsPencil } from "react-icons/bs";
 import "./productos.css";
 
 export const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
-  
   // 1. Helper para formatear dinero (hace que se vea profesional)
   const formatoMoneda = (valor) => {
-    return new Intl.NumberFormat('es-AR', { // Cambia 'es-AR' según tu país
-      style: 'currency', 
-      currency: 'ARS' 
+    return new Intl.NumberFormat("es-AR", {
+      // Cambia 'es-AR' según tu país
+      style: "currency",
+      currency: "ARS",
     }).format(valor);
   };
 
@@ -35,7 +35,7 @@ export const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
             text: "El producto ha sido borrado exitosamente.",
             icon: "success",
             timer: 2000,
-            showConfirmButton: false
+            showConfirmButton: false,
           });
         }
       }
@@ -57,32 +57,36 @@ export const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
         {formatoMoneda(itemProducto.precioOriginal)}
       </td>
 
-      <td className="text-muted small">{itemProducto.marca}</td>
+      <td className="text-muted small text-center">{itemProducto.marca}</td>
 
       {/* Imagen: Con borde sutil y placeholder por seguridad */}
       <td>
         <div className="d-flex justify-content-center">
-            <img
+          <img
             src={itemProducto.imagen || "https://placehold.co/40?text=..."}
             className="rounded border bg-white p-1"
-            alt={itemProducto.alt || "producto"}
+            alt={itemProducto.alt || "Producto-PetShop"}
             style={{ width: "45px", height: "45px", objectFit: "contain" }}
             loading="lazy"
-            />
+          />
         </div>
       </td>
 
       {/* Categoría: Estilo Badge minimalista */}
       <td>
         <span className="badge bg-light text-secondary border fw-normal px-2 py-1">
-            {itemProducto.categoria}
+          {itemProducto.categoria}
         </span>
       </td>
 
-      <td>{itemProducto.peso} kg</td>
+      <td className="text-center">{itemProducto.peso} kg</td>
 
       {/* Stock: Rojo si es bajo, Verde si es alto */}
-      <td className={`fw-bold ${stockBajo ? "text-danger" : "text-success"}`}>
+      <td
+        className={`fw-bold ${
+          stockBajo ? "text-danger" : "text-success"
+        } text-center`}
+      >
         {itemProducto.stock} u.
       </td>
 
