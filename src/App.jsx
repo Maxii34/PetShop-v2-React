@@ -17,9 +17,11 @@ import {
   CarritoModal,
   CarritoPagos,
   CheckoutPagos,
-  ConfirmacionPago
+  ConfirmacionPago,
 } from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
+import { Dashboard } from "./Components/Pages/Dashboar.jsx";
+
 
 function App() {
   //lee sessionStorage
@@ -120,6 +122,7 @@ function App() {
           <Route path="carrito" element={<CarritoPagos />} />
           <Route path="checkout" element={<CheckoutPagos />} />
           <Route path="confirmacion" element={<ConfirmacionPago />} />
+          <Route path="dashboard" element={<Dashboard />} />
           {/* Ruta protegida: /admin */}
           <Route
             path="admin"

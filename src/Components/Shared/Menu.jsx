@@ -33,13 +33,9 @@ export const Menu = ({ usuarioLogueado, setusuarioLogueado, handleShow, handleSh
             {usuarioLogueado ? (
               <>
                 <NavLink to="/admin" className="btn-customs">
-                  Productos
+                  Dashboar
                 </NavLink>
-                
-                <NavLink to="/admincarousel" className="btn-customs">
-                  Ofertas
-                </NavLink>
-                
+                                
                 {/* ACCIÓN: Usa button + btn-customs */}
                 <button
                   className="btn-customs"
