@@ -1,6 +1,7 @@
 import { Card, Button, Row, Col, Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { login } from "../helpers/queries";
 import Swal from "sweetalert2";
 
 export const Login = ({ setusuarioLogueado, handleClose, show }) => {
@@ -13,28 +14,8 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
 
   const navegacion = useNavigate();
 
-  const onSubmit = (data) => {
-    if (
-      data.email === import.meta.env.VITE_API_EMAIL &&
-      data.password === import.meta.env.VITE_API_PASSWORD
-    ) {
-      //Se agrega la logica y actualiza el estado.
-      setusuarioLogueado(true);
-      //alerts y redireciona
-      Swal.fire({
-        title: "Bienvenido Administrador",
-        text: "Iniciaste sesion correctamente.",
-        icon: "success",
-      });
-      navegacion("/admin");
-    } else {
-      Swal.fire({
-        title: "Ocurrio un error",
-        text: "Credenciales incorrectas",
-        icon: "error",
-      });
-    }
-    reset();
+  const onSubmit = async (data) => {
+    
   };
 
   return (
@@ -90,7 +71,7 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
                   )}
                 </Form.Group>
 
-                <Button variant="success" type="submit" onClick={handleClose}>
+                <Button variant="success" type="submit">
                   Iniciar sesión
                 </Button>
               </Form>
