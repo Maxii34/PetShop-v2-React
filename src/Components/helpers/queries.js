@@ -1,4 +1,4 @@
-const userBack = import.meta.env.BACKEND_API_USUARIOS;
+const userBack = import.meta.env.VITE_BACKEND_API_USUARIOS;
 
 // 1. Iniciar Sesión
 export const login = async (usuario) => {
