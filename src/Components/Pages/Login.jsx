@@ -38,7 +38,7 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
                       required: "El email es un dato obligatorio",
                       pattern: {
                         value:
-                          /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                          /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                         message:
                           "El email debe ser un correo valido por ej: usuario@mail.com",
                       },
@@ -56,11 +56,15 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
                     placeholder="Ingresa una contraseña"
                     {...register("password", {
                       required: "La contraseña es un dato obligatorio",
+                      minLength: {
+                        value: 8,
+                        message: "La contraseña debe tener al menos 8 caracteres",
+                      },
                       pattern: {
                         value:
-                          /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
+                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                         message:
-                          "La contraseña debe tener entre 8 y 16 caracteres e incluir al menos: un número, una letra mayúscula, una letra minúscula y un carácter especial.",
+                          "Debe incluir al menos: un número, una mayúscula, una minúscula y un carácter especial (@$!%*?&)",
                       },
                     })}
                   />

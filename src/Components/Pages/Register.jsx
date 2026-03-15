@@ -8,11 +8,9 @@ export const Register = ({ handleClose2, show2 }) => {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const password = watch("password");
 
   const onsubmit = (data) => {
     console.log(data);
@@ -98,7 +96,7 @@ export const Register = ({ handleClose2, show2 }) => {
                             required: "El email es obligatorio",
                             pattern: {
                               value:
-                                /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                                /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                               message: "Ingresa un correo válido",
                             },
                           })}
@@ -117,11 +115,15 @@ export const Register = ({ handleClose2, show2 }) => {
                           placeholder="Mínimo 8 caracteres"
                           {...register("password", {
                             required: "La contraseña es obligatoria",
+                            minLength: {
+                              value: 8,
+                              message: "La contraseña debe tener al menos 8 caracteres",
+                            },
                             pattern: {
                               value:
-                                /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                               message:
-                                "8-16 caracteres, incluye mayúscula, minúscula, número y símbolo",
+                                "Debe incluir mayúscula, minúscula, número y símbolo (@$!%*?&)",
                             },
                           })}
                         />
@@ -131,39 +133,6 @@ export const Register = ({ handleClose2, show2 }) => {
                       </Form.Group>
                     </Col>
 
-                    <Col md={6}>
-                      <Form.Group controlId="formBasicConfirmPassword">
-                        <Form.Label>Confirmar contraseña</Form.Label>
-                        <Form.Control
-                          type="password"
-                          placeholder="Repite la contraseña"
-                          {...register("confirmPassword", {
-                            required: "Confirma tu contraseña",
-                            validate: (value) =>
-                              value === password ||
-                              "Las contraseñas no coinciden",
-                          })}
-                        />
-                        <Form.Text className="text-danger">
-                          {errors.confirmPassword?.message}
-                        </Form.Text>
-                      </Form.Group>
-                    </Col>
-
-                    <Col xs={12}>
-                      <Form.Group controlId="formBasicTerminos">
-                        <Form.Check
-                          type="checkbox"
-                          label="Acepto los términos y condiciones"
-                          {...register("terminos", {
-                            required: "Debes aceptar los términos",
-                          })}
-                        />
-                        <Form.Text className="text-danger d-block">
-                          {errors.terminos?.message}
-                        </Form.Text>
-                      </Form.Group>
-                    </Col>
 
                     <Col xs={12}>
                       <div className="d-grid">
