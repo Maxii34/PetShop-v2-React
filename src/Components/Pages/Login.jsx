@@ -22,10 +22,8 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
 
     const respuesta = await login(usuarioLogueado);
 
-    if (respuesta) {
-      setusuarioLogueado(respuesta);
-      console.log(respuesta)
-      sessionStorage.setItem("usuarioLogueado", JSON.stringify(respuesta));
+    if (respuesta && respuesta.ok) {
+      setusuarioLogueado(respuesta.usuario);
 
       Swal.fire({
         title: "¡Login exitoso!",

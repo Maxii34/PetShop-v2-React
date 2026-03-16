@@ -43,22 +43,21 @@ export const Menu = ({
               Inicio
             </NavLink>
 
-            {/* Validamos: Si HAY un usuario logueado */}
-            {usuarioLogueado ? (
-              <>
-                
-                {usuarioLogueado.rol === "admin" && (
+            {(usuarioLogueado?.usuario?.rol === "admin" || usuarioLogueado?.rol === "admin") && (
                   <NavLink to="/admin" className="btn-customs">
                     Dashboard Admin
                   </NavLink>
                 )}
 
-                {usuarioLogueado.rol === "usuario" && (
+                {(usuarioLogueado?.usuario?.rol === "usuario" || usuarioLogueado?.rol === "usuario") && (
                   <span className="text-light">
-                    ¡Hola {usuarioLogueado.nombre}!
+                    ¡Hola {usuarioLogueado?.usuario?.nombre || usuarioLogueado?.nombre}!
                   </span>
                 )}
 
+            {/* Validamos: Si HAY un usuario logueado */}
+            {usuarioLogueado ? (
+              <>
                 <button
                   className="btn-customs"
                   onClick={cerrarSession}
