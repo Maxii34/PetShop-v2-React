@@ -19,6 +19,9 @@ export const FormularioProductos = ({
   } = useForm();
 
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [tipoImagen, setTipoImagen] = useState("url");
 
   useEffect(() => {
     if (id) {
@@ -33,7 +36,6 @@ export const FormularioProductos = ({
 
   const onSubmit = (data) => {
     const accion = id ? modificarProducto(id, data) : crearProducto(data);
-    console.log(data);  
 
     if (accion) {
       Swal.fire({
@@ -73,16 +75,46 @@ export const FormularioProductos = ({
               <Form.Group className="mb-3">
                 <Form.Label>Imagen del producto *</Form.Label>
 
-                <Form.Control
-                  type="file"
-                  accept="image/*"
-                  {...register("imagenFile", {
-                    required: !id ? "La imagen es obligatoria" : false,
-                  })}
-                />
+                {/* Selector */}
+                <div className="d-flex gap-3 mb-2">
+                  <Form.Check
+                    type="radio"
+                    label="URL"
+                    value="url"
+                    checked={tipoImagen === "url"}
+                    onChange={() => setTipoImagen("url")}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="Subir imagen"
+                    value="file"
+                    checked={tipoImagen === "file"}
+                    onChange={() => setTipoImagen("file")}
+                  />
+                </div>
 
-                {errors.imagenFile && (
-                  <small className="text-danger">{errors.imagenFile.message}</small>
+                {/* Input URL */}
+                {tipoImagen === "url" && (
+                  <Form.Control
+                    type="url"
+                    placeholder="https://ejemplo.com/imagen.jpg"
+                    {...register("imagen", {
+                      required: "La imagen es obligatoria",
+                    })}
+                  />
+                )}
+
+                {/* Input File */}
+                {tipoImagen === "file" && (
+                  <Form.Control
+                    type="file"
+                    accept="image/*"
+                    {...register("imagenFile")}
+                  />
+                )}
+
+                {errors.imagen && (
+                  <small className="text-danger">{errors.imagen.message}</small>
                 )}
               </Form.Group>
             </Col>
@@ -315,6 +347,9 @@ export const FormularioProductos = ({
             <Button variant="success" type="submit">
               {id ? "Guardar cambios" : "Agregar producto"}
             </Button>
+            <Link to="/admin" className="btn btn-danger">
+              Volver
+            </Link>
           </div>
         </Form>
       </section>
