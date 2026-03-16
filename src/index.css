@@ -329,3 +329,26 @@ h4 {
 .btn-agregar:active {
   transform: translateY(0); 
 }
+
+/* Sidebar Custom CSS */
+.sidebar-custom {
+  background-color: #e6e7e6; /* Mismo color que ".nav-pri" */
+  color: #333;
+}
+
+.sidebar-link {
+  color: #333 !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.sidebar-link:hover {
+  background-color: #0e6856; /* Mismo color verde de nav-sec */
+  color: #ffffff !important;
+}
+
+.sidebar-link.active {
+  background-color: #0e6856;
+  color: #ffffff !important;
+  font-weight: bold;
+}

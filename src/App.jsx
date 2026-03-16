@@ -18,10 +18,10 @@ import {
   CarritoPagos,
   CheckoutPagos,
   ConfirmacionPago,
+  Dashboard,
+  Sidebar,
 } from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
-import { Dashboard } from "./Components/Pages/Dashboar.jsx";
-
 
 function App() {
   //lee sessionStorage
@@ -31,7 +31,7 @@ function App() {
   const productosLS = JSON.parse(localStorage.getItem("productoskey")) || [];
   //Esado de login de usuario
   const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
-  console.log(usuarioLogueado)
+  console.log(usuarioLogueado);
   //Estado que guarda productos
   const [productos, setProductos] = useState(productosLS);
 
@@ -52,7 +52,7 @@ function App() {
   // Eliminar producto normal
   const borrarProducto = (idProducto) => {
     const productoFiltrado = productos.filter(
-      (itemProducto) => itemProducto.id !== idProducto
+      (itemProducto) => itemProducto.id !== idProducto,
     );
     setProductos(productoFiltrado);
     return true;
@@ -61,7 +61,7 @@ function App() {
   // Buscar producto normal
   const buscarProductos = (idProducto) => {
     const productoBuscado = productos.find(
-      (itemProducto) => itemProducto.id === idProducto
+      (itemProducto) => itemProducto.id === idProducto,
     );
     return productoBuscado;
   };
@@ -114,7 +114,10 @@ function App() {
         show={show}
       />
       <Canvas handleClose3={handleClose3} show3={show3} />
-      <CarritoModal handleCloseCarrito={handleCloseCarrito} showCarrito={showCarrito} />
+      <CarritoModal
+        handleCloseCarrito={handleCloseCarrito}
+        showCarrito={showCarrito}
+      />
       <Register handleClose2={handleClose2} show2={show2} />
       <main className="">
         <Routes>
@@ -124,40 +127,49 @@ function App() {
           <Route path="checkout" element={<CheckoutPagos />} />
           <Route path="confirmacion" element={<ConfirmacionPago />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="sidebar" element={<Sidebar />} />
+
           {/* Ruta protegida: /admin */}
           <Route
             path="admin"
             element={<ProtectorAdmin usuarioLogueado={usuarioLogueado} />}
           >
-            <Route
-              index
-              element={
-                <Admin
-                  productos={productos}
-                  setProductos={setProductos}
-                  borrarProducto={borrarProducto}
-                />
-              }
-            />
-            <Route
-              path="crear"
-              element={
-                <FormularioProductos
-                  titulo="Formulario: Agregar producto"
-                  crearProducto={crearProducto}
-                />
-              }
-            />
-            <Route
-              path="editar/:id"
-              element={
-                <FormularioProductos
-                  titulo="Formulario: Editar producto"
-                  buscarProducto={buscarProductos}
-                  modificarProducto={modificarProducto}
-                />
-              }
-            />
+            {/* El Dashboard actúa como la plantilla principal */}
+            <Route element={<Dashboard />}>
+              {/* Ruta base del dashboard, sin nada dentro */}
+              <Route index element={<h3 className="text-center text-gray-500 mt-10">Selecciona una opción en el menú</h3>} />
+
+              <Route
+                path="productos"
+                element={
+                  <Admin
+                    productos={productos}
+                    setProductos={setProductos}
+                    borrarProducto={borrarProducto}
+                  />
+                }
+              />
+
+              <Route
+                path="crear"
+                element={
+                  <FormularioProductos
+                    titulo="Formulario: Agregar producto"
+                    crearProducto={crearProducto}
+                  />
+                }
+              />
+              <Route
+                path="editar/:id"
+                element={
+                  <FormularioProductos
+                    titulo="Formulario: Editar producto"
+                    buscarProducto={buscarProductos}
+                    modificarProducto={modificarProducto}
+                  />
+                }
+              />
+            </Route>
           </Route>
           <Route path="*" element={<Error404 />} />
         </Routes>

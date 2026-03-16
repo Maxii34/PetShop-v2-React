@@ -56,7 +56,7 @@ export const FormularioProductos = ({
 
   return (
     <Container>
-      <section className="my-5">
+      <section className="">
         <div className="text-center mb-3">
           <h2>{titulo || "Alta de producto"}</h2>
           <span className="text-muted d-block mb-2">
@@ -66,7 +66,7 @@ export const FormularioProductos = ({
         </div>
 
         <Form
-          className="p-4 border rounded-2 shadow-lg"
+          className="p-4 "
           onSubmit={handleSubmit(onSubmit)}
         >
           {/* Imagen + Nombre */}
