@@ -100,3 +100,18 @@ export const obtenerUsuario = async (id) => {
     return null;
   }
 };
+
+// 7. Cerrar Sesión
+export const Logout = async () => {
+  try {
+    const response = await fetch(`${userBack}/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

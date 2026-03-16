@@ -24,6 +24,7 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
 
     if (respuesta) {
       setusuarioLogueado(respuesta);
+      console.log(respuesta)
       sessionStorage.setItem("usuarioLogueado", JSON.stringify(respuesta));
 
       Swal.fire({
