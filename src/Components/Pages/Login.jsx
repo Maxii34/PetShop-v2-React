@@ -15,7 +15,34 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
   const navegacion = useNavigate();
 
   const onSubmit = async (data) => {
-    
+    const usuarioLogueado = {
+      email: data.email,
+      password: data.password,
+    };
+
+    const respuesta = await login(usuarioLogueado);
+
+    if (respuesta) {
+      setusuarioLogueado(respuesta);
+      sessionStorage.setItem("usuarioLogueado", JSON.stringify(respuesta));
+
+      Swal.fire({
+        title: "¡Login exitoso!",
+        text: "Has iniciado sesión correctamente",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+      });
+      reset();
+      handleClose();
+      navegacion("/");
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "Error al iniciar sesión. Corrige tus credenciales.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+    }
   };
 
   return (
@@ -37,8 +64,7 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
                     {...register("email", {
                       required: "El email es un dato obligatorio",
                       pattern: {
-                        value:
-                          /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                        value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                         message:
                           "El email debe ser un correo valido por ej: usuario@mail.com",
                       },
@@ -58,7 +84,8 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
                       required: "La contraseña es un dato obligatorio",
                       minLength: {
                         value: 8,
-                        message: "La contraseña debe tener al menos 8 caracteres",
+                        message:
+                          "La contraseña debe tener al menos 8 caracteres",
                       },
                       pattern: {
                         value:
@@ -91,5 +118,3 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
     </Modal>
   );
 };
-
-

@@ -3,14 +3,14 @@ const userBack = import.meta.env.VITE_BACKEND_API_USUARIOS;
 // 1. Iniciar Sesión
 export const login = async (usuario) => {
   try {
-    const response = await fetch(userBack, {
+    const response = await fetch(`${userBack}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(usuario),
       credentials: "include",
-    });
+    }); 
     const result = await response.json();
     return result;
   } catch (error) {
