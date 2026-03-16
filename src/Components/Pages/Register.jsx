@@ -1,6 +1,5 @@
 import { Card, Button, Row, Col, Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { crearUsuario } from "../helpers/queries";
 
@@ -19,7 +18,7 @@ export const Register = ({ handleClose2, show2 }) => {
       apellido: data.apellido,
       email: data.email,
       password: data.password,
-      rol: "usuario"
+      rol: "admin"
     };
     const respuesta = await crearUsuario(usuarioNuevo);
     if (respuesta.ok) {
@@ -34,7 +33,7 @@ export const Register = ({ handleClose2, show2 }) => {
     } else {
       Swal.fire({
         title: "Error",
-        text: "Error al crear la cuenta",
+        text: "Error al crear la cuenta " + respuesta.mensaje,
         icon: "error",
         confirmButtonText: "Aceptar",
       });
