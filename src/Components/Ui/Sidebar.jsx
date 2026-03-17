@@ -33,9 +33,14 @@ export const Sidebar = () => {
         </NavLink>
 
         {/* Opción 3: Listado de usuarios */}
-        <div className="text-decoration-none p-3 rounded d-flex align-items-center sidebar-link">
+        <NavLink
+            to="/admin/usuarios"
+            className={({ isActive }) =>
+              `text-decoration-none p-3 rounded d-flex align-items-center sidebar-link ${isActive ? "active" : ""}`
+            }
+        >
           <BsPeople className="me-3 fs-5" /> Listado de usuarios
-        </div>
+        </NavLink>
       </nav>
     </aside>
   );

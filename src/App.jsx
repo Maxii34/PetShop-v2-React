@@ -20,6 +20,7 @@ import {
   ConfirmacionPago,
   Dashboard,
   Sidebar,
+  Usuarios,
 } from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
 
@@ -149,6 +150,8 @@ function App() {
                   />
                 }
               />
+
+              <Route path="usuarios" element={<Usuarios />} />
 
               <Route
                 path="crear"

@@ -4,6 +4,7 @@ export * from "./Pages/Error404";
 export * from "./Pages/Inicio";
 export * from "./Pages/Login";
 export * from "./Pages/Register";
+export * from "./Pages/usuarios";
 export * from "./Ui/CardsCarousel";
 export * from "./Productos/FormularioProductos";
 export * from "./Productos/ItemCarousel";
