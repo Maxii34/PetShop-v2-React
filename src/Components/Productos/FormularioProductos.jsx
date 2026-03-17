@@ -32,24 +32,7 @@ export const FormularioProductos = ({
   }, [id, buscarProducto, setValue]);
 
   const onSubmit = (data) => {
-    const accion = id ? modificarProducto(id, data) : crearProducto(data);
-    console.log(data);  
-
-    if (accion) {
-      Swal.fire({
-        icon: "success",
-        title: id ? "Producto actualizado" : "Producto creado",
-        text: `El producto "${data.nombre}" se guardó correctamente`,
-      });
-      reset();
-      navigate("/admin");
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Ocurrió un problema al guardar el producto",
-      });
-    }
+    
   };
 
   return (
