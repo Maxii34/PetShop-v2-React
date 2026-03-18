@@ -68,7 +68,7 @@ function App() {
         handleShow2={handleShow2}
         handleShowCarrito={handleShowCarrito}
       />
-      <SegundoNavbar setProductos={setProductos} handleShow3={handleShow3} />
+      <SegundoNavbar handleShow3={handleShow3} />
       <Login
         setusuarioLogueado={setusuarioLogueado}
         handleClose={handleClose}
