@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { BsTrash, BsPencil } from "react-icons/bs";
 import "./productos.css";
 
-export const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
+export const ItemProductos = ({ itemProducto, fila }) => {
   // 1. Helper para formatear dinero (hace que se vea profesional)
   const formatoMoneda = (valor) => {
     return new Intl.NumberFormat("es-AR", {
@@ -29,15 +29,19 @@ export const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
       focusCancel: true, // Pone el foco en cancelar por seguridad
     }).then((result) => {
       if (result.isConfirmed) {
-        if (borrarProducto(itemProducto.id)) {
-          Swal.fire({
-            title: "¡Eliminado!",
-            text: "El producto ha sido borrado exitosamente.",
-            icon: "success",
-            timer: 2000,
-            showConfirmButton: false,
-          });
-        }
+        // TODO: Hacer petición al backend para eliminar el producto
+        /*
+        const response = await api.delete(`/productos/${itemProducto.id}`);
+        if(response.ok) {
+        */
+        Swal.fire({
+          title: "¡Eliminado!",
+          text: "El producto ha sido borrado exitosamente.",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        /* } */
       }
     });
   };

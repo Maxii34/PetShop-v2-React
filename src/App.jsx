@@ -29,58 +29,18 @@ function App() {
   const sesionUsuario =
     JSON.parse(sessionStorage.getItem("usuariokey")) || false;
 
-  const productosLS = JSON.parse(localStorage.getItem("productoskey")) || [];
   //Esado de login de usuario
   const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
   console.log(usuarioLogueado);
   //Estado que guarda productos
-  const [productos, setProductos] = useState(productosLS);
+  const [productos, setProductos] = useState([]);
 
   //Guarda el estado de usuario en sessionStore
   useEffect(() => {
     sessionStorage.setItem("usuariokey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
-  //observa los cambios de productos y actualiza localestorage
-  useEffect(() => {
-    localStorage.setItem("productoskey", JSON.stringify(productos));
-  }, [productos]);
 
-  const crearProducto = (productoNuevo) => {
-    setProductos([...productos, productoNuevo]);
-    return true;
-  };
 
-  // Eliminar producto normal
-  const borrarProducto = (idProducto) => {
-    const productoFiltrado = productos.filter(
-      (itemProducto) => itemProducto.id !== idProducto,
-    );
-    setProductos(productoFiltrado);
-    return true;
-  };
-
-  // Buscar producto normal
-  const buscarProductos = (idProducto) => {
-    const productoBuscado = productos.find(
-      (itemProducto) => itemProducto.id === idProducto,
-    );
-    return productoBuscado;
-  };
-
-  // Modificar producto normal
-  const modificarProducto = (idProducto, datosProducto) => {
-    const productoActualizado = productos.map((itemProducto) => {
-      if (itemProducto.id === idProducto) {
-        return {
-          ...itemProducto,
-          ...datosProducto,
-        };
-      }
-      return itemProducto;
-    });
-    setProductos(productoActualizado);
-    return true;
-  };
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -146,7 +106,6 @@ function App() {
                   <Admin
                     productos={productos}
                     setProductos={setProductos}
-                    borrarProducto={borrarProducto}
                   />
                 }
               />
@@ -158,7 +117,6 @@ function App() {
                 element={
                   <FormularioProductos
                     titulo="Formulario: Agregar producto"
-                    crearProducto={crearProducto}
                   />
                 }
               />
@@ -167,8 +125,6 @@ function App() {
                 element={
                   <FormularioProductos
                     titulo="Formulario: Editar producto"
-                    buscarProducto={buscarProductos}
-                    modificarProducto={modificarProducto}
                   />
                 }
               />

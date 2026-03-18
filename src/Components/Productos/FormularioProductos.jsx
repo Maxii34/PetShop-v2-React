@@ -6,9 +6,6 @@ import Swal from "sweetalert2";
 
 export const FormularioProductos = ({
   titulo,
-  crearProducto,
-  buscarProducto,
-  modificarProducto,
 }) => {
   const {
     register,
@@ -22,14 +19,12 @@ export const FormularioProductos = ({
 
   useEffect(() => {
     if (id) {
-      const producto = buscarProducto(id);
-      if (producto) {
-        Object.keys(producto).forEach((key) => {
-          setValue(key, producto[key]);
-        });
-      }
+      // TODO: Llamado al backend para buscar el producto a editar
+      /*
+      const fetchProducto = async () => { ... }
+      */
     }
-  }, [id, buscarProducto, setValue]);
+  }, [id, setValue]);
 
   const onSubmit = (data) => {
     

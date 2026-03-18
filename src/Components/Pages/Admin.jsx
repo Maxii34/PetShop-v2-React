@@ -10,7 +10,7 @@ import {
   BsDatabaseFillAdd,
 } from "react-icons/bs";
 
-export function Admin({ productos, setProductos, borrarProducto }) {
+export function Admin({ productos, setProductos }) {
   const productosPrueba = () => {
     if (Array.isArray(productosObj) && productosObj.length > 0) {
       setProductos(productosObj);
@@ -133,7 +133,6 @@ export function Admin({ productos, setProductos, borrarProducto }) {
           {productos.slice(0, visible).map((itemProducto, indice) => (
             <ItemProductos
               itemProducto={itemProducto}
-              borrarProducto={borrarProducto}
               key={itemProducto.id}
               fila={indice + 1}
             />
