@@ -1,12 +1,15 @@
 import { Link } from "react-router";
-import { Button, Table } from "react-bootstrap";
+import { Button, Table, Spinner } from "react-bootstrap";
 import { ItemProductos } from "../index.jsx";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { listarProductos } from "../helpers/productos.queries.js";
+import { useEffect } from "react";
 
 export function Admin({ productos, setProductos }) {
 
   const [visible, setVisible] = useState(10);
+  const [cargando, setCargando] = useState(true);
 
   const mostrarMas = () => {
     setVisible((prev) => prev + 5); // suma 5 más cada vez
@@ -28,6 +31,20 @@ export function Admin({ productos, setProductos }) {
       seccion.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const cargarProductos = async () => {
+    setCargando(true);
+    const respuesta = await listarProductos();
+    if (respuesta) {
+      setProductos(respuesta);
+    }
+    setCargando(false);
+  };
+
+  useEffect(() => {
+    cargarProductos();
+  }, []);
+
 
   return (
     <section id="topLine" className="container my-4">
@@ -52,17 +69,33 @@ export function Admin({ productos, setProductos }) {
           </tr>
         </thead>
         <tbody>
-          {productos.slice(0, visible).map((itemProducto, indice) => (
-            <ItemProductos
-              itemProducto={itemProducto}
-              key={itemProducto.id}
-              fila={indice + 1}
-            />
-          ))}
+          {cargando ? (
+            <tr>
+              <td colSpan="9" className="text-center py-5">
+                <Spinner animation="border" variant="primary" />
+                <span className="ms-2">Cargando productos...</span>
+              </td>
+            </tr>
+          ) : productos.length === 0 ? (
+            <tr>
+              <td colSpan="9" className="text-center py-5">
+                No hay productos guardados disponibles.
+              </td>
+            </tr>
+          ) : (
+            productos.slice(0, visible).map((itemProducto, indice) => (
+              <ItemProductos
+                itemProducto={itemProducto}
+                key={itemProducto.id}
+                fila={indice + 1}
+              />
+            ))
+          )}
         </tbody>
       </Table>
-      <div className="text-center mt-3">
-        {visible < productos.length ? (
+      {!cargando && productos.length > 0 && (
+        <div className="text-center mt-3">
+          {visible < productos.length ? (
           <div
             id="mostarmenos"
             className=" d-flex justify-content-center align-content-center"
@@ -100,7 +133,8 @@ export function Admin({ productos, setProductos }) {
             </Button>
           </div>
         )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

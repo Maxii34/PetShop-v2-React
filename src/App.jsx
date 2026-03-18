@@ -31,7 +31,6 @@ function App() {
 
   //Esado de login de usuario
   const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
-  console.log(usuarioLogueado);
   //Estado que guarda productos
   const [productos, setProductos] = useState([]);
 

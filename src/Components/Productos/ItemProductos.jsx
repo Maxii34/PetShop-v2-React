@@ -4,6 +4,7 @@ import { BsTrash, BsPencil } from "react-icons/bs";
 import "./productos.css";
 
 export const ItemProductos = ({ itemProducto, fila }) => {
+  console.log(itemProducto);
   // 1. Helper para formatear dinero (hace que se vea profesional)
   const formatoMoneda = (valor) => {
     return new Intl.NumberFormat("es-AR", {
@@ -14,19 +15,19 @@ export const ItemProductos = ({ itemProducto, fila }) => {
   };
 
   // 2. Lógica para el color del Stock (Alerta visual)
-  const stockBajo = itemProducto.stock < 5; // Define tu umbral
+  const stockBajo = itemProducto.stock < 5; 
 
   const eliminarProducto = () => {
     Swal.fire({
       title: "¿Eliminar producto?",
-      text: "Esta acción no se puede deshacer.", // Texto más directo y profesional
+      text: "Esta acción no se puede deshacer.", 
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#dc3545", // Rojo para acciones destructivas (Estándar UX)
+      confirmButtonColor: "#dc3545", 
       cancelButtonColor: "#6c757d",
       confirmButtonText: "Sí, eliminar",
       cancelButtonText: "Cancelar",
-      focusCancel: true, // Pone el foco en cancelar por seguridad
+      focusCancel: true, 
     }).then((result) => {
       if (result.isConfirmed) {
         // TODO: Hacer petición al backend para eliminar el producto
@@ -53,12 +54,12 @@ export const ItemProductos = ({ itemProducto, fila }) => {
 
       {/* Nombre: Alineado a la izquierda y negrita */}
       <td className="text-start fw-semibold text-dark">
-        {itemProducto.nombreProducto}
+        {itemProducto.nombre}
       </td>
 
       {/* Precio: Formateado correctamente */}
       <td className="font-monospace text-nowrap">
-        {formatoMoneda(itemProducto.precioOriginal)}
+        {formatoMoneda(itemProducto.precio)}
       </td>
 
       <td className="text-muted small text-center">{itemProducto.marca}</td>
@@ -67,9 +68,9 @@ export const ItemProductos = ({ itemProducto, fila }) => {
       <td>
         <div className="d-flex justify-content-center">
           <img
-            src={itemProducto.imagen || "https://placehold.co/40?text=..."}
+            src={itemProducto.imagenes }
             className="rounded border bg-white p-1"
-            alt={itemProducto.alt || "Producto-PetShop"}
+            alt="Productos PetShop"
             style={{ width: "45px", height: "45px", objectFit: "contain" }}
             loading="lazy"
           />
@@ -83,7 +84,7 @@ export const ItemProductos = ({ itemProducto, fila }) => {
         </span>
       </td>
 
-      <td className="text-center">{itemProducto.peso} kg</td>
+      <td className="text-center">{itemProducto.detalles.peso} kg</td>
 
       {/* Stock: Rojo si es bajo, Verde si es alto */}
       <td
