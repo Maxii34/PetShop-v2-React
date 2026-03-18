@@ -16,11 +16,13 @@ export const Usuarios = () => {
     cargarUsuarios();
   }, []);
 
-  const cargarUsuarios = async () => {
+  const cargarUsuarios = async () => { 
     setLoading(true);
     const respuesta = await listarUsuarios();
-    if (respuesta) {
-      setUsuarios(respuesta);
+    if (respuesta && respuesta.ok) {
+      setUsuarios(respuesta.usuarios);
+    } else if (respuesta && Array.isArray(respuesta)) {
+      setUsuarios(respuesta); // Por si en algún momento el backend devuelve un arreglo directo
     } else {
       Swal.fire({
         title: "Error",

@@ -10,7 +10,7 @@ export const login = async (usuario) => {
       },
       body: JSON.stringify(usuario),
       credentials: "include",
-    }); 
+    });
     const result = await response.json();
     return result;
   } catch (error) {
@@ -41,7 +41,7 @@ export const crearUsuario = async (usuarioNuevo) => {
 export const listarUsuarios = async () => {
   try {
     const response = await fetch(userBack, {
-      method: "GET", 
+      method: "GET",
       credentials: "include",
     });
     const result = await response.json();
@@ -91,7 +91,7 @@ export const obtenerUsuario = async (id) => {
   try {
     const response = await fetch(`${userBack}/${id}`, {
       method: "GET",
-      credentials: "include", 
+      credentials: "include",
     });
     const result = await response.json();
     return result;

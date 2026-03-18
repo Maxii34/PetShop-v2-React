@@ -18,7 +18,7 @@ export const Register = ({ handleClose2, show2 }) => {
       apellido: data.apellido,
       email: data.email,
       password: data.password,
-      rol: "admin"
+      rol: "usuario"
     };
     const respuesta = await crearUsuario(usuarioNuevo);
     if (respuesta.ok) {
