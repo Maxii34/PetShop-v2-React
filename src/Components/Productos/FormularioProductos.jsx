@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import Swal from "sweetalert2";
+import { crearProducto } from "../helpers/productos.queries";
 
-export const FormularioProductos = ({
-  titulo,
-}) => {
+export const FormularioProductos = ({ titulo }) => {
   const {
     register,
     handleSubmit,
@@ -26,8 +25,41 @@ export const FormularioProductos = ({
     }
   }, [id, setValue]);
 
-  const onSubmit = (data) => {
-    
+  const onSubmit = async (data) => {
+    const nuevoProducto = {
+      nombre: data.nombre,
+      precio: data.precio,
+      stock: data.stock,
+      categoria: data.categoria,
+      marca: data.marca,
+      tipoAnimal: data.tipoAnimal,
+      descripcion: data.descripcion,
+      imagen: data.imagenFile,
+      detalles: {
+        etapa: data.detalles.etapa,
+        peso: data.detalles.peso,
+        cuotas: data.detalles.cuotas,
+        sabor: data.detalles.sabor,
+        talla: data.detalles.talla,
+      },
+    };
+    const respuesta = await crearProducto(nuevoProducto);
+    if (respuesta && respuesta.ok) {
+      Swal.fire({
+        title: "¡Producto creado!",
+        text: "El producto se ha creado correctamente",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+      });
+      reset();
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "No se pudo crear el producto" + respuesta.mensaje,
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+    }
   };
 
   return (
@@ -41,10 +73,7 @@ export const FormularioProductos = ({
           <hr className="w-25 mx-auto" />
         </div>
 
-        <Form
-          className="p-4 "
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <Form className="p-4 " onSubmit={handleSubmit(onSubmit)}>
           {/* Imagen + Nombre */}
           <Row className="d-flex justify-content-center ali">
             <Col md={12}>
@@ -60,7 +89,9 @@ export const FormularioProductos = ({
                 />
 
                 {errors.imagenFile && (
-                  <small className="text-danger">{errors.imagenFile.message}</small>
+                  <small className="text-danger">
+                    {errors.imagenFile.message}
+                  </small>
                 )}
               </Form.Group>
             </Col>
@@ -94,6 +125,8 @@ export const FormularioProductos = ({
                   placeholder="Royal Canin"
                   {...register("marca", {
                     required: "La marca es obligatoria",
+                    minLength: { value: 2, message: "Mínimo 2 caracteres" },
+                    maxLength: { value: 50, message: "Máximo 50 caracteres" },
                   })}
                 />
                 {errors.marca && (
@@ -106,7 +139,9 @@ export const FormularioProductos = ({
               <Form.Group className="mb-3">
                 <Form.Label>Animal *</Form.Label>
                 <Form.Select
-                  {...register("tipoAnimal", { required: "Seleccione un animal" })}
+                  {...register("tipoAnimal", {
+                    required: "Seleccione un animal",
+                  })}
                 >
                   <option value="">Seleccione...</option>
                   <option value="Perro">Perro</option>
@@ -123,10 +158,8 @@ export const FormularioProductos = ({
                 <Form.Label>Etapa</Form.Label>
                 <Form.Select {...register("detalles.etapa")}>
                   <option value="">Seleccione...</option>
-                  <option value="adulto">Adulto</option>
                   <option value="cachorro">Cachorro</option>
-                  <option value="senior">Senior</option>
-                  <option value="gatito">Gatito</option>
+                  <option value="adulto">Adulto</option>
                 </Form.Select>
               </Form.Group>
             </Col>
@@ -143,7 +176,10 @@ export const FormularioProductos = ({
                   {...register("precio", {
                     required: "El precio es obligatorio",
                     min: { value: 0, message: "No puede ser negativo" },
-                    max: { value: 900000, message: "El precio no puede ser mayor a 900.000" },
+                    max: {
+                      value: 900000,
+                      message: "El precio no puede ser mayor a 900.000",
+                    },
                   })}
                 />
                 {errors.precio && (
@@ -161,7 +197,10 @@ export const FormularioProductos = ({
                   {...register("stock", {
                     required: "El stock es obligatorio",
                     min: { value: 0, message: "No puede ser negativo" },
-                    max: { value: 10000, message: "El stock no puede ser mayor a 10000" },
+                    max: {
+                      value: 10000,
+                      message: "El stock no puede ser mayor a 10000",
+                    },
                   })}
                 />
                 {errors.stock && (
@@ -203,9 +242,13 @@ export const FormularioProductos = ({
             <Col md={3}>
               <Form.Group className="mb-3">
                 <Form.Label>Peso / Present.</Form.Label>
-                <Form.Control 
-                  placeholder="Ej: 15 kg" 
-                  {...register("detalles.peso")} 
+                <Form.Control
+                  placeholder="Ej: 15 kg"
+                  {...register("detalles.peso", {
+                    //required: "El peso es obligatorio",
+                    min: { value: 0.1, message: "Debe ser mayor a 0" },
+                    max: { value: 100, message: "Peso demasiado alto" },
+                  })}
                 />
               </Form.Group>
             </Col>
@@ -213,9 +256,13 @@ export const FormularioProductos = ({
             <Col md={3}>
               <Form.Group className="mb-3">
                 <Form.Label>Sabor / Aroma</Form.Label>
-                <Form.Control 
-                  placeholder="Ej: Pollo y Carne" 
-                  {...register("detalles.sabor")} 
+                <Form.Control
+                  placeholder="Ej: Pollo y Carne"
+                  {...register("detalles.sabor", {
+                    //required: "El sabor es obligatorio",
+                    minLength: { value: 3, message: "Muy corto" },
+                    maxLength: { value: 20, message: "Muy largo" },
+                  })}
                 />
               </Form.Group>
             </Col>
@@ -223,9 +270,13 @@ export const FormularioProductos = ({
             <Col md={3}>
               <Form.Group className="mb-3">
                 <Form.Label>Talla / Dimensiones</Form.Label>
-                <Form.Control 
-                  placeholder="Ej: XL o 50x40" 
-                  {...register("detalles.talla")} 
+                <Form.Control
+                  placeholder="Ej: XL o 50x40"
+                  {...register("detalles.talla", {
+                    //required: "La talla es obligatoria",
+                    minLength: { value: 1, message: "Muy corto" },
+                    maxLength: { value: 20, message: "Muy largo" },
+                  })}
                 />
               </Form.Group>
             </Col>
@@ -284,7 +335,9 @@ export const FormularioProductos = ({
               })}
             />
             {errors.descripcion && (
-              <small className="text-danger">{errors.descripcion.message}</small>
+              <small className="text-danger">
+                {errors.descripcion.message}
+              </small>
             )}
           </Form.Group>
 
@@ -299,5 +352,3 @@ export const FormularioProductos = ({
     </Container>
   );
 };
-
-

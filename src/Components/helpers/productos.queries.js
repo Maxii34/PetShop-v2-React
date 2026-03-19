@@ -27,3 +27,21 @@ export const eliminarProducto = async (id) => {
     return null;
   }
 };
+
+export const crearProducto = async (producto) => {
+  try {
+    const response = await fetch(productBack, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(producto),
+      credentials: "include",
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
