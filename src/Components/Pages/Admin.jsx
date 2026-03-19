@@ -86,8 +86,9 @@ export function Admin({ productos, setProductos }) {
             productos.slice(0, visible).map((itemProducto, indice) => (
               <ItemProductos
                 itemProducto={itemProducto}
-                key={itemProducto.id}
+                key={itemProducto._id}
                 fila={indice + 1}
+                cargarProductos={cargarProductos}
               />
             ))
           )}

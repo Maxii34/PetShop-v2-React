@@ -2,47 +2,49 @@ import { Link } from "react-router";
 import Swal from "sweetalert2";
 import { BsTrash, BsPencil } from "react-icons/bs";
 import "./productos.css";
+import { eliminarProducto } from "../helpers/productos.queries";
 
-export const ItemProductos = ({ itemProducto, fila }) => {
-  console.log(itemProducto);
-  // 1. Helper para formatear dinero (hace que se vea profesional)
+export const ItemProductos = ({ itemProducto, fila, cargarProductos }) => {
   const formatoMoneda = (valor) => {
     return new Intl.NumberFormat("es-AR", {
-      // Cambia 'es-AR' según tu país
       style: "currency",
       currency: "ARS",
     }).format(valor);
   };
+  const stockBajo = itemProducto.stock < 5;
 
-  // 2. Lógica para el color del Stock (Alerta visual)
-  const stockBajo = itemProducto.stock < 5; 
-
-  const eliminarProducto = () => {
+  const eliminarProductos = () => {
     Swal.fire({
       title: "¿Eliminar producto?",
-      text: "Esta acción no se puede deshacer.", 
+      text: "Esta acción no se puede deshacer.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#dc3545", 
+      confirmButtonColor: "#dc3545",
       cancelButtonColor: "#6c757d",
       confirmButtonText: "Sí, eliminar",
       cancelButtonText: "Cancelar",
-      focusCancel: true, 
-    }).then((result) => {
+      focusCancel: true,
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        // TODO: Hacer petición al backend para eliminar el producto
-        /*
-        const response = await api.delete(`/productos/${itemProducto.id}`);
-        if(response.ok) {
-        */
-        Swal.fire({
-          title: "¡Eliminado!",
-          text: "El producto ha sido borrado exitosamente.",
-          icon: "success",
-          timer: 2000,
-          showConfirmButton: false,
-        });
-        /* } */
+        const response = await eliminarProducto(itemProducto._id);
+        if (response && response.ok) {
+          Swal.fire({
+            title: "¡Eliminado!",
+            text: "El producto ha sido borrado exitosamente.",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+          await cargarProductos();
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "No se pudo eliminar el producto.",
+            icon: "error",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+        }
       }
     });
   };
@@ -68,7 +70,7 @@ export const ItemProductos = ({ itemProducto, fila }) => {
       <td>
         <div className="d-flex justify-content-center">
           <img
-            src={itemProducto.imagenes }
+            src={itemProducto.imagenes[0]}
             className="rounded border bg-white p-1"
             alt="Productos PetShop"
             style={{ width: "45px", height: "45px", objectFit: "contain" }}
@@ -108,7 +110,7 @@ export const ItemProductos = ({ itemProducto, fila }) => {
 
           <button
             className="btn-icono btn-eliminar-item"
-            onClick={eliminarProducto}
+            onClick={eliminarProductos}
             title="Eliminar producto"
           >
             <BsTrash size={18} />

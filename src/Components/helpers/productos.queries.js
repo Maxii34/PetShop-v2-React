@@ -13,3 +13,17 @@ export const listarProductos = async () => {
     return null;
   }
 };
+
+export const eliminarProducto = async (id) => {
+  try {
+    const response = await fetch(`${productBack}/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
