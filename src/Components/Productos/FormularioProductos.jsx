@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router";
 import Swal from "sweetalert2";
 import { crearProducto } from "../helpers/productos.queries";
 
+
 export const FormularioProductos = ({ titulo }) => {
   const {
     register,
@@ -34,7 +35,7 @@ export const FormularioProductos = ({ titulo }) => {
       marca: data.marca,
       tipoAnimal: data.tipoAnimal,
       descripcion: data.descripcion,
-      imagen: data.imagenFile,
+      imagen: data.imagenes,
       detalles: {
         etapa: data.detalles.etapa,
         peso: data.detalles.peso,
@@ -44,6 +45,7 @@ export const FormularioProductos = ({ titulo }) => {
       },
     };
     const respuesta = await crearProducto(nuevoProducto);
+    console.log(respuesta);
     if (respuesta && respuesta.ok) {
       Swal.fire({
         title: "¡Producto creado!",
@@ -83,14 +85,14 @@ export const FormularioProductos = ({ titulo }) => {
                 <Form.Control
                   type="file"
                   accept="image/*"
-                  {...register("imagenFile", {
+                  {...register("imagenes", {
                     required: !id ? "La imagen es obligatoria" : false,
                   })}
                 />
 
-                {errors.imagenFile && (
+                {errors.imagenes && (
                   <small className="text-danger">
-                    {errors.imagenFile.message}
+                    {errors.imagenes.message}
                   </small>
                 )}
               </Form.Group>
