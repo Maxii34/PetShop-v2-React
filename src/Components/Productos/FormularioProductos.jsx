@@ -27,6 +27,10 @@ export const FormularioProductos = ({ titulo }) => {
   }, [id, setValue]);
 
   const onSubmit = async (data) => {
+  try {
+    // Convertir FileList a Array
+    const imagenesArray = data.imagenes ? Array.from(data.imagenes) : [];
+
     const nuevoProducto = {
       nombre: data.nombre,
       precio: data.precio,
@@ -35,17 +39,19 @@ export const FormularioProductos = ({ titulo }) => {
       marca: data.marca,
       tipoAnimal: data.tipoAnimal,
       descripcion: data.descripcion,
-      imagen: data.imagenes,
+      imagenes: imagenesArray, 
       detalles: {
-        etapa: data.detalles.etapa,
-        peso: data.detalles.peso,
-        cuotas: data.detalles.cuotas,
-        sabor: data.detalles.sabor,
-        talla: data.detalles.talla,
+        etapa: data.detalles?.etapa || "",
+        peso: data.detalles?.peso || "",
+        cuotas: data.detalles?.cuotas || data.cuotas || "", 
+        sabor: data.detalles?.sabor || "",
+        talla: data.detalles?.talla || "",
       },
     };
+
     const respuesta = await crearProducto(nuevoProducto);
     console.log(respuesta);
+
     if (respuesta && respuesta.ok) {
       Swal.fire({
         title: "¡Producto creado!",
@@ -57,12 +63,21 @@ export const FormularioProductos = ({ titulo }) => {
     } else {
       Swal.fire({
         title: "Error",
-        text: "No se pudo crear el producto" + respuesta.mensaje,
+        text: respuesta?.mensaje || "No se pudo crear el producto",
         icon: "error",
         confirmButtonText: "Aceptar",
       });
     }
-  };
+  } catch (error) {
+    console.error("Error en onSubmit:", error);
+    Swal.fire({
+      title: "Error",
+      text: "Ocurrió un error al procesar el producto",
+      icon: "error",
+      confirmButtonText: "Aceptar",
+    });
+  }
+};
 
   return (
     <Container>

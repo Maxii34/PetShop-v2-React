@@ -16,7 +16,7 @@ export const StatsCardsProduct = () => {
 
               <div className="d-flex justify-content-between align-items-center w-100">
                 <div>
-                  <h3 className="mb-0 fw-bold py-1">100</h3>
+                  <h3 className="mb-0 fw-bold py-1">739</h3>
                   <span className="text-muted fs-6">Unidades</span>
                 </div>
 
@@ -39,7 +39,7 @@ export const StatsCardsProduct = () => {
 
               <div className="d-flex justify-content-between align-items-center w-100">
                 <div>
-                  <h3 className="mb-0 fw-bold py-1">$25.000</h3>
+                  <h3 className="mb-0 fw-bold py-1">$ 25.000</h3>
                   <span className="text-muted fs-6">Hoy</span>
                 </div>
 
