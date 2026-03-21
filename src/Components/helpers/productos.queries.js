@@ -87,10 +87,38 @@ export const obtenerProducto = async (id) => {
   }
 };
 
-export const editarProductos = async (id) => {
+export const editarProductos = async (id, producto) => {
   try {
+    const formData = new FormData();
+
+    formData.append("nombre", producto.nombre);
+    formData.append("descripcion", producto.descripcion);
+    formData.append("precio", producto.precio);
+    formData.append("categoria", producto.categoria);
+    formData.append("stock", producto.stock);
+    formData.append("marca", producto.marca);
+    formData.append("tipoAnimal", producto.tipoAnimal);
+    formData.append("ingrediente", producto.ingrediente);
+    formData.append("caracteristica", producto.caracteristica);
+    formData.append("enOferta", producto.enOferta);
+    formData.append("esNuevo", producto.esNuevo);
+    formData.append("destacado", producto.destacado);
+
+    if (producto.detalles) {
+      Object.keys(producto.detalles).forEach((key) => {
+        formData.append(`detalles[${key}]`, producto.detalles[key]);
+      });
+    }
+
+    if (producto.imagenes && producto.imagenes.length > 0) {
+      producto.imagenes.forEach((imagen) => {
+        formData.append("imagenes", imagen);
+      });
+    }
+
     const response = await fetch(`${productBack}/${id}`, {
       method: "PUT",
+      body: formData,
       credentials: "include",
     });
     const result = await response.json();

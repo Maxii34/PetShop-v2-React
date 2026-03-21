@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { crearProducto } from "../helpers/productos.queries";
+import { crearProducto, obtenerProducto, editarProductos } from "../helpers/productos.queries";
 
 
 export const FormularioProductos = ({ titulo }) => {
@@ -16,13 +16,36 @@ export const FormularioProductos = ({ titulo }) => {
   } = useForm();
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
-      // TODO: Llamado al backend para buscar el producto a editar
-      /*
-      const fetchProducto = async () => { ... }
-      */
+      obtenerProducto(id).then((respuesta) => {
+        const prod = respuesta?.producto || respuesta;
+        if (prod && prod.nombre) {
+          setValue("nombre", prod.nombre);
+          setValue("precio", prod.precio);
+          setValue("stock", prod.stock);
+          setValue("categoria", prod.categoria);
+          setValue("marca", prod.marca);
+          setValue("tipoAnimal", prod.tipoAnimal);
+          setValue("descripcion", prod.descripcion);
+          setValue("ingrediente", prod.ingrediente);
+          setValue("caracteristica", prod.caracteristica);
+          setValue("enOferta", prod.enOferta);
+          setValue("esNuevo", prod.esNuevo);
+          setValue("destacado", prod.destacado);
+          
+          if (prod.detalles) {
+            setValue("detalles.etapa", prod.detalles.etapa);
+            setValue("detalles.peso", prod.detalles.peso);
+            setValue("detalles.cuotas", prod.detalles.cuotas);
+            setValue("detalles.sabor", prod.detalles.sabor);
+            setValue("detalles.talla", prod.detalles.talla);
+            setValue("cuotas", prod.detalles.cuotas);
+          }
+        }
+      });
     }
   }, [id, setValue]);
 
@@ -54,21 +77,29 @@ export const FormularioProductos = ({ titulo }) => {
       },
     };
 
-    const respuesta = await crearProducto(nuevoProducto);
+    let respuesta;
+    if (id) {
+      respuesta = await editarProductos(id, nuevoProducto);
+    } else {
+      respuesta = await crearProducto(nuevoProducto);
+    }
+
     console.log(respuesta);
 
-    if (respuesta && respuesta.ok) {
+    if (respuesta && (respuesta.ok || respuesta.status === 200 || !respuesta.error)) {
       Swal.fire({
-        title: "¡Producto creado!",
-        text: "El producto se ha creado correctamente",
+        title: id ? "¡Producto editado!" : "¡Producto creado!",
+        text: id ? "El producto se ha editado correctamente" : "El producto se ha creado correctamente",
         icon: "success",
         confirmButtonText: "Aceptar",
+      }).then(() => {
+        navigate("/admin/productos");
       });
       reset();
     } else {
       Swal.fire({
         title: "Error",
-        text: respuesta?.mensaje || "No se pudo crear el producto",
+        text: respuesta?.mensaje || (id ? "No se pudo editar el producto" : "No se pudo crear el producto"),
         icon: "error",
         confirmButtonText: "Aceptar",
       });

@@ -102,7 +102,7 @@ export const ItemProductos = ({ itemProducto, fila, cargarProductos }) => {
         <div className="d-flex justify-content-center gap-2">
           <Link
             className="btn-icono btn-editar-item"
-            to={`editar/${itemProducto._id}`}
+            to={`/admin/editar/${itemProducto._id}`}
             title="Editar producto"
           >
             <BsPencil size={18} />
