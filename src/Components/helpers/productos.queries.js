@@ -32,7 +32,7 @@ export const crearProducto = async (producto) => {
   try {
     // Crear un FormData para enviar archivos e información
     const formData = new FormData();
-    
+
     // Agregar campos de texto
     formData.append("nombre", producto.nombre);
     formData.append("descripcion", producto.descripcion);
@@ -41,31 +41,30 @@ export const crearProducto = async (producto) => {
     formData.append("stock", producto.stock);
     formData.append("marca", producto.marca);
     formData.append("tipoAnimal", producto.tipoAnimal);
-    
-    // Enviar detalles como objeto (no como string JSON)
-if (producto.detalles) {
-  // Enviar cada propiedad de detalles por separado
-  Object.keys(producto.detalles).forEach((key) => {
-    formData.append(`detalles[${key}]`, producto.detalles[key]);
-  });
-}
-    
-    // Agregar imágenes (archivos)
-    // Importante: usar "imagenes" porque así lo espera multer en tu ruta
+    formData.append("ingrediente", producto.ingrediente);
+    formData.append("caracteristica", producto.caracteristica);
+    formData.append("enOferta", producto.enOferta);
+    formData.append("esNuevo", producto.esNuevo);
+    formData.append("destacado", producto.destacado);
+
+    if (producto.detalles) {
+      Object.keys(producto.detalles).forEach((key) => {
+        formData.append(`detalles[${key}]`, producto.detalles[key]);
+      });
+    }
+
     if (producto.imagenes && producto.imagenes.length > 0) {
       producto.imagenes.forEach((imagen) => {
-        formData.append("imagenes", imagen); // imagen es un File object
+        formData.append("imagenes", imagen);
       });
     }
 
     const response = await fetch(productBack, {
       method: "POST",
-      // NO incluyas "Content-Type": "application/json"
-      // FormData lo maneja automáticamente con multipart/form-data
       body: formData,
       credentials: "include",
     });
-    
+
     const result = await response.json();
     return result;
   } catch (error) {

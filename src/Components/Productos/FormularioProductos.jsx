@@ -39,6 +39,11 @@ export const FormularioProductos = ({ titulo }) => {
       marca: data.marca,
       tipoAnimal: data.tipoAnimal,
       descripcion: data.descripcion,
+      ingrediente: data.ingrediente,
+      caracteristica: data.caracteristica,
+      enOferta: Boolean(data.enOferta), 
+      esNuevo: Boolean(data.esNuevo), 
+      destacado: Boolean(data.destacado), 
       imagenes: imagenesArray, 
       detalles: {
         etapa: data.detalles?.etapa || "",
@@ -328,12 +333,6 @@ export const FormularioProductos = ({ titulo }) => {
                     label="Producto destacado"
                     {...register("destacado")}
                   />
-
-                  <Form.Check
-                    type="checkbox"
-                    label="Ninguno"
-                    {...register("Ninguno")}
-                  />
                 </div>
               </Form.Group>
             </Col>
@@ -354,6 +353,42 @@ export const FormularioProductos = ({ titulo }) => {
             {errors.descripcion && (
               <small className="text-danger">
                 {errors.descripcion.message}
+              </small>
+            )}
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Caracteristicas *</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={4}
+              {...register("caracteristica", {
+                required: "La caracteristica es obligatoria",
+                minLength: { value: 20, message: "Mínimo 20 caracteres" },
+                maxLength: { value: 1000, message: "Máximo 1000 caracteres" },
+              })}
+            />
+            {errors.caracteristica && (
+              <small className="text-danger">
+                {errors.caracteristica.message}
+              </small>
+            )}
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Ingredientes *</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={4}
+              {...register("ingrediente", {
+                required: "Los ingredientes son obligatoria",
+                minLength: { value: 20, message: "Mínimo 20 caracteres" },
+                maxLength: { value: 1000, message: "Máximo 1000 caracteres" },
+              })}
+            />
+            {errors.ingrediente && (
+              <small className="text-danger">
+                {errors.ingrediente.message}
               </small>
             )}
           </Form.Group>
