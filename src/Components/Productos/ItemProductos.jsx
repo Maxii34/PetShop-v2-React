@@ -50,7 +50,7 @@ export const ItemProductos = ({ itemProducto, fila, cargarProductos }) => {
   };
 
   return (
-    <tr className="align-middle border-bottom transition-effect hover-row">
+    <tr  className="align-middle border-bottom transition-effect hover-row">
       {/* Índice: Color atenuado */}
       <td className="text-secondary fw-light">{fila}</td>
 
