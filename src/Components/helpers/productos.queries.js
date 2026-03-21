@@ -72,3 +72,31 @@ export const crearProducto = async (producto) => {
     return null;
   }
 };
+
+export const obtenerProducto = async (id) => {
+  try {
+    const response = await fetch(`${productBack}/${id}`, {
+      method: "GET",
+      credentials: "include",
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const editarProductos = async (id) => {
+  try {
+    const response = await fetch(`${productBack}/${id}`, {
+      method: "PUT",
+      credentials: "include",
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
