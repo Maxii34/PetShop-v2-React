@@ -33,7 +33,7 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
       });
       reset();
       handleClose();
-      navegacion("/");
+      navegacion("/admin/productos");
     } else {
       Swal.fire({
         title: "Error",
