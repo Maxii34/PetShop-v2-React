@@ -81,7 +81,7 @@ function App() {
       <Register handleClose2={handleClose2} show2={show2} />
       <main className="">
         <Routes>
-          <Route path="/" element={<Inicio productos={productos} />} />
+          <Route path="/" element={<Inicio productos={productos} setProductos={setProductos} />} />
           <Route path="detalle" element={<DetalleProductos />} />
           <Route path="carrito" element={<CarritoPagos />} />
           <Route path="checkout" element={<CheckoutPagos />} />
