@@ -13,9 +13,8 @@ import { Image } from "react-bootstrap";
 export const DetalleProductos = () => {
   const location = useLocation();
   const { producto } = location.state || {};
-  console.log(producto);
 
-  const precioCuotas = producto.precioEfectivo / producto.cuotas;
+  const precioDescuento = producto.precio * 0.9;
 
   // Manejo si no hay producto
   if (!producto) {
@@ -71,9 +70,7 @@ export const DetalleProductos = () => {
               {producto.categoria}
             </a>{" "}
             &gt;
-            <span className="fw-semibold text-dark">
-              {producto.nombre}
-            </span>
+            <span className="fw-semibold text-dark">{producto.nombre}</span>
           </nav>
 
           <div className="border-bottom pb-3 mb-3">
@@ -81,14 +78,18 @@ export const DetalleProductos = () => {
               <b>{producto.nombre}</b>
             </h4>
             <p className="fs-3 my-2">
-              <b>${producto.precio}</b>
+              <b>$ {producto.precio}</b>
             </p>
             <p className="text-success mb-0">
-              <b>${producto.precio}, con efectivo. 🤑</b>
+              <b>$ {precioDescuento}, con efectivo. 🤑</b>
+            </p>
+            <p className="my-1">
+              <i className="bi bi-coin"></i> 10% de descuento pagando con
+              Efectivo
               <br />
               <small className="d-block mt-1">
                 Con transferencia: ${Math.round(producto.precio * 1.05)}{" "}
-                (5% de recargo).
+                <span className="fw-bold text-success">(5% de recargo).</span>
               </small>
             </p>
             <p className="m-1">
@@ -100,10 +101,6 @@ export const DetalleProductos = () => {
               <i className="bi bi-wallet"></i> 12 cuotas de $
               {Math.round(producto.precio / 12)} o 6 cuotas de ${" "}
               {Math.round(producto.precio / 6)}
-            </p>
-            <p className="my-1">
-              <i className="bi bi-coin"></i> 10% de descuento pagando con
-              Efectivo
             </p>
           </div>
 
@@ -163,5 +160,3 @@ export const DetalleProductos = () => {
     </Container>
   );
 };
-
-
