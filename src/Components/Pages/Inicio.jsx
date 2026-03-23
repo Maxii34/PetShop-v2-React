@@ -20,7 +20,7 @@ export function Inicio({productos, productosOferta, setProductos }) {
             <CarouselComponente />
             <div className=" container-fluid mt-5">
                 <ContainerGrid  productos={productos} />
-                <ContenedorCards productosOferta={productosOferta}/>
+                <ContenedorCards productos={productos} />
             </div>
             <MuralInstagran />
         </section>

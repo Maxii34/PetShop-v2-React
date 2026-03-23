@@ -4,7 +4,9 @@ import { MdVisibility } from "react-icons/md";
 import { BiCreditCard } from "react-icons/bi";
 import "./EstilosCards.css";
 
-export const CardsCarousel = () => {
+export const CardsCarousel = ({ producto }) => {
+  if (!producto) return null;
+
   return (
     <>
       <div className="card card-wrapper product-card border-0 shadow-sm h-100">
@@ -14,8 +16,8 @@ export const CardsCarousel = () => {
         >
           <img
             className="card-img-top w-100 h-100"
-            src="" 
-            alt="Producto"
+            src={producto?.imagenes?.[0] || ""} 
+            alt={producto?.nombre || "Producto"}
             style={{ objectFit: "contain" }}
             loading="lazy"
           />
@@ -37,19 +39,19 @@ export const CardsCarousel = () => {
         <div className="card-body d-flex flex-column text-center pt-0">
           <h5
             className="card-title fw-bold text-dark text-truncate mb-3"
-            title="Nombre Alimento Completo"
+            title={producto.nombre}
           >
-            Nombre Alimento
+            {producto.nombre}
           </h5>
 
           <div className="mb-4">
-            <h3 className="mb-2 fw-bolder text-dark">$ 45.000</h3>
+            <h3 className="mb-2 fw-bolder text-dark">$ {producto.precio}</h3>
 
             <div
               className="d-inline-block bg-light text-primary px-2 py-1 rounded-2 mb-2"
               style={{ fontSize: "0.85rem", fontWeight: "600" }}
             >
-              <BiCreditCard className="me-1" />3 cuotas s/int de $11.300
+              <BiCreditCard className="me-1" />3 cuotas s/int de ${Math.floor(producto.precio / 3)}
             </div>
 
             <div className="text-success small fw-semibold">
@@ -59,7 +61,7 @@ export const CardsCarousel = () => {
               >
                 Efectivo:{" "}
               </span>
-              $ 43.000
+              $ {Math.floor(producto.precio * 0.9)} {/* 10% descuento en efectivo aproximado */}
             </div>
           </div>
 
@@ -72,7 +74,7 @@ export const CardsCarousel = () => {
             </Link>
             <Link
               to="/detalle"
-              state={{ producto: "producto" }}
+              state={{ producto }}
               className="btn btn-eye d-flex align-items-center justify-content-center bg-light text-dark border"
               title="Ver más"
             >
