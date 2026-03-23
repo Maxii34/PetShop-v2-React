@@ -34,8 +34,8 @@ export const DetalleProductos = () => {
         {/* Columna de imagen y descripción */}
         <Col md={6}>
           <Image
-            src={producto.imagen}
-            alt={producto.alt}
+            src={producto.imagenes?.[0]}
+            alt="Imagen del producto"
             fluid
             loading="lazy"
             className="mb-3"
@@ -45,10 +45,10 @@ export const DetalleProductos = () => {
               <b>Descripcion:</b> {producto.descripcion}
             </p>
             <p className="fs-6">
-              <b>Caracteristicas:</b> {producto.caracteristicas}
+              <b>Caracteristicas:</b> {producto.caracteristica}
             </p>
             <p className="fs-6">
-              <b>Ingredientes:</b> {producto.ingredientes}
+              <b>Ingredientes:</b> {producto.ingrediente}
             </p>
           </div>
         </Col>
@@ -64,7 +64,7 @@ export const DetalleProductos = () => {
             </a>{" "}
             &gt;
             <a href="#" className="fs-6 text-muted text-decoration-none">
-              {producto.animal === "gato" ? "Gatos" : "Perros"}
+              {producto.tipoAnimal}
             </a>{" "}
             &gt;
             <a href="#" className="fs-6 text-muted text-decoration-none">
@@ -72,22 +72,22 @@ export const DetalleProductos = () => {
             </a>{" "}
             &gt;
             <span className="fw-semibold text-dark">
-              {producto.nombreProducto}
+              {producto.nombre}
             </span>
           </nav>
 
           <div className="border-bottom pb-3 mb-3">
             <h4 className="my-2">
-              <b>{producto.nombreProducto}</b>
+              <b>{producto.nombre}</b>
             </h4>
             <p className="fs-3 my-2">
-              <b>${producto.precioOriginal}</b>
+              <b>${producto.precio}</b>
             </p>
             <p className="text-success mb-0">
-              <b>${producto.precioEfectivo}, con efectivo. 🤑</b>
+              <b>${producto.precio}, con efectivo. 🤑</b>
               <br />
               <small className="d-block mt-1">
-                Con transferencia: ${Math.round(producto.precioOriginal * 1.05)}{" "}
+                Con transferencia: ${Math.round(producto.precio * 1.05)}{" "}
                 (5% de recargo).
               </small>
             </p>
@@ -98,8 +98,8 @@ export const DetalleProductos = () => {
 
             <p className="my-1">
               <i className="bi bi-wallet"></i> 12 cuotas de $
-              {Math.round(producto.precioOriginal / 12)} o 6 cuotas de ${" "}
-              {Math.round(producto.precioOriginal / 6)}
+              {Math.round(producto.precio / 12)} o 6 cuotas de ${" "}
+              {Math.round(producto.precio / 6)}
             </p>
             <p className="my-1">
               <i className="bi bi-coin"></i> 10% de descuento pagando con

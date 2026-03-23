@@ -71,7 +71,7 @@ export const CardsProductos = ({ producto }) => {
           </Link>
           <Link
             to="/detalle"
-            state={{ producto: "producto" }}
+            state={{ producto }}
             className="btn btn-eye d-flex align-items-center justify-content-center bg-light text-dark border"
             title="Ver más"
           >

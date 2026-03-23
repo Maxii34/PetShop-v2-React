@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import { CarouselComponente, ContainerGrid, ContenedorCards, MuralInstagran } from "../index.jsx";
+import { listarProductos as obtenerProductosApi } from "../helpers/productos.queries.js";
 
 export function Inicio({productos, productosOferta, setProductos }) {
 
-    const listarProductos = async () => {
-        const listado = await listarProductos();
+    const cargarProductos = async () => {
+        const listado = await obtenerProductosApi();
         if (listado) {
             setProductos(listado);
         }
     }
 
     useEffect(() => {
-        listarProductos();
+        cargarProductos();
     }, []);
 
     return (
