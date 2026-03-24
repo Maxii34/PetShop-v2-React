@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"; // 1. Agregamos useEffect
+import { useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
 import { CardsProductos } from "./Cards";
-import AOS from "aos"; // 
-import "aos/dist/aos.css"; 
+import AOS from "aos";
+import "aos/dist/aos.css";
+import "./EstilosCards.css";
 
 export const ContainerGrid = ({ productos }) => {
   const [visible, setVisible] = useState(10);
@@ -10,7 +11,7 @@ export const ContainerGrid = ({ productos }) => {
   // Inicializamos AOS al cargar el componente
   useEffect(() => {
     AOS.init({
-      duration: 500, 
+      duration: 500,
     });
   }, []);
 
@@ -37,27 +38,27 @@ export const ContainerGrid = ({ productos }) => {
           Lo mejor para tus compañeros peludos 🐾✨
         </h1>
       </div>
-      
+
       <div className="grid-container">
         {productos.slice(0, visible).map((itemProducto, indice) => (
           /* Envolvemos la card en un div con la animación */
-          <div 
-            key={indice} 
-            data-aos="fade-up" 
+          <div
+            key={indice}
+            data-aos="fade-up"
             data-aos-delay={indice * 100} // Efecto escalera
           >
-             <CardsProductos producto={itemProducto} />
+            <CardsProductos producto={itemProducto} />
           </div>
         ))}
       </div>
 
       <div className="text-center mt-3">
         {visible < productos.length ? (
-          <Button variant="primary" className="shadow" onClick={mostrarMas}>
+          <Button className="btn-grid btn-grid--more" onClick={mostrarMas}>
             Ver más
           </Button>
         ) : (
-          <Button variant="secondary" className="shadow" onClick={mostrarMenos}>
+          <Button className="btn-grid btn-grid--less" onClick={mostrarMenos}>
             Ver menos
           </Button>
         )}
