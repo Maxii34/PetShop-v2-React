@@ -15,24 +15,20 @@ export const ContenedorCards = ({ productos }) => {
 
   return (
     <>
-      <Container>
-        <div className="my-5">
-          <h4 className="text-center fs-2 mb-4">¡Ofertas Exclusivas para Vos! 🛍️</h4>
-          <Row className="g-4 justify-content-center">
+        <div className="my-5 ">
+          <h4 className="text-center fs-2 mb-4 p-0 m-0">¡Ofertas Exclusivas para Vos! 🛍️</h4>
+            <div className="grid-container p-0 m-0">
             {productosEnOferta.map((producto, index) => (
-              <Col 
-                xs={12} sm={6} md={4} lg={3} 
+              <div 
                 key={producto._id} 
-                className="d-flex align-items-stretch"
                 data-aos="zoom-in" 
                 data-aos-delay={`${300 + Math.min(index * 100, 1000)}`}
               >
                 <CardsCarousel producto={producto} />
-              </Col>
+              </div>
             ))}
-          </Row>
+            </div>
         </div>
-      </Container>
     </>
   );
 };

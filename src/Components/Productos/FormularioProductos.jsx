@@ -155,19 +155,23 @@ export const FormularioProductos = ({ titulo }) => {
                     <Form.Control
                       type="text"
                       placeholder="Ej. Royal Canin Mini Adult 3kg"
+                      isInvalid={!!errors.nombre}
                       {...register("nombre", {
-                        required: "El nombre es obligatorio",
-                        minLength: { value: 3, message: "Mínimo 3 caracteres" },
+                        required: "El nombre del producto es obligatorio",
+                        minLength: {
+                          value: 3,
+                          message: "El nombre debe tener al menos 3 caracteres",
+                        },
                         maxLength: {
                           value: 100,
-                          message: "Máximo 100 caracteres",
+                          message: "El nombre no puede exceder 100 caracteres",
                         },
                       })}
                     />
                     {errors.nombre && (
-                      <small className="text-danger">
+                      <Form.Control.Feedback type="invalid" className="d-block">
                         {errors.nombre.message}
-                      </small>
+                      </Form.Control.Feedback>
                     )}
                   </Form.Group>
                 </Col>
@@ -176,15 +180,21 @@ export const FormularioProductos = ({ titulo }) => {
                   <Form.Group className="mb-3">
                     <Form.Label>Categoría *</Form.Label>
                     <Form.Select
+                      isInvalid={!!errors.categoria}
                       {...register("categoria", {
-                        required: "Seleccione una categoría",
+                        required: "Debes seleccionar una categoría",
                       })}
                     >
-                      <option value="">Seleccione...</option>
+                      <option value="">Seleccione una categoría...</option>
                       <option value="Alimentos">Alimentos</option>
                       <option value="Juguetes">Juguetes</option>
                       <option value="Accesorios">Accesorios</option>
                     </Form.Select>
+                    {errors.categoria && (
+                      <Form.Control.Feedback type="invalid" className="d-block">
+                        {errors.categoria.message}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                 </Col>
 
@@ -194,19 +204,23 @@ export const FormularioProductos = ({ titulo }) => {
                     <Form.Control
                       type="text"
                       placeholder="Ej. Royal Canin"
+                      isInvalid={!!errors.marca}
                       {...register("marca", {
                         required: "La marca es obligatoria",
-                        minLength: { value: 2, message: "Mínimo 2 caracteres" },
+                        minLength: {
+                          value: 2,
+                          message: "La marca debe tener al menos 2 caracteres",
+                        },
                         maxLength: {
                           value: 50,
-                          message: "Máximo 50 caracteres",
+                          message: "La marca no puede exceder 50 caracteres",
                         },
                       })}
                     />
                     {errors.marca && (
-                      <small className="text-danger">
+                      <Form.Control.Feedback type="invalid" className="d-block">
                         {errors.marca.message}
-                      </small>
+                      </Form.Control.Feedback>
                     )}
                   </Form.Group>
                 </Col>
@@ -215,33 +229,49 @@ export const FormularioProductos = ({ titulo }) => {
                   <Form.Group className="mb-3">
                     <Form.Label>Animal *</Form.Label>
                     <Form.Select
+                      isInvalid={!!errors.tipoAnimal}
                       {...register("tipoAnimal", {
-                        required: "Seleccione un animal",
+                        required: "Debes seleccionar el tipo de animal",
                       })}
                     >
-                      <option value="">Seleccione...</option>
+                      <option value="">Seleccione un animal...</option>
                       <option value="Perro">Perro</option>
                       <option value="Gato">Gato</option>
                       <option value="Roedor">Roedor</option>
                       <option value="Ave">Ave</option>
                       <option value="Otro">Otro</option>
                     </Form.Select>
+                    {errors.tipoAnimal && (
+                      <Form.Control.Feedback type="invalid" className="d-block">
+                        {errors.tipoAnimal.message}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                 </Col>
 
                 <Col md={6}>
                   <Form.Group className="mb-3">
-                    <Form.Label>Etapa</Form.Label>
-                    <Form.Select {...register("detalles.etapa")}>
-                      <option value="">Seleccione...</option>
+                    <Form.Label>Etapa de Vida *</Form.Label>
+                    <Form.Select
+                      isInvalid={!!errors.detalles?.etapa}
+                      {...register("detalles.etapa", {
+                        required: "Debes seleccionar una etapa de vida",
+                      })}
+                    >
+                      <option value="">Seleccione una etapa...</option>
                       <option value="cachorro">Cachorro</option>
                       <option value="adulto">Adulto</option>
                     </Form.Select>
+                    {errors.detalles?.etapa && (
+                      <Form.Control.Feedback type="invalid" className="d-block">
+                        {errors.detalles.etapa.message}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                 </Col>
               </Row>
 
-              <h5 className="text-secondary border-bottom pb-2 mt-2 mb-3">
+              <h5 className="text-secondary border-bottom pb-2 mt-2 mb-3 pt-3">
                 Detalles Adicionales
               </h5>
               <Row>
@@ -249,46 +279,104 @@ export const FormularioProductos = ({ titulo }) => {
                   <Form.Group className="mb-3">
                     <Form.Label>Peso / Present.</Form.Label>
                     <Form.Control
-                      placeholder="Ej: 15 kg"
+                      type="number"
+                      placeholder="Ej: 15"
+                      isInvalid={!!errors.detalles?.peso}
                       {...register("detalles.peso", {
-                        min: { value: 0.1, message: "Mayor a 0" },
-                        max: { value: 100, message: "Límite excedido" },
+                        required: "El peso es obligatorio",
+                        min: {
+                          value: 0.1,
+                          message: "El peso debe ser mayor a 0",
+                        },
+                        max: {
+                          value: 100,
+                          message: "El peso no puede exceder 100",
+                        },
                       })}
                     />
+                    {errors.detalles?.peso && (
+                      <Form.Control.Feedback type="invalid" className="d-block">
+                        {errors.detalles.peso.message}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                 </Col>
+
                 <Col md={3} xs={6}>
                   <Form.Group className="mb-3">
                     <Form.Label>Sabor / Aroma</Form.Label>
                     <Form.Control
+                      type="text"
                       placeholder="Ej: Pollo"
+                      isInvalid={!!errors.detalles?.sabor}
                       {...register("detalles.sabor", {
-                        minLength: { value: 3, message: "Muy corto" },
-                        maxLength: { value: 20, message: "Muy largo" },
+                        minLength: {
+                          value: 3,
+                          message: "El sabor debe tener al menos 3 caracteres",
+                        },
+                        maxLength: {
+                          value: 20,
+                          message: "El sabor no puede exceder 20 caracteres",
+                        },
                       })}
                     />
+                    {errors.detalles?.sabor && (
+                      <Form.Control.Feedback type="invalid" className="d-block">
+                        {errors.detalles.sabor.message}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                 </Col>
+
                 <Col md={3} xs={6}>
                   <Form.Group className="mb-3">
                     <Form.Label>Talla / Medida</Form.Label>
                     <Form.Control
+                      type="text"
                       placeholder="Ej: XL o 50x40"
+                      isInvalid={!!errors.detalles?.talla}
                       {...register("detalles.talla", {
-                        minLength: { value: 1, message: "Muy corto" },
-                        maxLength: { value: 20, message: "Muy largo" },
+                        minLength: {
+                          value: 1,
+                          message: "La talla debe tener al menos 1 carácter",
+                        },
+                        maxLength: {
+                          value: 20,
+                          message: "La talla no puede exceder 20 caracteres",
+                        },
                       })}
                     />
+                    {errors.detalles?.talla && (
+                      <Form.Control.Feedback type="invalid" className="d-block">
+                        {errors.detalles.talla.message}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                 </Col>
+
                 <Col md={3} xs={6}>
                   <Form.Group className="mb-3">
                     <Form.Label>Cuotas (Cant.)</Form.Label>
                     <Form.Control
                       type="number"
                       placeholder="Ej: 3"
-                      {...register("cuotas")}
+                      isInvalid={!!errors.cuotas}
+                      {...register("cuotas", {
+                        min: {
+                          value: 0,
+                          message: "Las cuotas no pueden ser negativas",
+                        },
+                        max: {
+                          value: 24,
+                          message: "Las cuotas no pueden exceder 24",
+                        },
+                      })}
                     />
+                    {errors.cuotas && (
+                      <Form.Control.Feedback type="invalid" className="d-block">
+                        {errors.cuotas.message}
+                      </Form.Control.Feedback>
+                    )}
                   </Form.Group>
                 </Col>
               </Row>
@@ -297,22 +385,34 @@ export const FormularioProductos = ({ titulo }) => {
             {/* Columna Derecha: Tarjeta de Precio, Imagen y Estados */}
             <Col lg={4} md={12}>
               <div className="bg-light p-4 rounded border h-100 d-flex flex-column gap-3">
+                <h5 className="text-secondary border-bottom mt-2 mb-1">
+                Datos inportantes
+              </h5>
                 <div>
                   <Form.Group>
                     <Form.Label className="fw-bold">
+                      <i className="bi bi-image me-2"></i>
                       Imagen del producto *
                     </Form.Label>
                     <Form.Control
                       type="file"
                       accept="image/*"
+                      isInvalid={!!errors.imagenes}
                       {...register("imagenes", {
-                        required: !id ? "La imagen es obligatoria" : false,
+                        required: !id ? "Debes seleccionar una imagen" : false,
                       })}
                     />
+                    <Form.Text className="d-block mt-1 text-muted">
+                      <i className="bi bi-info-circle me-1"></i>
+                      Formatos: JPG, PNG, WebP (máx. 3MB)
+                    </Form.Text>
                     {errors.imagenes && (
-                      <small className="text-danger">
+                      <Form.Control.Feedback
+                        type="invalid"
+                        className="d-block mt-2"
+                      >
                         {errors.imagenes.message}
-                      </small>
+                      </Form.Control.Feedback>
                     )}
                   </Form.Group>
                 </div>
@@ -326,16 +426,26 @@ export const FormularioProductos = ({ titulo }) => {
                       <Form.Control
                         type="number"
                         placeholder="Ej: 12500"
+                        isInvalid={!!errors.precio}
                         {...register("precio", {
                           required: "El precio es obligatorio",
-                          min: { value: 0, message: "No negativo" },
-                          max: { value: 900000, message: "Máximo 900.000" },
+                          min: {
+                            value: 0.01,
+                            message: "El precio debe ser mayor a $0",
+                          },
+                          max: {
+                            value: 900000,
+                            message: "El precio no puede exceder $900.000",
+                          },
                         })}
                       />
                       {errors.precio && (
-                        <small className="text-danger">
+                        <Form.Control.Feedback
+                          type="invalid"
+                          className="d-block"
+                        >
                           {errors.precio.message}
-                        </small>
+                        </Form.Control.Feedback>
                       )}
                     </Form.Group>
                   </Col>
@@ -347,16 +457,26 @@ export const FormularioProductos = ({ titulo }) => {
                       <Form.Control
                         type="number"
                         placeholder="Ej: 30"
+                        isInvalid={!!errors.stock}
                         {...register("stock", {
                           required: "El stock es obligatorio",
-                          min: { value: 0, message: "No negativo" },
-                          max: { value: 10000, message: "Máximo 10000" },
+                          min: {
+                            value: 0,
+                            message: "El stock no puede ser negativo",
+                          },
+                          max: {
+                            value: 10000,
+                            message: "El stock no puede exceder 10.000",
+                          },
                         })}
                       />
                       {errors.stock && (
-                        <small className="text-danger">
+                        <Form.Control.Feedback
+                          type="invalid"
+                          className="d-block"
+                        >
                           {errors.stock.message}
-                        </small>
+                        </Form.Control.Feedback>
                       )}
                     </Form.Group>
                   </Col>
@@ -390,69 +510,92 @@ export const FormularioProductos = ({ titulo }) => {
           </Row>
 
           {/* Fila Inferior: Textareas Amplios */}
-          <Row className="mt-4">
+          <Row className="mt-4 bg-light p-4 rounded border h-100">
+            <h5 className="text-secondary border-bottom pb-2 mt-2 mb-3">
+                Informacion descriptivas
+              </h5>
             <Col lg={4} md={12}>
               <Form.Group className="mb-3">
-                <Form.Label>Descripción General *</Form.Label>
+                <Form.Label>Descripción General</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={4}
+                  placeholder="Describe el producto en detalle (opcional)"
+                  isInvalid={!!errors.descripcion}
                   {...register("descripcion", {
-                    required: "La descripción es obligatoria",
-                    minLength: { value: 20, message: "Mínimo 20 caracteres" },
-                    maxLength: { value: 500, message: "Máximo 500 caracteres" },
+                    minLength: {
+                      value: 20,
+                      message:
+                        "La descripción debe tener al menos 20 caracteres",
+                    },
+                    maxLength: {
+                      value: 500,
+                      message: "La descripción no puede exceder 500 caracteres",
+                    },
                   })}
                 />
                 {errors.descripcion && (
-                  <small className="text-danger">
+                  <Form.Control.Feedback type="invalid" className="d-block">
                     {errors.descripcion.message}
-                  </small>
+                  </Form.Control.Feedback>
                 )}
               </Form.Group>
             </Col>
 
             <Col lg={4} md={12}>
               <Form.Group className="mb-3">
-                <Form.Label>Características Clave *</Form.Label>
+                <Form.Label>Características Clave</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={4}
+                  placeholder="Listá las características principales (opcional)"
+                  isInvalid={!!errors.caracteristica}
                   {...register("caracteristica", {
-                    required: "La caracteristica es obligatoria",
-                    minLength: { value: 20, message: "Mínimo 20 caracteres" },
+                    minLength: {
+                      value: 20,
+                      message:
+                        "Las características deben tener al menos 20 caracteres",
+                    },
                     maxLength: {
                       value: 1000,
-                      message: "Máximo 1000 caracteres",
+                      message:
+                        "Las características no pueden exceder 1000 caracteres",
                     },
                   })}
                 />
                 {errors.caracteristica && (
-                  <small className="text-danger">
+                  <Form.Control.Feedback type="invalid" className="d-block">
                     {errors.caracteristica.message}
-                  </small>
+                  </Form.Control.Feedback>
                 )}
               </Form.Group>
             </Col>
 
             <Col lg={4} md={12}>
               <Form.Group className="mb-3">
-                <Form.Label>Ingredientes / Materiales *</Form.Label>
+                <Form.Label>Ingredientes / Materiales</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={4}
+                  placeholder="Listá los ingredientes o materiales (opcional)"
+                  isInvalid={!!errors.ingrediente}
                   {...register("ingrediente", {
-                    required: "Los ingredientes son obligatorios",
-                    minLength: { value: 20, message: "Mínimo 20 caracteres" },
+                    minLength: {
+                      value: 20,
+                      message:
+                        "Los ingredientes deben tener al menos 20 caracteres",
+                    },
                     maxLength: {
                       value: 1000,
-                      message: "Máximo 1000 caracteres",
+                      message:
+                        "Los ingredientes no pueden exceder 1000 caracteres",
                     },
                   })}
                 />
                 {errors.ingrediente && (
-                  <small className="text-danger">
+                  <Form.Control.Feedback type="invalid" className="d-block">
                     {errors.ingrediente.message}
-                  </small>
+                  </Form.Control.Feedback>
                 )}
               </Form.Group>
             </Col>

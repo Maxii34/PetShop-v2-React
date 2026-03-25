@@ -6,12 +6,12 @@ import { useEffect } from "react";
 export const ContaiGridCarousel = () => {
   useEffect(() => {
   AOS.init({
-    duration: 1000, //
+    duration: 1000, 
     });
 }, []);
   return (
     <div data-aos="zoom-in" data-aos-delay="300">
-    <div className="grid-container">
+    <div>
       <CardsCarousel />
     </div>
     </div>
