@@ -9,10 +9,14 @@ import {
 } from "react-bootstrap";
 import { useLocation } from "react-router";
 import { Image } from "react-bootstrap";
+import { useState } from "react";
 
 export const DetalleProductos = () => {
   const location = useLocation();
   const { producto } = location.state || {};
+  
+  // Estado para controlar cuál imagen se muestra
+  const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
 
   const precioDescuento = producto.precio * 0.9;
 
@@ -27,29 +31,84 @@ export const DetalleProductos = () => {
     );
   }
 
+  // Obtener array de imágenes (protección si no existe)
+  const imagenes = producto.imagenes || [];
+  const tieneMultiplesImagenes = imagenes.length > 1;
+
   return (
     <Container className="my-4">
       <Row className="g-4">
         {/* Columna de imagen y descripción */}
         <Col md={6}>
+          {/* Imagen principal */}
           <Image
-            src={producto.imagenes?.[0]}
-            alt="Imagen del producto"
+            src={imagenes[imagenSeleccionada]}
+            alt={`Imagen ${imagenSeleccionada + 1} del producto`}
             fluid
             loading="lazy"
             className="mb-3"
+            style={{ borderRadius: "8px" }}
           />
-          <div>
-            <p className="fs-6">
-              <b>Descripcion:</b> {producto.descripcion}
-            </p>
-            <p className="fs-6">
-              <b>Caracteristicas:</b> {producto.caracteristica}
-            </p>
-            <p className="fs-6">
-              <b>Ingredientes:</b> {producto.ingrediente}
-            </p>
-          </div>
+
+          {/* Galería de miniaturas - solo mostrar si hay múltiples imágenes */}
+          {tieneMultiplesImagenes && (
+            <div className="d-flex gap-2 overflow-auto pb-2">
+              {imagenes.map((imagen, index) => (
+                <button
+                  key={index}
+                  onClick={() => setImagenSeleccionada(index)}
+                  style={{
+                    border:
+                      imagenSeleccionada === index
+                        ? "3px solid #333"
+                        : "2px solid #ddd",
+                    borderRadius: "6px",
+                    padding: "0",
+                    cursor: "pointer",
+                    minWidth: "80px",
+                    height: "80px",
+                    transition: "border-color 0.2s",
+                    backgroundColor: "transparent",
+                  }}
+                >
+                  <Image
+                    src={imagen}
+                    alt={`Miniatura ${index + 1}`}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "4px",
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Descripción - solo mostrar si hay contenido */}
+          {(producto.descripcion || producto.caracteristica || producto.ingrediente) && (
+            <div className="mt-4">
+              <h4 className="mb-2 fw-semibold text-dark text-capitalize">Información del producto</h4>
+              <div className="border-top pt-3 mt-3">
+                {producto.descripcion && (
+                  <p className="fs-6">
+                    <b>Descripcion:</b> {producto.descripcion}
+                  </p>
+                )}
+                {producto.caracteristica && (
+                  <p className="fs-6">
+                    <b>Caracteristicas:</b> {producto.caracteristica}
+                  </p>
+                )}
+                {producto.ingrediente && (
+                  <p className="fs-6">
+                    <b>Ingredientes:</b> {producto.ingrediente}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
         </Col>
 
         {/* Columna de precios e info */}
