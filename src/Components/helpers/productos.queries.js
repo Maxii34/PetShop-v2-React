@@ -34,18 +34,18 @@ export const crearProducto = async (producto) => {
     const formData = new FormData();
 
     // Agregar campos de texto
-    formData.append("nombre", producto.nombre);
-    formData.append("descripcion", producto.descripcion);
-    formData.append("precio", producto.precio);
-    formData.append("categoria", producto.categoria);
-    formData.append("stock", producto.stock);
-    formData.append("marca", producto.marca);
-    formData.append("tipoAnimal", producto.tipoAnimal);
-    formData.append("ingrediente", producto.ingrediente);
-    formData.append("caracteristica", producto.caracteristica);
-    formData.append("enOferta", producto.enOferta);
-    formData.append("esNuevo", producto.esNuevo);
-    formData.append("destacado", producto.destacado);
+    formData.append("nombre", producto.nombre || "");
+    formData.append("descripcion", producto.descripcion || "");
+    formData.append("precio", producto.precio || "");
+    formData.append("categoria", producto.categoria || "");
+    formData.append("stock", producto.stock || "");
+    formData.append("marca", producto.marca || "");
+    formData.append("tipoAnimal", producto.tipoAnimal || "");
+    formData.append("ingrediente", producto.ingrediente || "");
+    formData.append("caracteristica", producto.caracteristica || "");
+    formData.append("enOferta", producto.enOferta || false);
+    formData.append("esNuevo", producto.esNuevo || false);
+    formData.append("destacado", producto.destacado || false);
 
     if (producto.detalles) {
       Object.keys(producto.detalles).forEach((key) => {
@@ -91,18 +91,18 @@ export const editarProductos = async (id, producto) => {
   try {
     const formData = new FormData();
 
-    formData.append("nombre", producto.nombre);
-    formData.append("descripcion", producto.descripcion);
-    formData.append("precio", producto.precio);
-    formData.append("categoria", producto.categoria);
-    formData.append("stock", producto.stock);
-    formData.append("marca", producto.marca);
-    formData.append("tipoAnimal", producto.tipoAnimal);
-    formData.append("ingrediente", producto.ingrediente);
-    formData.append("caracteristica", producto.caracteristica);
-    formData.append("enOferta", producto.enOferta);
-    formData.append("esNuevo", producto.esNuevo);
-    formData.append("destacado", producto.destacado);
+    formData.append("nombre", producto.nombre || "");
+    formData.append("descripcion", producto.descripcion || "");
+    formData.append("precio", producto.precio || "");
+    formData.append("categoria", producto.categoria || "");
+    formData.append("stock", producto.stock || "");
+    formData.append("marca", producto.marca || "");
+    formData.append("tipoAnimal", producto.tipoAnimal || "");
+    formData.append("ingrediente", producto.ingrediente || "");
+    formData.append("caracteristica", producto.caracteristica || "");
+    formData.append("enOferta", producto.enOferta || false);
+    formData.append("esNuevo", producto.esNuevo || false);
+    formData.append("destacado", producto.destacado || false);
 
     if (producto.detalles) {
       Object.keys(producto.detalles).forEach((key) => {

@@ -1,7 +1,7 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import "./Stats.css";
 
-export const StatsCardsProduct = () => {
+export const StatsCardsProduct = ({productos}) => {
   return (
     <Container className="mt-0 mb-4">
       <Row className="g-3">
@@ -16,7 +16,7 @@ export const StatsCardsProduct = () => {
 
               <div className="d-flex justify-content-between align-items-center w-100">
                 <div>
-                  <h3 className="mb-0 fw-bold py-1">739</h3>
+                  <h3 className="mb-0 fw-bold py-1">{productos.length}</h3>
                   <span className="text-muted fs-6">Unidades</span>
                 </div>
 

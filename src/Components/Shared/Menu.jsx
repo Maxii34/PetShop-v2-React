@@ -44,7 +44,7 @@ export const Menu = ({
             </NavLink>
 
             {(usuarioLogueado?.usuario?.rol === "admin" || usuarioLogueado?.rol === "admin") && (
-                  <NavLink to="/admin" className="btn-customs">
+                  <NavLink to="/admin/crear" className="btn-customs">
                     Dashboard Admin
                   </NavLink>
                 )}

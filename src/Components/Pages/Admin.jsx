@@ -50,7 +50,7 @@ export function Admin({ productos, setProductos }) {
     <> <Container>
       <div className="mb-4" style={{backgroundColor: "#e6e7e6", borderRadius: "10px", padding: "8px"}}>
         <h2 className="text-center text-muted">Estadisticas de productos</h2>
-        <StatsCardsProduct />
+        <StatsCardsProduct productos={productos} />
         <span className="text-center text-muted px-2">Fecha: {new Date().toLocaleDateString()}</span>
       </div>
       
