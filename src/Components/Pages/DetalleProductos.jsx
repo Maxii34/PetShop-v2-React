@@ -14,7 +14,7 @@ import { useState } from "react";
 export const DetalleProductos = () => {
   const location = useLocation();
   const { producto } = location.state || {};
-  
+
   // Estado para controlar cuál imagen se muestra
   const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
 
@@ -87,9 +87,13 @@ export const DetalleProductos = () => {
           )}
 
           {/* Descripción - solo mostrar si hay contenido */}
-          {(producto.descripcion || producto.caracteristica || producto.ingrediente) && (
+          {(producto.descripcion ||
+            producto.caracteristica ||
+            producto.ingrediente) && (
             <div className="mt-4">
-              <h4 className="mb-2 fw-semibold text-dark text-capitalize">Información del producto</h4>
+              <h4 className="mb-2 fw-semibold text-dark text-capitalize text-muted">
+                Información del producto
+              </h4>
               <div className="border-top pt-3 mt-3">
                 {producto.descripcion && (
                   <p className="fs-6">
@@ -161,6 +165,61 @@ export const DetalleProductos = () => {
               {Math.round(producto.precio / 12)} o 6 cuotas de ${" "}
               {Math.round(producto.precio / 6)}
             </p>
+          </div>
+
+          <div className="border-bottom pb-3 mb-3 d-flex flex-wrap gap-2">
+            {producto.detalles?.etapa && (
+              <>
+                <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
+                  <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
+                    Etapa:
+                  </span>
+                  <span className="badge bg-success-subtle text-success-emphasis text-capitalize px-3 py-2">
+                    <i className="bi bi-dog me-1"></i>
+                    {producto.detalles.etapa}
+                  </span>
+                </div>
+              </>
+            )}
+
+            {producto.detalles?.peso && (
+              <>
+                <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
+                  <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
+                    Peso:
+                  </span>
+                  <span className="badge bg-success-subtle text-success-emphasis px-3 py-2">
+                    {producto.detalles.peso}
+                  </span>
+                </div>
+              </>
+            )}
+
+            {producto?.stock && (
+              <>
+                <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
+                  <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
+                    Stock disp:
+                  </span>
+                  <span className="badge bg-success-subtle text-success-emphasis px-3 py-2">
+                    {producto.stock} Unidades
+                  </span>
+                </div>
+              </>
+            )}
+
+            {producto?.tipoAnimal && (
+              <>
+                <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
+                  <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
+                    Tipo:
+                  </span>
+                  <span className="badge bg-success-subtle text-success-emphasis px-3 py-2">
+                    {producto.tipoAnimal}
+                  </span>
+                </div>
+              </>
+            )}
           </div>
 
           <p>
