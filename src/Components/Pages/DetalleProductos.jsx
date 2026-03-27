@@ -133,40 +133,45 @@ export const DetalleProductos = () => {
               {producto.categoria}
             </a>{" "}
             &gt;
-            <span className="fw-semibold text-dark">{producto.nombre}</span>
+            <span className="fw-semibold text-dark text-muted">{producto.nombre}</span>
           </nav>
 
           <div className="border-bottom pb-3 mb-3">
-            <h4 className="my-2">
-              <b>{producto.nombre}</b>
-            </h4>
-            <p className="fs-3 my-2">
-              <b>$ {producto.precio}</b>
-            </p>
-            <p className="text-success mb-0">
-              <b>$ {precioDescuento}, con efectivo. 🤑</b>
-            </p>
-            <p className="my-1">
-              <i className="bi bi-coin"></i> 10% de descuento pagando con
-              Efectivo
-              <br />
-              <small className="d-block mt-1">
-                Con transferencia: ${Math.round(producto.precio * 1.05)}{" "}
-                <span className="fw-bold text-success">(5% de recargo).</span>
-              </small>
-            </p>
-            <p className="m-1">
-              <i className="bi bi-cash"></i> Hasta {producto.cuotas} cuotas{" "}
-              <b>SIN</b> interés con tarjeta.
+            <h4 className="my-2 fw-semibold">{producto.nombre}</h4>
+
+            {/* Precio principal */}
+            <p className="fs-3 my-1 fw-bold text-dark">$ {producto.precio}</p>
+
+            {/* Descuento */}
+            <p className="text-success mb-1 fw-semibold">
+              🤑 $ {precioDescuento.toFixed(0)} con efectivo
             </p>
 
-            <p className="my-1">
+            <p className="my-1 small text-muted">
+              <i className="bi bi-coin"></i> 10% de descuento pagando en
+              efectivo
+            </p>
+
+            {/* Transferencia */}
+            <p className="my-1 small">
+              <small className="text-muted">
+                Con transferencia: ${Math.round(producto.precio * 1.05)}{" "}
+                <span className="fw-semibold">(5% de recargo)</span>
+              </small>
+            </p>
+
+            {/* Cuotas */}
+            <p className="my-2">
+              <i className="bi bi-credit-card"></i> Hasta{" "}
+              <b>{producto.detalles.cuotas} cuotas SIN interés</b>
+            </p>
+
+            <p className="my-1 small text-muted">
               <i className="bi bi-wallet"></i> 12 cuotas de $
-              {Math.round(producto.precio / 12)} o 6 cuotas de ${" "}
+              {Math.round(producto.precio / 12)} o 6 cuotas de $
               {Math.round(producto.precio / 6)}
             </p>
           </div>
-
           <div className="border-bottom pb-3 mb-3 d-flex flex-wrap gap-2">
             {producto.detalles?.etapa && (
               <>
@@ -227,50 +232,46 @@ export const DetalleProductos = () => {
             compras superiores a $15.000
           </p>
 
-          {/* Sección de envíos y carrito */}
+          {/* Sección de compra */}
           <div className="border-top pt-3 mt-3">
-            <div className="d-flex align-items-center mb-2">
-              <Button variant="outline-dark" className="px-3 py-1">
-                −
-              </Button>
-              <span className="mx-2">1</span>
-              <Button variant="outline-dark" className="px-3 py-1">
-                +
-              </Button>
-              <Button variant="dark" className="ms-3">
-                AGREGAR AL CARRITO
-              </Button>
-            </div>
+            {/* CTA principal */}
+            <Button
+              className="w-75 py-2 fw-semibold shadow-md"
+              variant="success"
+            >
+              <i className="bi bi-bag me-2"></i>
+              Comprar ahora
+            </Button>
 
-            <div className="mb-2">
-              <i className="bi bi-truck"></i> Medios de envío
-            </div>
+            {/* CTA secundario */}
+            <Button
+              className="w-75 mt-2 py-2 fw-semibold shadow-md"
+              variant="outline-dark"
+            >
+              Agregar al carrito
+            </Button>
 
-            <div className="mb-2">
-              <strong>Zonas de Envíos Programados</strong>
-              <br />
-              <small className="text-muted">
-                San Miguel de Tucumán - Yerba Buena - Banda del Río Salí - Tafí
-                Viejo - San José - Las Talitas - Lomas de Tafí - Villa Carmela -
-                Concepción.
-              </small>
-            </div>
+            {/* Envíos */}
+            <div className="mt-4 small border-top pt-3">
+              <div className="d-flex align-items-center gap-2 mb-2">
+                <i className="bi bi-truck fs-5"></i>
+                <strong>Envíos</strong>
+              </div>
 
-            <div className="mb-2">
-              <strong>Envíos</strong>
-              <br />
-              <small className="text-muted d-block">
-                📦 Envíos programados disponibles de <b>Lunes a Sábados</b>.
-                <br />
-                ⚠️ Ten en cuenta que los tiempos de entrega pueden variar según
-                la demanda.
-              </small>
-            </div>
+              <p className="text-muted mb-2">
+                📍 San Miguel de Tucumán, Yerba Buena, Tafí Viejo y zonas
+                cercanas.
+              </p>
 
-            <div>
-              <strong>
-                Envíos Programados GRATIS con compras superiores a $15.000
-              </strong>
+              <p className="text-muted mb-2">
+                📦 Entregas de <b>Lunes a Sábados</b> en franjas horarias como
+                <b> 08:00–13:00</b> o <b>18:00–22:00</b>. Los horarios se
+                coordinan según disponibilidad.
+              </p>
+
+              <p className="fw-semibold text-success mb-0">
+                🚚 Envío GRATIS en compras superiores a $17.000
+              </p>
             </div>
           </div>
         </Col>
