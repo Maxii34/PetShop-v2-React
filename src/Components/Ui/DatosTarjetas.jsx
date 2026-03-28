@@ -1,11 +1,8 @@
 import { Row, Col } from "react-bootstrap";
 import { SiVisa, SiMastercard, SiMercadopago } from "react-icons/si";
 import { FaCreditCard, FaLock } from "react-icons/fa";
-import { useLocation } from "react-router";
 
-export const DatosTarjetas = ({ metodo }) => {
-  const location = useLocation();
-  const { producto, cantidad, subtotal, envio, descuento, total } = location.state || {};
+export const DatosTarjetas = ({ metodo }) => {  
   return (
     <>
       <div className="bg-light p-3 rounded-3">

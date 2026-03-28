@@ -352,3 +352,77 @@ h4 {
   color: #ffffff !important;
   font-weight: bold;
 }
+
+/* ============================================
+   ESTILOS PARA CHECKOUT CON VALIDACIONES
+   ============================================ */
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-custom {
+  border-color: #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.input-custom:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.15);
+}
+
+.input-custom.is-invalid {
+  border-color: #dc3545;
+  background-image: none;
+}
+
+.input-custom.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+}
+
+.input-custom.is-valid {
+  border-color: #28a745;
+  background-image: none;
+}
+
+.input-custom.is-valid:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.15);
+}
+
+.payment-option {
+  border: 2px solid #dee2e6;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.payment-option:hover {
+  border-color: #ccc;
+  background-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.payment-option.active {
+  border-color: #28a745;
+  background-color: #f0f8f5;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+}
+
+.btn-success:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+}
+
+.card-checkout {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card-checkout:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
