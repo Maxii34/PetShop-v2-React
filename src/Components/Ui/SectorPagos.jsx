@@ -1,8 +1,62 @@
 import { Form, Button } from "react-bootstrap";
-import "./EstilosCards.css"; // Asegúrate de tener tus estilos base aquí
+import { useState } from "react";
+import "./EstilosCards.css";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
-export const SectorPagos = () => {
+export const SectorPagos = ({ producto, cantidad }) => {
+  const [descuento, setDescuento] = useState(0);
+  const [codigoAplicado, setCodigoAplicado] = useState("");
+
+  // Calcular subtotal
+  const subtotal = producto?.precio * cantidad || 0;
+  const envio = subtotal >= 17000 ? 0 : 5.0;
+  const total = subtotal + envio - descuento;
+
+  // Función para formatear precio
+  const formatearPrecio = (numero) => {
+    return numero.toLocaleString("es-AR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
+  const aplicarDescuento = () => {
+    const codigo = document
+      .getElementById("codigoDescuento")
+      .value.trim()
+      .toUpperCase();
+
+    if (codigo === "MASCOTA10") {
+      const desc = subtotal * 0.1;
+      setDescuento(desc);
+      setCodigoAplicado(codigo);
+      Swal.fire({
+        icon: "success",
+        title: "¡Código aplicado!",
+        text: "10% de descuento",
+        timer: 1000,
+        showConfirmButton: false,
+      });
+    } else if (codigo === "") {
+      Swal.fire({
+        icon: "error",
+        title: "Por favor ingresa un código",
+        timer: 1000,
+        showConfirmButton: false,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Código de descuento no válido",
+        timer: 1000,
+        showConfirmButton: false,
+      });
+      setDescuento(0);
+      setCodigoAplicado("");
+    }
+  };
+
   return (
     <div
       className="card-pagos w-100% p-4"
@@ -10,27 +64,33 @@ export const SectorPagos = () => {
     >
       <h3 className="mb-4 fw-bold">Resumen del Pedido</h3>
 
-      {/* --- FILA 1: Subtotal --- */}
-      <div className="d-flex justify-content-between mb-2">
-        <span className="text-muted">Subtotal</span>
-        <span className="fw-bold">$77.99</span>
+      {/* Producto y cantidad */}
+      <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
+        <span className="text-muted">
+          <strong>{producto?.nombre}</strong> x {cantidad}
+        </span>
+        <span className="fw-bold">$ {formatearPrecio(subtotal)}</span>
       </div>
 
-      {/* --- FILA 2: Envío --- */}
+      {/* Envío */}
       <div className="d-flex justify-content-between mb-2">
         <span className="text-muted">
-          Envío Estimado <i className="bi bi-truck"></i> {/* Icono opcional */}
+          Envío Estimado <i className="bi bi-truck"></i>
         </span>
-        <span className="fw-bold">$5.00</span>
+        <span className="fw-bold">
+          {envio === 0 ? "GRATIS" : `$ ${formatearPrecio(envio)}`}
+        </span>
       </div>
 
-      {/* --- FILA 3: Descuento --- */}
+      {/* Descuento */}
       <div className="d-flex justify-content-between mb-4">
         <span className="text-success">Descuento</span>
-        <span className="text-success fw-bold">-$0.00</span>
+        <span className="text-success fw-bold">
+          -$ {formatearPrecio(descuento)}
+        </span>
       </div>
 
-      {/* --- INPUT CODIGO --- */}
+      {/* INPUT CÓDIGO */}
       <Form.Group className="mb-4 position-relative">
         <Form.Label className="small text-muted fw-bold">
           CÓDIGO DE DESCUENTO
@@ -40,6 +100,7 @@ export const SectorPagos = () => {
             type="text"
             placeholder="Ej: MASCOTA10"
             style={{ borderRadius: "20px" }}
+            id="codigoDescuento"
           />
           <Button
             variant="warning"
@@ -48,6 +109,7 @@ export const SectorPagos = () => {
               color: "white",
               fontWeight: "bold",
             }}
+            onClick={aplicarDescuento}
           >
             APLICAR
           </Button>
@@ -56,23 +118,35 @@ export const SectorPagos = () => {
 
       <hr />
 
-      {/* --- TOTAL --- */}
+      {/* TOTAL */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <span className="fw-bold fs-5">Total</span>
         <div className="text-end">
           <small className="text-muted d-block" style={{ fontSize: "0.7rem" }}>
             IVA incluido
           </small>
-          <span className="fw-bold fs-2">$82.99</span>
+          <span className="fw-bold fs-2">$ {formatearPrecio(total)}</span>
         </div>
       </div>
 
-      {/* --- BOTON FINALIZAR --- */}
-      <Link to="/checkout" variant="warning" size="lg" className="w-100 mb-3 btn-finalizar btn">
+      {/* BOTÓN FINALIZAR */}
+      <Link
+        to="/checkout"
+        className="w-100 mb-3 btn btn-warning"
+        style={{ borderRadius: "20px", fontWeight: "bold" }}
+        state={{
+          producto,
+          cantidad,
+          subtotal: formatearPrecio(subtotal),
+          envio: formatearPrecio(envio),
+          descuento: formatearPrecio(descuento),
+          total: formatearPrecio(total),
+        }}
+      >
         FINALIZAR COMPRA →
       </Link>
 
-      {/* Iconos de pago simples */}
+      {/* Iconos de pago */}
       <div className="text-center text-muted small">
         <span className="mx-1">VISA</span>
         <span className="mx-1">Naranja x</span>

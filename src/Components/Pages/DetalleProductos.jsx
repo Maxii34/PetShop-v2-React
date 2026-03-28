@@ -7,7 +7,7 @@ import {
   InputGroup,
   Form,
 } from "react-bootstrap";
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Image } from "react-bootstrap";
 import { useState } from "react";
 
@@ -235,13 +235,14 @@ export const DetalleProductos = () => {
           {/* Sección de compra */}
           <div className="border-top pt-3 mt-3">
             {/* CTA principal */}
-            <Button
-              className="w-75 py-2 fw-semibold shadow-md"
-              variant="success"
+            <Link
+              className="w-75 py-2 fw-semibold shadow-md btn btn-success"
+              state={{producto}}
+              to="/carrito"
             >
               <i className="bi bi-bag me-2"></i>
               Comprar ahora
-            </Button>
+            </Link>
 
             {/* CTA secundario */}
             <Button
