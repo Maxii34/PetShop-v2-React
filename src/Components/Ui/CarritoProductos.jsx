@@ -46,8 +46,8 @@ export const CarritoProductos = ({ producto, setProductox }) => {
         </div>
 
         <div className="d-flex align-items-center gap-2 mx-1">
-          <span className="precio-final">{producto.precio}</span>
-          <button className="btn-eliminar-item">
+          <span className="precio-final">$ {producto.precio}</span>
+          <button className="eliminar-item">
             <BsTrash size={19} />
           </button>
         </div>

@@ -310,12 +310,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .img-circular img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.img-circular img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 /* 2. Selector tipo "Pastilla" */
@@ -355,17 +362,18 @@
   color: #212529;
 }
 
-.btn-eliminar-item {
+.eliminar-item {
   background: none;
   border: none;
-  color: #424140; 
+  color: #e60e0e; 
   cursor: pointer;
   padding: 5px;
   transition: color 0.2s;
 }
 
-.btn-eliminar-item:hover {
-  color: #dc3545; 
+.eliminar-item:hover {
+  color: #f7011a; 
+  transform: translateY(-3px);
 }
 
 .card-pagos {
