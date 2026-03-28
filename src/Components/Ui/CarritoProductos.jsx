@@ -4,7 +4,6 @@ import { useState } from "react";
 
 export const CarritoProductos = ({ producto, setProductox }) => {
   const [cantidad, setCantidad] = useState(1);
-  console.log(cantidad)
 
 
   const handleCantidad = (operacion) => {

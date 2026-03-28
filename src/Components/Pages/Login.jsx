@@ -33,7 +33,11 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
       });
       reset();
       handleClose();
-      navegacion("/admin/productos");
+      if (respuesta.usuario.rol === "admin") {
+        navegacion("/admin/productos");
+      } else {
+        navegacion("/");
+      }
     } else {
       Swal.fire({
         title: "Error",

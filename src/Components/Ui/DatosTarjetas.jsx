@@ -1,4 +1,3 @@
-// 1. IMPORTACIONES CORREGIDAS (Solo una vez cada librería)
 import { Row, Col } from "react-bootstrap";
 import { SiVisa, SiMastercard, SiMercadopago } from "react-icons/si";
 import { FaCreditCard, FaLock } from "react-icons/fa";

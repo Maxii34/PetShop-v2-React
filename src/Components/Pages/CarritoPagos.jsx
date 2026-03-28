@@ -9,7 +9,6 @@ export const CarritoPagos = () => {
 
   // Estado con la cantidad
   const [productox, setProductox] = useState(1);
-  console.log("CarritoPagos:", productox);
 
   return (
     <>

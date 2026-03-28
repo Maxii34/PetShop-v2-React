@@ -6,7 +6,6 @@ import { FaCartArrowDown } from "react-icons/fa6";
 import "./EstilosCards.css";
 
 export const CardsProductos = ({ producto }) => {
-  console.log(producto);
 
   const precioDividido = (producto.precio / 3).toFixed(0);
   const precioEfectivo = producto.precio * 0.9;
@@ -74,8 +73,10 @@ export const CardsProductos = ({ producto }) => {
 
       {/* Botones fuera del Link */}
       <div className="card-body d-flex justify-content-center gap-2 pt-0">
-        <button
+        <Link
           className="btn btn-buy flex-grow-1 d-flex justify-content-center align-items-center"
+          to="/carrito"
+          state={{ producto }}
           style={{ fontSize: "0.9rem" }}
           onClick={(e) => {
             e.stopPropagation(); // Evita que se propague al Link padre
@@ -83,7 +84,7 @@ export const CardsProductos = ({ producto }) => {
           }}
         >
           <RiMoneyDollarCircleFill className="fs-5 me-1" /> Comprar
-        </button>
+        </Link>
         <button
           className="btn btn-add-cart flex-grow-1 d-flex align-items-center justify-content-center bg-light text-dark border"
           title="Agregar al carrito"
