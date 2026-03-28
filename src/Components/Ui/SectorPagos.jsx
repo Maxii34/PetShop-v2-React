@@ -27,8 +27,8 @@ export const SectorPagos = ({ producto, cantidad }) => {
       .value.trim()
       .toUpperCase();
 
-    if (codigo === "MASCOTA10") {
-      const desc = subtotal * 0.1;
+    if (codigo === "MASCOTA15") {
+      const desc = subtotal * 0.15;
       setDescuento(desc);
       setCodigoAplicado(codigo);
       Swal.fire({
@@ -65,10 +65,11 @@ export const SectorPagos = ({ producto, cantidad }) => {
       <h3 className="mb-4 fw-bold">Resumen del Pedido</h3>
 
       {/* Producto y cantidad */}
-      <div className="d-flex justify-content-between mb-2 pb-2 border-bottom">
-        <span className="text-muted">
-          <strong>{producto?.nombre}</strong> x {cantidad}
+      <div className="d-flex justify-content-between mb-2 pb-2 border-bottom flex-wrap">
+        <span className="text-muted w-100 mb-2">
+          <strong>{producto?.nombre}</strong>
         </span>
+        <span className="text-muted">x {cantidad}</span>
         <span className="fw-bold">$ {formatearPrecio(subtotal)}</span>
       </div>
 

@@ -10,10 +10,10 @@ export const CarritoProductos = ({ producto, setProductox }) => {
   const handleCantidad = (operacion) => {
     if (operacion === "sumar") {
       setCantidad(cantidad + 1);
-      setProductox(cantidad)
+      setProductox(cantidad + 1);
     } else if (operacion === "restar" && cantidad > 1) {
       setCantidad(cantidad - 1);
-      setProductox(cantidad)
+      setProductox(cantidad - 1);
     }
   };
   return (
