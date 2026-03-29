@@ -85,7 +85,7 @@ function App() {
           <Route path="detalle" element={<DetalleProductos />} />
           <Route path="carrito" element={<CarritoPagos />} />
           <Route path="checkout" element={<CheckoutPagos />} />
-          <Route path="confirmacion" element={<ConfirmacionPago />} />
+          <Route path="confirmacion" element={<ConfirmacionPago usuarioLogueado={usuarioLogueado} />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="sidebar" element={<Sidebar />} />
 

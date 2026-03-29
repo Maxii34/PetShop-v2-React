@@ -2,7 +2,7 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { FaCheckCircle, FaHome, FaPrint } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 
-export const ConfirmacionPago = () => {
+export const ConfirmacionPago = ({usuarioLogueado}) => {
   const location = useLocation();
 
   const {
@@ -59,17 +59,17 @@ export const ConfirmacionPago = () => {
               </div>
 
               <p className="small text-muted mb-4">
-                Hemos enviado un correo de confirmación a{" "}
-                <span className="fw-bold">usuario@ejemplo.com</span>
+                Hemos enviado un correo con los datos de la compra a:{" "}
+                <span className="fw-bold">{usuarioLogueado?.email}</span>
               </p>
 
-              <div className="d-flex gap-2 justify-content-center">
+              <div className="d-flex gap-2 justify-content-center mt-3">
                 <Link to="/" className="text-decoration-none">
-                  <Button className="btn-success">
+                  <Button variant="success" className="px-4 py-2 d-flex align-items-center justify-content-center h-100">
                     <FaHome className="me-2" /> Volver
                   </Button>
                 </Link>
-                <Button variant="btn btn-outline-secondary" onClick={() => window.print()}>
+                <Button variant="outline-secondary" className="px-4 py-2 d-flex align-items-center justify-content-center h-100" onClick={() => window.print()}>
                   <FaPrint className="me-2" /> Imprimir
                 </Button>
               </div>
@@ -82,7 +82,7 @@ export const ConfirmacionPago = () => {
               <div className="mb-3">
                 <p className="text-muted small mb-1">{producto?.nombre}</p>
                 <p className="fw-bold">
-                  Cantidad: {cantidad} x ${(subtotal / cantidad).toLocaleString("es-AR")}
+                  Cantidad: {cantidad} x ${(producto?.precio || (subtotal * cantidad)).toLocaleString("es-AR")}
                 </p>
               </div>
 

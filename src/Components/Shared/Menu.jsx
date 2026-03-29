@@ -50,7 +50,7 @@ export const Menu = ({
                 )}
 
                 {(usuarioLogueado?.usuario?.rol === "usuario" || usuarioLogueado?.rol === "usuario") && (
-                  <span className="text-light">
+                  <span className="text-success fw-bold ">
                     ¡Hola {usuarioLogueado?.usuario?.nombre || usuarioLogueado?.nombre}!
                   </span>
                 )}
