@@ -132,7 +132,7 @@ export const SectorPagos = ({ producto, cantidad }) => {
 
       {/* BOTÓN FINALIZAR */}
       <Link
-        to="/checkout"
+        to="/user/checkout"
         className="w-100 mb-3 btn btn-warning"
         style={{ borderRadius: "20px", fontWeight: "bold" }}
         state={{

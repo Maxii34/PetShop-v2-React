@@ -14,7 +14,7 @@ export const CardsProductos = ({ producto }) => {
     <div className="card card-wrapper product-card h-100">
       {/* Contenedor clickeable con Link */}
       <Link
-        to="/detalle"
+        to="/user/detalle"
         state={{ producto }}
         className="text-decoration-none text-dark"
         style={{ cursor: "pointer" }}
@@ -75,7 +75,7 @@ export const CardsProductos = ({ producto }) => {
       <div className="card-body d-flex justify-content-center gap-2 pt-0">
         <Link
           className="btn btn-buy flex-grow-1 d-flex justify-content-center align-items-center"
-          to="/carrito"
+          to="/user/carrito"
           state={{ producto }}
           style={{ fontSize: "0.9rem" }}
           onClick={(e) => {

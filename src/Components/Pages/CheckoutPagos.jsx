@@ -53,7 +53,7 @@ export const CheckoutPagos = () => {
     console.log("Datos del formulario:", data);
     console.log("Método de pago:", paymentMethod);
     // Aquí irá la lógica de pago
-    navigate("/confirmacion", {
+    navigate("/user/confirmacion", {
       state: {
         producto,
         cantidad,

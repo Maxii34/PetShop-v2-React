@@ -23,24 +23,25 @@ import {
   Usuarios,
 } from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
+import ProtectorUser from "./Components/Routes/ProtectorUser.jsx";
 
 function App() {
-  //lee sessionStorage
+  // Lee sessionStorage
   const sesionUsuario =
     JSON.parse(sessionStorage.getItem("usuariokey")) || false;
 
-  //Esado de login de usuario
+  // Estado de login de usuario
   const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
-  //Estado que guarda productos
+  
+  // Estado que guarda productos
   const [productos, setProductos] = useState([]);
 
-  //Guarda el estado de usuario en sessionStore
+  // Guarda el estado de usuario en sessionStore
   useEffect(() => {
     sessionStorage.setItem("usuariokey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
 
-
-
+  // Modal states
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -50,7 +51,6 @@ function App() {
   const handleShow2 = () => setShow2(true);
 
   const [show3, setShow3] = useState(false);
-
   const handleClose3 = () => setShow3(false);
   const handleShow3 = () => setShow3(true);
 
@@ -79,26 +79,36 @@ function App() {
         showCarrito={showCarrito}
       />
       <Register handleClose2={handleClose2} show2={show2} />
+
       <main className="">
         <Routes>
+          {/* ============ RUTAS PÚBLICAS ============ */}
           <Route path="/" element={<Inicio productos={productos} setProductos={setProductos} />} />
-          <Route path="detalle" element={<DetalleProductos />} />
-          <Route path="carrito" element={<CarritoPagos />} />
-          <Route path="checkout" element={<CheckoutPagos />} />
-          <Route path="confirmacion" element={<ConfirmacionPago usuarioLogueado={usuarioLogueado} />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="sidebar" element={<Sidebar />} />
 
-          {/* Ruta protegida: /admin */}
-          <Route
-            path="admin"
+          {/* ============ RUTAS PROTEGIDAS: USUARIO ============ */}
+          <Route 
+            path="user" 
+            element={<ProtectorUser usuarioLogueado={usuarioLogueado} />}
+          >
+            <Route index element={<Inicio productos={productos} setProductos={setProductos} />} />
+            <Route path="detalle" element={<DetalleProductos />} />
+            <Route path="carrito" element={<CarritoPagos />} />
+            <Route path="checkout" element={<CheckoutPagos />} />
+            <Route path="confirmacion" element={<ConfirmacionPago usuarioLogueado={usuarioLogueado} />} />
+          </Route>
+
+          {/* ============ RUTAS PROTEGIDAS: ADMIN ============ */}
+          <Route 
+            path="admin" 
             element={<ProtectorAdmin usuarioLogueado={usuarioLogueado} />}
           >
-            {/* El Dashboard actúa como la plantilla principal */}
+            {/* Dashboard es el LAYOUT principal para todas las subrutas */}
             <Route element={<Dashboard />}>
-              {/* Ruta base del dashboard, sin nada dentro */}
-              <Route index element={<h3 className="text-center text-gray-500 mt-10">Selecciona una opción en el menú</h3>} />
-
+              
+              {/* Ruta index: /admin renderiza el Dashboard con su contenido por defecto */}
+              <Route index element={null} />
+              
+              {/* Subrutas: se renderizan dentro del <Outlet /> de Dashboard */}
               <Route
                 path="productos"
                 element={
@@ -108,9 +118,7 @@ function App() {
                   />
                 }
               />
-
               <Route path="usuarios" element={<Usuarios />} />
-
               <Route
                 path="crear"
                 element={
@@ -129,6 +137,8 @@ function App() {
               />
             </Route>
           </Route>
+
+          {/* ============ RUTA 404 ============ */}
           <Route path="*" element={<Error404 />} />
         </Routes>
       </main>

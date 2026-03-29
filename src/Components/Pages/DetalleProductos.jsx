@@ -238,7 +238,7 @@ export const DetalleProductos = () => {
             <Link
               className="w-75 py-2 fw-semibold shadow-md btn btn-success"
               state={{producto}}
-              to="/carrito"
+              to="/user/carrito"
             >
               <i className="bi bi-bag me-2"></i>
               Comprar ahora
