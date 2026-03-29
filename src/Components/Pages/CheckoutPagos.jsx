@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import { SiMercadopago } from "react-icons/si";
 import { DatosTarjetas } from "../Ui/DatosTarjetas";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useLocation } from "react-router";
 
 export const CheckoutPagos = () => {
@@ -20,6 +20,8 @@ export const CheckoutPagos = () => {
   const { producto, cantidad, subtotal, envio, descuento, total } =
     location.state || {};
   const [paymentMethod, setPaymentMethod] = useState(null);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -51,6 +53,17 @@ export const CheckoutPagos = () => {
     console.log("Datos del formulario:", data);
     console.log("Método de pago:", paymentMethod);
     // Aquí irá la lógica de pago
+    navigate("/confirmacion", {
+      state: {
+        producto,
+        cantidad,
+        subtotal,
+        envio,
+        descuento,
+        total,
+        metodoPago: paymentMethod,
+      },
+    });
   };
 
   const isFormValid =
