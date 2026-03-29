@@ -17,8 +17,9 @@ import { useLocation } from "react-router";
 
 export const CheckoutPagos = () => {
   const location = useLocation();
-  const { producto, cantidad, subtotal, envio, descuento, total } =
+  const { productos, subtotal, envio, descuento, total } =
     location.state || {};
+  const cantidad = productos?.reduce((acc, item) => acc + (item.cantidad || 1), 0) || 0;
   const [paymentMethod, setPaymentMethod] = useState(null);
 
   const navigate = useNavigate();
@@ -55,13 +56,14 @@ export const CheckoutPagos = () => {
     // Aquí irá la lógica de pago
     navigate("/user/confirmacion", {
       state: {
-        producto,
+        productos,
         cantidad,
         subtotal,
         envio,
         descuento,
         total,
         metodoPago: paymentMethod,
+        ...data,
       },
     });
   };

@@ -5,7 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import "./EstilosCards.css";
 
-export const ContainerGrid = ({ productos }) => {
+export const ContainerGrid = ({ productos, handleShowCarrito }) => {
   const [visible, setVisible] = useState(10);
 
   // Inicializamos AOS al cargar el componente
@@ -47,7 +47,7 @@ export const ContainerGrid = ({ productos }) => {
             data-aos="fade-up"
             data-aos-delay={indice * 100} // Efecto escalera
           >
-            <CardsProductos producto={itemProducto} />
+            <CardsProductos producto={itemProducto} handleShowCarrito={handleShowCarrito} />
           </div>
         ))}
       </div>

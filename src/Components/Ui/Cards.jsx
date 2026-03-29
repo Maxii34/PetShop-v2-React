@@ -2,13 +2,17 @@ import { Link } from "react-router-dom";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { BiCreditCard } from "react-icons/bi";
 import { FaCartArrowDown } from "react-icons/fa6";
-
 import "./EstilosCards.css";
+import Swal from "sweetalert2";
 
-export const CardsProductos = ({ producto }) => {
+export const CardsProductos = ({ producto, handleShowCarrito }) => {
 
   const precioDividido = (producto.precio / 3).toFixed(0);
   const precioEfectivo = producto.precio * 0.9;
+
+  const agregarAlCarrito = () => {
+    handleShowCarrito();
+  }
 
   return (
     <div className="card card-wrapper product-card h-100">
@@ -75,12 +79,11 @@ export const CardsProductos = ({ producto }) => {
       <div className="card-body d-flex justify-content-center gap-2 pt-0">
         <Link
           className="btn btn-buy flex-grow-1 d-flex justify-content-center align-items-center"
-          to="/user/carrito"
+          to="/user/comprar"
           state={{ producto }}
           style={{ fontSize: "0.9rem" }}
           onClick={(e) => {
             e.stopPropagation(); // Evita que se propague al Link padre
-            // Aquí va la lógica de compra
           }}
         >
           <RiMoneyDollarCircleFill className="fs-5 me-1" /> Comprar
@@ -89,8 +92,31 @@ export const CardsProductos = ({ producto }) => {
           className="btn btn-add-cart flex-grow-1 d-flex align-items-center justify-content-center bg-light text-dark border"
           title="Agregar al carrito"
           onClick={(e) => {
+            e.preventDefault();
             e.stopPropagation(); // Evita que se propague al Link padre
-            // Aquí va la lógica de agregar al carrito
+            
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const tokenIdentificador = producto._id || producto.id;
+            const existe = carrito.find(item => (item._id || item.id) === tokenIdentificador);
+            
+            if(existe) {
+              existe.cantidad = (existe.cantidad || 1) + 1;
+            } else {
+              carrito.push({ ...producto, cantidad: 1 });
+            }
+            
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            Swal.fire({
+              toast: true,
+              position: 'top-end',
+              icon: 'success',
+              title: 'Producto agregado',
+              showConfirmButton: false,
+              timer: 1500,
+              timerProgressBar: true,
+            });
+
+            handleShowCarrito();
           }}
         > <FaCartArrowDown className="fs-5 me-1" /> Agregar
         </button>

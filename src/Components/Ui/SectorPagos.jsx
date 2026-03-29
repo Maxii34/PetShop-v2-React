@@ -4,14 +4,18 @@ import "./EstilosCards.css";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-export const SectorPagos = ({ producto, cantidad }) => {
+export const SectorPagos = ({ productos = [] }) => {
   const [descuento, setDescuento] = useState(0);
   const [codigoAplicado, setCodigoAplicado] = useState("");
 
-  // Calcular subtotal
-  const subtotal = producto?.precio * cantidad || 0;
-  const envio = subtotal >= 17000 ? 0 : 5.0;
-  const total = subtotal + envio - descuento;
+  // Calcular subtotal sumando todos los productos del carrito
+  const subtotal = productos.reduce(
+    (acc, item) => acc + item.precio * (item.cantidad || 1),
+    0
+  );
+  
+  const envio = subtotal >= 17000 || subtotal === 0 ? 0 : 5000.0; // Cambiado a 5000 de costo de envío si no llega al monto (5.0 era muy bajo para pesos)
+  const total = subtotal > 0 ? subtotal + envio - descuento : 0;
 
   // Función para formatear precio
   const formatearPrecio = (numero) => {
@@ -27,14 +31,14 @@ export const SectorPagos = ({ producto, cantidad }) => {
       .value.trim()
       .toUpperCase();
 
-    if (codigo === "MASCOTA15") {
+    if (codigo === "MASCOTA15" && subtotal > 0) {
       const desc = subtotal * 0.15;
       setDescuento(desc);
       setCodigoAplicado(codigo);
       Swal.fire({
         icon: "success",
         title: "¡Código aplicado!",
-        text: "10% de descuento",
+        text: "15% de descuento",
         timer: 1000,
         showConfirmButton: false,
       });
@@ -48,7 +52,7 @@ export const SectorPagos = ({ producto, cantidad }) => {
     } else {
       Swal.fire({
         icon: "error",
-        title: "Código de descuento no válido",
+        title: subtotal > 0 ? "Código de descuento no válido" : "Agrega productos antes",
         timer: 1000,
         showConfirmButton: false,
       });
@@ -64,17 +68,19 @@ export const SectorPagos = ({ producto, cantidad }) => {
     >
       <h3 className="mb-4 fw-bold">Resumen del Pedido</h3>
 
-      {/* Producto y cantidad */}
-      <div className="d-flex justify-content-between mb-2 pb-2 border-bottom flex-wrap">
-        <span className="text-muted w-100 mb-2">
-          <strong>{producto?.nombre}</strong>
-        </span>
-        <span className="text-muted">x {cantidad}</span>
-        <span className="fw-bold">$ {formatearPrecio(subtotal)}</span>
-      </div>
+      {/* Lista de productos minimizada */}
+      {productos.map((prod) => (
+        <div key={prod._id || prod.id} className="d-flex justify-content-between mb-2 pb-2 border-bottom flex-wrap">
+          <span className="text-muted w-100 mb-2">
+            <strong>{prod.nombre}</strong>
+          </span>
+          <span className="text-muted">x {prod.cantidad || 1}</span>
+          <span className="fw-bold">$ {formatearPrecio(prod.precio * (prod.cantidad || 1))}</span>
+        </div>
+      ))}
 
       {/* Envío */}
-      <div className="d-flex justify-content-between mb-2">
+      <div className="d-flex justify-content-between mb-2 mt-3">
         <span className="text-muted">
           Envío Estimado <i className="bi bi-truck"></i>
         </span>
@@ -99,7 +105,7 @@ export const SectorPagos = ({ producto, cantidad }) => {
         <div className="d-flex gap-2">
           <Form.Control
             type="text"
-            placeholder="Ej: MASCOTA10"
+            placeholder="Ej: MASCOTA15"
             style={{ borderRadius: "20px" }}
             id="codigoDescuento"
           />
@@ -132,17 +138,16 @@ export const SectorPagos = ({ producto, cantidad }) => {
 
       {/* BOTÓN FINALIZAR */}
       <Link
-        to="/user/checkout"
-        className="w-100 mb-3 btn btn-warning"
+        to={productos.length > 0 ? "/user/checkout" : "#"}
+        className={`w-100 mb-3 btn btn-warning ${productos.length === 0 ? "disabled" : ""}`}
         style={{ borderRadius: "20px", fontWeight: "bold" }}
-        state={{
-          producto,
-          cantidad,
+        state={productos.length > 0 ? {
+          productos, // Enviamos el array
           subtotal: formatearPrecio(subtotal),
           envio: formatearPrecio(envio),
           descuento: formatearPrecio(descuento),
           total: formatearPrecio(total),
-        }}
+        } : null}
       >
         FINALIZAR COMPRA →
       </Link>

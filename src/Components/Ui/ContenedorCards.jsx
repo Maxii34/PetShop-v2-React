@@ -4,7 +4,7 @@ import AOS from "aos";
 import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-export const ContenedorCards = ({ productos }) => {
+export const ContenedorCards = ({ productos, handleShowCarrito }) => {
   useEffect(() => {
   AOS.init({
     duration: 1000, //
@@ -24,7 +24,7 @@ export const ContenedorCards = ({ productos }) => {
                 data-aos="zoom-in" 
                 data-aos-delay={`${300 + Math.min(index * 100, 1000)}`}
               >
-                <CardsCarousel producto={producto} />
+                <CardsCarousel producto={producto} handleShowCarrito={handleShowCarrito} />
               </div>
             ))}
             </div>

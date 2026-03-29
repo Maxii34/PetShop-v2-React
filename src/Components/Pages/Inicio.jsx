@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { CarouselComponente, ContainerGrid, ContenedorCards, MuralInstagran } from "../index.jsx";
 import { listarProductos as obtenerProductosApi } from "../helpers/productos.queries.js";
 
-export function Inicio({productos, productosOferta, setProductos }) {
+export function Inicio({productos, setProductos, handleShowCarrito }) {
 
     const cargarProductos = async () => {
         const listado = await obtenerProductosApi();
@@ -19,8 +19,8 @@ export function Inicio({productos, productosOferta, setProductos }) {
         <section>
             <CarouselComponente />
             <div className=" container-fluid mt-5">
-                <ContainerGrid  productos={productos} />
-                <ContenedorCards productos={productos} />
+                <ContainerGrid  productos={productos} handleShowCarrito={handleShowCarrito} />
+                <ContenedorCards productos={productos} handleShowCarrito={handleShowCarrito} />
             </div>
             <MuralInstagran />
         </section>

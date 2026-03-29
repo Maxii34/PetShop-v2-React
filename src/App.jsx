@@ -32,7 +32,7 @@ function App() {
 
   // Estado de login de usuario
   const [usuarioLogueado, setusuarioLogueado] = useState(sesionUsuario);
-  
+
   // Estado que guarda productos
   const [productos, setProductos] = useState([]);
 
@@ -83,56 +83,68 @@ function App() {
       <main className="">
         <Routes>
           {/* ============ RUTAS PÚBLICAS ============ */}
-          <Route path="/" element={<Inicio productos={productos} setProductos={setProductos} />} />
+          <Route
+            path="/"
+            element={
+              <Inicio
+                productos={productos}
+                setProductos={setProductos}
+                handleShowCarrito={handleShowCarrito}
+              />
+            }
+          />
 
           {/* ============ RUTAS PROTEGIDAS: USUARIO ============ */}
-          <Route 
-            path="user" 
+          <Route
+            path="user"
             element={<ProtectorUser usuarioLogueado={usuarioLogueado} />}
           >
-            <Route index element={<Inicio productos={productos} setProductos={setProductos} />} />
+            <Route
+              index
+              element={
+                <Inicio productos={productos} setProductos={setProductos} />
+              }
+            />
             <Route path="detalle" element={<DetalleProductos />} />
-            <Route path="carrito" element={<CarritoPagos />} />
+
+            <Route path="comprar" element={<CarritoPagos titulo="Compra" />} />
+            <Route path="carrito" element={<CarritoPagos titulo="Carrito" />} />
+
             <Route path="checkout" element={<CheckoutPagos />} />
-            <Route path="confirmacion" element={<ConfirmacionPago usuarioLogueado={usuarioLogueado} />} />
+            <Route
+              path="confirmacion"
+              element={<ConfirmacionPago usuarioLogueado={usuarioLogueado} />}
+            />
           </Route>
 
           {/* ============ RUTAS PROTEGIDAS: ADMIN ============ */}
-          <Route 
-            path="admin" 
+          <Route
+            path="admin"
             element={<ProtectorAdmin usuarioLogueado={usuarioLogueado} />}
           >
             {/* Dashboard es el LAYOUT principal para todas las subrutas */}
             <Route element={<Dashboard />}>
-              
               {/* Ruta index: /admin renderiza el Dashboard con su contenido por defecto */}
               <Route index element={null} />
-              
+
               {/* Subrutas: se renderizan dentro del <Outlet /> de Dashboard */}
               <Route
                 path="productos"
                 element={
-                  <Admin
-                    productos={productos}
-                    setProductos={setProductos}
-                  />
+                  <Admin productos={productos} setProductos={setProductos} />
                 }
               />
               <Route path="usuarios" element={<Usuarios />} />
               <Route
                 path="crear"
                 element={
-                  <FormularioProductos
-                    titulo="Formulario: Agregar producto"
-                  />
+                  <FormularioProductos titulo="Formulario: Agregar producto" />
                 }
               />
               <Route
                 path="editar/:id"
                 element={
-                  <FormularioProductos
-                    titulo="Formulario: Editar producto"
-                  />
+                  <FormularioProductos titulo="Formulario: Editar producto" />
                 }
               />
             </Route>

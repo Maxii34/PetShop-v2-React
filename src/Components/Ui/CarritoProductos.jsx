@@ -1,20 +1,17 @@
 import { BsTrash, BsPlus, BsDash } from "react-icons/bs";
 import "./EstilosCards.css";
-import { useState } from "react";
 
-export const CarritoProductos = ({ producto, setProductox }) => {
-  const [cantidad, setCantidad] = useState(1);
-
+export const CarritoProductos = ({ producto, actualizarCantidad, eliminarProducto }) => {
+  const cantidad = producto.cantidad || 1;
 
   const handleCantidad = (operacion) => {
     if (operacion === "sumar") {
-      setCantidad(cantidad + 1);
-      setProductox(cantidad + 1);
+      actualizarCantidad(producto._id || producto.id, cantidad + 1);
     } else if (operacion === "restar" && cantidad > 1) {
-      setCantidad(cantidad - 1);
-      setProductox(cantidad - 1);
+      actualizarCantidad(producto._id || producto.id, cantidad - 1);
     }
   };
+  
   return (
     <>
       <div className="card-producto d-flex align-items-center justify-content-between">
@@ -22,15 +19,15 @@ export const CarritoProductos = ({ producto, setProductox }) => {
         <div className="d-flex align-items-center gap-2">
           {/* Contenedor circular de la imagen */}
           <div className="img-circular">
-            <img src={producto.imagenes[0]} alt="Producto" />
+            <img src={producto?.imagenes?.[0] || producto?.img} alt="Producto" />
           </div>
 
           <div>
             <h6 className="mb-1 fw-bold text-dark">
-              {producto.nombre || "Producto no encontrado"}
+              {producto?.nombre || "Producto no encontrado"}
             </h6>
             <small className="text-muted fw-normal">
-              Peso: {producto.detalles.peso || ""}
+              Peso: {producto?.detalles?.peso || "N/A"}
             </small>
           </div>
         </div>
@@ -46,8 +43,12 @@ export const CarritoProductos = ({ producto, setProductox }) => {
         </div>
 
         <div className="d-flex align-items-center gap-2 mx-1">
-          <span className="precio-final">$ {producto.precio}</span>
-          <button className="eliminar-item">
+          <span className="precio-final">$ {producto.precio * cantidad}</span>
+          <button 
+            className="eliminar-item bg-transparent border-0 text-danger" 
+            title="Eliminar producto"
+            onClick={() => eliminarProducto(producto._id || producto.id)}
+          >
             <BsTrash size={19} />
           </button>
         </div>

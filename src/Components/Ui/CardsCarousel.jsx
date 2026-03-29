@@ -5,7 +5,7 @@ import { FaCartArrowDown } from "react-icons/fa6";
 
 import "./EstilosCards.css";
 
-export const CardsCarousel = ({ producto }) => {
+export const CardsCarousel = ({ producto, handleShowCarrito }) => {
   if (!producto) return null;
 
   const precioDividido = Math.floor(producto.precio / 3);
@@ -100,8 +100,36 @@ export const CardsCarousel = ({ producto }) => {
           className="btn btn-add-cart flex-grow-1 d-flex align-items-center justify-content-center bg-light text-dark border"
           title="Agregar al carrito"
           onClick={(e) => {
+            e.preventDefault();
             e.stopPropagation(); // Evita que se propague al Link padre
-            // Aquí va la lógica de agregar al carrito
+            
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const tokenIdentificador = producto._id || producto.id;
+            const existe = carrito.find(item => (item._id || item.id) === tokenIdentificador);
+            
+            if(existe) {
+              existe.cantidad = (existe.cantidad || 1) + 1;
+            } else {
+              carrito.push({ ...producto, cantidad: 1 });
+            }
+            
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            
+            import("sweetalert2").then(Swal => {
+              Swal.default.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Producto agregado',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+              });
+            });
+
+            if (handleShowCarrito) {
+              handleShowCarrito();
+            }
           }}
         > <FaCartArrowDown className="fs-5 me-1" /> Agregar
         </button>

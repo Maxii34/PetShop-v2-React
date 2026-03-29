@@ -238,19 +238,20 @@ export const DetalleProductos = () => {
             <Link
               className="w-75 py-2 fw-semibold shadow-md btn btn-success"
               state={{producto}}
-              to="/user/carrito"
+              to="/user/comprar"
             >
               <i className="bi bi-bag me-2"></i>
               Comprar ahora
             </Link>
 
             {/* CTA secundario */}
-            <Button
-              className="w-75 mt-2 py-2 fw-semibold shadow-md"
-              variant="outline-dark"
+            <Link
+              className="w-75 mt-2 py-2 fw-semibold shadow-md btn btn-outline-dark"
+              to="/user/carrito"
+              state={{producto}}
             >
               Agregar al carrito
-            </Button>
+            </Link>
 
             {/* Envíos */}
             <div className="mt-4 small border-top pt-3">

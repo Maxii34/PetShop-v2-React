@@ -6,7 +6,7 @@ export const ConfirmacionPago = ({usuarioLogueado}) => {
   const location = useLocation();
 
   const {
-    producto,
+    productos,
     cantidad,
     subtotal,
     envio,
@@ -79,12 +79,14 @@ export const ConfirmacionPago = ({usuarioLogueado}) => {
             <Card className="mt-4 p-4 shadow-md border-0 rounded-4">
               <h6 className="fw-bold mb-3">Resumen del Pedido</h6>
 
-              <div className="mb-3">
-                <p className="text-muted small mb-1">{producto?.nombre}</p>
-                <p className="fw-bold">
-                  Cantidad: {cantidad} x ${(producto?.precio || (subtotal * cantidad)).toLocaleString("es-AR")}
-                </p>
-              </div>
+              {productos?.map((prod) => (
+                <div className="mb-3 border-bottom pb-2" key={prod._id || prod.id}>
+                  <p className="text-muted small mb-1">{prod.nombre}</p>
+                  <p className="fw-bold">
+                    Cantidad: {prod.cantidad || 1} x ${(prod.precio || 0).toLocaleString("es-AR")}
+                  </p>
+                </div>
+              ))}
 
               <hr className="my-3" />
 
