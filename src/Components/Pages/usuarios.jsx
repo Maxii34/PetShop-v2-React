@@ -22,7 +22,7 @@ export const Usuarios = () => {
     if (respuesta && respuesta.ok) {
       setUsuarios(respuesta.usuarios);
     } else if (respuesta && Array.isArray(respuesta)) {
-      setUsuarios(respuesta); // Por si en algún momento el backend devuelve un arreglo directo
+      setUsuarios(respuesta);
     } else {
       Swal.fire({
         title: "Error",
