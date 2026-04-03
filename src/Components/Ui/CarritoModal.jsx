@@ -39,7 +39,7 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
 
         const totalItems = productosMapeados.reduce(
           (acc, item) => acc + (item.cantidad || 1),
-          0
+          0,
         );
 
         localStorage.setItem("carritoCantidad", totalItems);
@@ -66,7 +66,7 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
 
   const totalCompra = carrito.reduce(
     (acc, item) => acc + item.precio * (item.cantidad || 1),
-    0
+    0,
   );
 
   return (
@@ -77,9 +77,14 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
 
       <Modal.Body className="p-0">
         {carrito.length === 0 ? (
-          <p className="text-center my-4 fs-5 text-muted">
-            El carrito está vacío.
-          </p>
+          <>
+          <div className="d-flex flex-column align-items-center">
+            <p className="text-center my-4 fs-5 text-muted">
+              El carrito está vacío, <br /> Agrega productos para comenzar a comprar. 
+            </p>
+            <span className="text-center my-4 fs-5 text-muted">O inicia sesión para ver tus productos guardados.</span>
+          </div>
+          </>
         ) : (
           <ListGroup variant="flush">
             {carrito.map((prod, index) => (
@@ -100,9 +105,7 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
                   />
 
                   <div className="flex-grow-1">
-                    <h6 className="text-nombre mb-1 fw-bold">
-                      {prod.nombre}
-                    </h6>
+                    <h6 className="text-nombre mb-1 fw-bold">{prod.nombre}</h6>
 
                     <small className="text-precio d-block mb-1">
                       Precio unitario: ${prod.precio}
@@ -126,9 +129,7 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
                     variant="outline-danger"
                     size="sm"
                     className="btn-eliminar rounded-circle p-2"
-                    onClick={() =>
-                      eliminarProducto(prod._id || prod.id)
-                    }
+                    onClick={() => eliminarProducto(prod._id || prod.id)}
                     title="Eliminar del carrito"
                   >
                     <BsTrash className="fs-5" />
@@ -141,27 +142,31 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
       </Modal.Body>
 
       <Modal.Footer className="cart-footer">
-        <div className="cart-total">
-          Total: <span>${totalCompra}</span>
-        </div>
+        {carrito.length > 0 && (
+          <>
+            <div className="cart-total">
+              Total: <span>${totalCompra}</span>
+            </div>
 
-        <div className="cart-actions">
-          <Link
-            to="/"
-            onClick={handleCloseCarrito}
-            className="btn-continue"
-          >
-            ← Seguir comprando
-          </Link>
+            <div className="cart-actions">
+              <Link
+                to="/"
+                onClick={handleCloseCarrito}
+                className="btn-continue"
+              >
+                ← Seguir comprando
+              </Link>
 
-          <Link
-            to="/user/carrito"
-            onClick={handleCloseCarrito}
-            className="btn-checkout"
-          >
-            Ir a pagar →
-          </Link>
-        </div>
+              <Link
+                to="/user/carrito"
+                onClick={handleCloseCarrito}
+                className="btn-checkout"
+              >
+                Ir a pagar →
+              </Link>
+            </div>
+          </>
+        )}
       </Modal.Footer>
     </Modal>
   );
