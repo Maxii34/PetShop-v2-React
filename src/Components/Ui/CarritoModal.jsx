@@ -4,28 +4,57 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom"; // Se utiliza react-router-dom para compatibilidad
 import { useState, useEffect } from "react";
+import { listarCarrito, eliminarCarrito } from "../helpers/carrito.queries";
 
 export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
   // Inicializamos el carrito localmente
   const [carrito, setCarrito] = useState([]);
 
-  // Cada vez que se abre el modal, cargamos el carrito de localStorage
+  // Cada vez que se abre el modal, cargamos el carrito del backend
   useEffect(() => {
     if (showCarrito) {
-      const storedCart = JSON.parse(localStorage.getItem("carrito")) || [];
-      setCarrito(storedCart);
+      cargarCarritoBackend();
     }
   }, [showCarrito]);
 
-  const eliminarProducto = (id) => {
-    const nuevoCarrito = carrito.filter((prod) => (prod._id || prod.id) !== id);
-    setCarrito(nuevoCarrito);
-    localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+  const cargarCarritoBackend = async () => {
+    try {
+      const res = await listarCarrito();
+      // Verificamos si res es válido y tiene la estructura correcta con items
+      if (res && res.ok && res.carrito && res.carrito.items) {
+        const productosMapeados = res.carrito.items.map(item => {
+           // Si el item tiene un objeto "product" populado
+           if (item.product && typeof item.product === 'object' && item.product.nombre) {
+             return { ...item.product, cantidad: item.quantity, _id: item.product._id || item.product.id };
+           }
+           // Si viene todo junto en item
+           return { ...item, cantidad: item.quantity || item.cantidad || 1 };
+        });
+        setCarrito(productosMapeados);
+      } else {
+        setCarrito([]);
+      }
+    } catch(err) {
+      console.error("Error al cargar el carrito:", err);
+      setCarrito([]);
+    }
   };
 
-  const vaciarCarrito = () => {
+  const eliminarProducto = async (id) => {
+    try {
+      const res = await eliminarCarrito(id);
+      if (res && res.ok) {
+        cargarCarritoBackend(); // Recargar luego de eliminar
+      }
+    } catch (error) {
+      console.error("Error al eliminar el producto", error);
+    }
+  };
+
+  const vaciarCarrito = async () => {
+    // Si no hay endpoint para vaciar, podemos iterar o simplemente limpiar localmente (opcional)
+    // Lo ideal sería un backend request. Por ahora limpiar el estado:
     setCarrito([]);
-    localStorage.removeItem("carrito");
   };
 
   const totalCompra = carrito.reduce(

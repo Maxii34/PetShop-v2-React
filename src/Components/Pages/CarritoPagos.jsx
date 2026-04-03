@@ -1,7 +1,8 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { CarritoProductos, SectorPagos } from "../index.jsx";
 import { useLocation } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { eliminarCarrito } from "../helpers/carrito.queries";
 
 export const CarritoPagos = ({titulo}) => {
   const location = useLocation();
@@ -9,10 +10,33 @@ export const CarritoPagos = ({titulo}) => {
   
   // Usamos un estado para los productos así podemos actualizar las cantidades desde CarritoProductos
   const [productos, setProductos] = useState(() => {
-    const carritoLocal = JSON.parse(localStorage.getItem("carrito")) || [];
-    // Si viene de comprar directo, array de 1. Sino, el carrito.
-    return stateProducto ? [{ ...stateProducto, cantidad: 1 }] : carritoLocal;
+    // Si viene de comprar directo, array de 1. Sino, vacío hasta cargar.
+    return stateProducto ? [{ ...stateProducto, cantidad: 1 }] : [];
   });
+
+  useEffect(() => {
+    if (!stateProducto) {
+      cargarCarritoBackend();
+    }
+  }, [stateProducto]);
+
+  const cargarCarritoBackend = async () => {
+    try {
+      const { listarCarrito } = await import("../helpers/carrito.queries");
+      const res = await listarCarrito();
+      if (res && res.ok && res.carrito && res.carrito.items) {
+        const productosMapeados = res.carrito.items.map(item => {
+           if (item.product && typeof item.product === 'object' && item.product.nombre) {
+             return { ...item.product, cantidad: item.quantity, _id: item.product._id || item.product.id };
+           }
+           return { ...item, cantidad: item.quantity || item.cantidad || 1 };
+        });
+        setProductos(productosMapeados);
+      }
+    } catch(err) {
+      console.error(err);
+    }
+  };
 
   // Función para que CarritoProductos pueda actualizar la cantidad de un ítem
   const actualizarCantidad = (id, nuevaCantidad) => {
@@ -23,17 +47,18 @@ export const CarritoPagos = ({titulo}) => {
       return p;
     });
     setProductos(nuevosProductos);
-    // Solo actualizamos storage si no es una compra directa aislada
-    if (!stateProducto) {
-      localStorage.setItem("carrito", JSON.stringify(nuevosProductos));
-    }
+    // TODO: Idealmente también enviar al backend la nueva cantidad
   };
 
-  const eliminarProducto = (id) => {
+  const eliminarProducto = async (id) => {
     const nuevosProductos = productos.filter((p) => (p._id || p.id) !== id);
     setProductos(nuevosProductos);
     if (!stateProducto) {
-      localStorage.setItem("carrito", JSON.stringify(nuevosProductos));
+      try {
+        await eliminarCarrito(id);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 

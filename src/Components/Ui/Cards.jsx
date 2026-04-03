@@ -4,15 +4,65 @@ import { BiCreditCard } from "react-icons/bi";
 import { FaCartArrowDown } from "react-icons/fa6";
 import "./EstilosCards.css";
 import Swal from "sweetalert2";
+import { crearCarrito } from "../helpers/carrito.queries";
 
 export const CardsProductos = ({ producto, handleShowCarrito }) => {
-
   const precioDividido = (producto.precio / 3).toFixed(0);
   const precioEfectivo = producto.precio * 0.9;
 
-  const agregarAlCarrito = () => {
-    handleShowCarrito();
-  }
+  const agregarAlCarrito = async (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // Evita que se propague al Link padre
+
+    try {
+      // 1. Obtenemos el usuario del sessionStorage
+      const usuario = JSON.parse(sessionStorage.getItem("usuariokey"));
+      const usuarioId = usuario ? (usuario._id || usuario.id) : null;
+
+      if (!usuarioId) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Atención',
+          text: 'Debes iniciar sesión para agregar productos al carrito'
+        });
+        return;
+      }
+      const nuevoCarrito = {
+        user: usuarioId,       
+        items: [{
+          product: producto._id,   
+          quantity: 1
+        }]
+      };
+
+      // 2. Enviamos la petición al backend
+      const respuesta = await crearCarrito(nuevoCarrito);
+      if (respuesta && respuesta.ok) {
+        console.log(respuesta)
+        Swal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'success',
+          title: 'Producto agregado',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        });
+
+        // 3. Mostramos el carrito visualmente 
+        handleShowCarrito();
+      } else {
+        throw new Error("Error en la respuesta del backend");
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al agregar al carrito'
+      });
+    }
+  };
 
   return (
     <div className="card card-wrapper product-card h-100">
@@ -91,33 +141,7 @@ export const CardsProductos = ({ producto, handleShowCarrito }) => {
         <button
           className="btn btn-add-cart flex-grow-1 d-flex align-items-center justify-content-center bg-light text-dark border"
           title="Agregar al carrito"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation(); // Evita que se propague al Link padre
-            
-            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-            const tokenIdentificador = producto._id || producto.id;
-            const existe = carrito.find(item => (item._id || item.id) === tokenIdentificador);
-            
-            if(existe) {
-              existe.cantidad = (existe.cantidad || 1) + 1;
-            } else {
-              carrito.push({ ...producto, cantidad: 1 });
-            }
-            
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-            Swal.fire({
-              toast: true,
-              position: 'top-end',
-              icon: 'success',
-              title: 'Producto agregado',
-              showConfirmButton: false,
-              timer: 1500,
-              timerProgressBar: true,
-            });
-
-            handleShowCarrito();
-          }}
+          onClick={agregarAlCarrito}
         > <FaCartArrowDown className="fs-5 me-1" /> Agregar
         </button>
       </div>
