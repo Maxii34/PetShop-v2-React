@@ -34,7 +34,16 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
           }
           return { ...item, cantidad: item.quantity || item.cantidad || 1 };
         });
+
         setCarrito(productosMapeados);
+
+        const totalItems = productosMapeados.reduce(
+          (acc, item) => acc + (item.cantidad || 1),
+          0
+        );
+
+        localStorage.setItem("carritoCantidad", totalItems);
+        window.dispatchEvent(new Event("carritoActualizado"));
       } else {
         setCarrito([]);
       }
@@ -76,13 +85,13 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
             {carrito.map((prod, index) => (
               <ListGroup.Item
                 key={prod._id || prod.id || index}
-                className="d-flex flex-column flex-sm-row justify-content-between align-items-center py-3"
+                className="cart-item d-flex flex-column flex-sm-row justify-content-between align-items-center py-3"
               >
                 <div className="d-flex align-items-center justify-content-start gap-4 w-100">
                   <img
                     src={prod.imagenes ? prod.imagenes[0] : prod.img}
                     alt={prod.nombre}
-                    className="imagen-Carrito rounded"
+                    className="imagen-Carrito"
                     style={{
                       width: "80px",
                       height: "80px",

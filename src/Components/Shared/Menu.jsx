@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router";
 import { BsCart3 } from "react-icons/bs";
 import { Logout } from "../helpers/queries";
+import { useEffect, useState } from "react";
 
 export const Menu = ({
   usuarioLogueado,
@@ -14,18 +15,38 @@ export const Menu = ({
 }) => {
   const navegacion = useNavigate();
 
-  // Transfromamos cerrarSession a asíncrona (async)
+  const [cantidad, setCantidad] = useState(0);
+
+  // 🔹 Cargar cantidad inicial
+  useEffect(() => {
+    const cantidadGuardada = localStorage.getItem("carritoCantidad");
+    setCantidad(Number(cantidadGuardada) || 0);
+  }, []);
+
+  // 🔥 Escuchar cambios en tiempo real
+  useEffect(() => {
+    const actualizarCantidad = () => {
+      const cantidadGuardada = localStorage.getItem("carritoCantidad");
+      setCantidad(Number(cantidadGuardada) || 0);
+    };
+
+    window.addEventListener("carritoActualizado", actualizarCantidad);
+
+    return () => {
+      window.removeEventListener("carritoActualizado", actualizarCantidad);
+    };
+  }, []);
+
   const cerrarSession = async () => {
-    // Mandamos la petición al backend para que anule la cookie
     await Logout();
 
-    // Limpiamos el estado en React indicando que ya no hay usuario
     setusuarioLogueado(false);
-
-    // Opcional pero recomendado: forzar la limpieza del sessionStorage
     sessionStorage.removeItem("usuariokey");
 
-    // Redirigimos al inicio
+    // 🔥 limpiar carrito visualmente
+    localStorage.removeItem("carritoCantidad");
+    setCantidad(0);
+
     navegacion("/");
   };
 
@@ -33,7 +54,9 @@ export const Menu = ({
     <Navbar expand="lg" className="nav-pri py-3">
       <Container>
         <Navbar.Brand href="#">Apolo PetShop</Navbar.Brand>
+
         <Navbar.Toggle aria-controls="navbarScroll" />
+
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="ms-auto text-center align-items-center gap-3 mt-3 mt-lg-0"
@@ -43,31 +66,32 @@ export const Menu = ({
               Inicio
             </NavLink>
 
-            {(usuarioLogueado?.usuario?.rol === "admin" || usuarioLogueado?.rol === "admin") && (
-                  <NavLink to="/admin/crear" className="btn-customs">
-                    Dashboard Admin
-                  </NavLink>
-                )}
+            {(usuarioLogueado?.usuario?.rol === "admin" ||
+              usuarioLogueado?.rol === "admin") && (
+              <NavLink to="/admin/crear" className="btn-customs">
+                Dashboard Admin
+              </NavLink>
+            )}
 
-                {(usuarioLogueado?.usuario?.rol === "usuario" || usuarioLogueado?.rol === "usuario") && (
-                  <span className="text-success fw-bold ">
-                    ¡Hola {usuarioLogueado?.usuario?.nombre || usuarioLogueado?.nombre}!
-                  </span>
-                )}
+            {(usuarioLogueado?.usuario?.rol === "usuario" ||
+              usuarioLogueado?.rol === "usuario") && (
+              <span className="text-success fw-bold">
+                ¡Hola{" "}
+                {usuarioLogueado?.usuario?.nombre ||
+                  usuarioLogueado?.nombre}
+                !
+              </span>
+            )}
 
-            {/* Validamos: Si HAY un usuario logueado */}
             {usuarioLogueado ? (
-              <>
-                <button
-                  className="btn-customs"
-                  onClick={cerrarSession}
-                  type="button"
-                >
-                  Cerrar sesión
-                </button>
-              </>
+              <button
+                className="btn-customs"
+                onClick={cerrarSession}
+                type="button"
+              >
+                Cerrar sesión
+              </button>
             ) : (
-              // Si NO hay usuario logueado, mostramos iniciar sesión y registro
               <>
                 <button
                   className="btn-customs"
@@ -76,6 +100,7 @@ export const Menu = ({
                 >
                   Iniciar sesión
                 </button>
+
                 <button
                   className="btn-customs"
                   onClick={handleShow2}
@@ -86,13 +111,22 @@ export const Menu = ({
               </>
             )}
 
-            <button
-              className="btn-customs"
-              onClick={handleShowCarrito}
-              type="button"
-            >
-              <BsCart3 className="fs-5" />
-            </button>
+            {/* 🛒 CARRITO CON BADGE */}
+            <div className="cart-icon-container">
+              <button
+                className="btn-customs position-relative"
+                onClick={handleShowCarrito}
+                type="button"
+              >
+                <BsCart3 className="fs-5" />
+
+                {cantidad > 0 && (
+                  <span className="cart-badge">
+                    {cantidad}
+                  </span>
+                )}
+              </button>
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -594,3 +594,51 @@
   font-size: 22px;
   font-weight: 700;
 }
+
+/* ITEM DEL CARRITO */
+.cart-item {
+  background: #ffffff;
+  border-radius: 12px;
+  margin: 10px 12px;
+  padding: 14px;
+  border: none !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
+}
+
+/* HOVER */
+.cart-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.19);
+}
+
+/* IMAGEN MÁS PRO */
+.imagen-Carrito {
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.cart-item:hover .imagen-Carrito {
+  transform: scale(1.05);
+  object-fit: cover;
+}
+
+/* NOMBRE */
+.text-nombre {
+  font-size: 15px;
+  color: #222;
+}
+
+/* BOTÓN ELIMINAR MÁS SUAVE */
+.btn-eliminar {
+  transition: all 0.2s ease;
+}
+
+.btn-eliminar:hover {
+  transform: scale(1.1);
+}
+
+/* SEPARACIÓN GENERAL DEL LIST */
+.list-group {
+  background: transparent !important;
+}
