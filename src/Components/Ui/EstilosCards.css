@@ -642,3 +642,19 @@
 .list-group {
   background: transparent !important;
 }
+
+/* Columnas personalizadas para mostrar exactamente 5 items */
+.col-lg-2-4 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+.col-xl-2-4 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+/* Opcional: ajustar espacios aplica a todos los carousel */
+.carousel-inner {
+  padding: 10px 0;
+}
