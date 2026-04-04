@@ -38,7 +38,6 @@ export const CardsProductos = ({ producto, handleShowCarrito }) => {
       // 2. Enviamos la petición al backend
       const respuesta = await crearCarrito(nuevoCarrito);
       if (respuesta && respuesta.ok) {
-        console.log(respuesta)
         Swal.fire({
           toast: true,
           position: 'top-end',
@@ -102,14 +101,14 @@ export const CardsProductos = ({ producto, handleShowCarrito }) => {
           </h5>
 
           <div className="mb-4">
-            <h3 className="mb-2 fw-bolder text-dark precio-Card">$ {producto.precio}</h3>
+            <h3 className="mb-2 fw-bolder text-dark precio-Card">$ {producto.precio.toLocaleString("es-AR")}</h3>
 
             <div
               className="d-inline-block bg-light text-primary rounded-2 mb-2"
               style={{ fontSize: "0.85rem", fontWeight: "600" }}
             >
               <BiCreditCard className="me-1" />3 cuotas s/int de <br className="d-none text-md-block" /> ${" "}
-              {precioDividido}
+              {precioDividido.toLocaleString("es-AR")}
             </div>
 
             <div className="text-success small fw-semibold">
@@ -119,7 +118,7 @@ export const CardsProductos = ({ producto, handleShowCarrito }) => {
               >
                 En efectivo:  
               </span>
-               $ {precioEfectivo}
+               $ {precioEfectivo.toLocaleString("es-AR")}
             </div>
           </div>
         </div>

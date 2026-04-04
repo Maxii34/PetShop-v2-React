@@ -2,14 +2,72 @@ import { Link } from "react-router-dom";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { BiCreditCard } from "react-icons/bi";
 import { FaCartArrowDown } from "react-icons/fa6";
-
 import "./EstilosCards.css";
+import Swal from "sweetalert2";
+import { crearCarrito } from "../helpers/carrito.queries";
 
 export const CardsCarousel = ({ producto, handleShowCarrito }) => {
-  if (!producto) return null;
+  const precioOferta = Math.floor(producto.precio * 0.8); // Precio con 20% de descuento
+  // Precio dividido en 3 cuotas sin interés
+  const precioDividido = Math.floor(precioOferta / 3);
+  // Precio con descuento del 10% para pago en efectivo
+  const precioEfectivo = Math.floor(precioOferta * 0.9);
 
-  const precioDividido = Math.floor(producto.precio / 3);
-  const precioEfectivo = Math.floor(producto.precio * 0.9);
+  const agregarAlCarrito = async (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // Evita que se propague al Link padre
+
+    try {
+      // 1. Obtenemos el usuario del sessionStorage
+      const usuario = JSON.parse(sessionStorage.getItem("usuariokey"));
+      const usuarioId = usuario ? usuario._id || usuario.id : null;
+
+      if (!usuarioId) {
+        Swal.fire({
+          icon: "warning",
+          title: "Atención",
+          text: "Debes iniciar sesión para agregar productos al carrito",
+        });
+        return;
+      }
+      const nuevoCarrito = {
+        user: usuarioId,
+        items: [
+          {
+            product: producto._id,
+            quantity: 1,
+          },
+        ],
+      };
+
+      // 2. Enviamos la petición al backend
+      const respuesta = await crearCarrito(nuevoCarrito);
+      if (respuesta && respuesta.ok) {
+        console.log(respuesta);
+        Swal.fire({
+          toast: true,
+          position: "top-end",
+          icon: "success",
+          title: "Producto agregado",
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        });
+
+        // 3. Mostramos el carrito visualmente
+        handleShowCarrito();
+      } else {
+        throw new Error("Error en la respuesta del backend");
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema al agregar al carrito",
+      });
+    }
+  };
 
   return (
     <div className="card card-wrapper product-card h-100">
@@ -35,8 +93,8 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
           <span
             className="position-absolute badge rounded-pill bg-danger"
             style={{
-              top: "10px", 
-              right: "10px", 
+              top: "10px",
+              right: "10px",
               zIndex: 10,
               fontSize: "0.8rem", // Tamaño de la letra
             }}
@@ -61,14 +119,23 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
           </h5>
 
           <div className="mb-4">
-            <h3 className="mb-2 fw-bolder text-dark precio-Card">$ {producto.precio}</h3>
+            <div className="d-flex justify-content-center">
+              <h3 className="mb-2 fw-bolder text-dark precio-Card">
+                <span className="text-muted fs-6 me-2">
+                  <span className="text-decoration-line-through ms-1 text-danger">
+                    ${producto.precio.toLocaleString("es-AR")}
+                  </span>
+                </span>
+                ${precioOferta.toLocaleString("es-AR")}
+              </h3>
+            </div>
 
             <div
               className="d-inline-block bg-light text-primary rounded-2 mb-2"
               style={{ fontSize: "0.85rem", fontWeight: "600" }}
             >
-              <BiCreditCard className="me-1" />3 cuotas s/int de <br className="d-none text-md-block" /> ${" "}
-              {precioDividido}
+              <BiCreditCard className="me-1" />3 cuotas s/int de{" "}
+              <br className="d-none text-md-block" /> $ {precioDividido.toLocaleString("es-AR")}
             </div>
 
             <div className="text-success small fw-semibold">
@@ -76,9 +143,9 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
                 className="text-muted fw-normal text-decoration-none"
                 style={{ fontSize: "0.8rem" }}
               >
-                En efectivo:  
+                En efectivo:
               </span>
-               $ {precioEfectivo}
+              $ {precioEfectivo.toLocaleString("es-AR")}
             </div>
           </div>
         </div>
@@ -86,52 +153,24 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
 
       {/* Botones fuera del Link */}
       <div className="card-body d-flex justify-content-center gap-2 pt-0">
-        <button
+        <Link
           className="btn btn-buy flex-grow-1 d-flex justify-content-center align-items-center"
+          to="/user/comprar"
+          state={{ producto }}
           style={{ fontSize: "0.9rem" }}
           onClick={(e) => {
             e.stopPropagation(); // Evita que se propague al Link padre
-            // Aquí va la lógica de compra
           }}
         >
           <RiMoneyDollarCircleFill className="fs-5 me-1" /> Comprar
-        </button>
+        </Link>
         <button
           className="btn btn-add-cart flex-grow-1 d-flex align-items-center justify-content-center bg-light text-dark border"
           title="Agregar al carrito"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation(); // Evita que se propague al Link padre
-            
-            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-            const tokenIdentificador = producto._id || producto.id;
-            const existe = carrito.find(item => (item._id || item.id) === tokenIdentificador);
-            
-            if(existe) {
-              existe.cantidad = (existe.cantidad || 1) + 1;
-            } else {
-              carrito.push({ ...producto, cantidad: 1 });
-            }
-            
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-            
-            import("sweetalert2").then(Swal => {
-              Swal.default.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'success',
-                title: 'Producto agregado',
-                showConfirmButton: false,
-                timer: 1500,
-                timerProgressBar: true,
-              });
-            });
-
-            if (handleShowCarrito) {
-              handleShowCarrito();
-            }
-          }}
-        > <FaCartArrowDown className="fs-5 me-1" /> Agregar
+          onClick={agregarAlCarrito}
+        >
+          {" "}
+          <FaCartArrowDown className="fs-5 me-1" /> Agregar
         </button>
       </div>
     </div>
