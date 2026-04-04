@@ -6,6 +6,7 @@ import { BsCart3 } from "react-icons/bs";
 import { Logout } from "../helpers/queries";
 import { useEffect, useState } from "react";
 
+
 export const Menu = ({
   usuarioLogueado,
   setusuarioLogueado,
@@ -43,7 +44,7 @@ export const Menu = ({
     setusuarioLogueado(false);
     sessionStorage.removeItem("usuariokey");
 
-    // 🔥 limpiar carrito visualmente
+    // limpiar carrito visualmente
     localStorage.removeItem("carritoCantidad");
     setCantidad(0);
 
@@ -53,7 +54,7 @@ export const Menu = ({
   return (
     <Navbar expand="lg" className="nav-pri py-3">
       <Container>
-        <Navbar.Brand href="#">Apolo PetShop</Navbar.Brand>
+        <Navbar.Brand to="/" className="">Apolo PetShop</Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
 
@@ -69,7 +70,7 @@ export const Menu = ({
             {(usuarioLogueado?.usuario?.rol === "admin" ||
               usuarioLogueado?.rol === "admin") && (
               <NavLink to="/admin/crear" className="btn-customs">
-                Dashboard Admin
+                Dashboard
               </NavLink>
             )}
 
