@@ -15,7 +15,7 @@ export const ContenedorCards = ({ productos, handleShowCarrito }) => {
 
   return (
     <>
-        <div className="my-5 ">
+        <div id="ofertas" className="my-5 pt-3 ">
           <h4 className="text-center fs-2 mb-4 p-0 m-0">¡Ofertas Exclusivas para Vos! 🛍️</h4>
             <div className="grid-container p-0 m-0">
             {productosEnOferta.map((producto, index) => (

@@ -14,7 +14,7 @@ export const SegundoNavbar = ({ handleShow3 }) => {
             Perros & Gatos
           </Nav.Link>
 
-          <Nav.Link className="nav-link-custom px-2">
+          <Nav.Link className="nav-link-custom px-2" href="#ofertas">
             Ofertas
           </Nav.Link>
 
