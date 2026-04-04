@@ -15,8 +15,11 @@ export const FormularioProductos = ({ titulo }) => {
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { errors },
   } = useForm();
+
+  const enOfertaActivo = watch("enOferta");
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -36,6 +39,7 @@ export const FormularioProductos = ({ titulo }) => {
           setValue("ingrediente", prod.ingrediente);
           setValue("caracteristica", prod.caracteristica);
           setValue("enOferta", prod.enOferta);
+          setValue("descuento", prod.descuento);
           setValue("esNuevo", prod.esNuevo);
           setValue("destacado", prod.destacado);
 
@@ -51,6 +55,13 @@ export const FormularioProductos = ({ titulo }) => {
       });
     }
   }, [id, setValue]);
+
+  // 👇 limpiar descuento si se desactiva oferta
+  useEffect(() => {
+    if (!enOfertaActivo) {
+      setValue("descuento", 0);
+    }
+  }, [enOfertaActivo, setValue]);
 
   const onSubmit = async (data) => {
     try {
@@ -68,6 +79,7 @@ export const FormularioProductos = ({ titulo }) => {
         ingrediente: data.ingrediente,
         caracteristica: data.caracteristica,
         enOferta: Boolean(data.enOferta),
+        descuento: data.enOferta ? Number(data.descuento) : 0,
         esNuevo: Boolean(data.esNuevo),
         destacado: Boolean(data.destacado),
         imagenes: imagenesArray,
@@ -79,6 +91,7 @@ export const FormularioProductos = ({ titulo }) => {
           talla: data.detalles?.talla || "",
         },
       };
+      console.log("Producto a enviar:", nuevoProducto);
 
       let respuesta;
       if (id) {
@@ -86,8 +99,6 @@ export const FormularioProductos = ({ titulo }) => {
       } else {
         respuesta = await crearProducto(nuevoProducto);
       }
-
-      console.log(respuesta);
 
       if (
         respuesta &&
@@ -386,8 +397,8 @@ export const FormularioProductos = ({ titulo }) => {
             <Col lg={4} md={12}>
               <div className="bg-light p-4 rounded border h-100 d-flex flex-column gap-3">
                 <h5 className="text-secondary border-bottom mt-2 mb-1">
-                Datos inportantes
-              </h5>
+                  Datos inportantes
+                </h5>
                 <div>
                   <Form.Group>
                     <Form.Label className="fw-bold">
@@ -482,6 +493,8 @@ export const FormularioProductos = ({ titulo }) => {
                   </Col>
                 </Row>
 
+                {/* ... TODO TU CÓDIGO ANTERIOR EXACTO ... */}
+
                 <div className="mt-auto pt-3 border-top">
                   <Form.Label className="fw-bold">Estados Visuales</Form.Label>
                   <div className="d-flex flex-column gap-2 mt-1">
@@ -491,12 +504,45 @@ export const FormularioProductos = ({ titulo }) => {
                       label="En Oferta (Resaltado)"
                       {...register("enOferta")}
                     />
+
+                    {/* 🔥 CAMPO DESCUENTO DINÁMICO */}
+                    {enOfertaActivo && (
+                      <Form.Group>
+                        <Form.Label>% Descuento *</Form.Label>
+                        <Form.Control
+                          type="number"
+                          placeholder="Ej: 20"
+                          isInvalid={!!errors.descuento}
+                          {...register("descuento", {
+                            required: "Debes ingresar un descuento",
+                            min: {
+                              value: 0,
+                              message: "El descuento no puede ser menor a 0%",
+                            },
+                            max: {
+                              value: 90,
+                              message: "El descuento no puede ser mayor a 90%",
+                            },
+                          })}
+                        />
+                        {errors.descuento && (
+                          <Form.Control.Feedback
+                            type="invalid"
+                            className="d-block"
+                          >
+                            {errors.descuento.message}
+                          </Form.Control.Feedback>
+                        )}
+                      </Form.Group>
+                    )}
+
                     <Form.Check
                       type="switch"
                       id="switch-nuevo"
                       label="Etiqueta: Nuevo"
                       {...register("esNuevo")}
                     />
+
                     <Form.Check
                       type="switch"
                       id="switch-destacado"
@@ -512,8 +558,8 @@ export const FormularioProductos = ({ titulo }) => {
           {/* Fila Inferior: Textareas Amplios */}
           <Row className="mt-4 bg-light p-4 rounded border h-100">
             <h5 className="text-secondary border-bottom pb-2 mt-2 mb-3">
-                Informacion descriptivas
-              </h5>
+              Informacion descriptivas
+            </h5>
             <Col lg={4} md={12}>
               <Form.Group className="mb-3">
                 <Form.Label>Descripción General</Form.Label>
