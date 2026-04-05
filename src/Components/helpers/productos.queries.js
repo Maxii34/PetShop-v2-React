@@ -101,6 +101,7 @@ export const editarProductos = async (id, producto) => {
     formData.append("ingrediente", producto.ingrediente || "");
     formData.append("caracteristica", producto.caracteristica || "");
     formData.append("enOferta", producto.enOferta || false);
+    formData.append("descuento", producto.descuento || 0);
     formData.append("esNuevo", producto.esNuevo || false);
     formData.append("destacado", producto.destacado || false);
 

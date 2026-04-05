@@ -493,8 +493,6 @@ export const FormularioProductos = ({ titulo }) => {
                   </Col>
                 </Row>
 
-                {/* ... TODO TU CÓDIGO ANTERIOR EXACTO ... */}
-
                 <div className="mt-auto pt-3 border-top">
                   <Form.Label className="fw-bold">Estados Visuales</Form.Label>
                   <div className="d-flex flex-column gap-2 mt-1">

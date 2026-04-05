@@ -7,11 +7,27 @@ import Swal from "sweetalert2";
 import { crearCarrito } from "../helpers/carrito.queries";
 
 export const CardsCarousel = ({ producto, handleShowCarrito }) => {
-  const precioOferta = Math.floor(producto.precio * 0.8); // Precio con 20% de descuento
-  // Precio dividido en 3 cuotas sin interés
+  const precioDescuento = producto.descuento || 0;
+
+  // Precio con descuento aplicado
+  const precioOferta = Math.floor(
+    producto.precio * (1 - precioDescuento / 100),
+  );
+
+  // Precio en 3 cuotas
   const precioDividido = Math.floor(precioOferta / 3);
-  // Precio con descuento del 10% para pago en efectivo
+
+  // Precio efectivo (10% extra)
   const precioEfectivo = Math.floor(precioOferta * 0.9);
+
+
+  // 🔥 ACÁ
+  const badgeStyle = {
+    top: "10px",
+    right: "10px",
+    zIndex: 10,
+    fontSize: "0.8rem",
+  };
 
   const agregarAlCarrito = async (e) => {
     e.preventDefault();
@@ -99,7 +115,21 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
               fontSize: "0.8rem", // Tamaño de la letra
             }}
           >
-            20% OFF
+            {producto.enOferta && producto.descuento > 0 ? (
+              <span
+                className="position-absolute badge rounded-pill bg-danger"
+                style={badgeStyle}
+              >
+                -{producto.descuento}% OFF
+              </span>
+            ) : producto.esNuevo ? (
+              <span
+                className="position-absolute badge rounded-pill bg-success"
+                style={badgeStyle}
+              >
+                ¡Nuevo!
+              </span>
+            ) : null}
           </span>
         </div>
 
@@ -135,7 +165,8 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
               style={{ fontSize: "0.85rem", fontWeight: "600" }}
             >
               <BiCreditCard className="me-1" />3 cuotas s/int de{" "}
-              <br className="d-none text-md-block" /> $ {precioDividido.toLocaleString("es-AR")}
+              <br className="d-none text-md-block" /> ${" "}
+              {precioDividido.toLocaleString("es-AR")}
             </div>
 
             <div className="text-success small fw-semibold">
