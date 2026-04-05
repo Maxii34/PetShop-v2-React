@@ -7,19 +7,17 @@ import Swal from "sweetalert2";
 import { crearCarrito } from "../helpers/carrito.queries";
 
 export const CardsCarousel = ({ producto, handleShowCarrito }) => {
-  const precioDescuento = producto.descuento || 0;
+  // Porcentaje de descuento
+  const porcentajeDescuento = producto.descuento || 0;
 
-  // Precio con descuento aplicado
-  const precioOferta = Math.floor(
-    producto.precio * (1 - precioDescuento / 100),
-  );
+  // Precio con descuento aplicado (10% de descuento si paga efectivo)
+  const precioConDescuento = Math.floor(producto.precio * 0.9);
 
   // Precio en 3 cuotas
-  const precioDividido = Math.floor(precioOferta / 3);
+  const precioDividido = Math.floor(precioConDescuento / 3);
 
-  // Precio efectivo (10% extra)
-  const precioEfectivo = Math.floor(precioOferta * 0.9);
-
+  // Precio efectivo (10% descuento)
+  const precioEfectivo = Math.floor(precioConDescuento);
 
   // 🔥 ACÁ
   const badgeStyle = {
@@ -89,8 +87,15 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
     <div className="card card-wrapper product-card h-100">
       {/* Contenedor clickeable con Link */}
       <Link
-        to="/detalle"
-        state={{ producto }}
+        to="/user/detalle"
+        state={{
+          producto,
+          precioOriginal: producto.precio,
+          precioDescuento: precioConDescuento, 
+          precioOferta: precioConDescuento,
+          precioDividido: precioDividido,
+          precioEfectivo: precioEfectivo,
+        }}
         className="text-decoration-none text-dark"
         style={{ cursor: "pointer" }}
       >
@@ -152,11 +157,13 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
             <div className="d-flex justify-content-center">
               <h3 className="mb-2 fw-bolder text-dark precio-Card">
                 <span className="text-muted fs-6 me-2">
-                  <span className="text-decoration-line-through ms-1 text-danger">
-                    ${producto.precio.toLocaleString("es-AR")}
-                  </span>
+                  {porcentajeDescuento > 0 && (
+                    <span className="text-decoration-line-through ms-1 text-danger">
+                      ${producto.precio.toLocaleString("es-AR")}
+                    </span>
+                  )}
                 </span>
-                ${precioOferta.toLocaleString("es-AR")}
+                ${precioConDescuento.toLocaleString("es-AR")}
               </h3>
             </div>
 

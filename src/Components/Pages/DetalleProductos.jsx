@@ -2,38 +2,77 @@ import {
   Container,
   Row,
   Col,
-  Button,
-  Collapse,
-  InputGroup,
-  Form,
 } from "react-bootstrap";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { Image } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const DetalleProductos = () => {
   const location = useLocation();
-  const { producto } = location.state || {};
+  const navigate = useNavigate();
 
-  // Estado para controlar cuál imagen se muestra
+  const [producto, setProducto] = useState(null);
+  const [precioDescuento, setPrecioDescuento] = useState(0);
   const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
 
-  const precioDescuento = producto.precio * 0.9;
+  useEffect(() => {
+    // Obtener datos del state
+    const state = location.state;
 
-  // Manejo si no hay producto
+    console.log("Estado recibido:", state); // DEBUG
+
+    if (state && state.producto) {
+      setProducto(state.producto);
+      setPrecioDescuento(state.precioDescuento || state.producto.precio * 0.9);
+    } else {
+      console.warn("No hay producto en el state");
+      // Redirigir si no hay producto después de 2 segundos
+      const timer = setTimeout(() => {
+        navigate("/");
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [location, navigate]);
+
+  // ✅ Valores calculados CORRECTAMENTE
+  const precioOriginal = producto?.precio || 0;
+  
+  // Verificar si realmente hay descuento (compara si precioDescuento es diferente al original)
+  const tieneDescuento = precioDescuento && precioDescuento < precioOriginal;
+  
+  // Precio con descuento (solo si realmente hay descuento)
+  const precioConDescuento = tieneDescuento ? precioDescuento : precioOriginal;
+  
+  // Precio en efectivo: 10% descuento sobre el precio base
+  const precioEnEfectivo = Math.round(precioConDescuento * 0.9);
+  
+  // Precio con transferencia: 5% recargo sobre el precio base
+  const precioConTransferencia = Math.round(precioConDescuento * 1.05);
+  
+  // Precio en cuotas (sobre el precio con descuento)
+  const precioPor3Cuotas = Math.round(precioConDescuento / 3);
+  const precioPor6Cuotas = Math.round(precioConDescuento / 6);
+  const precioPor12Cuotas = Math.round(precioConDescuento / 12);
+
+  // Obtener array de imágenes
+  const imagenes = producto?.imagenes || [];
+  const tieneMultiplesImagenes = imagenes.length > 1;
+
+  // Manejo si no hay producto (mientras se carga)
   if (!producto) {
     return (
       <section className="my-4">
         <Container>
-          <p>No se seleccionó ningún producto</p>
+          <div className="text-center">
+            <p className="fs-5 text-muted">Cargando producto...</p>
+            <p className="small text-danger">
+              Si no carga, serás redirigido al inicio
+            </p>
+          </div>
         </Container>
       </section>
     );
   }
-
-  // Obtener array de imágenes (protección si no existe)
-  const imagenes = producto.imagenes || [];
-  const tieneMultiplesImagenes = imagenes.length > 1;
 
   return (
     <Container className="my-4">
@@ -41,14 +80,29 @@ export const DetalleProductos = () => {
         {/* Columna de imagen y descripción */}
         <Col md={6}>
           {/* Imagen principal */}
-          <Image
-            src={imagenes[imagenSeleccionada]}
-            alt={`Imagen ${imagenSeleccionada + 1} del producto`}
-            fluid
-            loading="lazy"
-            className="mb-3"
-            style={{ borderRadius: "8px" }}
-          />
+          {imagenes.length > 0 ? (
+            <Image
+              src={imagenes[imagenSeleccionada]}
+              alt={`Imagen ${imagenSeleccionada + 1} del producto`}
+              fluid
+              loading="lazy"
+              className="mb-3"
+              style={{ borderRadius: "8px" }}
+            />
+          ) : (
+            <div
+              style={{
+                height: "300px",
+                borderRadius: "8px",
+                backgroundColor: "#f0f0f0",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p className="text-muted">Sin imagen disponible</p>
+            </div>
+          )}
 
           {/* Galería de miniaturas - solo mostrar si hay múltiples imágenes */}
           {tieneMultiplesImagenes && (
@@ -118,33 +172,43 @@ export const DetalleProductos = () => {
         {/* Columna de precios e info */}
         <Col md={6}>
           <nav className="mb-2">
-            <a
-              href="/index.html"
-              className="fs-6 text-muted text-decoration-none"
-            >
+            <a href="/" className="fs-6 text-muted text-decoration-none">
               Inicio
-            </a>{" "}
-            &gt;
+            </a>
+            {" > "}
             <a href="#" className="fs-6 text-muted text-decoration-none">
-              {producto.tipoAnimal}
-            </a>{" "}
-            &gt;
+              {producto.tipoAnimal || "Categoría"}
+            </a>
+            {" > "}
             <a href="#" className="fs-6 text-muted text-decoration-none">
-              {producto.categoria}
-            </a>{" "}
-            &gt;
-            <span className="fw-semibold text-dark text-muted">{producto.nombre}</span>
+              {producto.categoria || "Subcategoría"}
+            </a>
+            {" > "}
+            <span className="fw-semibold text-dark text-muted">
+              {producto.nombre}
+            </span>
           </nav>
 
           <div className="border-bottom pb-3 mb-3">
             <h4 className="my-2 fw-semibold">{producto.nombre}</h4>
 
-            {/* Precio principal */}
-            <p className="fs-3 my-1 fw-bold text-dark">$ {producto.precio}</p>
+            {/* Precio principal - Muestra el precio con descuento */}
+            <div className="d-flex justify-content-start align-items-center gap-2">
+              {/* Si tiene descuento, muestra el precio original tachado */}
+              {tieneDescuento && (
+                <span className="text-decoration-line-through text-danger fs-6">
+                  ${precioOriginal.toLocaleString("es-AR")}
+                </span>
+              )}
+              {/* Precio actual (con descuento si lo hay) */}
+              <h3 className="mb-0 fw-bolder text-dark">
+                ${precioConDescuento.toLocaleString("es-AR")}
+              </h3>
+            </div>
 
-            {/* Descuento */}
-            <p className="text-success mb-1 fw-semibold">
-              🤑 $ {precioDescuento.toFixed(0)} con efectivo
+            {/* Descuento en efectivo */}
+            <p className="text-success mb-1 fw-semibold mt-2">
+              🤑 $ {precioEnEfectivo.toLocaleString("es-AR")} con efectivo
             </p>
 
             <p className="my-1 small text-muted">
@@ -155,7 +219,7 @@ export const DetalleProductos = () => {
             {/* Transferencia */}
             <p className="my-1 small">
               <small className="text-muted">
-                Con transferencia: ${Math.round(producto.precio * 1.05)}{" "}
+                Con transferencia: ${precioConTransferencia.toLocaleString("es-AR")}{" "}
                 <span className="fw-semibold">(5% de recargo)</span>
               </small>
             </p>
@@ -163,67 +227,61 @@ export const DetalleProductos = () => {
             {/* Cuotas */}
             <p className="my-2">
               <i className="bi bi-credit-card"></i> Hasta{" "}
-              <b>{producto.detalles.cuotas} cuotas SIN interés</b>
+              <b>{producto?.detalles?.cuotas || 3} cuotas SIN interés</b>
             </p>
 
             <p className="my-1 small text-muted">
-              <i className="bi bi-wallet"></i> 12 cuotas de $
-              {Math.round(producto.precio / 12)} o 6 cuotas de $
-              {Math.round(producto.precio / 6)}
+              <i className="bi bi-wallet"></i> 3 cuotas de $
+              {precioPor3Cuotas.toLocaleString("es-AR")}, 6 cuotas de $
+              {precioPor6Cuotas.toLocaleString("es-AR")} o 12 cuotas de $
+              {precioPor12Cuotas.toLocaleString("es-AR")}
             </p>
           </div>
+
           <div className="border-bottom pb-3 mb-3 d-flex flex-wrap gap-2">
             {producto.detalles?.etapa && (
-              <>
-                <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
-                  <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
-                    Etapa:
-                  </span>
-                  <span className="badge bg-success-subtle text-success-emphasis text-capitalize px-3 py-2">
-                    <i className="bi bi-dog me-1"></i>
-                    {producto.detalles.etapa}
-                  </span>
-                </div>
-              </>
+              <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
+                <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
+                  Etapa:
+                </span>
+                <span className="badge bg-success-subtle text-success-emphasis text-capitalize px-3 py-2">
+                  <i className="bi bi-dog me-1"></i>
+                  {producto.detalles.etapa}
+                </span>
+              </div>
             )}
 
             {producto.detalles?.peso && (
-              <>
-                <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
-                  <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
-                    Peso:
-                  </span>
-                  <span className="badge bg-success-subtle text-success-emphasis px-3 py-2">
-                    {producto.detalles.peso}
-                  </span>
-                </div>
-              </>
+              <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
+                <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
+                  Peso:
+                </span>
+                <span className="badge bg-success-subtle text-success-emphasis px-3 py-2">
+                  {producto.detalles.peso}
+                </span>
+              </div>
             )}
 
             {producto?.stock && (
-              <>
-                <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
-                  <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
-                    Stock disp:
-                  </span>
-                  <span className="badge bg-success-subtle text-success-emphasis px-3 py-2">
-                    {producto.stock} Unidades
-                  </span>
-                </div>
-              </>
+              <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
+                <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
+                  Stock disp:
+                </span>
+                <span className="badge bg-success-subtle text-success-emphasis px-3 py-2">
+                  {producto.stock} Unidades
+                </span>
+              </div>
             )}
 
             {producto?.tipoAnimal && (
-              <>
-                <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
-                  <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
-                    Tipo:
-                  </span>
-                  <span className="badge bg-success-subtle text-success-emphasis px-3 py-2">
-                    {producto.tipoAnimal}
-                  </span>
-                </div>
-              </>
+              <div className="d-flex align-items-center gap-2 card border-0 m-2 shadow-md bg-body-secondary">
+                <span className="fw-semibold text-dark fs-6 text-capitalize text-muted">
+                  Tipo:
+                </span>
+                <span className="badge bg-success-subtle text-success-emphasis px-3 py-2">
+                  {producto.tipoAnimal}
+                </span>
+              </div>
             )}
           </div>
 
@@ -237,7 +295,7 @@ export const DetalleProductos = () => {
             {/* CTA principal */}
             <Link
               className="w-75 py-2 fw-semibold shadow-md btn btn-success"
-              state={{producto}}
+              state={{ producto }}
               to="/user/comprar"
             >
               <i className="bi bi-bag me-2"></i>
@@ -248,7 +306,7 @@ export const DetalleProductos = () => {
             <Link
               className="w-75 mt-2 py-2 fw-semibold shadow-md btn btn-outline-dark"
               to="/user/carrito"
-              state={{producto}}
+              state={{ producto }}
             >
               Agregar al carrito
             </Link>
