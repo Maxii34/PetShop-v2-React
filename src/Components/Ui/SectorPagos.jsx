@@ -9,8 +9,12 @@ export const SectorPagos = ({ productos = [] }) => {
   const [codigoAplicado, setCodigoAplicado] = useState("");
 
   // Calcular subtotal sumando todos los productos del carrito
+  // Usa precioConDescuento si existe, sino usa precio
   const subtotal = productos.reduce(
-    (acc, item) => acc + item.precio * (item.cantidad || 1),
+    (acc, item) => {
+      const precioFinal = item.precioConDescuento || item.precio;
+      return acc + precioFinal * (item.cantidad || 1);
+    },
     0
   );
   
@@ -69,15 +73,18 @@ export const SectorPagos = ({ productos = [] }) => {
       <h3 className="mb-4 fw-bold">Resumen del Pedido</h3>
 
       {/* Lista de productos minimizada */}
-      {productos.map((prod) => (
-        <div key={prod._id || prod.id} className="d-flex justify-content-between mb-2 pb-2 border-bottom flex-wrap">
-          <span className="text-muted w-100 mb-2">
-            <strong>{prod.nombre}</strong>
-          </span>
-          <span className="text-muted">x {prod.cantidad || 1}</span>
-          <span className="fw-bold">$ {formatearPrecio(prod.precio * (prod.cantidad || 1))}</span>
-        </div>
-      ))}
+      {productos.map((prod) => {
+        const precioFinal = prod.precioConDescuento || prod.precio;
+        return (
+          <div key={prod._id || prod.id} className="d-flex justify-content-between mb-2 pb-2 border-bottom flex-wrap">
+            <span className="text-muted w-100 mb-2">
+              <strong>{prod.nombre}</strong>
+            </span>
+            <span className="text-muted">x {prod.cantidad || 1}</span>
+            <span className="fw-bold">$ {formatearPrecio(precioFinal * (prod.cantidad || 1))}</span>
+          </div>
+        );
+      })}
 
       {/* Envío */}
       <div className="d-flex justify-content-between mb-2 mt-3">

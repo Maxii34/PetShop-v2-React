@@ -7,6 +7,7 @@ export const CarritoProductos = ({
   eliminarProducto,
 }) => {
   const cantidad = producto.cantidad || 1;
+  const precioFinal = producto.precioConDescuento || producto.precio;
 
   const handleCantidad = (operacion) => {
     if (operacion === "sumar") {
@@ -49,7 +50,7 @@ export const CarritoProductos = ({
         </div>
 
         <div className="d-flex align-items-center gap-2 mx-1">
-          <span className="precio-final">$ {producto.precio * cantidad}</span>
+          <span className="precio-final">$ {precioFinal * cantidad}</span>
           <button
             className="eliminar-item bg-transparent border-0 text-danger"
             title="Eliminar producto"

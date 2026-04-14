@@ -6,12 +6,14 @@ import { eliminarCarrito } from "../helpers/carrito.queries";
 
 export const CarritoPagos = ({titulo}) => {
   const location = useLocation();
+
   const stateProducto = location.state?.producto;
+  const statePrecioConDescuento = location.state?.precioConDescuento;
   
   // Usamos un estado para los productos así podemos actualizar las cantidades desde CarritoProductos
   const [productos, setProductos] = useState(() => {
     // Si viene de comprar directo, array de 1. Sino, vacío hasta cargar.
-    return stateProducto ? [{ ...stateProducto, cantidad: 1 }] : [];
+    return stateProducto ? [{ ...stateProducto, cantidad: 1, precioConDescuento: statePrecioConDescuento }] : [];
   });
 
   useEffect(() => {
