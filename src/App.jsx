@@ -105,7 +105,7 @@ function App() {
                 <Inicio productos={productos} setProductos={setProductos} />
               }
             />
-            <Route path="detalle" element={<DetalleProductos />} />
+            <Route path="detalle" element={<DetalleProductos handleShowCarrito={handleShowCarrito} />} />
 
             <Route path="comprar" element={<CarritoPagos titulo="Compra" />} />
             <Route path="carrito" element={<CarritoPagos titulo="Carrito" />} />

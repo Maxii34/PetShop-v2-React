@@ -2,8 +2,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router";
 import { Image } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { FaCartArrowDown } from "react-icons/fa6";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import Swal from "sweetalert2";
+import { crearCarrito } from "../helpers/carrito.queries";
 
-export const DetalleProductos = () => {
+export const DetalleProductos = ({ handleShowCarrito }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -16,8 +20,6 @@ export const DetalleProductos = () => {
 
     if (state && state.producto) {
       setProducto(state.producto);
-      // Solo setea precioDescuento si viene en el state
-      // Si no viene, déjalo como null/undefined
       setPrecioDescuento(state.precioDescuento || null);
     } else {
       console.warn("No hay producto en el state");
@@ -31,24 +33,16 @@ export const DetalleProductos = () => {
   // Valores calculados CORRECTAMENTE
   const precioOriginal = producto?.precio || 0;
 
-  // Verificar si realmente hay descuento
-  // precioDescuento viene null si no hay descuento, o el precio con descuento si lo hay
   const tieneDescuento =
     precioDescuento &&
     precioDescuento !== null &&
     precioDescuento < precioOriginal;
 
-  // Si hay descuento: precioConDescuento es el precio con descuento
-  // Si NO hay descuento: precioConDescuento es el precio original
   const precioConDescuento = tieneDescuento ? precioDescuento : precioOriginal;
 
-  // Precio en efectivo: 10% descuento sobre el precio base
   const precioEnEfectivo = Math.round(precioConDescuento * 0.9);
-
-  // Precio con transferencia: 5% recargo sobre el precio base
   const precioConTransferencia = Math.round(precioConDescuento * 1.05);
 
-  // Precio en cuotas (sobre el precio con descuento)
   const precioPor3Cuotas = Math.round(precioConDescuento / 3);
   const precioPor6Cuotas = Math.round(precioConDescuento / 6);
   const precioPor12Cuotas = Math.round(precioConDescuento / 12);
@@ -56,6 +50,60 @@ export const DetalleProductos = () => {
   // Obtener array de imágenes
   const imagenes = producto?.imagenes || [];
   const tieneMultiplesImagenes = imagenes.length > 1;
+
+  // 👇 AGREGAR ESTA FUNCIÓN
+  const agregarAlCarrito = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+      const usuario = JSON.parse(sessionStorage.getItem("usuariokey"));
+      const usuarioId = usuario ? usuario._id || usuario.id : null;
+
+      if (!usuarioId) {
+        Swal.fire({
+          icon: "warning",
+          title: "Atención",
+          text: "Debes iniciar sesión para agregar productos al carrito",
+        });
+        return;
+      }
+
+      const nuevoCarrito = {
+        user: usuarioId,
+        items: [
+          {
+            product: producto._id,
+            quantity: 1,
+            precioConDescuento: precioConDescuento,
+          },
+        ],
+      };
+
+      const respuesta = await crearCarrito(nuevoCarrito);
+      if (respuesta && respuesta.ok) {
+        Swal.fire({
+          toast: true,
+          position: "top-end",
+          icon: "success",
+          title: "Producto agregado",
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        });
+        handleShowCarrito();
+      } else {
+        throw new Error("Error en la respuesta del backend");
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema al agregar al carrito",
+      });
+    }
+  };
 
   // Manejo si no hay producto (mientras se carga)
   if (!producto) {
@@ -103,7 +151,7 @@ export const DetalleProductos = () => {
             </div>
           )}
 
-          {/* Galería de miniaturas - solo mostrar si hay múltiples imágenes */}
+          {/* Galería de miniaturas */}
           {tieneMultiplesImagenes && (
             <div className="d-flex gap-2 overflow-auto pb-2">
               {imagenes.map((imagen, index) => (
@@ -139,7 +187,7 @@ export const DetalleProductos = () => {
             </div>
           )}
 
-          {/* Descripción - solo mostrar si hay contenido */}
+          {/* Descripción */}
           {(producto.descripcion ||
             producto.caracteristica ||
             producto.ingrediente) && (
@@ -193,7 +241,6 @@ export const DetalleProductos = () => {
 
             {/* Precio principal */}
             <div className="d-flex justify-content-start align-items-center gap-2">
-              {/* Si tiene descuento: muestra precio original tachado + precio con descuento */}
               {tieneDescuento ? (
                 <>
                   <span className="text-decoration-line-through text-danger fs-6">
@@ -204,14 +251,13 @@ export const DetalleProductos = () => {
                   </h3>
                 </>
               ) : (
-                /* Si NO tiene descuento: solo muestra el precio original grande */
                 <h3 className="mb-0 fw-bolder text-dark">
                   ${precioOriginal.toLocaleString("es-AR")}
                 </h3>
               )}
             </div>
 
-            {/* Descuento en efectivo - solo mostrar si hay descuento */}
+            {/* Descuento en efectivo */}
             {tieneDescuento && (
               <>
                 <p className="text-success mb-1 fw-semibold mt-2">
@@ -308,18 +354,16 @@ export const DetalleProductos = () => {
               state={{ producto, precioConDescuento }}
               to="/user/comprar"
             >
-              <i className="bi bi-bag me-2"></i>
-              Comprar ahora
+              <RiMoneyDollarCircleFill className="fs-5 me-1" /> Comprar ahora
             </Link>
 
-            {/* CTA secundario */}
-            <Link
-              className="w-75 mt-2 py-2 fw-semibold shadow-md btn btn-outline-dark"
-              to="/user/carrito"
-              state={{ producto, precioConDescuento }}
+            {/* CTA secundario - CON LA FUNCIÓN */}
+            <button
+              className="w-75 mt-2 py-2 fw-semibold shadow-md btn btn-outline-dark d-flex align-items-center justify-content-center"
+              onClick={agregarAlCarrito}
             >
-              Agregar al carrito
-            </Link>
+              <FaCartArrowDown className="fs-5 me-1" /> Agregar al carrito
+            </button>
 
             {/* Envíos */}
             <div className="mt-4 small border-top pt-3">
