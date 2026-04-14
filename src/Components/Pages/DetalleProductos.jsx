@@ -19,8 +19,6 @@ export const DetalleProductos = () => {
     // Obtener datos del state
     const state = location.state;
 
-    console.log("Estado recibido:", state); // DEBUG
-
     if (state && state.producto) {
       setProducto(state.producto);
       setPrecioDescuento(state.precioDescuento || state.producto.precio * 0.9);
@@ -34,13 +32,15 @@ export const DetalleProductos = () => {
     }
   }, [location, navigate]);
 
-  // ✅ Valores calculados CORRECTAMENTE
+  // Valores calculados CORRECTAMENTE
   const precioOriginal = producto?.precio || 0;
   
-  // Verificar si realmente hay descuento (compara si precioDescuento es diferente al original)
-  const tieneDescuento = precioDescuento && precioDescuento < precioOriginal;
+  // Verificar si realmente hay descuento
+  // precioDescuento viene null si no hay descuento, o el precio con descuento si lo hay
+  const tieneDescuento = precioDescuento && precioDescuento !== null && precioDescuento < precioOriginal;
   
-  // Precio con descuento (solo si realmente hay descuento)
+  // Si hay descuento: precioConDescuento es el precio con descuento
+  // Si NO hay descuento: precioConDescuento es el precio original
   const precioConDescuento = tieneDescuento ? precioDescuento : precioOriginal;
   
   // Precio en efectivo: 10% descuento sobre el precio base
@@ -192,29 +192,39 @@ export const DetalleProductos = () => {
           <div className="border-bottom pb-3 mb-3">
             <h4 className="my-2 fw-semibold">{producto.nombre}</h4>
 
-            {/* Precio principal - Muestra el precio con descuento */}
+            {/* Precio principal */}
             <div className="d-flex justify-content-start align-items-center gap-2">
-              {/* Si tiene descuento, muestra el precio original tachado */}
-              {tieneDescuento && (
-                <span className="text-decoration-line-through text-danger fs-6">
+              {/* Si tiene descuento: muestra precio original tachado + precio con descuento */}
+              {tieneDescuento ? (
+                <>
+                  <span className="text-decoration-line-through text-danger fs-6">
+                    ${precioOriginal.toLocaleString("es-AR")}
+                  </span>
+                  <h3 className="mb-0 fw-bolder text-dark">
+                    ${precioConDescuento.toLocaleString("es-AR")}
+                  </h3>
+                </>
+              ) : (
+                /* Si NO tiene descuento: solo muestra el precio original grande */
+                <h3 className="mb-0 fw-bolder text-dark">
                   ${precioOriginal.toLocaleString("es-AR")}
-                </span>
+                </h3>
               )}
-              {/* Precio actual (con descuento si lo hay) */}
-              <h3 className="mb-0 fw-bolder text-dark">
-                ${precioConDescuento.toLocaleString("es-AR")}
-              </h3>
             </div>
 
-            {/* Descuento en efectivo */}
-            <p className="text-success mb-1 fw-semibold mt-2">
-              🤑 $ {precioEnEfectivo.toLocaleString("es-AR")} con efectivo
-            </p>
+            {/* Descuento en efectivo - solo mostrar si hay descuento */}
+            {tieneDescuento && (
+              <>
+                <p className="text-success mb-1 fw-semibold mt-2">
+                  🤑 $ {precioEnEfectivo.toLocaleString("es-AR")} con efectivo
+                </p>
 
-            <p className="my-1 small text-muted">
-              <i className="bi bi-coin"></i> 10% de descuento pagando en
-              efectivo
-            </p>
+                <p className="my-1 small text-muted">
+                  <i className="bi bi-coin"></i> 10% de descuento pagando en
+                  efectivo
+                </p>
+              </>
+            )}
 
             {/* Transferencia */}
             <p className="my-1 small">
