@@ -18,7 +18,7 @@ export const SectorPagos = ({ productos = [] }) => {
     0
   );
   
-  const envio = subtotal >= 17000 || subtotal === 0 ? 0 : 5000.0; // Cambiado a 5000 de costo de envío si no llega al monto (5.0 era muy bajo para pesos)
+  const envio = subtotal >= 17000 || subtotal === 0 ? 0 : 10000.0; // Cambiado a 5000 de costo de envío si no llega al monto (5.0 era muy bajo para pesos)
   const total = subtotal > 0 ? subtotal + envio - descuento : 0;
 
   // Función para formatear precio

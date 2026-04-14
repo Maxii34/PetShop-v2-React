@@ -88,7 +88,7 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
     <div className="card card-wrapper product-card h-100">
       {/* Contenedor clickeable con Link */}
       <Link
-        to="/user/detalle"
+        to="/detalle"
         state={{
     producto,
     precioDescuento: precioConDescuento

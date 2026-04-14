@@ -17,6 +17,15 @@ export const CarritoProductos = ({
     }
   };
 
+    // Función para formatear precio
+  const formatearPrecio = (numero) => {
+    return numero.toLocaleString("es-AR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
+
   return (
     <>
       <div className="card-producto d-flex align-items-center justify-content-between">
@@ -50,7 +59,7 @@ export const CarritoProductos = ({
         </div>
 
         <div className="d-flex align-items-center gap-2 mx-1">
-          <span className="precio-final">$ {precioFinal * cantidad}</span>
+          <span className="precio-final">$ {formatearPrecio(precioFinal * cantidad)}</span>
           <button
             className="eliminar-item bg-transparent border-0 text-danger"
             title="Eliminar producto"

@@ -94,6 +94,8 @@ function App() {
             }
           />
 
+          <Route path="detalle" element={<DetalleProductos handleShowCarrito={handleShowCarrito} />} />
+
           {/* ============ RUTAS PROTEGIDAS: USUARIO ============ */}
           <Route
             path="user"
@@ -105,7 +107,6 @@ function App() {
                 <Inicio productos={productos} setProductos={setProductos} />
               }
             />
-            <Route path="detalle" element={<DetalleProductos handleShowCarrito={handleShowCarrito} />} />
 
             <Route path="comprar" element={<CarritoPagos titulo="Compra" />} />
             <Route path="carrito" element={<CarritoPagos titulo="Carrito" />} />

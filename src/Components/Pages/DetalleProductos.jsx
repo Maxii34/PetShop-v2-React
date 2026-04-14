@@ -14,6 +14,7 @@ export const DetalleProductos = ({ handleShowCarrito }) => {
   const [producto, setProducto] = useState(null);
   const [precioDescuento, setPrecioDescuento] = useState(0);
   const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
+  const [usuarioId, setUsuarioId] = useState(null);
 
   useEffect(() => {
     const state = location.state;
@@ -29,6 +30,12 @@ export const DetalleProductos = ({ handleShowCarrito }) => {
       return () => clearTimeout(timer);
     }
   }, [location, navigate]);
+
+  // Obtener usuarioId del sessionStorage
+  useEffect(() => {
+    const usuario = JSON.parse(sessionStorage.getItem("usuariokey"));
+    setUsuarioId(usuario ? usuario._id || usuario.id : null);
+  }, []);
 
   // Valores calculados CORRECTAMENTE
   const precioOriginal = producto?.precio || 0;
@@ -57,9 +64,6 @@ export const DetalleProductos = ({ handleShowCarrito }) => {
     e.stopPropagation();
 
     try {
-      const usuario = JSON.parse(sessionStorage.getItem("usuariokey"));
-      const usuarioId = usuario ? usuario._id || usuario.id : null;
-
       if (!usuarioId) {
         Swal.fire({
           icon: "warning",
@@ -349,21 +353,34 @@ export const DetalleProductos = ({ handleShowCarrito }) => {
           {/* Sección de compra */}
           <div className="border-top pt-3 mt-3">
             {/* CTA principal */}
-            <Link
-              className="w-75 py-2 fw-semibold shadow-md btn btn-success"
-              state={{ producto, precioConDescuento }}
-              to="/user/comprar"
-            >
-              <RiMoneyDollarCircleFill className="fs-5 me-1" /> Comprar ahora
-            </Link>
+            <div className="border-top pt-3 mt-3">
+  {/* Botones de acción */}
+  <div className="d-flex flex-column align-items-center gap-1">
+  {!usuarioId && (
+    <div className="alert alert-warning mt-3 py-2 small shadow-sm w-75 mx-auto text-center" role="alert">
+      <i className="bi bi-info-circle me-1"></i> 
+      Para continuar, debes haber <b>iniciado sesión</b>, si no tienes cuenta <b>registrarte</b>. 
+    </div>
+  )}
 
-            {/* CTA secundario - CON LA FUNCIÓN */}
-            <button
-              className="w-75 mt-2 py-2 fw-semibold shadow-md btn btn-outline-dark d-flex align-items-center justify-content-center"
-              onClick={agregarAlCarrito}
-            >
-              <FaCartArrowDown className="fs-5 me-1" /> Agregar al carrito
-            </button>
+    <Link
+      className={`w-75 py-2 fw-semibold shadow-md btn btn-success ${!usuarioId ? "disabled opacity-50" : ""}`}
+      state={{ producto, precioConDescuento }}
+      to={usuarioId ? "/user/comprar" : "#"}
+      style={!usuarioId ? { pointerEvents: "none" } : {}}
+    >
+      <RiMoneyDollarCircleFill className="fs-5 me-1" /> Comprar ahora
+    </Link>
+
+    <button
+      className="w-75 mt-2 py-2 fw-semibold shadow-md btn btn-outline-dark d-flex align-items-center justify-content-center"
+      onClick={agregarAlCarrito}
+      disabled={!usuarioId} // Esto bloquea el click y lo pone opaco automáticamente en muchos navegadores
+    >
+      <FaCartArrowDown className="fs-5 me-1" /> Agregar al carrito
+    </button>
+  </div>
+</div>
 
             {/* Envíos */}
             <div className="mt-4 small border-top pt-3">
