@@ -30,6 +30,7 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
               ...item.product,
               cantidad: item.quantity,
               _id: item.product._id || item.product.id,
+              precio: item.precioConDescuento || item.product.precio,
             };
           }
           return { ...item, cantidad: item.quantity || item.cantidad || 1 };
@@ -78,12 +79,15 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
       <Modal.Body className="p-0">
         {carrito.length === 0 ? (
           <>
-          <div className="d-flex flex-column align-items-center">
-            <p className="text-center my-4 fs-5 text-muted">
-              El carrito está vacío, <br /> Agrega productos para comenzar a comprar. 
-            </p>
-            <span className="text-center my-4 fs-5 text-muted">O inicia sesión para ver tus productos guardados.</span>
-          </div>
+            <div className="d-flex flex-column align-items-center">
+              <p className="text-center my-4 fs-5 text-muted">
+                El carrito está vacío, <br /> Agrega productos para comenzar a
+                comprar.
+              </p>
+              <span className="text-center my-4 fs-5 text-muted">
+                O inicia sesión para ver tus productos guardados.
+              </span>
+            </div>
           </>
         ) : (
           <ListGroup variant="flush">
@@ -108,7 +112,7 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
                     <h6 className="text-nombre mb-1 fw-bold">{prod.nombre}</h6>
 
                     <small className="text-precio d-block mb-1">
-                      Precio unitario: ${prod.precio}
+                      Precio unitario: ${prod.precio.toLocaleString("es-AR")}
                     </small>
 
                     <span className="badge bg-secondary">
@@ -122,7 +126,7 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
                   style={{ maxWidth: "200px" }}
                 >
                   <p className="text-precio-total mb-0">
-                    ${prod.precio * (prod.cantidad || 1)}
+                    ${(prod.precio * (prod.cantidad || 1)).toLocaleString("es-AR")}
                   </p>
 
                   <Button
@@ -145,7 +149,7 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
         {carrito.length > 0 && (
           <>
             <div className="cart-total">
-              Total: <span>${totalCompra}</span>
+              Total: <span>${totalCompra.toLocaleString("es-AR")}</span>
             </div>
 
             <div className="cart-actions">

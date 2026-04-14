@@ -50,6 +50,7 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
           {
             product: producto._id,
             quantity: 1,
+            precioConDescuento: precioConDescuento,
           },
         ],
       };
@@ -89,13 +90,9 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
       <Link
         to="/user/detalle"
         state={{
-          producto,
-          precioOriginal: producto.precio,
-          precioDescuento: precioConDescuento, 
-          precioOferta: precioConDescuento,
-          precioDividido: precioDividido,
-          precioEfectivo: precioEfectivo,
-        }}
+    producto,
+    precioDescuento: precioConDescuento
+  }}
         className="text-decoration-none text-dark"
         style={{ cursor: "pointer" }}
       >
@@ -194,7 +191,7 @@ export const CardsCarousel = ({ producto, handleShowCarrito }) => {
         <Link
           className="btn btn-buy flex-grow-1 d-flex justify-content-center align-items-center"
           to="/user/comprar"
-          state={{ producto }}
+          state={{ producto, precioConDescuento }}
           style={{ fontSize: "0.9rem" }}
           onClick={(e) => {
             e.stopPropagation(); // Evita que se propague al Link padre

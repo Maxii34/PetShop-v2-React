@@ -1,8 +1,4 @@
-import {
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router";
 import { Image } from "react-bootstrap";
 import { useState, useEffect } from "react";
@@ -16,15 +12,15 @@ export const DetalleProductos = () => {
   const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
 
   useEffect(() => {
-    // Obtener datos del state
     const state = location.state;
 
     if (state && state.producto) {
       setProducto(state.producto);
-      setPrecioDescuento(state.precioDescuento || state.producto.precio * 0.9);
+      // Solo setea precioDescuento si viene en el state
+      // Si no viene, déjalo como null/undefined
+      setPrecioDescuento(state.precioDescuento || null);
     } else {
       console.warn("No hay producto en el state");
-      // Redirigir si no hay producto después de 2 segundos
       const timer = setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -34,21 +30,24 @@ export const DetalleProductos = () => {
 
   // Valores calculados CORRECTAMENTE
   const precioOriginal = producto?.precio || 0;
-  
+
   // Verificar si realmente hay descuento
   // precioDescuento viene null si no hay descuento, o el precio con descuento si lo hay
-  const tieneDescuento = precioDescuento && precioDescuento !== null && precioDescuento < precioOriginal;
-  
+  const tieneDescuento =
+    precioDescuento &&
+    precioDescuento !== null &&
+    precioDescuento < precioOriginal;
+
   // Si hay descuento: precioConDescuento es el precio con descuento
   // Si NO hay descuento: precioConDescuento es el precio original
   const precioConDescuento = tieneDescuento ? precioDescuento : precioOriginal;
-  
+
   // Precio en efectivo: 10% descuento sobre el precio base
   const precioEnEfectivo = Math.round(precioConDescuento * 0.9);
-  
+
   // Precio con transferencia: 5% recargo sobre el precio base
   const precioConTransferencia = Math.round(precioConDescuento * 1.05);
-  
+
   // Precio en cuotas (sobre el precio con descuento)
   const precioPor3Cuotas = Math.round(precioConDescuento / 3);
   const precioPor6Cuotas = Math.round(precioConDescuento / 6);
@@ -229,7 +228,8 @@ export const DetalleProductos = () => {
             {/* Transferencia */}
             <p className="my-1 small">
               <small className="text-muted">
-                Con transferencia: ${precioConTransferencia.toLocaleString("es-AR")}{" "}
+                Con transferencia: $
+                {precioConTransferencia.toLocaleString("es-AR")}{" "}
                 <span className="fw-semibold">(5% de recargo)</span>
               </small>
             </p>
@@ -305,7 +305,7 @@ export const DetalleProductos = () => {
             {/* CTA principal */}
             <Link
               className="w-75 py-2 fw-semibold shadow-md btn btn-success"
-              state={{ producto }}
+              state={{ producto, precioConDescuento }}
               to="/user/comprar"
             >
               <i className="bi bi-bag me-2"></i>
@@ -316,7 +316,7 @@ export const DetalleProductos = () => {
             <Link
               className="w-75 mt-2 py-2 fw-semibold shadow-md btn btn-outline-dark"
               to="/user/carrito"
-              state={{ producto }}
+              state={{ producto, precioConDescuento }}
             >
               Agregar al carrito
             </Link>
