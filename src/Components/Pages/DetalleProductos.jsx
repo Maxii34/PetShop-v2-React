@@ -112,7 +112,7 @@ export const DetalleProductos = ({ handleShowCarrito }) => {
   // Manejo si no hay producto (mientras se carga)
   if (!producto) {
     return (
-      <section className="my-4">
+      <section className="my-4" id="detalle">
         <Container>
           <div className="text-center">
             <p className="fs-5 text-muted">Cargando producto...</p>
@@ -126,7 +126,7 @@ export const DetalleProductos = ({ handleShowCarrito }) => {
   }
 
   return (
-    <Container className="my-4">
+    <Container className="my-4" id="detalle">
       <Row className="g-4">
         {/* Columna de imagen y descripción */}
         <Col md={6}>
@@ -354,33 +354,38 @@ export const DetalleProductos = ({ handleShowCarrito }) => {
           <div className="border-top pt-3 mt-3">
             {/* CTA principal */}
             <div className="border-top pt-3 mt-3">
-  {/* Botones de acción */}
-  <div className="d-flex flex-column align-items-center gap-1">
-  {!usuarioId && (
-    <div className="alert alert-warning mt-3 py-2 small shadow-sm w-75 mx-auto text-center" role="alert">
-      <i className="bi bi-info-circle me-1"></i> 
-      Para continuar, debes haber <b>iniciado sesión</b>, si no tienes cuenta <b>registrarte</b>. 
-    </div>
-  )}
+              {/* Botones de acción */}
+              <div className="d-flex flex-column align-items-center gap-1">
+                {!usuarioId && (
+                  <div
+                    className="alert alert-warning mt-3 py-2 small shadow-sm w-75 mx-auto text-center"
+                    role="alert"
+                  >
+                    <i className="bi bi-info-circle me-1"></i>
+                    Para continuar, debes haber <b>iniciado sesión</b>, si no
+                    tienes cuenta <b>registrarte</b>.
+                  </div>
+                )}
 
-    <Link
-      className={`w-75 py-2 fw-semibold shadow-md btn btn-success ${!usuarioId ? "disabled opacity-50" : ""}`}
-      state={{ producto, precioConDescuento }}
-      to={usuarioId ? "/user/comprar" : "#"}
-      style={!usuarioId ? { pointerEvents: "none" } : {}}
-    >
-      <RiMoneyDollarCircleFill className="fs-5 me-1" /> Comprar ahora
-    </Link>
+                <Link
+                  className={`w-75 py-2 fw-semibold shadow-md btn btn-success ${!usuarioId ? "disabled opacity-50" : ""}`}
+                  state={{ producto, precioConDescuento }}
+                  to={usuarioId ? "/user/comprar" : "#"}
+                  style={!usuarioId ? { pointerEvents: "none" } : {}}
+                >
+                  <RiMoneyDollarCircleFill className="fs-5 me-1" /> Comprar
+                  ahora
+                </Link>
 
-    <button
-      className="w-75 mt-2 py-2 fw-semibold shadow-md btn btn-outline-dark d-flex align-items-center justify-content-center"
-      onClick={agregarAlCarrito}
-      disabled={!usuarioId} // Esto bloquea el click y lo pone opaco automáticamente en muchos navegadores
-    >
-      <FaCartArrowDown className="fs-5 me-1" /> Agregar al carrito
-    </button>
-  </div>
-</div>
+                <button
+                  className="w-75 mt-2 py-2 fw-semibold shadow-md btn btn-outline-dark d-flex align-items-center justify-content-center"
+                  onClick={agregarAlCarrito}
+                  disabled={!usuarioId} // Esto bloquea el click y lo pone opaco automáticamente en muchos navegadores
+                >
+                  <FaCartArrowDown className="fs-5 me-1" /> Agregar al carrito
+                </button>
+              </div>
+            </div>
 
             {/* Envíos */}
             <div className="mt-4 small border-top pt-3">

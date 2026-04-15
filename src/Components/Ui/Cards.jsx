@@ -68,6 +68,7 @@ export const CardsProductos = ({ producto, handleShowCarrito }) => {
       {/* Contenedor clickeable con Link */}
       <Link
         to="/detalle"
+        id="detalle"
         state={{ producto }}
         className="text-decoration-none text-dark"
         style={{ cursor: "pointer" }}

@@ -24,6 +24,7 @@ import {
 } from "./Components/index.jsx";
 import ProtectorAdmin from "./Components/Routes/ProtectoAdmin.jsx";
 import ProtectorUser from "./Components/Routes/ProtectorUser.jsx";
+import ScrollToTop from "./Components/ScrollToTop";
 
 function App() {
   // Lee sessionStorage
@@ -60,6 +61,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Menu
         usuarioLogueado={usuarioLogueado}
         setusuarioLogueado={setusuarioLogueado}
