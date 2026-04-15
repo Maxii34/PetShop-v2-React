@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { listarCarrito, eliminarCarrito } from "../helpers/carrito.queries";
 import "./EstilosCards.css";
+import { FaCartArrowDown } from "react-icons/fa6";
 
 export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
   const [carrito, setCarrito] = useState([]);
@@ -79,14 +80,19 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
       <Modal.Body className="p-0">
         {carrito.length === 0 ? (
           <>
-            <div className="d-flex flex-column align-items-center">
-              <p className="text-center my-4 fs-5 text-muted">
-                El carrito está vacío, <br /> Agrega productos para comenzar a
-                comprar.
+            <div className="d-flex flex-column align-items-center justify-content-center text-center py-5">
+              <FaCartArrowDown className="fs-5 me-1" />
+
+              <h5 className="fw-bold mb-2">Tu carrito está vacío</h5>
+
+              <p className="text-muted mb-3" style={{ maxWidth: "300px" }}>
+                Parece que todavía no agregaste productos. Explorá el catálogo y
+                empezá tu compra 🛍️
               </p>
-              <span className="text-center my-4 fs-5 text-muted">
-                O inicia sesión para ver tus productos guardados.
-              </span>
+
+              <p className="text-muted small mb-4">
+                ¿Ya tenías productos? Iniciá sesión para recuperarlos.
+              </p>
             </div>
           </>
         ) : (
@@ -126,7 +132,10 @@ export const CarritoModal = ({ handleCloseCarrito, showCarrito }) => {
                   style={{ maxWidth: "200px" }}
                 >
                   <p className="text-precio-total mb-0">
-                    ${(prod.precio * (prod.cantidad || 1)).toLocaleString("es-AR")}
+                    $
+                    {(prod.precio * (prod.cantidad || 1)).toLocaleString(
+                      "es-AR",
+                    )}
                   </p>
 
                   <Button
