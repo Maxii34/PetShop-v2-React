@@ -18,20 +18,20 @@ export const SegundoNavbar = ({ handleShow3 }) => {
             Ofertas
           </Nav.Link>
 
-          <Nav.Link className="nav-link-custom px-2">
+          <Nav.Link className="nav-link-custom px-2" href="/404">
             Veterinaria
           </Nav.Link>
 
           {/* GRUPO 2 */}
-          <Nav.Link href="#nuevos" className="nav-link-custom px-2 d-none d-lg-block">
+          <Nav.Link href="/404" className="nav-link-custom px-2 d-none d-lg-block" >
             Nuevos Productos
           </Nav.Link>
 
-          <Nav.Link href="#destacados" className="nav-link-custom px-2 d-none d-lg-block">
+          <Nav.Link href="/404" className="nav-link-custom px-2 d-none d-lg-block">
             Destacados
           </Nav.Link>
 
-          <Nav.Link href="#contacto" className="nav-link-custom px-2 d-none d-lg-block">
+          <Nav.Link href="/404" className="nav-link-custom px-2 d-none d-lg-block">
             Contacto
           </Nav.Link>
 
