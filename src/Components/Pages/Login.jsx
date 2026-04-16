@@ -191,24 +191,27 @@ export const Login = ({
                 Regístrate aquí
               </button>
             </div>
+            <div className="custom-footer">
+              <Button
+                type="submit"
+                disabled={loading}
+                className="btn-submit"
+                size="lg"
+              >
+                {loading ? "Validando..." : "Iniciar Sesión"}
+              </Button>
+
+              <Button
+                onClick={handleClose}
+                disabled={loading}
+                className="btn-cancel my-1"
+              >
+                Cancelar
+              </Button>
+            </div>
           </Form>
         )}
       </Modal.Body>
-
-      <Modal.Footer className="custom-footer">
-        <Button
-          type="submit"
-          disabled={loading}
-          className="btn-submit"
-          size="lg"
-        >
-          {loading ? "Validando..." : "Iniciar Sesión"}
-        </Button>
-
-        <Button onClick={handleClose} disabled={loading} className="btn-cancel">
-          Cancelar
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };
