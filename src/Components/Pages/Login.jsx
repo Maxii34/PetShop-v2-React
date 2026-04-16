@@ -10,7 +10,7 @@ const showNotification = (title, message, type) => {
     toast: true,
     position: "top-end",
     showConfirmButton: false,
-    timer: 4000,
+    timer: 1500,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -18,7 +18,7 @@ const showNotification = (title, message, type) => {
     },
   });
 
-  const bgColor = type === "success" ? "#198754" : "#dc3545";
+  const bgColor = type === "success" ? "#287450" : "#dc3545";
 
   Toast.fire({
     icon: type,
@@ -29,7 +29,12 @@ const showNotification = (title, message, type) => {
   });
 };
 
-export const Login = ({ setusuarioLogueado, handleClose, show }) => {
+export const Login = ({
+  setusuarioLogueado,
+  handleClose,
+  show,
+  handleShow2,
+}) => {
   const {
     register,
     handleSubmit,
@@ -80,7 +85,7 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
       show={show}
       onHide={handleClose}
       centered
-      size="sm"
+      size="md"
       className="login-modal"
       style={{
         "--bs-modal-border-color": "#e9ecef",
@@ -175,47 +180,32 @@ export const Login = ({ setusuarioLogueado, handleClose, show }) => {
                 </small>
               )}
             </Form.Group>
+            <div className="register-container">
+              <span className="register-text">Si no tienes cuenta</span>
 
-            <Button
-              variant="success"
-              type="submit"
-              disabled={loading}
-              className="w-100 fw-600"
-              size="lg"
-              style={{
-                backgroundColor: "#198754",
-                borderColor: "#198754",
-                padding: "0.75rem",
-                fontSize: "1rem",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.backgroundColor = "#157347";
-                e.target.style.borderColor = "#157347";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "#198754";
-                e.target.style.borderColor = "#198754";
-              }}
-            >
-              {loading ? "Validando..." : "Iniciar Sesión"}
-            </Button>
+              <button
+                type="button"
+                className="register-link"
+                onClick={handleShow2}
+              >
+                Regístrate aquí
+              </button>
+            </div>
           </Form>
         )}
       </Modal.Body>
 
-      <Modal.Footer className="border-0 bg-white pt-0">
+      <Modal.Footer className="custom-footer">
         <Button
-          variant="outline-secondary"
-          onClick={handleClose}
+          type="submit"
           disabled={loading}
-          className="w-100 fw-600 shadow-md"
-          style={{
-            color: "#6c757d",
-            borderColor: "#dee2e6",
-            padding: "0.5rem",
-          }}
+          className="btn-submit"
+          size="lg"
         >
+          {loading ? "Validando..." : "Iniciar Sesión"}
+        </Button>
+
+        <Button onClick={handleClose} disabled={loading} className="btn-cancel">
           Cancelar
         </Button>
       </Modal.Footer>

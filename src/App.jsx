@@ -73,6 +73,7 @@ function App() {
       <Login
         setusuarioLogueado={setusuarioLogueado}
         handleClose={handleClose}
+        handleShow2={handleShow2}
         show={show}
       />
       <Canvas handleClose3={handleClose3} show3={show3} />

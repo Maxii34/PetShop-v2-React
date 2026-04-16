@@ -11,14 +11,13 @@ export const Register = ({ handleClose2, show2 }) => {
     formState: { errors },
   } = useForm();
 
-
   const onsubmit = async (data) => {
     const usuarioNuevo = {
       nombre: data.nombre,
       apellido: data.apellido,
       email: data.email,
       password: data.password,
-      rol: "usuario"
+      rol: "usuario",
     };
     const respuesta = await crearUsuario(usuarioNuevo);
     if (respuesta.ok) {
@@ -43,8 +42,7 @@ export const Register = ({ handleClose2, show2 }) => {
   return (
     <>
       <Modal show={show2} onHide={handleClose2} size="lg">
-        <Modal.Header closeButton>
-        </Modal.Header>
+        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <Row xs={12}>
             <Col>
@@ -111,8 +109,7 @@ export const Register = ({ handleClose2, show2 }) => {
                           {...register("email", {
                             required: "El email es obligatorio",
                             pattern: {
-                              value:
-                                /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                               message: "Ingresa un correo válido",
                             },
                           })}
@@ -133,7 +130,8 @@ export const Register = ({ handleClose2, show2 }) => {
                             required: "La contraseña es obligatoria",
                             minLength: {
                               value: 8,
-                              message: "La contraseña debe tener al menos 8 caracteres",
+                              message:
+                                "La contraseña debe tener al menos 8 caracteres",
                             },
                             pattern: {
                               value:
@@ -149,31 +147,29 @@ export const Register = ({ handleClose2, show2 }) => {
                       </Form.Group>
                     </Col>
 
-
-                    <Col xs={12}>
-                      <div className="d-grid">
-                        <Button variant="success" type="submit" size="lg">
-                          Crear cuenta
-                        </Button>
-                      </div>
-                    </Col>
-
                     <Col xs={12}>
                       <div className="text-center mt-3">
                         <p className="mb-0">
                           ¿Ya tienes cuenta?{" "}
                           <Button
                             variant="link"
-                            className="p-0 text-decoration-none"
+                            className="register-link"
                             onClick={() => {
                               handleClose2();
                               // Aquí deberías llamar a la función que abre el modal de login
                               // Por ejemplo: handleShowLogin();
                             }}
                           >
-                            Inicia sesión aquí
+                            Inicia Sesión Aquí
                           </Button>
                         </p>
+                      </div>
+                    </Col>
+                    <Col xs={12}>
+                      <div className="d-grid">
+                        <Button className="btn-submit" type="submit" size="lg">
+                          Crear cuenta
+                        </Button>
                       </div>
                     </Col>
                   </Row>

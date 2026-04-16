@@ -315,21 +315,21 @@ h4 {
 
 /* Botón Agregar Personalizado */
 .btn-agregar {
-  background-color: #10b981; 
+  background-color: #10b981;
   border: none;
   font-weight: 500;
   transition: all 0.3s ease;
 }
 
 .btn-agregar:hover {
-  background-color: #059669; 
+  background-color: #059669;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.8); 
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.8);
 }
 
 .btn-agregar:active {
-  transform: translateY(0); 
+  transform: translateY(0);
 }
 
 /* Sidebar Custom CSS */
@@ -473,7 +473,7 @@ h4 {
 
 /* Línea animada */
 .nav-link-custom::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -500,4 +500,76 @@ h4 {
 .dropdown-custom .dropdown-item:hover {
   background-color: rgba(163, 255, 204, 0.2);
   color: #198754;
+}
+
+/* estilos de los botones de login*/
+
+/* BOTÓN PRINCIPAL */
+.btn-submit {
+  width: 100%;
+  font-weight: 600;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: #22c55e; /* verde moderno */
+  border: none;
+  color: #0b0f0c;
+  transition: all 0.6s ease;
+}
+
+.btn-submit:hover {
+  background-color: #16a34a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(58, 59, 64, 0.6);
+}
+
+/* BOTÓN CANCELAR */
+.btn-cancel {
+  width: 100%;
+  font-weight: 600;
+  padding: 0.6rem;
+  border-radius: 8px;
+
+  background-color: transparent;
+  color: #121313;
+  border: 1px solid #3a3b40;
+  transition: all 0.6s ease;
+}
+
+.btn-cancel:hover {
+  background-color: #2a2b30;
+  border-color: #4b5563;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(58, 59, 64, 0.6);
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.register-text {
+  color: #9ca3af; /* gris suave */
+  font-size: 0.95rem;
+}
+
+.register-link {
+  background: none;
+  border: none;
+  padding: 0;
+
+  color: #22c55e; /* verde moderno */
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.register-link:hover {
+  color: #16a34a;
+  text-decoration: underline;
 }
