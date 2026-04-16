@@ -573,3 +573,71 @@ h4 {
   color: #16a34a;
   text-decoration: underline;
 }
+
+.redes-container {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .redes-container {
+    justify-content: flex-start;
+  }
+}
+
+.icono-red {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+
+  font-size: 18px;
+  color: white;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* INSTAGRAM */
+.icono-red.instagram {
+  background: radial-gradient(circle at 30% 30%, #feda75, #d62976, #962fbf);
+}
+
+.icono-red.instagram:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* FACEBOOK */
+.icono-red.facebook {
+  background-color: #1877f2;
+}
+
+.icono-red.facebook:hover {
+  background-color: #145dbf;
+  transform: translateY(-3px);
+}
+
+/* TIKTOK */
+.icono-red.tiktok {
+  background-color: #000;
+}
+
+.icono-red.tiktok:hover {
+  background: linear-gradient(45deg, #25f4ee, #fe2c55);
+  transform: translateY(-3px);
+}
+
+/* GITHUB */
+.icono-red.github {
+  background-color: #24292e;
+}
+
+.icono-red.github:hover {
+  background-color: #000;
+  transform: translateY(-3px);
+}
+
