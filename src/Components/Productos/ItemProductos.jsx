@@ -1,24 +1,48 @@
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import { BsTrash, BsPencil } from "react-icons/bs";
+import "./productos.css";
+import { eliminarProducto } from "../helpers/productos.queries";
 
-const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
-  const eliminarProducto = () => {
+export const ItemProductos = ({ itemProducto, fila, cargarProductos }) => {
+  const formatoMoneda = (valor) => {
+    return new Intl.NumberFormat("es-AR", {
+      style: "currency",
+      currency: "ARS",
+    }).format(valor);
+  };
+  const stockBajo = itemProducto.stock < 5;
+
+  const eliminarProductos = () => {
     Swal.fire({
-      title: "¿Estas seguro de eliminar?",
-      text: "No se puede revertir este paso posteriormente",
+      title: "¿Eliminar producto?",
+      text: "Esta acción no se puede deshacer.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#198754",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Borrar",
+      confirmButtonColor: "#dc3545",
+      cancelButtonColor: "#6c757d",
+      confirmButtonText: "Sí, eliminar",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
+      focusCancel: true,
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        if (borrarProducto(itemProducto.id)) {
+        const response = await eliminarProducto(itemProducto._id);
+        if (response && response.ok) {
           Swal.fire({
-            title: "Producto eliminado",
-            text: `El producto eliminado correctamente`,
+            title: "¡Eliminado!",
+            text: "El producto ha sido borrado exitosamente.",
             icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+          await cargarProductos();
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: "No se pudo eliminar el producto.",
+            icon: "error",
+            timer: 2000,
+            showConfirmButton: false,
           });
         }
       }
@@ -26,35 +50,73 @@ const ItemProductos = ({ itemProducto, fila, borrarProducto }) => {
   };
 
   return (
-    <tr className="text-center align-middle shadow">
-      <td>{fila}</td>
-      <td>{itemProducto.nombreProducto}</td>
-      <td>{itemProducto.precioOriginal}</td>
-      <td>{itemProducto.marca}</td>
-      <td>
-        <img
-          src={itemProducto.imagen || null}
-          className="img-fluid rounded table-img"
-          alt={itemProducto.alt}
-          style={{ width: "80px", height: "80px", objectFit: "cover" }}
-          loading="lazy"
-        />
+    <tr  className="align-middle border-bottom transition-effect hover-row">
+      {/* Índice: Color atenuado */}
+      <td className="text-secondary fw-light">{fila}</td>
+
+      {/* Nombre: Alineado a la izquierda y negrita */}
+      <td className="text-start fw-semibold text-dark">
+        {itemProducto.nombre}
       </td>
-      <td>{itemProducto.categoria}</td>
-      <td>{itemProducto.peso}</td>
-      <td>{itemProducto.stock}</td>
+
+      {/* Precio: Formateado correctamente */}
+      <td className="font-monospace text-nowrap">
+        {formatoMoneda(itemProducto.precio)}
+      </td>
+
+      <td className="text-muted small text-center">{itemProducto.marca}</td>
+
+      {/* Imagen: Con borde sutil y placeholder por seguridad */}
       <td>
-        <div className="d-flex justify-content-center gap-1">
-          <Link className="me-lg-2 btn btn-warning shadow" to={`editar/${itemProducto.id}`}>
-            <i className="bi bi-pencil-square"></i>
+        <div className="d-flex justify-content-center">
+          <img
+            src={itemProducto.imagenes[0]}
+            className="rounded border bg-white p-1"
+            alt="Productos PetShop"
+            style={{ width: "45px", height: "45px", objectFit: "contain" }}
+            loading="lazy"
+          />
+        </div>
+      </td>
+
+      {/* Categoría: Estilo Badge minimalista */}
+      <td>
+        <span className="badge bg-light text-secondary border fw-normal px-2 py-1">
+          {itemProducto.categoria}
+        </span>
+      </td>
+
+      <td className="text-center">{itemProducto.detalles.peso} kg</td>
+
+      {/* Stock: Rojo si es bajo, Verde si es alto */}
+      <td
+        className={`fw-bold ${
+          stockBajo ? "text-danger" : "text-success"
+        } text-center`}
+      >
+        {itemProducto.stock} u.
+      </td>
+
+      {/* Acciones */}
+      <td>
+        <div className="d-flex justify-content-center gap-2">
+          <Link
+            className="btn-icono btn-editar-item"
+            to={`/admin/editar/${itemProducto._id}`}
+            title="Editar producto"
+          >
+            <BsPencil size={18} />
           </Link>
-          <button className="me-lg-2 btn btn-danger shadow" onClick={eliminarProducto}>
-            <i className="bi bi-trash"></i>
+
+          <button
+            className="btn-icono btn-eliminar-item"
+            onClick={eliminarProductos}
+            title="Eliminar producto"
+          >
+            <BsTrash size={18} />
           </button>
         </div>
       </td>
     </tr>
   );
 };
-
-export default ItemProductos;

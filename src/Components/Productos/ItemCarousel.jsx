@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-const ItemCarousel = ({ itemProductosC, fila, borrarProductoCR }) => {
+export const ItemCarousel = ({ itemProductosC, fila }) => {
   const eliminarProducto = () => {
     Swal.fire({
       title: "¿Estas seguro de eliminar?",
@@ -14,13 +14,12 @@ const ItemCarousel = ({ itemProductosC, fila, borrarProductoCR }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        if (borrarProductoCR(itemProductosC.id)) {
-          Swal.fire({
-            title: "Producto eliminado",
-            text: `El producto eliminado correctamente`,
-            icon: "success",
-          });
-        }
+        // TODO: Llamado al backend para eliminar el producto
+        Swal.fire({
+          title: "Producto eliminado",
+          text: `El producto eliminado correctamente`,
+          icon: "success",
+        });
       }
     });
   };
@@ -63,4 +62,4 @@ const ItemCarousel = ({ itemProductosC, fila, borrarProductoCR }) => {
   );
 };
 
-export default ItemCarousel;
+

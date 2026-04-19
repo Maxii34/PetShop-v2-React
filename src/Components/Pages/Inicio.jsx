@@ -1,20 +1,28 @@
-import CarouselComponente from "../Carousel";
-import ContainerGrid from "../ContainerGrid";
-import ContenedorCards from "../ContenedorCards";
-import MuralInstagran from "../MuralInstagran";
+import { useEffect } from "react";
+import { CarouselComponente, ContainerGrid, ContenedorCards, MuralInstagran } from "../index.jsx";
+import { listarProductos as obtenerProductosApi } from "../helpers/productos.queries.js";
 
+export function Inicio({productos, setProductos, handleShowCarrito }) {
 
-const Inicio = ({productos, productosOferta }) => {
+    const cargarProductos = async () => {
+        const listado = await obtenerProductosApi();
+        if (listado) {
+            setProductos(listado);
+        }
+    }
+
+    useEffect(() => {
+        cargarProductos();
+    }, []);
+
     return (
         <section>
             <CarouselComponente />
-            <div>
-                <ContainerGrid  productos={productos} />
-                <ContenedorCards productosOferta={productosOferta}/>
+            <div className=" container-fluid mt-5">
+                <ContainerGrid  productos={productos} handleShowCarrito={handleShowCarrito} />
+                <ContenedorCards productos={productos} handleShowCarrito={handleShowCarrito} />
             </div>
             <MuralInstagran />
         </section>
     );
 };
-
-export default Inicio;

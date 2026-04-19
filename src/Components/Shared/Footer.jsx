@@ -1,8 +1,9 @@
 import { Container } from "react-bootstrap";
+import { FaInstagram, FaFacebookF, FaTiktok, FaGithub } from "react-icons/fa";
 
-const Footer = () => {
+export const Footer = () => {
   return (
-    <footer className="pt-2 border-top footer-color color-footer">
+    <footer className="pt-2 border-top footer-color color-footer shadow-lg">
       <Container>
         <div className="row">
           <div className="col-12 col-md-4 col-lg-4 mb-4 text-center text-md-start">
@@ -10,7 +11,7 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li>
                 <a
-                  href="#"
+                  href="/404"
                   className="text-dark text-decoration-none d-block mb-2"
                 >
                   Contacto
@@ -18,7 +19,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/404"
                   className="text-dark text-decoration-none d-block mb-2"
                 >
                   Quienes Somos
@@ -26,7 +27,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/404"
                   className="text-dark text-decoration-none d-block mb-2"
                 >
                   Trabajá con nosotros
@@ -34,7 +35,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/404"
                   className="text-dark text-decoration-none d-block mb-2"
                 >
                   Cómo Comprar
@@ -42,7 +43,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/404"
                   className="text-dark text-decoration-none d-block mb-2"
                 >
                   Política de Devolución
@@ -50,14 +51,17 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/404"
                   className="text-dark text-decoration-none d-block mb-2"
                 >
                   Preguntas Frecuentes
                 </a>
               </li>
               <li>
-                <a href="#" className="text-dark text-decoration-none d-block">
+                <a
+                  href="/404"
+                  className="text-dark text-decoration-none d-block"
+                >
                   Términos y condiciones consulta online
                 </a>
               </li>
@@ -82,18 +86,22 @@ const Footer = () => {
 
           <div className="col-12 col-md-4 col-lg-4 text-center text-md-start">
             <h5 className="fw-bold mb-3">Sigamos conectados</h5>
-            <div className="d-flex gap-3 justify-content-center justify-content-md-start">
-              <a href="#" className="icono-redes shadow">
-                <i className="bi bi-instagram fs-5"></i>
+
+            <div className="redes-container">
+              <a href="/404" className="icono-red instagram">
+                <FaInstagram />
               </a>
-              <a href="#" className="icono-redes shadow">
-                <i className="bi bi-facebook fs-5"></i>
+
+              <a href="/404" className="icono-red facebook">
+                <FaFacebookF />
               </a>
-              <a href="#" className="icono-redes shadow">
-                <i className="bi bi-tiktok fs-5"></i>
+
+              <a href="/404" className="icono-red tiktok">
+                <FaTiktok />
               </a>
-              <a href="#" className="icono-redes shadow">
-                <i className="bi bi-github fs-5"></i>
+
+              <a href="/404" className="icono-red github">
+                <FaGithub />
               </a>
             </div>
           </div>
@@ -144,5 +152,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;

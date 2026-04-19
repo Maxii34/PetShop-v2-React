@@ -1,0 +1,660 @@
+/*               TARJETA DE PRODUCTO                 */
+
+/* Contenedor principal de la tarjeta */
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card {
+  border: 1px solid #e5e5e5; /* más suave que negro */
+  border-radius: 15px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  height: 100%;
+  user-select: none;
+
+  /* sombra MUY sutil */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.product-card {
+  border: 1px solid #eaeaea;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+
+
+/* Imagen superior de la tarjeta */
+.card-img-top {
+  object-fit: cover;
+  height: 200px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #212529;
+  padding: 0px;
+}
+
+.precio-Card {
+  font-size: 25px;
+  font-weight: 600;
+  color: #212529;
+}
+
+/* Precio principal */
+.price-main {
+  font-size: 10px;
+  font-weight: 500;
+  color: #212529;
+}
+
+/* Precio con efectivo */
+.price-cash {
+  color: #495057;
+  font-size: 15px;
+}
+
+/* Cuotas */
+.installments {
+  font-size: 14px;
+  color: #666;
+}
+
+.bod-top {
+  border-top: 4px solid rgba(24, 21, 21, 0.671);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.bod-top:hover {
+  border-top: 4px solid rgba(32, 88, 32, 0.8);
+  box-shadow: 0 -2px 8px rgba(32, 88, 32, 0.5);
+}
+
+/*                  2. BOTONES                         */
+
+/* Botones de cards (en grillas de productos) */
+/* Botón: Comprar */
+.btn-buy {
+  background-color: #2c3e50;
+  color: white;
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+}
+
+.btn-buy:hover {
+  background-color: #1f2b37;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+
+/* Botón: Agregar al carrito */
+.btn-add-cart {
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-add-cart:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+
+/* Botones para las cards del carrusel */
+.btn-carousel {
+  background-color: #2c3e50;
+  color: white;
+  border-radius: 30px;
+  padding: 2px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.btn-eye-carousel {
+  border-radius: 30px;
+  padding: 2px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.btn-carousel:hover {
+  background-color: #1f2b37;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-eye-carousel:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón de compra general */
+.btn-buy {
+  background-color: #198754;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-buy:hover {
+  background-color: #157347;
+}
+
+/*Carrito*/
+
+.imagen-Carrito {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.text-nombre {
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.text-precio {
+  font-size: 15px;
+  font-weight: 400;
+  padding: 5px;
+}
+
+.text-cantidad {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.text-precio-total {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 5px;
+}
+
+.btn-eliminar {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.btn-eliminar:hover {
+  background-color: #dc2626;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn-eliminar:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-seguir {
+  background-color: #6c757d;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 11px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(108, 117, 125, 0.4);
+}
+
+.btn-seguir:hover {
+  background-color: #5c636a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(108, 117, 125, 0.5);
+  color: white;
+}
+
+.btn-seguir:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(108, 117, 125, 0.4);
+}
+
+.btn-finalizar {
+  background-color: #198754;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 8px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(25, 135, 84, 0.4);
+}
+
+.btn-finalizar:hover {
+  background-color: #157347;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(25, 135, 84, 0.5);
+  color: white;
+}
+
+.btn-finalizar:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(25, 135, 84, 0.4);
+}
+
+.card-Cartpago {
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.7s ease-in-out, transform 0.7s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor principal */
+.card-producto {
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2px;
+  transition: box-shadow 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.card-producto:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+}
+
+/* 1. Imagen Circular */
+.img-circular {
+  width: 65px;
+  height: 65px;
+  min-width: 65px;
+  min-height: 65px;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.img-circular img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.img-circular img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* 2. Selector tipo "Pastilla" */
+.selector-cantidad {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100px;
+  padding: 4px 5px;
+  border: 1px solid #e5e5e5; 
+  border-radius: 50px; 
+  background-color: #fff;
+}
+
+.btn-qty {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  color: #333;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.btn-qty:hover {
+  color: #000;
+}
+
+.qty-numero {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.precio-final {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #212529;
+}
+
+.eliminar-item {
+  background: none;
+  border: none;
+  color: #e60e0e; 
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.2s;
+}
+
+.eliminar-item:hover {
+  color: #f7011a; 
+  transform: translateY(-3px);
+}
+
+.card-pagos {
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  margin: 2px;
+  transition: box-shadow 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn-finalizar {
+  border-radius: 30px;
+  color: white !important;
+  font-weight: bold;
+  padding: 10px;
+  /* Opcional: Para que siga siendo blanco al pasar el mouse */
+  transition: all 0.3s ease;
+}
+
+.btn-finalizar:hover {
+  color: white !important;
+  opacity: 0.9;
+}
+
+/* Badge de oferta animado (opcional, llama la atencion) */
+.badge-oferta {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Efecto hover suave para los botones de esta card */
+.btn-hover-scale {
+    transition: transform 0.2s ease;
+}
+.btn-hover-scale:hover {
+    transform: scale(1.05); /* Crece un poquito al pasar el mouse */
+}
+
+/* Reutilizamos tu sombra preferida para la card completa */
+.card-wrapper:hover {
+    /* Tu sombra negra potente */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6) !important; 
+    transform: translateY(-5px);
+}
+
+/* --- Estilos para los Links del Menú (Efecto Marcador) --- */
+.opcion-lateral {
+  display: block;
+  padding: 10px 15px;
+  color: #6c757d; /* Gris suave */
+  text-decoration: none;
+  font-weight: 500;
+  border-left: 4px solid transparent; /* Borde invisible inicial */
+  transition: all 0.2s ease-in-out;
+}
+
+.opcion-lateral:hover {
+  background-color: #fffbf0;
+  color: #d9a406;
+  border-left: 4px solid #ffc107;
+  padding-left: 25px;
+}
+
+.accordion-flush .accordion-item .accordion-button {
+    background-color: transparent;
+    color: #333;
+    font-weight: bold;
+    box-shadow: none; 
+}
+
+.accordion-flush .accordion-item .accordion-button:not(.collapsed) {
+    color: #ffc107; 
+    background-color: rgba(255, 193, 7, 0.1); 
+}
+
+/* Base */
+.btn-grid {
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  border: none;
+}
+
+
+/* Ver más (acción positiva / expandir) */
+.btn-grid--more {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: #fff;
+}
+
+.btn-grid--more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #1f2b37, #2c3e50);
+}
+
+
+/* Ver menos (acción secundaria / volver arriba) */
+.btn-grid--less {
+  background-color: #f1f3f5;
+  color: #495057;
+  border: 1px solid #dee2e6;
+}
+
+.btn-grid--less:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.19);
+}
+
+/* RESET base para links tipo botón */
+.btn-checkout,
+.btn-continue {
+  display: flex; /* mejor que inline-flex acá */
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 0 16px;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+/* BOTÓN PRINCIPAL */
+.btn-checkout {
+  color: #fff;
+  background: linear-gradient(135deg, #0f9b8e, #1dd1a1);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(29, 209, 161, 0.25);
+}
+
+.btn-checkout:hover {
+  background: linear-gradient(135deg, #0c7c73, #17b890);
+  box-shadow: 0 6px 16px rgba(29, 209, 161, 0.4);
+  transform: translateY(-1px);
+}
+
+/* BOTÓN SECUNDARIO */
+.btn-continue {
+  color: #0f5132;
+  background-color: #e6f4ea;
+  border: 1.5px solid #b7e4c7;
+  font-weight: 500;
+}
+
+.btn-continue:hover {
+  background-color: #d8f3dc;
+  border-color: #95d5b2;
+  box-shadow: 0 2px 8px rgba(29, 209, 161, 0.25);
+}
+
+/* CLICK */
+.btn-checkout:active,
+.btn-continue:active {
+  transform: scale(0.97);
+}
+
+/* FOOTER */
+.cart-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px;
+  background-color: #f8f9fa;
+}
+
+/* TOTAL */
+.cart-total {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+  text-align: right;
+}
+
+.cart-total span {
+  color: #1dd1a1;
+}
+
+/* CONTENEDOR BOTONES */
+.cart-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* BOTONES FULL WIDTH */
+.btn-checkout,
+.btn-continue {
+  width: 100%;
+}
+/* PRECIO UNITARIO */
+.text-precio {
+  color: #1dd1a1 !important;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* PRECIO POR PRODUCTO (fila) */
+.text-precio-total {
+  color: #1dd1a1 !important;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* TOTAL FINAL  */
+.cart-total span {
+  color: #1dd1a1;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* ITEM DEL CARRITO */
+.cart-item {
+  background: #ffffff;
+  border-radius: 12px;
+  margin: 10px 12px;
+  padding: 14px;
+  border: none !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
+}
+
+/* HOVER */
+.cart-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.19);
+}
+
+/* IMAGEN MÁS PRO */
+.imagen-Carrito {
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.cart-item:hover .imagen-Carrito {
+  transform: scale(1.05);
+  object-fit: cover;
+}
+
+/* NOMBRE */
+.text-nombre {
+  font-size: 15px;
+  color: #222;
+}
+
+/* BOTÓN ELIMINAR MÁS SUAVE */
+.btn-eliminar {
+  transition: all 0.2s ease;
+}
+
+.btn-eliminar:hover {
+  transform: scale(1.1);
+}
+
+/* SEPARACIÓN GENERAL DEL LIST */
+.list-group {
+  background: transparent !important;
+}
+
+/* Columnas personalizadas para mostrar exactamente 5 items */
+.col-lg-2-4 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+.col-xl-2-4 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+/* Opcional: ajustar espacios aplica a todos los carousel */
+.carousel-inner {
+  padding: 10px 0;
+}

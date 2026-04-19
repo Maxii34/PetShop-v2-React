@@ -1,11 +1,11 @@
-#root{
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-background-color: #f8f9fa;
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
 }
 
-main{
+main {
   flex-grow: 1;
 }
 
@@ -23,7 +23,7 @@ main{
 }
 
 .icono-redes {
-  background-color: #212529; 
+  background-color: #212529;
   color: #ffffff;
   border-radius: 50%;
   width: 45px;
@@ -94,3 +94,550 @@ h4 {
   flex: 0 0 auto;
   scroll-snap-align: center;
 }
+
+.acordeon-verde .accordion-button:not(.collapsed) {
+  background-color: rgba(104, 104, 104, 0.267) !important;
+  color: rgb(11, 32, 20) !important;
+  box-shadow: none !important;
+  font-size: 22px;
+}
+
+.acordeon-verde .accordion-button:focus {
+  border-color: unset !important;
+  box-shadow: none !important;
+}
+
+.acordeon-verde .accordion-button {
+  color: #333 !important;
+  font-weight: 600;
+}
+
+/* Clase unificada para Links y Botones */
+.btn-customs {
+  /* Estructura */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none !important;
+  border: unset;
+
+  /* Tu diseño visual */
+  padding: 10px 15px;
+  border-radius: 5px;
+  background: #e6e7e6;
+  color: #0e6856;
+  font-weight: 900;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 250ms;
+}
+
+/* El efecto de fondo deslizante */
+.btn-customs::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 50px;
+  background-color: #0e6856;
+  z-index: -1;
+  transition: all 250ms;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+}
+
+/* Hover: cambia color de texto */
+.btn-customs:hover {
+  border-radius: 50px;
+  color: #e6e7e6;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+}
+
+/* Hover: expande el fondo negro */
+.btn-customs:hover::before {
+  width: 100%;
+}
+
+/* CheckoutPagos.css */
+
+/* Contenedor principal */
+.checkout-container {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Estilo base de las tarjetas (Cards) */
+.card-checkout {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: #ffffff;
+}
+
+/* Inputs personalizados */
+.input-custom {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.2s ease;
+}
+
+.input-custom:focus {
+  background-color: #ffffff;
+  border-color: #ffc107; /* Color amarillo al hacer clic */
+  box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.15);
+  outline: none;
+}
+
+/* Opciones de método de pago */
+.payment-option {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+}
+
+.payment-option:hover {
+  border-color: #ffc107;
+  background-color: #fffdf5;
+}
+
+/* Clase para cuando una opción de pago está seleccionada */
+.payment-option.active {
+  border-color: #ffc107 !important; /* Fuerza el borde amarillo */
+  background-color: #fff3cd !important; /* Fondo amarillo muy suave */
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+
+/* Botón principal amarillo */
+.btn-checkout-primary {
+  background-color: #ffc107;
+  color: #212529;
+  font-weight: bold;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.2s;
+}
+
+.btn-checkout-primary:hover {
+  background-color: #e0a800; /* Un poco más oscuro al pasar el mouse */
+  color: #000;
+}
+
+/* ConfirmacionPago.css */
+
+.confirmacion-container {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  display: flex;
+  align-items: center; /* Centrado vertical */
+}
+
+.card-success {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+/* Animación para el icono de éxito */
+.success-icon {
+  font-size: 5rem;
+  color: #198754; /* Verde Bootstrap */
+  animation: scale-up 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.order-number-box {
+  background-color: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px 0;
+}
+
+/* Botón "Volver al inicio" */
+.btn-home {
+  background-color: #ffc107;
+  color: #212529;
+  font-weight: bold;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-home:hover {
+  background-color: #e0a800;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+}
+
+.btn-outline-secondary {
+  border-radius: 50px;
+  padding: 12px 15px;
+  background-color: #f8f9fa;
+  color: #212529;
+  border: 1px solid #dee;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #dee2e6;
+  transform: translateY(-2px);
+  color: #212529;
+}
+
+/*nuevoooooooooo*/
+
+/* Botón Agregar Personalizado */
+.btn-agregar {
+  background-color: #10b981;
+  border: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-agregar:hover {
+  background-color: #059669;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.8);
+}
+
+.btn-agregar:active {
+  transform: translateY(0);
+}
+
+/* Sidebar Custom CSS */
+.sidebar-custom {
+  background-color: #e6e7e6; /* Mismo color que ".nav-pri" */
+  color: #333;
+}
+
+.sidebar-link {
+  color: #333 !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.sidebar-link:hover {
+  background-color: #0e6856; /* Mismo color verde de nav-sec */
+  color: #ffffff !important;
+}
+
+.sidebar-link.active {
+  background-color: #0e6856;
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+/* ============================================
+   ESTILOS PARA CHECKOUT CON VALIDACIONES
+   ============================================ */
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-custom {
+  border-color: #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.input-custom:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.15);
+}
+
+.input-custom.is-invalid {
+  border-color: #dc3545;
+  background-image: none;
+}
+
+.input-custom.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+}
+
+.input-custom.is-valid {
+  border-color: #28a745;
+  background-image: none;
+}
+
+.input-custom.is-valid:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.15);
+}
+
+.payment-option {
+  border: 2px solid #dee2e6;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.payment-option:hover {
+  border-color: #ccc;
+  background-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.payment-option.active {
+  border-color: #28a745;
+  background-color: #f0f8f5;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+}
+
+.btn-success:disabled {
+  background-color: #ccc;
+  border-color: #ccc;
+}
+
+.card-checkout {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card-checkout:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.cart-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* IMPORTANTE: esto evita que se corte */
+.btn-customs {
+  position: relative;
+  overflow: visible !important;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #1dd1a1;
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 7px;
+  border-radius: 50px;
+  min-width: 20px;
+  text-align: center;
+  line-height: 1;
+  z-index: 10;
+}
+
+.nav-sec {
+  background-color: #198754; /* verde (puede ser el de bootstrap) */
+}
+
+/* Links */
+.nav-link-custom {
+  position: relative;
+  color: #ffffff !important;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Línea animada */
+.nav-link-custom::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #a3ffcc; /* verde claro */
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+/* Hover PRO */
+.nav-link-custom:hover {
+  color: #a3ffcc !important; /* verde clarito */
+  background-color: rgba(255, 255, 255, 0.1); /* leve fondo glass */
+  box-shadow: 0 4px 12px rgba(34, 83, 34, 0.2); /* sombra verde suave */
+}
+
+/* underline animado desde el centro */
+.nav-link-custom:hover::after {
+  width: 85%;
+}
+
+/* Dropdown */
+.dropdown-custom .dropdown-item:hover {
+  background-color: rgba(163, 255, 204, 0.2);
+  color: #198754;
+}
+
+/* estilos de los botones de login*/
+
+/* BOTÓN PRINCIPAL */
+.btn-submit {
+  width: 100%;
+  font-weight: 600;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  background-color: #22c55e; /* verde moderno */
+  border: none;
+  color: #0b0f0c;
+  transition: all 0.6s ease;
+}
+
+.btn-submit:hover {
+  background-color: #16a34a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(58, 59, 64, 0.6);
+}
+
+/* BOTÓN CANCELAR */
+.btn-cancel {
+  width: 100%;
+  font-weight: 600;
+  padding: 0.6rem;
+  border-radius: 8px;
+
+  background-color: transparent;
+  color: #121313;
+  border: 1px solid #3a3b40;
+  transition: all 0.6s ease;
+}
+
+.btn-cancel:hover {
+  background-color: #2a2b30;
+  border-color: #4b5563;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(58, 59, 64, 0.6);
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.register-text {
+  color: #9ca3af; /* gris suave */
+  font-size: 0.95rem;
+}
+
+.register-link {
+  background: none;
+  border: none;
+  padding: 0;
+
+  color: #22c55e; /* verde moderno */
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.register-link:hover {
+  color: #16a34a;
+  text-decoration: underline;
+}
+
+.redes-container {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .redes-container {
+    justify-content: flex-start;
+  }
+}
+
+.icono-red {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+
+  font-size: 18px;
+  color: white;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* INSTAGRAM */
+.icono-red.instagram {
+  background: radial-gradient(circle at 30% 30%, #feda75, #d62976, #962fbf);
+}
+
+.icono-red.instagram:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* FACEBOOK */
+.icono-red.facebook {
+  background-color: #1877f2;
+}
+
+.icono-red.facebook:hover {
+  background-color: #145dbf;
+  transform: translateY(-3px);
+}
+
+/* TIKTOK */
+.icono-red.tiktok {
+  background-color: #000;
+}
+
+.icono-red.tiktok:hover {
+  background: linear-gradient(45deg, #25f4ee, #fe2c55);
+  transform: translateY(-3px);
+}
+
+/* GITHUB */
+.icono-red.github {
+  background-color: #24292e;
+}
+
+.icono-red.github:hover {
+  background-color: #000;
+  transform: translateY(-3px);
+}
+
