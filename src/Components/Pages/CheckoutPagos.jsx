@@ -60,23 +60,34 @@ export const CheckoutPagos = ({ usuarioLogueado }) => {
 
     if (paymentMethod === "mercadopago") {
       try {
+        const idUsuario = usuarioLogueado?._id || usuarioLogueado?.id;
+        
+        if (!idUsuario) {
+          throw new Error("No se pudo identificar al usuario logueado. Por favor reingresa al sitio.");
+        }
+
+        if (!productos || productos.length === 0) {
+          throw new Error("El carrito parece estar vacío. Intenta agregar productos nuevamente.");
+        }
+
         const productosCarrito = productos.map((p) => ({
           id: p._id || p.id,
           quantity: p.cantidad || 1,
         }));
 
         const response = await crearOrdenCarrito(
-          usuarioLogueado._id,
+          idUsuario,
           productosCarrito
         );
 
-        if (response.init_point) {
+        if (response && response.init_point) {
           window.location.href = response.init_point;
           return;
         } else {
-          throw new Error("No se pudo obtener el enlace de pago");
+          throw new Error("El servidor de pagos no devolvió un punto de inicio válido.");
         }
       } catch (error) {
+        console.error("Error en el flujo de Mercado Pago:", error);
         Swal.fire({
           icon: "error",
           title: "Error al procesar el pago",
