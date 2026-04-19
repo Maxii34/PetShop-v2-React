@@ -3,6 +3,8 @@ import { useState } from "react";
 import "./EstilosCards.css";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import { crearOrdenCarrito } from "../helpers/pagos.queries";
+import { SiMercadopago } from "react-icons/si";
 
 export const SectorPagos = ({ productos = [] }) => {
   const [descuento, setDescuento] = useState(0);
@@ -156,7 +158,7 @@ export const SectorPagos = ({ productos = [] }) => {
           total: formatearPrecio(total),
         } : null}
       >
-        FINALIZAR COMPRA →
+        PAGAR AHORA
       </Link>
 
       {/* Iconos de pago */}

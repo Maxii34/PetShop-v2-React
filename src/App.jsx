@@ -114,7 +114,7 @@ function App() {
             <Route path="comprar" element={<CarritoPagos titulo="Compra" />} />
             <Route path="carrito" element={<CarritoPagos titulo="Carrito" />} />
 
-            <Route path="checkout" element={<CheckoutPagos />} />
+            <Route path="checkout" element={<CheckoutPagos usuarioLogueado={usuarioLogueado} />} />
             <Route
               path="confirmacion"
               element={<ConfirmacionPago usuarioLogueado={usuarioLogueado} />}

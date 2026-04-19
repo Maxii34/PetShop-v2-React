@@ -14,8 +14,10 @@ import { SiMercadopago } from "react-icons/si";
 import { DatosTarjetas } from "../Ui/DatosTarjetas";
 import { Link, useNavigate } from "react-router";
 import { useLocation } from "react-router";
+import { crearOrdenCarrito } from "../helpers/pagos.queries";
+import Swal from "sweetalert2";
 
-export const CheckoutPagos = () => {
+export const CheckoutPagos = ({ usuarioLogueado }) => {
   const location = useLocation();
   const { productos, subtotal, envio, descuento, total } =
     location.state || {};
@@ -46,14 +48,45 @@ export const CheckoutPagos = () => {
   const ciudadValue = watch("ciudad");
   const codigoPostalValue = watch("codigoPostal");
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (!paymentMethod) {
-      alert("Por favor selecciona un método de pago");
+      Swal.fire({
+        icon: "error",
+        title: "Método de pago requerido",
+        text: "Por favor selecciona un método de pago antes de continuar",
+      });
       return;
     }
-    console.log("Datos del formulario:", data);
-    console.log("Método de pago:", paymentMethod);
-    // Aquí irá la lógica de pago
+
+    if (paymentMethod === "mercadopago") {
+      try {
+        const productosCarrito = productos.map((p) => ({
+          id: p._id || p.id,
+          quantity: p.cantidad || 1,
+        }));
+
+        const response = await crearOrdenCarrito(
+          usuarioLogueado._id,
+          productosCarrito
+        );
+
+        if (response.init_point) {
+          window.location.href = response.init_point;
+          return;
+        } else {
+          throw new Error("No se pudo obtener el enlace de pago");
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error al procesar el pago",
+          text: error.message || "Hubo un error al conectar con Mercado Pago.",
+        });
+        return;
+      }
+    }
+
+    // Lógica para otros métodos (ej: simulación de tarjeta)
     navigate("/user/confirmacion", {
       state: {
         productos,
@@ -337,7 +370,9 @@ export const CheckoutPagos = () => {
                   </div>
                 </div>
               </div>
-              {paymentMethod && <DatosTarjetas metodo={paymentMethod} />}
+              {paymentMethod && paymentMethod !== "mercadopago" && (
+                <DatosTarjetas metodo={paymentMethod} />
+              )}
               {!paymentMethod && (
                 <div className="text-center text-muted p-3 bg-light rounded border border-dashed">
                   <small>
@@ -384,11 +419,28 @@ export const CheckoutPagos = () => {
 
               <button
                 type="submit"
-                className="btn btn-success w-100 fw-bold py-3 shadow-sm"
+                className={`w-100 fw-bold py-3 shadow-sm btn ${
+                  paymentMethod === "mercadopago" 
+                    ? "btn-primary d-flex align-items-center justify-content-center gap-2" 
+                    : "btn-success"
+                }`}
+                style={{ 
+                  borderRadius: "10px",
+                  ...(paymentMethod === "mercadopago" && { backgroundColor: "#009ee3", border: "none" })
+                }}
                 disabled={!isFormValid || !paymentMethod || isSubmitting}
               >
-                <FaLock size={14} className="me-2" />
-                {isSubmitting ? "Procesando..." : "PAGAR AHORA"}
+                {isSubmitting ? (
+                  "Procesando..."
+                ) : paymentMethod === "mercadopago" ? (
+                  <>
+                    <SiMercadopago size={24} /> PAGAR CON MERCADO PAGO
+                  </>
+                ) : (
+                  <>
+                    <FaLock size={14} className="me-2" /> PAGAR AHORA
+                  </>
+                )}
               </button>
 
               <div className="mt-3 text-center">
