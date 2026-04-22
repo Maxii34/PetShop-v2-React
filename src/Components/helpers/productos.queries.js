@@ -15,9 +15,13 @@ export const listarProductos = async () => {
 };
 
 export const eliminarProducto = async (id) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${productBack}/${id}`, {
       method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
       credentials: "include",
     });
     const result = await response.json();
@@ -59,8 +63,12 @@ export const crearProducto = async (producto) => {
       });
     }
 
+    const token = localStorage.getItem("token");
     const response = await fetch(productBack, {
       method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
       body: formData,
       credentials: "include",
     });
@@ -117,8 +125,12 @@ export const editarProductos = async (id, producto) => {
       });
     }
 
+    const token = localStorage.getItem("token");
     const response = await fetch(`${productBack}/${id}`, {
       method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
       body: formData,
       credentials: "include",
     });

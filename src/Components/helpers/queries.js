@@ -12,6 +12,11 @@ export const login = async (usuario) => {
       credentials: "include",
     });
     const result = await response.json();
+
+    if (result.ok && result.token) {
+      localStorage.setItem("token", result.token);
+    };
+
     return result;
   } catch (error) {
     console.log(error);
@@ -39,9 +44,14 @@ export const crearUsuario = async (usuarioNuevo) => {
 
 // 3. Listar Usuarios
 export const listarUsuarios = async () => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(userBack, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
       credentials: "include",
     });
     const result = await response.json();
@@ -54,9 +64,14 @@ export const listarUsuarios = async () => {
 
 // 4. Eliminar Usuario
 export const eliminarUsuario = async (id) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${userBack}/${id}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
       credentials: "include",
     });
     const result = await response.json();
@@ -69,11 +84,13 @@ export const eliminarUsuario = async (id) => {
 
 // 5. Actualizar Usuario
 export const actualizarUsuario = async (id, datosActualizados) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${userBack}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify(datosActualizados),
       credentials: "include",
@@ -88,9 +105,14 @@ export const actualizarUsuario = async (id, datosActualizados) => {
 
 // 6. Obtener un Usuario por ID
 export const obtenerUsuario = async (id) => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${userBack}/${id}`, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
       credentials: "include",
     });
     const result = await response.json();
@@ -103,12 +125,21 @@ export const obtenerUsuario = async (id) => {
 
 // 7. Cerrar Sesión
 export const Logout = async () => {
+  const token = localStorage.getItem("token");
   try {
     const response = await fetch(`${userBack}/logout`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
       credentials: "include",
     });
     const result = await response.json();
+    
+    // Al cerrar sesión, también limpiamos el token local
+    localStorage.removeItem("token");
+    
     return result;
   } catch (error) {
     console.log(error);
